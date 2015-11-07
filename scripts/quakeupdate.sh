@@ -3,8 +3,9 @@
 # created by Thomas Jones on 09/09/15.
 # purger@tomtecsolutions.com
 
+# This script will be replaced in the near future. Consider this an active legacy script.
+
 # Defining variables:
-export qBaseURL="https://raw.githubusercontent.com/tjone270/QuakeLiveDS_Scripts/master"
 export qUpdateServerMessage="^7All ^4TomTec Solutions^7 hosted servers are going down ^1within a minute^7 for daily updating. They will be back in ^410 minutes^7."
 export qUpdateLowestRconPort=28960
 export qUpdateHighestRconPort=28970
@@ -29,10 +30,6 @@ echo Stopping Quake Servers...
 # Running 'steamcmd' to update qzeroded
 echo Updating Quake Server...
 ~/steamcmd/steamcmd.sh +login anonymous +force_install_dir ~/steamcmd/steamapps/common/qlds/ +app_update 349090 +quit
-
-# Updating mappools/configs/factories
-curl $qBaseURL/scripts/quakeconfig.sh > quakeconfig.sh; dos2unix quakeconfig.sh; chmod +x quakeconfig.sh
-sh quakeconfig.sh
 
 # Removing the .quakelive directories, except for baseq3.
 echo Removing Purgery port directories...

@@ -3,6 +3,8 @@
 # created by Thomas Jones on 02/10/15.
 # purger@tomtecsolutions.com
 
+# This script will be replaced in the near future. Consider this an active legacy script.
+
 if [ $# -eq 0 ]; then
     echo "Usage:"
     echo "    ./searchlogs.sh <string> <server id> <surrounding lines>"

@@ -3,6 +3,7 @@
 # created by Thomas Jones on 09/09/15.
 # purger@tomtecsolutions.com
 
+# This script will be replaced in the near future. Consider this an active legacy script.
 
 # Defining variables.
 export qServerLocation=$(<localConfig-serverLocation.txt)
