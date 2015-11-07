@@ -16,8 +16,9 @@ git clone https://github.com/TomTec-Solutions/QL-Server-Config.git > /dev/null
 cd QL-Server-Config
 
 # Running pre-run script.
-echo "Running pre-run script..."
+echo "=== Running pre-run script..."
 bash pre-run.sh
+echo "=== End of pre-run script..."
 
 #
 #  Performing main data move.
@@ -58,8 +59,10 @@ cd ..
 
 
 # Running post-run script.
-echo "Running post-run script..."
+echo "=== Running post-run script..."
 bash post-run.sh
+echo "=== End of post-run script..."
 
 # Finished, cleaning up and exiting.
-cd QL-Server-Config; cp deploy.sh ~/deploy.sh; cd ~; rm -rf QL-Server-Config; exit
+echo "Deployment complete."
+cp deploy.sh ~/deploy.sh; cd ~; rm -rf QL-Server-Config; exit
