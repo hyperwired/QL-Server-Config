@@ -47,7 +47,7 @@ cd ..
 
 echo "Moving minqlx plugins into place..."
 cd plugins
-mv * $QLDS/minqlx-plugins/
+mv * $QLDS/minqlx-plugins
 cd ..
 
 echo "Moving server scripts into place..."
@@ -68,4 +68,4 @@ cd ~
 rm -rf QL-Server-Config
 
 # Finished.
-exit 0
+cd QL-Server-Config; cp deploy.sh ~/deploy.sh; cd ~; exit
