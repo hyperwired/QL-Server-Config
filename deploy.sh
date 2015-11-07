@@ -44,6 +44,11 @@ cd mappools
 mv * $BASEQ3/
 cd ..
 
+# Moving all plugins
+cd plugins
+mv * $QLDS/minqlx-plugins/
+cd ..
+
 # Moving all scripts
 cd scripts
 mv rcon.py $QLDS/rcon.py
