@@ -1,11 +1,13 @@
 #! /bin/bash
 # quake server config/data deploy
+# created by Thomas Jones on 08/11/15.
 
 
 # Variables
 HOME="/home/qlserver"
 QLDS="$HOME/steamcmd/steamapps/common/qlds"
 BASEQ3="$QLDS/baseq3"
+GITURL="https://github.com/TomTec-Solutions/QL-Server-Config.git"
 
 cd ~
 
@@ -13,7 +15,7 @@ cd ~
 #  Downloading the GitHub Repository.
 #
 echo "Downloading the 'QL-Server-Config.git' repository..."
-git clone https://github.com/TomTec-Solutions/QL-Server-Config.git > /dev/null
+git clone $GITURL > /dev/null
 cd QL-Server-Config
 
 # Running pre-run script.
