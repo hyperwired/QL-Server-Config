@@ -21,7 +21,7 @@ cd QL-Server-Config
 # Running pre-run script.
 echo "=== Running pre-run script..."
 bash pre-run.sh
-echo "=== End of pre-run script..."
+echo "=== End of pre-run script."
 
 #
 #  Performing main data move.
@@ -49,6 +49,11 @@ cd mappools
 mv * $BASEQ3/
 cd ..
 
+echo "Zipping up minqlx core files and moving them into place..."
+rm -f ~/steamcmd/steamapps/common/qlds/minqlx.zip
+zip -r ~/steamcmd/steamapps/common/qlds/minqlx.zip minqlx/*
+
+
 echo "Moving minqlx plugins into place..."
 cd plugins
 mv * $QLDS/minqlx-plugins
@@ -64,7 +69,7 @@ cd ..
 # Running post-run script.
 echo "=== Running post-run script..."
 bash post-run.sh
-echo "=== End of post-run script..."
+echo "=== End of post-run script."
 
 # Finished, cleaning up and exiting.
 echo "Deployment complete."
