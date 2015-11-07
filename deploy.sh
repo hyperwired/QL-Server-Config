@@ -4,7 +4,7 @@
 
 # Variables
 HOME="/home/qlserver"
-QLDS="$HOME/steamcmd/steamapps/common/qlds
+QLDS="$HOME/steamcmd/steamapps/common/qlds"
 BASEQ3="$QLDS/baseq3"
 
 
