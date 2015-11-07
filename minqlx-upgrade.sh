@@ -16,7 +16,7 @@ if [ $CURRENT_MINQLX_VERSION != $LATEST_MINQLX_VERSION ]; then
     cd ~
     rm -rf temp
     echo "0.0.4a" > ~/minqlx.version
-    echo "minqlx is now up-to-date (version $CURRENT_MINQLX_VERSION)."
+    echo "minqlx is now up-to-date (version $LATEST_MINQLX_VERSION)."
 else
     echo "minqlx is up-to-date (version $CURRENT_MINQLX_VERSION)."
 fi
