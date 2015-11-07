@@ -7,11 +7,12 @@ HOME="/home/qlserver"
 QLDS="$HOME/steamcmd/steamapps/common/qlds"
 BASEQ3="$QLDS/baseq3"
 
+cd ~
 
 #
 #  Downloading the GitHub Repository.
 #
-cd ~
+echo "Downloading the 'QL-Server-Config.git' repository..."
 git clone https://github.com/TomTec-Solutions/QL-Server-Config.git > /dev/null
 cd QL-Server-Config
 
