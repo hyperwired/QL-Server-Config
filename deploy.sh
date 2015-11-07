@@ -61,11 +61,5 @@ cd ..
 echo "Running post-run script..."
 bash post-run.sh
 
-#
-#  Removing GitHub Repository.
-#
-cd ~
-rm -rf QL-Server-Config
-
-# Finished.
-cd QL-Server-Config; cp deploy.sh ~/deploy.sh; cd ~; exit
+# Finished, cleaning up and exiting.
+cd QL-Server-Config; cp deploy.sh ~/deploy.sh; cd ~; rm -rf QL-Server-Config; exit
