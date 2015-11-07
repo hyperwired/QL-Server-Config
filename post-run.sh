@@ -1,6 +1,6 @@
 #! /bin/bash
 # Post-run script
 
-chmod -v +x ~/*.sh
+chmod +x ~/*.sh
 
 exit 0

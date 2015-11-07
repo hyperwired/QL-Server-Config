@@ -12,51 +12,53 @@ BASEQ3="$QLDS/baseq3"
 #  Downloading the GitHub Repository.
 #
 cd ~
-git clone https://github.com/TomTec-Solutions/QL-Server-Config.git
+git clone https://github.com/TomTec-Solutions/QL-Server-Config.git > /dev/null
 cd QL-Server-Config
 
 # Running pre-run script.
+echo "Running pre-run script..."
 bash pre-run.sh
 
 #
 #  Performing main data move.
 # 
 
-# Moving all access files
+echo "Moving access files into place..."
 cd accesses
 mv * $BASEQ3/
 cd ..
 
-# Moving all configuration files
+echo "Moving configuration files into place..."
 cd config-files
 mv server.txt $BASEQ3/server.cfg
 sudo mv supervisord.txt /etc/supervisord.conf
 mv workshop.txt $BASEQ3/workshop.txt
 cd ..
 
-# Moving all factories
+echo "Moving factories into place..."
 cd factories
 mv * $BASEQ3/scripts
 cd ..
 
-# Moving all map-pools
+echo "Moving map-pools into place..."
 cd mappools
 mv * $BASEQ3/
 cd ..
 
-# Moving all plugins
+echo "Moving minqlx plugins into place..."
 cd plugins
 mv * $QLDS/minqlx-plugins/
 cd ..
 
-# Moving all scripts
+echo "Moving server scripts into place..."
 cd scripts
 mv rcon.py $QLDS/rcon.py
 mv * $HOME/
 cd ..
 
 
-# Running post-run script
+# Running post-run script.
+echo "Running post-run script..."
 bash post-run.sh
 
 #
