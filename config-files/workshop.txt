@@ -5,3 +5,6 @@
 
 # Quake Live Holiday Pack
 539421982
+
+# Rocket Arena 3 - Map Pack
+550003921
