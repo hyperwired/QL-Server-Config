@@ -49,10 +49,8 @@ cd mappools
 mv * $BASEQ3/
 cd ..
 
-echo "Zipping up minqlx core files and moving them into place..."
-rm -f ~/steamcmd/steamapps/common/qlds/minqlx.zip
-zip -r ~/steamcmd/steamapps/common/qlds/minqlx.zip minqlx/*
-
+echo "Moving minqlx.zip into place..."
+mv minqlx.zip $QLDS/minqlx.zip
 
 echo "Moving minqlx plugins into place..."
 cd plugins
