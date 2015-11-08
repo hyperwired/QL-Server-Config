@@ -193,9 +193,9 @@ def set_plugins_version(path):
     setattr(minqlx, "__plugins_version__", p.stdout.read().decode().strip())
 
 def set_map_subtitles():
-    #minqlx.set_configstring(678, "Running minqlx ^6{}^7 with plugins ^6{}^7."
-    #    .format(minqlx.__version__, minqlx.__plugins_version__))
-    #minqlx.set_configstring(679, "Check ^6http://github.com/MinoMino/minqlx^7 for more details.")
+    minqlx.set_configstring(678, "Running minqlx ^6{}^7 with plugins ^6{}^7."
+        .format(minqlx.__version__, minqlx.__plugins_version__))
+    minqlx.set_configstring(679, "Check ^6http://github.com/MinoMino/minqlx^7 for more details.")
 
 # ====================================================================
 #                              DECORATORS

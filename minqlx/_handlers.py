@@ -185,8 +185,7 @@ def handle_new_game(is_restart):
                 "Launch the server with \"zmq_stats_enable 1\"")
             _zmq_warning_issued = True
 
-    # Disabled this so I can activate my branding.
-    #minqlx.set_map_subtitles()
+    minqlx.set_map_subtitles()
 
     if not is_restart:
         try:
