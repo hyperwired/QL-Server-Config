@@ -281,9 +281,9 @@ exec $qPathToMinqlxStartScript \
     +set g_damage_lg 6 \
     +set g_voteFlags 0
 elif [ $1 -eq 11 ]
-# starting mickzerofive's brisbane server 1...
+# starting mickzerofive's sydney server 1...
 then
-if [ $(hostname) == "brisbane.quakelive.tomtecsolutions.com.au" ]
+if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
 then
 echo "Starting mickzerofive's server..."
 exec $qPathToVanillaStartScript \
