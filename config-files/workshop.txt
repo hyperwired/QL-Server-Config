@@ -6,7 +6,6 @@
 # Quake Live Holiday Pack
 539421982
 
-<<<<<<< HEAD
 # Rocket Arena 3 - ra3map18
 550003921
 
@@ -112,7 +111,3 @@
 
 # Switch, Duel map
 540068166
-=======
-# Rocket Arena 3 - Map Pack
-550003921
->>>>>>> origin/master
