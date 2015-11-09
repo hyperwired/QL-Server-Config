@@ -69,6 +69,7 @@ class essentials(minqlx.Plugin):
         self.add_command("allready", self.cmd_allready, 2)
         self.add_command("abort", self.cmd_abort, 2)
         self.add_command(("map", "changemap"), self.cmd_map, 2, usage="<mapname> [factory]")
+        self.add_command("devmap", self.cmd_devmap, 4, usage="<mapname> [factory]")
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("db", self.cmd_db, 5, usage="<key> [value]")
         self.add_command("seen", self.cmd_seen, usage="<steam_id>")
@@ -520,6 +521,12 @@ class essentials(minqlx.Plugin):
         
         # TODO: Give feedback on !map.
         self.change_map(msg[1], msg[2] if len(msg) > 2 else None)
+
+    def cmd_devmap(self, player, msg, channel):
+        if len(msg) < 2:
+            return minqlx.RET_USAGE
+        
+        minqlx.console_command("devmap {} {}".format(msg[1], msg[2]))
         
     def cmd_help(self, player, msg, channel):
         # TODO: Perhaps print some essential commands in !help
