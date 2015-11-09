@@ -1,4 +1,4 @@
-# Get these numbers from the ?id= ending of the workshop URI.
+# Get these numbers from the ?id= ending of the workshop URL.
 
 # Quake Live Extras Pack
 539421606
@@ -6,6 +6,7 @@
 # Quake Live Holiday Pack
 539421982
 
+<<<<<<< HEAD
 # Rocket Arena 3 - ra3map18
 550003921
 
@@ -111,3 +112,7 @@
 
 # Switch, Duel map
 540068166
+=======
+# Rocket Arena 3 - Map Pack
+550003921
+>>>>>>> origin/master
