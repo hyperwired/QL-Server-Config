@@ -6,5 +6,108 @@
 # Quake Live Holiday Pack
 539421982
 
-# Rocket Arena 3 - Map Pack
+# Rocket Arena 3 - ra3map18
 550003921
+
+# Map - Rustgrad
+546664071
+
+# OSPCA1 - American Can-CO
+547440173
+
+# Threewave q3wpak 0, 1, 2, 3, 4
+546209430
+546895198
+546129401
+545699336
+546960020
+
+# Rocket Arena 3 - ra3map14
+549447613
+
+# 6+ (Q3: 6++)
+547252823
+
+# Rocket Arena 3 - ra3map13
+550674410
+
+# Rocket Arena 3 - ra3map15
+550575965
+
+# Q1DM6 - The Dark Zone
+545368609
+
+# Beatbox Map (ztn3dm2)
+547937675
+
+# Rocket Arena 3 - ra3map16
+550566693
+
+# Crash Race Course
+548134603
+
+# Hot Crossings
+546510790
+
+# Mario Opposing Castles
+547046433
+
+# Big Campgrounds / Big CTF/CA !
+547481475
+
+# Rocket Arena 3 - ra3map19
+549208258
+
+# Reda
+547535957
+
+# 1337BC
+549763551
+
+# SpaceCtf5
+547915966
+
+# Painless Map
+544872333
+
+# Map - Family Fun Factory
+550747161
+
+# Rocket Arena 3 - ra3map10
+550843679
+
+# The Simpsons Map
+547039436
+
+# MONSOON_CONVERTED
+542684362
+
+# Consequence
+544634523
+
+# Test Big Box
+545598325
+
+# CoralCTF
+544276062
+
+# Winter's Edge Original
+540986862
+
+# Menace, CTF map
+539826376
+
+# Arcane Citadel Original
+541499431
+
+# Map - Solitude
+550850908
+
+# SCDM3
+540937824
+
+# Arena trening map
+545137572
+
+# Switch, Duel map
+540068166
