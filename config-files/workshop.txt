@@ -1,4 +1,4 @@
-# Get these numbers from the ?id= ending of the workshop URI.
+# Get these numbers from the ?id= ending of the workshop URL.
 
 # Quake Live Extras Pack
 539421606
