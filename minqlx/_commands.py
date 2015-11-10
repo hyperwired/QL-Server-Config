@@ -179,7 +179,7 @@ class CommandInvoker:
                         # C-level dispatchers expect False if it shouldn't go to the engine.
                         return False
                     elif res == minqlx.RET_USAGE and cmd.usage:
-                        channel.reply("^7Usage: ^6{} {}".format(name, cmd.usage))
+                        channel.reply("^7Usage: ^4{} {}".format(name, cmd.usage))
                     elif res != None and res != minqlx.RET_NONE:
                         logger = minqlx.get_logger(None)
                         logger.warning("Command '{}' with handler '{}' returned an unknown return value: {}"
