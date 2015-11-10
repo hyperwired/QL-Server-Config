@@ -526,7 +526,7 @@ class essentials(minqlx.Plugin):
         if len(msg) < 2:
             return minqlx.RET_USAGE
         
-        minqlx.console_command("devmap {}".join(msg[1:])
+        minqlx.console_command("devmap {}".join(msg[1:]))
         
     def cmd_help(self, player, msg, channel):
         # TODO: Perhaps print some essential commands in !help
