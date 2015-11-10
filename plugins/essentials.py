@@ -54,8 +54,8 @@ class essentials(minqlx.Plugin):
         self.add_command("stopmusic", self.cmd_stopmusic, 1)
         self.add_command("kick", self.cmd_kick, 2, usage="<id>")
         self.add_command(("kickban", "tempban"), self.cmd_kickban, 2, usage="<id>")
-        self.add_command("yes", self.cmd_yes, 2)
-        self.add_command("no", self.cmd_no, 2)
+        self.add_command(("yes", "pass"), self.cmd_yes, 2)
+        self.add_command(("no", "veto"), self.cmd_no, 2)
         self.add_command("switch", self.cmd_switch, 1, usage="<id> <id>")
         self.add_command("red", self.cmd_red, 1, usage="<id>")
         self.add_command("blue", self.cmd_blue, 1, usage="<id>")
@@ -526,7 +526,7 @@ class essentials(minqlx.Plugin):
         if len(msg) < 2:
             return minqlx.RET_USAGE
         
-        minqlx.console_command("devmap {} {}".format(msg[1], msg[2]))
+        minqlx.console_command("devmap {}".join(msg[1:])
         
     def cmd_help(self, player, msg, channel):
         # TODO: Perhaps print some essential commands in !help
