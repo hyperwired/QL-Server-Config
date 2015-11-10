@@ -111,3 +111,15 @@
 
 # Switch, Duel map
 540068166
+
+# Rocket Arena 3 - ra3map8
+551367534
+
+# Rocket Arena 3 - ra3map20
+551229107
+
+# Fortress
+551212214
+
+# Rocket Arena 3 - ra3map9
+551148976
