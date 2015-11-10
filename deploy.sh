@@ -35,18 +35,23 @@ cd ..
 echo "Moving configuration files into place..."
 cd config-files
 mv server.txt $BASEQ3/server.cfg
+dos2unix $BASEQ3/server.cfg > /dev/null
 sudo mv supervisord.txt /etc/supervisord.conf
+sudo dos2unix /etc/supervisord.conf > /dev/null
 mv workshop.txt $BASEQ3/workshop.txt
+dos2unix $BASEQ3/workshop.txt > /dev/null
 cd ..
 
 echo "Moving factories into place..."
 cd factories
 mv * $BASEQ3/scripts
+dos2unix $BASEQ3/scripts/* > /dev/null
 cd ..
 
 echo "Moving map-pools into place..."
 cd mappools
 mv * $BASEQ3/
+dos2unix $BASEQ3/mappool* > /dev/null
 cd ..
 
 #echo "Moving minqlx.zip into place..."
