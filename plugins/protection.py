@@ -10,12 +10,12 @@ class protection(minqlx.Plugin):
     def handle_vote_called(self, caller, vote, args):
         if vote.lower() == "kick":
 
-            if args == "zeobyte":
-                caller.tell("^7Voting to kick the server owner is prohibited. This incident will be logged.")
+            if args.lower() == "zeobyte":
+                caller.tell("^7Voting to kick the server owner is prohibited. This incident has been recorded.")
                 return minqlx.RET_STOP_ALL
             
-            if args == "merozollo":
-                caller.tell("^7Voting to kick a server administrator is prohibited. This incident will be logged.")
+            if args.lower() == "merozollo":
+                caller.tell("^7Voting to kick a server administrator is prohibited. This incident has been recorded.")
                 return minqlx.RET_STOP_ALL
 
 
