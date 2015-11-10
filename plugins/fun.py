@@ -9,4 +9,4 @@ class fun(minqlx.Plugin):
 
 
     def cmd_penlen(self, player, msg, channel):
-        channel.reply("^7{}^7's penis length: ^4{}^7.".format(player, randint(0,12)))
+        channel.reply("^7{}^7's penis length: ^4{} inch(es)^7".format(player, randint(0,12)))
