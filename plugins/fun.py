@@ -1,16 +1,13 @@
 # This has been created by TomTec Solutions
-<<<<<<< HEAD
-=======
 # This file contains community ideas that may be found to be in bad taste. These views do not represent the views of TomTec Solutions
 
->>>>>>> origin/master
 import minqlx
 from random import randint
 
 class fun(minqlx.Plugin):
     def __init__(self):
         self.add_command("penislength", self.cmd_penlen) # Junkyard requested
-        self.add_command("poke", self.cmd_poke, usage="<text>") # Merozollo requested
+        self.add_command("poke", self.cmd_poke, usage="<name>") # Merozollo requested
  
     def cmd_penlen(self, player, msg, channel):
         playerName = player.clean_name
@@ -30,5 +27,5 @@ class fun(minqlx.Plugin):
 
         displayText = " ".join(msg[1:])
         
-        minqlx.console_command("cp ^7WAKE UP, {}^7!".format(displayText))
+        minqlx.console_command("cp ^7WAKE UP, {}^7!".format(displayText.upper()))
         self.play_sound("sound/world/klaxon2.wav")
