@@ -1,4 +1,9 @@
 # This has been created by TomTec Solutions
+<<<<<<< HEAD
+=======
+# This file contains community ideas that may be found to be in bad taste. These views do not represent the views of TomTec Solutions
+
+>>>>>>> origin/master
 import minqlx
 from random import randint
 
