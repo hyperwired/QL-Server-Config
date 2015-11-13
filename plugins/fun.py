@@ -7,7 +7,7 @@ from random import randint
 class fun(minqlx.Plugin):
     def __init__(self):
         self.add_command("penislength", self.cmd_penlen) # Junkyard requested
-        self.add_command("vaginadepth", self.cmd_vagdep) # Junkyard requested
+        self.add_command(("vaginadepth", "vaginaldepth", "vaginialdepth"), self.cmd_vagdep) # Junkyard requested
         self.add_command("poke", self.cmd_poke, usage="<name>") # Merozollo requested
  
     def cmd_penlen(self, player, msg, channel):
