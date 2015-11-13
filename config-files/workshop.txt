@@ -123,3 +123,27 @@
 
 # Rocket Arena 3 - ra3map9
 551148976
+
+# Rocket Arena 3 - ra3map21
+551699225
+
+# Sanctorium
+552722973
+
+# Rocket Arena 3 - ra3map22
+553088484
+
+# Rocket Arena 3 - ra3map6
+553095317
+
+# Theatre of Pain - ra3map1
+551678612
+
+# Crypt
+552635969
+
+# Overkill Remix
+549600167
+
+# Central Pwnage Unit (Beta 2)
+553399644
