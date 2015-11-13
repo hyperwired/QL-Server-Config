@@ -8,7 +8,7 @@ class fun(minqlx.Plugin):
     def __init__(self):
         self.add_command("penislength", self.cmd_penlen) # Junkyard requested
         self.add_command(("vaginadepth", "vaginaldepth", "vaginialdepth"), self.cmd_vagdep) # Junkyard requested
-        self.add_command(("msg", "message"), self.cmd_screenmessage, usage="<text>", 1) # Merozollo requested
+        self.add_command(("msg", "message"), self.cmd_screenmessage, 1, usage="<text>") # Merozollo requested
  
     def cmd_penlen(self, player, msg, channel):
         playerName = player.clean_name
@@ -36,5 +36,5 @@ class fun(minqlx.Plugin):
         if len(msg) < 2:
             return minqlx.RET_USAGE
         
-        minqlx.console_command("cp ^7{}^7".format(displayText))
+        minqlx.console_command("cp ^7{}^7".format(" ".join(msg[1:])))
         #self.play_sound("sound/world/klaxon2.wav")
