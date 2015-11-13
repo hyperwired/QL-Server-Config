@@ -28,5 +28,4 @@ echo "'deploy.sh' has arrived. Executing."
 bash ~/deploy.sh
 echo "'deploy.sh' has left. Exiting."
 
-cp -f initialise.sh ~; cd ~; rm -rf ~/QL-Server-Config
-exit
+cp -f initialise.sh ~; cd ~; chmod +x ~/initialise.sh; rm -rf ~/QL-Server-Config; exit
