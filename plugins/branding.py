@@ -18,7 +18,8 @@ class branding(minqlx.Plugin):
 
     def sponsor_message(self):
         minqlx.send_server_command(None, "cp \"^4The Purgery\n^5Sponsored by TomTec Solutions^7\"\n")
-
+        self.play_sound("sound/items/protect3.ogg")
+        
     def welcome_message(self, player):
         minqlx.send_server_command(player.id, "cp \"^7Welcome to ^4The Purgery^7\"\n")
         #self.play_sound("sound/items/protect3.ogg") # waaaa, cthulhu's crying about it
