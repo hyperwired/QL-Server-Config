@@ -6,10 +6,10 @@
 # This script will be replaced in the near future. Consider this an active legacy script.
 
 # Defining variables.
-export qServerLocation=$(<localConfig-serverLocation.txt)
+export qServerLocation=$(<~/localConfig-serverLocation.txt)
 export qPathToMinqlxStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64_minqlx.sh"
 export qPathToVanillaStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64.sh"
-export qRconPasswordPurgery=$(<localConfig-rconPassword-purgery.txt)
+export qRconPasswordPurgery=$(<~/localConfig-rconPassword-purgery.txt)
 sponsortag="$qServerLocation,TomTec Solutions"
 
 gameport=`expr $1 + 27960`
