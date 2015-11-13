@@ -38,7 +38,7 @@ rm -rf 27960 27961 27962 27963 27964 27965 27966 27967 27968 27969 27970
 cd ~
 
 # Running 'autodownload.sh' to recache all workshop items before restarting.
-bash ~/autodownload.sh
+#bash ~/autodownload.sh # going to see how well it does on it's own.
 
 # Using 'supervisorctl' to start all servers.
 echo Starting Quake Servers...
