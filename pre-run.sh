@@ -4,7 +4,7 @@
 # Upgrade minqlx if needed.
 bash minqlx-upgrade.sh
 
-# Remove all minqlx plugins
-rm -rf ~/steamcmd/steamapps/common/qlds/minqlx-plugins/*.py
+# Kill supervisord, so our new config is activated.
+sudo killall supervisord
 
 exit 0
