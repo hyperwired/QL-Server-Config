@@ -217,7 +217,7 @@ echo "Starting multi game type server 1..."
 exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
-    +set sv_hostname "    #$servernum The Purgery $qServerLocation PQL - Multi-Gametype Turbo" \
+    +set sv_hostname "    #$servernum The Purgery $qServerLocation PQL - Multi-Gametype" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
@@ -263,7 +263,7 @@ echo "Starting VQL iCTF server 1..."
 exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
-    +set sv_hostname " #$servernum The Purgery $qServerLocation VQL - iCTF" \
+    +set sv_hostname " #$servernum The Purgery $qServerLocation VQL - Multi-Gametype" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
@@ -276,7 +276,7 @@ exec $qPathToMinqlxStartScript \
     +set bot_enable 1 \
     +set bot_nochat 1 \
     +set g_accessFile "access_purgery.txt" \
-    +set sv_mappoolFile "mappool_vqlictf.txt" \
+    +set sv_mappoolFile "mappool_default.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set g_damage_lg 6 \
     +set g_voteFlags 0
