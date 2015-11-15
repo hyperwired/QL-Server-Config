@@ -36,3 +36,6 @@
 
 # mod 9, quarrel
 76561198048831696|mod
+
+# mod 10, junkyard
+76561198257486058|mod
