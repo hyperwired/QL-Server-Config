@@ -16,9 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with minqlx. If not, see <http://www.gnu.org/licenses/>.
 
-
-# This has been modified by TomTec Solutions
-
 import minqlx
 import datetime
 import time
@@ -201,12 +198,9 @@ class ban(minqlx.Plugin):
             db.execute()
             
             try:
-                self.kick(ident, "You have been banned until {}: {}".format(expires, reason))
+                self.kick(ident, "has been banned until ^4{}^7: {}".format(expires, reason))
             except ValueError:
-                pass
-            
-            channel.reply("^4{} ^7has been banned. Ban expires on ^4{}^7.".format(name, expires))
-            return
+                channel.reply("^4{} ^7has been banned. Ban expires on ^4{}^7.".format(name, expires))
 
     def cmd_unban(self, player, msg, channel):
         """Unbans a player if banned."""
@@ -238,7 +232,7 @@ class ban(minqlx.Plugin):
         else:
             db = self.db.pipeline()
             for ban_id, score in bans:
-                db.zincr(base_key + ":{}".format(ban_id), -score)
+                db.zincrby(base_key, ban_id, -score)
             db.execute()
             channel.reply("^4{}^7 has been unbanned.".format(name))
 
@@ -270,7 +264,7 @@ class ban(minqlx.Plugin):
         if res:
             expires, reason = res
             if reason:
-                channel.reply("^4{}^7 is banned until ^4{}^7 for the follow reason:^4 {}".format(name, *res))
+                channel.reply("^4{}^7 is banned until ^4{}^7 for the following reason:^4 {}".format(name, *res))
             else:
                 channel.reply("^4{}^7 is banned until ^4{}^7.".format(name, expires))
             return

@@ -18,9 +18,6 @@
 
 #Some essential functions.
 
-
-# This has been modified by TomTec Solutions
-
 import minqlx
 import minqlx.database
 import datetime
@@ -69,15 +66,13 @@ class essentials(minqlx.Plugin):
         self.add_command("allready", self.cmd_allready, 2)
         self.add_command("abort", self.cmd_abort, 2)
         self.add_command(("map", "changemap"), self.cmd_map, 2, usage="<mapname> [factory]")
-        self.add_command("devmap", self.cmd_devmap, 4, usage="<mapname> [factory]")
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("db", self.cmd_db, 5, usage="<key> [value]")
         self.add_command("seen", self.cmd_seen, usage="<steam_id>")
         self.add_command("time", self.cmd_time, usage="[timezone_offset]")
         self.add_command(("teamsize", "ts"), self.cmd_teamsize, 2, usage="<size>")
         self.add_command("rcon", self.cmd_rcon, 5)
-        self.add_command(("mappool", "maps"), self.cmd_mappool, client_cmd_perm=0)
-        self.add_command(("maplist", "listmaps"), self.cmd_maplist, client_cmd_perm=0)
+        self.add_command(("mappool", "maps", "maplist"), self.cmd_mappool, client_cmd_perm=0)
 
         # Cvars.
         self.set_cvar_once("qlx_votepass", "1")
@@ -522,17 +517,11 @@ class essentials(minqlx.Plugin):
         
         # TODO: Give feedback on !map.
         self.change_map(msg[1], msg[2] if len(msg) > 2 else None)
-
-    def cmd_devmap(self, player, msg, channel):
-        if len(msg) < 2:
-            return minqlx.RET_USAGE
-        
-        minqlx.console_command("devmap {}".join(msg[1:]))
         
     def cmd_help(self, player, msg, channel):
         # TODO: Perhaps print some essential commands in !help
-        player.tell("^4Zeo^7mod, derived from ^6minqlx^7.")
-        player.tell("Email ^4thomas@tomtecsolutions.com^7 for more information about the modified ^6minqlx^7.")
+        player.tell("minqlx: ^4{}^7 - Plugins: ^4{}".format(minqlx.__version__, minqlx.__plugins_version__))
+        player.tell("See ^4github.com/MinoMino/minqlx^7 for more info about the mod and its commands.")
         return minqlx.RET_STOP_EVENT
     
     def cmd_db(self, player, msg, channel):
@@ -647,9 +636,6 @@ class essentials(minqlx.Plugin):
             self.tell_mappool(player)
 
         return minqlx.RET_STOP_EVENT
-
-    def cmd_maplist(self, player, msg, channel):
-        self.tell_mappool(player)
 
 
     # ====================================================================

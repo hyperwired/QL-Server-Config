@@ -16,9 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with minqlx. If not, see <http://www.gnu.org/licenses/>.
 
-
-# This has been modified by TomTec Solutions
-
 """Database agnostic way of getting and setting a player's permissions.
 
 It assumes the database driver interprets integers as SteamID64s and
@@ -94,7 +91,7 @@ class permission(minqlx.Plugin):
 
     def cmd_myperm(self, player, msg, channel):
         if player.steam_id == minqlx.owner():
-            channel.reply("Silly question, you're the owner here ^4Zeo^7byte.")
+            channel.reply("You can do anything to me, master.")
             return
         
         perm = self.db.get_permission(player)

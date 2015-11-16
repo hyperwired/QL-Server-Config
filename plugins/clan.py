@@ -16,9 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with minqlx. If not, see <http://www.gnu.org/licenses/>.
 
-
-# This has been modified by TomTec Solutions
-
 import minqlx
 import re
 

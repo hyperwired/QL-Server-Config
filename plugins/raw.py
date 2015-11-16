@@ -19,9 +19,6 @@
 # Used mostly for debug. A potential security issue, since it allows
 # level 5 people to execute arbitrary Python code on your server.
 
-
-# This has been modified by TomTec Solutions
-
 import minqlx
 
 class raw(minqlx.Plugin):
