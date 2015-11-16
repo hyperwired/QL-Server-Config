@@ -20,8 +20,16 @@ class protection(minqlx.Plugin):
                 caller.tell("^7Voting to kick a server administrator is prohibited. This incident has been recorded.")
                 return minqlx.RET_STOP_ALL
 
+            if playerName == "0regonn":
+                caller.tell("^7Voting to kick a protected player is prohibited. This incident has been recorded.")
+                return minqlx.RET_STOP_ALL
+
 
         if vote.lower() == "clientkick":
 
             playerID = args.lower()
+            if self.player(playerID).steam_id == "76561198150444650": # 0regonn
+                caller.tell("^7Voting to clientkick a protected player is prohibited. This incident has been recorded.")
+                return minqlx.RET_STOP_ALL
+            
             # no need to block this anymore, if you're A, can't be clientkicked.
