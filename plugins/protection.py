@@ -27,9 +27,7 @@ class protection(minqlx.Plugin):
 
         if vote.lower() == "clientkick":
 
-            playerID = args.lower()
-            if self.player(playerID).steam_id == "76561198150444650": # 0regonn
-                caller.tell("^7Voting to clientkick a protected player is prohibited. This incident has been recorded.")
-                return minqlx.RET_STOP_ALL
+            caller.tell("^7Voting from the in-game menu/clientkick is disabled, as it conflicts with the player protection system.")
+            caller.tell("^7Please use the ^2/cv^7/^2/callvote^7 console commands.")
+            return minqlx.RET_STOP_ALL
             
-            # no need to block this anymore, if you're A, can't be clientkicked.
