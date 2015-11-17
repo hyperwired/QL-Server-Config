@@ -1,7 +1,7 @@
 #! /bin/bash
 cd ~
 
-CURRENT_MINQLX_VERSION=$(cat minqlx.version)
+CURRENT_MINQLX_VERSION=$(cat ~/minqlx.version)
 LATEST_MINQLX_VERSION="0.1.0"
 LATEST_MINQLX_URL="https://github.com/MinoMino/minqlx/releases/download/v0.1.0/minqlx_v0.1.0.tar.gz"
 
