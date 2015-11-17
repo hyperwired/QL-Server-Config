@@ -7,7 +7,7 @@ LATEST_MINQLX_URL="https://github.com/MinoMino/minqlx/releases/download/v0.1.0/m
 
 if [ $CURRENT_MINQLX_VERSION != $LATEST_MINQLX_VERSION ]; then
     echo "Upgrading minqlx from version $CURRENT_MINQLX_VERSION to $LATEST_MINQLX_VERSION..."
-sudo rm -rf ~/steamcmd/steamapps/common/qlds/minqlx.so > /dev/null # no longer remove minqlx.zip
+    sudo rm -rf ~/steamcmd/steamapps/common/qlds/minqlx.so > /dev/null # no longer remove minqlx.zip
     mkdir temp; cd temp
     wget $LATEST_MINQLX_URL > /dev/null
     tar xvzf minqlx_v$LATEST_MINQLX_VERSION.tar.gz
