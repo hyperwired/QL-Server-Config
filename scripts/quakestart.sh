@@ -280,34 +280,6 @@ exec $qPathToMinqlxStartScript \
     +set fs_homepath ~/.quakelive/$gameport \
     +set g_damage_lg 6 \
     +set g_voteFlags 0
-elif [ $1 -eq 11 ]
-# starting mickzerofive's sydney server 1...
-then
-if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
-then
-echo "Starting mickzerofive's server..."
-exec $qPathToVanillaStartScript \
-    +set net_strict 1 \
-    +set net_port $gameport \
-    +set sv_hostname "http://4SeasonsGaming.com $qServerLocation" \
-    +set zmq_rcon_enable 1 \
-    +set zmq_rcon_password "$(<localConfig-rconPassword-mickzerofive.txt)" \
-    +set zmq_rcon_port $rconport \
-    +set zmq_stats_enable 1 \
-    +set zmq_stats_password "$(<localConfig-rconPassword-mickzerofive.txt)" \
-    +set zmq_stats_port $gameport \
-    +set sv_tags "4Seasons Gaming,$qServerLocation" \
-    +set g_allowSpecVote 0 \
-    +set g_allowVoteMidGame 0 \
-    +set bot_enable 1 \
-    +set bot_nochat 1 \
-    +set g_accessFile "access_mickzerofive.txt" \
-    +set sv_mappoolFile "mappool_default.txt" \
-    +set fs_homepath ~/.quakelive/mickzerofive-27971
-else
-echo "This system is not intended to host MickZeroFive's server."
-fi
-
 fi
 
 
