@@ -51,8 +51,8 @@ class essentials(minqlx.Plugin):
         self.add_command("stopmusic", self.cmd_stopmusic, 1)
         self.add_command("kick", self.cmd_kick, 2, usage="<id>")
         self.add_command(("kickban", "tempban"), self.cmd_kickban, 2, usage="<id>")
-        self.add_command(("yes", "pass"), self.cmd_yes, 2)
-        self.add_command(("no", "veto"), self.cmd_no, 2)
+        self.add_command("yes", self.cmd_yes, 2)
+        self.add_command("no", self.cmd_no, 2)
         self.add_command("switch", self.cmd_switch, 1, usage="<id> <id>")
         self.add_command("red", self.cmd_red, 1, usage="<id>")
         self.add_command("blue", self.cmd_blue, 1, usage="<id>")
@@ -155,7 +155,7 @@ class essentials(minqlx.Plugin):
         of players that matched it. It ignores colors.
 
         Ex.: ``!id min cool`` would list all players with those two
-        tokens in their name. "Mino", "COOLLER" and "^5I A^2M MI^4NO"
+        tokens in their name. "Mino", "COOLLER" and "^5I A^2M MI^6NO"
         would all be possible candidates.
 
         You can always do /players in the console, but this can save you
@@ -167,7 +167,7 @@ class essentials(minqlx.Plugin):
             out = ""
             for p in players:
                 out += " " * indent
-                out += "{}^4:^7 {}\n".format(p.id, p.name)
+                out += "{}^6:^7 {}\n".format(p.id, p.name)
             player.tell(out[:-1], delimiter="\n")
         
         player_list = self.players()
@@ -183,7 +183,7 @@ class essentials(minqlx.Plugin):
                     if p not in players:
                         players.append(p)
             if players:
-                player.tell("A total of ^4{}^7 players matched:".format(len(players)))
+                player.tell("A total of ^6{}^7 players matched:".format(len(players)))
                 list_alternatives(players)
             else:
                 player.tell("Sorry, but no players matched your tokens.")
@@ -195,7 +195,7 @@ class essentials(minqlx.Plugin):
         if len(self.recent_cmds) == 1:
             player.tell("No commands have been recorded yet.")
         else:
-            player.tell("The most recent ^4{}^7 commands executed:".format(len(self.recent_cmds) - 1))
+            player.tell("The most recent ^6{}^7 commands executed:".format(len(self.recent_cmds) - 1))
             for cmd in list(self.recent_cmds)[1:]:
                 player.tell("  {} executed: {}".format(cmd[0].name, cmd[2]))
 
@@ -520,8 +520,8 @@ class essentials(minqlx.Plugin):
         
     def cmd_help(self, player, msg, channel):
         # TODO: Perhaps print some essential commands in !help
-        player.tell("minqlx: ^4{}^7 - Plugins: ^4{}".format(minqlx.__version__, minqlx.__plugins_version__))
-        player.tell("See ^4github.com/MinoMino/minqlx^7 for more info about the mod and its commands.")
+        player.tell("minqlx: ^6{}^7 - Plugins: ^6{}".format(minqlx.__version__, minqlx.__plugins_version__))
+        player.tell("See ^6github.com/MinoMino/minqlx^7 for more info about the mod and its commands.")
         return minqlx.RET_STOP_EVENT
     
     def cmd_db(self, player, msg, channel):
@@ -571,16 +571,16 @@ class essentials(minqlx.Plugin):
             return
         
         key = "minqlx:players:{}:last_seen".format(steam_id)
-        name = "that player" if steam_id != minqlx.owner() else "my ^4master^7"
+        name = "that player" if steam_id != minqlx.owner() else "my ^6master^7"
         if key in self.db:
             then = datetime.datetime.strptime(self.db[key], DATETIME_FORMAT)
             td = datetime.datetime.now() - then
             r = re.match(r'((?P<d>.*) days*, )?(?P<h>..?):(?P<m>..?):.+', str(td))
             if r.group("d"):
-                channel.reply("^7I saw {} ^4{}^7 day(s), ^4{}^7 hour(s) and ^4{}^7 minute(s) ago."
+                channel.reply("^7I saw {} ^6{}^7 day(s), ^6{}^7 hour(s) and ^6{}^7 minute(s) ago."
                     .format(name, r.group("d"), r.group("h"), r.group("m")))
             else:
-                channel.reply("^7I saw {} ^4{}^7 hour(s) and ^4{}^7 minute(s) ago."
+                channel.reply("^7I saw {} ^6{}^7 hour(s) and ^6{}^7 minute(s) ago."
                     .format(name, r.group("h"), r.group("m")))
         else:
             channel.reply("^7I have never seen {} before.".format(name))
@@ -598,13 +598,13 @@ class essentials(minqlx.Plugin):
         tz = datetime.timezone(offset=datetime.timedelta(hours=tz_offset))
         now = datetime.datetime.now(tz)
         if tz_offset > 0:
-            channel.reply("The current time is: ^4{} UTC+{}"
+            channel.reply("The current time is: ^6{} UTC+{}"
                 .format(now.strftime(TIME_FORMAT), tz_offset))
         elif tz_offset < 0:
-            channel.reply("The current time is: ^4{} UTC{}"
+            channel.reply("The current time is: ^6{} UTC{}"
                 .format(now.strftime(TIME_FORMAT), tz_offset))
         else:
-            channel.reply("The current time is: ^4{} UTC"
+            channel.reply("The current time is: ^6{} UTC"
                 .format(now.strftime(TIME_FORMAT)))
 
     def cmd_teamsize(self, player, msg, channel):
@@ -619,7 +619,7 @@ class essentials(minqlx.Plugin):
             return
         
         self.game.teamsize = n
-        self.msg("The teamsize has been set to ^4{}^7 by {}.".format(n, player))
+        self.msg("The teamsize has been set to ^6{}^7 by {}.".format(n, player))
         return minqlx.RET_STOP_EVENT
 
     def cmd_rcon(self, player, msg, channel):

@@ -87,7 +87,7 @@ class ban(minqlx.Plugin):
 
     def handle_game_countdown(self):
         if self.get_cvar("qlx_leaverBan", bool):
-            self.msg("Leavers are being kept track of. Repeat offenders ^4will^7 be banned.")
+            self.msg("Leavers are being kept track of. Repeat offenders ^6will^7 be banned.")
 
     def handle_game_start(self, game):
         teams = self.teams()
@@ -113,7 +113,7 @@ class ban(minqlx.Plugin):
         db.execute()
 
         if leavers:
-            self.msg("^7Leavers: ^4{}".format(" ".join([p.clean_name for p in leavers])))
+            self.msg("^7Leavers: ^6{}".format(" ".join([p.clean_name for p in leavers])))
             self.players_start = []
 
     def handle_team_switch(self, player, old_team, new_team):
@@ -157,7 +157,7 @@ class ban(minqlx.Plugin):
 
         # Permission level 5 players not bannable.
         if self.db.has_permission(ident, 5):
-            channel.reply("^4{}^7 has permission level 5 and cannot be banned.".format(name))
+            channel.reply("^6{}^7 has permission level 5 and cannot be banned.".format(name))
             return
 
         if len(msg) > 4:
@@ -198,9 +198,9 @@ class ban(minqlx.Plugin):
             db.execute()
             
             try:
-                self.kick(ident, "has been banned until ^4{}^7: {}".format(expires, reason))
+                self.kick(ident, "has been banned until ^6{}^7: {}".format(expires, reason))
             except ValueError:
-                channel.reply("^4{} ^7has been banned. Ban expires on ^4{}^7.".format(name, expires))
+                channel.reply("^6{} ^7has been banned. Ban expires on ^6{}^7.".format(name, expires))
 
     def cmd_unban(self, player, msg, channel):
         """Unbans a player if banned."""
@@ -228,13 +228,13 @@ class ban(minqlx.Plugin):
         base_key = PLAYER_KEY.format(ident) + ":bans"
         bans = self.db.zrangebyscore(base_key, time.time(), "+inf", withscores=True)
         if not bans:
-            channel.reply("^7 No active bans on ^4{}^7 found.".format(name))
+            channel.reply("^7 No active bans on ^6{}^7 found.".format(name))
         else:
             db = self.db.pipeline()
             for ban_id, score in bans:
                 db.zincrby(base_key, ban_id, -score)
             db.execute()
-            channel.reply("^4{}^7 has been unbanned.".format(name))
+            channel.reply("^6{}^7 has been unbanned.".format(name))
 
     def cmd_checkban(self, player, msg, channel):
         """Checks whether a player has been banned, and if so, why."""
@@ -264,17 +264,17 @@ class ban(minqlx.Plugin):
         if res:
             expires, reason = res
             if reason:
-                channel.reply("^4{}^7 is banned until ^4{}^7 for the following reason:^4 {}".format(name, *res))
+                channel.reply("^6{}^7 is banned until ^6{}^7 for the following reason:^6 {}".format(name, *res))
             else:
-                channel.reply("^4{}^7 is banned until ^4{}^7.".format(name, expires))
+                channel.reply("^6{}^7 is banned until ^6{}^7.".format(name, expires))
             return
         elif self.get_cvar("qlx_leaverBan", bool):
             status = self.leave_status(ident)
             if status and status[0] == "ban":
-                channel.reply("^4{} ^7is banned for having left too many games.".format(name))
+                channel.reply("^6{} ^7is banned for having left too many games.".format(name))
                 return
         
-        channel.reply("^4{} ^7is not banned.".format(name))
+        channel.reply("^6{} ^7is not banned.".format(name))
 
     def cmd_forgive(self, player, msg, channel):
         """Removes a leave from a player. Optional integer can be provided to remove multiple leaves."""
@@ -301,12 +301,12 @@ class ban(minqlx.Plugin):
 
         base_key = PLAYER_KEY.format(ident)
         if base_key not in self.db:
-            channel.reply("I do not know ^4{}^7.".format(name))
+            channel.reply("I do not know ^6{}^7.".format(name))
             return
         
         leaves = int(self.db[base_key + ":games_left"])
         if leaves <= 0:
-            channel.reply("^4{}^7's leaves are already at ^4{}^7.".format(name, leaves))
+            channel.reply("^6{}^7's leaves are already at ^6{}^7.".format(name, leaves))
             return
 
         if len(msg) == 2:
@@ -321,10 +321,10 @@ class ban(minqlx.Plugin):
         new_leaves = leaves - leaves_to_forgive
         if new_leaves <= 0:
             self.db[base_key + ":games_left"] = 0
-            channel.reply("^4{}^7's leaves have been reduced to ^40^7.".format(name))
+            channel.reply("^6{}^7's leaves have been reduced to ^60^7.".format(name))
         else:
             self.db[base_key + ":games_left"] = new_leaves
-            channel.reply("^4{}^7 games have been forgiven, putting ^4{}^7 at ^4{}^7 leaves."
+            channel.reply("^6{}^7 games have been forgiven, putting ^6{}^7 at ^6{}^7 leaves."
                 .format(leaves_to_forgive, name, new_leaves))
 
 
@@ -385,5 +385,5 @@ class ban(minqlx.Plugin):
         return (action, ratio)
 
     def warn_player(self, player, ratio):
-        player.tell("^7You have only completed ^4{}^7 percent of your games.".format(round(ratio * 100, 1)))
-        player.tell("^7If you keep leaving you ^4will^7 be banned.")
+        player.tell("^7You have only completed ^6{}^7 percent of your games.".format(round(ratio * 100, 1)))
+        player.tell("^7If you keep leaving you ^6will^7 be banned.")

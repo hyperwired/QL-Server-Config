@@ -34,10 +34,10 @@ class plugin_manager(minqlx.Plugin):
         else:
             try:
                 minqlx.load_plugin(msg[1])
-                channel.reply("^7Plugin ^4{} ^7has been successfully loaded."
+                channel.reply("^7Plugin ^6{} ^7has been successfully loaded."
                     .format(msg[1]))
             except Exception as e:
-                channel.reply("^7Plugin ^4{} ^7has failed to load: {} - {}"
+                channel.reply("^7Plugin ^6{} ^7has failed to load: {} - {}"
                     .format(msg[1], e.__class__.__name__, e))
                 minqlx.log_exception(self)
     
@@ -47,10 +47,10 @@ class plugin_manager(minqlx.Plugin):
         else:
             try:
                 minqlx.unload_plugin(msg[1])
-                channel.reply("^7Plugin ^4{} ^7has been successfully unloaded."
+                channel.reply("^7Plugin ^6{} ^7has been successfully unloaded."
                     .format(msg[1]))
             except Exception as e:
-                channel.reply("^7Plugin ^4{} ^7has failed to unload: {} - {}"
+                channel.reply("^7Plugin ^6{} ^7has failed to unload: {} - {}"
                     .format(msg[1], e.__class__.__name__, e))
                 minqlx.log_exception(self)
     
@@ -60,9 +60,9 @@ class plugin_manager(minqlx.Plugin):
         else:
             try:
                 minqlx.reload_plugin(msg[1])
-                channel.reply("^7Plugin ^4{} ^7has been successfully reloaded."
+                channel.reply("^7Plugin ^6{} ^7has been successfully reloaded."
                     .format(msg[1]))
             except Exception as e:
-                channel.reply("^7Plugin ^4{} ^7has failed to reload: {} - {}"
+                channel.reply("^7Plugin ^6{} ^7has failed to reload: {} - {}"
                     .format(msg[1], e.__class__.__name__, e))
                 minqlx.log_exception(self)
