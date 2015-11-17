@@ -27,7 +27,7 @@ class fun(minqlx.Plugin):
         if playerName.lower() == "zeobyte":
             channel.reply("^7{}^7's vaginial depth: ^4-12 inches^7".format(player))
         else:
-            randNum = randint(0,4)
+            randNum = randint(0,11)
             if randNum == 0:
                 channel.reply("^7{}^7's vaginial depth: ^40 inches (are you trans?)^7".format(player))
             else:
@@ -38,6 +38,7 @@ class fun(minqlx.Plugin):
         if playerName.lower() == "zeobyte":
             channel.reply("^7{}^7's cup size: ^4Stop asking, you're male!".format(playerName))
         else:
+            randNum = randint(0,5)
             if randNum == 0:
                 cupSize = "A"
             elif randNum == 1:
