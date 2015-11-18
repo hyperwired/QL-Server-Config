@@ -57,7 +57,7 @@ class clan(minqlx.Plugin):
                 minqlx.set_configstring(index, new_cs)
                 player.tell("The clan tag has been cleared.")
             else:
-                player.tell("Usage to set a clan tag: ^6{} <clan_tag>".format(msg[0]))
+                player.tell("Usage to set a clan tag: ^4{} <clan_tag>".format(msg[0]))
             return minqlx.RET_STOP_EVENT
 
         if len(self.clean_text(msg[1])) > 5:

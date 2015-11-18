@@ -53,7 +53,7 @@ class motd(minqlx.Plugin):
         if not motd:
             return
         
-        self.play_sound("sound/vo/crash_new/37b_07_alt.wav", player)
+        #self.play_sound("sound/vo/crash_new/37b_07_alt.wav", player)
         self.send_motd(player, motd)
 
     def cmd_setmotd(self, player, msg, channel):
@@ -120,7 +120,7 @@ class motd(minqlx.Plugin):
         return minqlx.RET_STOP_EVENT
 
     def send_motd(self, player, motd):
-        player.tell("^6*** ^7Message of the Day ^6***")
+        #player.tell("^4*** ^7Message of the Day ^4***")
         for line in motd.split("\\n"):
             player.tell(line)
 

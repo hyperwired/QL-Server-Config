@@ -63,7 +63,7 @@ class names(minqlx.Plugin):
         new_info = "".join(["\\{}\\{}".format(key, info[key]) for key in info])
         minqlx.client_command(player.id, "userinfo \"{}\"".format(new_info))
         self.db[name_key] = name
-        player.tell("The name has been registered. To make me forget about it, a simple ^6{}name^7 will do it."
+        player.tell("The name has been registered. To make me forget about it, a simple ^4{}name^7 will do it."
             .format(self.get_cvar("qlx_commandPrefix")))
         return minqlx.RET_STOP_EVENT
 
