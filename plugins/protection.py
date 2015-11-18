@@ -23,6 +23,10 @@ class protection(minqlx.Plugin):
             if playerName == "0regonn":
                 caller.tell("^7Voting to kick a protected player is prohibited. This incident has been recorded.")
                 return minqlx.RET_STOP_ALL
+                
+            if playerName == "zeoswhoregon":
+                caller.tell("^7Voting to kick a protected player is prohibited. This incident has been recorded.")
+                return minqlx.RET_STOP_ALL
 
 
         if vote.lower() == "clientkick":
