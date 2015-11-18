@@ -28,7 +28,7 @@ if [ $1 -eq 0 ]
 # starting PQL CA 1
 then
 echo "Starting clan arena server 1..."
-exec $qPathToVanillaStartScript \
+exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "     #$servernum The Purgery $qServerLocation PQL - Clan Arena" \
@@ -51,7 +51,7 @@ elif [ $1 -eq 1 ]
 # starting VQL CA 1
 then
 echo "Starting clan arena server 2..."
-exec $qPathToVanillaStartScript \
+exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Clan Arena" \
@@ -75,7 +75,7 @@ elif [ $1 -eq 2 ]
 # starting PQL Race 1...
 then
 echo "Starting race server 1..."
-exec $qPathToVanillaStartScript \
+exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "    #$servernum The Purgery $qServerLocation PQL - Race" \
@@ -98,7 +98,7 @@ elif [ $1 -eq 3 ]
 # starting PQL FFA 1...
 then
 echo "Starting free for all server 1..."
-exec $qPathToVanillaStartScript \
+exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "    #$servernum The Purgery $qServerLocation PQL - Free For All" \
@@ -121,7 +121,7 @@ elif [ $1 -eq 4 ]
 # starting PQL CTF 1...
 then
 echo "Starting capture the flag server 1..."
-exec $qPathToVanillaStartScript \
+exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Capture the Flag" \
@@ -145,7 +145,7 @@ elif [ $1 -eq 5 ]
 # starting PQL DOM 1...
 then
 echo "Starting domination server 1..."
-exec $qPathToVanillaStartScript \
+exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "    #$servernum The Purgery $qServerLocation PQL - Domination" \
@@ -168,7 +168,7 @@ elif [ $1 -eq 6 ]
 # starting PQL INFECTED 1...
 then
 echo "Starting infected server 1..."
-exec $qPathToVanillaStartScript \
+exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "    #$servernum The Purgery $qServerLocation PQL - Infected" \
@@ -191,7 +191,7 @@ elif [ $1 -eq 7 ]
 # starting PQL TDM 1...
 then
 echo "Starting team deathmatch server 1..."
-exec $qPathToVanillaStartScript \
+exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "    #$servernum The Purgery $qServerLocation PQL - Team Deathmatch" \
@@ -214,7 +214,7 @@ elif [ $1 -eq 8 ]
 # starting PQL MultiGame 1...
 then
 echo "Starting multi game type server 1..."
-exec $qPathToVanillaStartScript \
+exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "    #$servernum The Purgery $qServerLocation PQL - Multi-Gametype" \
@@ -236,7 +236,7 @@ elif [ $1 -eq 9 ]
 # starting vql duel 1...
 then
 echo "Starting VQL duel server 1..."
-exec $qPathToVanillaStartScript \
+exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Duel" \
@@ -260,7 +260,7 @@ elif [ $1 -eq 10 ]
 # starting VQL iCTF 1...
 then
 echo "Starting VQL iCTF server 1..."
-exec $qPathToVanillaStartScript \
+exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname " #$servernum The Purgery $qServerLocation VQL - Multi-Gametype" \
