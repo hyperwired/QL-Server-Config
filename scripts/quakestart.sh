@@ -288,10 +288,10 @@ exec $qPathToVanillaStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname " The Purgery $qServerLocation Test Server" \
-    +set zmq_rcon_enable 0 \
+    +set zmq_rcon_enable 1 \
+    +set zmq_rcon_password "$qRconPasswordPurgery" \
+    +set zmq_rcon_port $rconport \
     +set zmq_stats_enable 0 \
-    +set zmq_stats_password "" \
-    +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_allowSpecVote 1 \
     +set g_allowVoteMidGame 1 \
@@ -299,8 +299,9 @@ exec $qPathToVanillaStartScript \
     +set bot_nochat 1 \
     +set g_accessFile "access_testpurgery.txt" \
     +set sv_mappoolFile "mappool_default.txt" \
-    +set fs_homepath ~/.quakelive/TEST$gameport
-   fi
+    +set fs_homepath ~/.quakelive/TEST$gameport \
+    +set g_password "leaf"
+fi
 
 
 # Unused cvars.
