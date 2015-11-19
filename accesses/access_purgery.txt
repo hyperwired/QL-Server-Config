@@ -7,10 +7,7 @@
 # admin 2, merozollo
 76561198197573413|admin
 
-# admin 3, barley
-76561197971374552|admin
-
-# admin 4, 0regonn
+# admin 3, 0regonn
 76561198150444650|admin
 
 
@@ -20,26 +17,29 @@
 # mod 2, lion
 76561198042645339|mod
 
-# mod 3, giantman
+# mod 3, barley
+76561197971374552|mod
+
+# mod 4, giantman
 76561198206232871|mod
 
-# mod 4, biokemical
+# mod 5, biokemical
 76561198063863745|mod
 
-# mod 5, notes
+# mod 6, notes
 76561198072746913|mod
 
-# mod 6, sifz
+# mod 7, sifz
 76561198002147295|mod
 
-# mod 7, meganfoxxed
+# mod 8, meganfoxxed
 76561198218511531|mod
 
-# mod 8, chef
+# mod 9, chef
 76561198250594530|mod
 
-# mod 9, quarrel
+# mod 10, quarrel
 76561198048831696|mod
 
-# mod 10, junkyard
+# mod 11, junkyard
 76561198257486058|mod
