@@ -299,7 +299,7 @@ exec $qPathToVanillaStartScript \
     +set bot_nochat 1 \
     +set g_accessFile "access_testpurgery.txt" \
     +set sv_mappoolFile "mappool_default.txt" \
-    +set fs_homepath ~/.quakelive/TEST$gameport \
+    +set fs_homepath ~/.quakelive/TEST-$gameport \
     +set g_password "leaf"
 fi
 
