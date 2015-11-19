@@ -287,7 +287,7 @@ echo "Starting TEST SERVER server 1..."
 exec $qPathToVanillaStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
-    +set sv_hostname " The Purgery $qServerLocation Test Server" \
+    +set sv_hostname " The Purgery $qServerLocation - Test Server" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
