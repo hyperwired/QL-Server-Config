@@ -1,0 +1,17 @@
+# The Purgery access control list:
+
+
+# admin 1, tjone270
+76561198213481765|admin
+
+# admin 2, merozollo
+76561198197573413|admin
+
+# admin 3, barley
+76561197971374552|admin
+
+# admin 4, 0regonn
+76561198150444650|admin
+
+# admin 5, junkyard
+76561198257486058|admin
