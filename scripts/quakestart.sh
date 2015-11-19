@@ -280,7 +280,27 @@ exec $qPathToMinqlxStartScript \
     +set fs_homepath ~/.quakelive/$gameport \
     +set g_damage_lg 6 \
     +set g_voteFlags 0
-fi
+    elif [ $1 -eq 11 ]
+# starting TEST SEVER 1...
+then
+echo "Starting TEST SERVER server 1..."
+exec $qPathToVanillaStartScript \
+    +set net_strict 1 \
+    +set net_port $gameport \
+    +set sv_hostname " The Purgery $qServerLocation Test Server" \
+    +set zmq_rcon_enable 0 \
+    +set zmq_stats_enable 0 \
+    +set zmq_stats_password "" \
+    +set zmq_stats_port $gameport \
+    +set sv_tags "$sponsortag" \
+    +set g_allowSpecVote 1 \
+    +set g_allowVoteMidGame 1 \
+    +set bot_enable 1 \
+    +set bot_nochat 1 \
+    +set g_accessFile "access_testpurgery.txt" \
+    +set sv_mappoolFile "mappool_default.txt" \
+    +set fs_homepath ~/.quakelive/TEST$gameport
+   fi
 
 
 # Unused cvars.
