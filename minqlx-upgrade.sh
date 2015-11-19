@@ -1,6 +1,5 @@
 #! /bin/bash
 # THIS SCRIPT IS DEPRECIATED. IT WILL BE REMOVED SOON.
-
 cd ~
 
 CURRENT_MINQLX_VERSION=$(cat ~/minqlx.version)
