@@ -14,10 +14,10 @@ class branding(minqlx.Plugin):
     def brand_map(self):
         minqlx.set_configstring(3, "^4The Purgery^7")
         minqlx.set_configstring(678, "Sponsored by ^5TomTec Solutions^7 (^2quakesupport@tomtecsolutions.com^7).")
-        minqlx.set_configstring(679, "Visit our IRC channel on QuakeNet, ^4#thepurgery^7.")
+        minqlx.set_configstring(679, "Visit our IRC channel on QuakeNet, ^4#thepurgery^7. Visit our Facebook page at ^2http://fb.me/thepurgery^7.")
 
     def sponsor_message(self):
-        minqlx.send_server_command(None, "cp \"^4The Purgery\n^7Sponsored by ^5TomTec Solutions^7\"\n")
+        minqlx.send_server_command(None, "cp \"^4The Purgery\n^7Sponsored by ^4TomTec Solutions^7\"\n")
         self.play_sound("sound/items/protect3.ogg")
         
     def welcome_message(self, player):
