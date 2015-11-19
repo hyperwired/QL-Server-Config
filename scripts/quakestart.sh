@@ -280,7 +280,7 @@ exec $qPathToMinqlxStartScript \
     +set fs_homepath ~/.quakelive/$gameport \
     +set g_damage_lg 6 \
     +set g_voteFlags 0
-    elif [ $1 -eq 11 ]
+elif [ $1 -eq 11 ]
 # starting TEST SEVER 1...
 then
 echo "Starting TEST SERVER server 1..."
