@@ -168,3 +168,6 @@
 
 # Pad Maps
 557452835
+
+# Rocket Arena 3 - ra3map2
+558200805
