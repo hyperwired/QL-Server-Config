@@ -156,3 +156,15 @@
 
 # The Simpsons Map v2
 556856618
+
+# Rocket Arena 3 - ra3map1
+557591894
+
+# Batcula
+558018431
+
+# Winter Games
+558036158
+
+# Pad Maps
+557452835
