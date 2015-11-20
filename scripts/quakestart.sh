@@ -284,7 +284,7 @@ elif [ $1 -eq 11 ]
 # starting TEST SEVER 1...
 then
 echo "Starting TEST SERVER server 1..."
-exec $qPathToVanillaStartScript \
+exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname " The Purgery $qServerLocation - Test Server" \
@@ -300,6 +300,31 @@ exec $qPathToVanillaStartScript \
     +set g_accessFile "access_testpurgery.txt" \
     +set sv_mappoolFile "mappool_default.txt" \
     +set fs_homepath ~/.quakelive/TEST-$gameport
+fi
+elif [ $1 -eq 12 ]
+# starting reythe (sub580)...
+then
+if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
+then
+echo "Starting reythe's duel house (sub580) 1..."
+exec $qPathToVanillaStartScript \
+    +set net_strict 1 \
+    +set net_port $gameport \
+    +set sv_hostname "Reythe's Duel House" \
+    +set zmq_rcon_enable 1 \
+    +set zmq_rcon_password "$(<~/localConfig-rconPassword-reythe.txt)" \
+    +set zmq_rcon_port $rconport \
+    +set zmq_stats_enable 1 \
+    +set zmq_stats_password "$(<~/localConfig-rconPassword-reythe.txt)" \
+    +set zmq_stats_port $gameport \
+    +set sv_tags "$qServerLocation" \
+    +set bot_enable 0 \
+    +set g_accessFile "access_reythe.txt" \
+    +set sv_mappoolFile "mappool_duel.txt" \
+    +set fs_homepath ~/.quakelive/REYTHE-$gameport
+else
+echo "This system is not intended to host reythe (sub580) server."
+fi
 fi
 
 

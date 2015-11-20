@@ -1,0 +1,7 @@
+# Reythe's Duel House access control list:
+
+# staff: tjone270
+76561198213481765|admin
+
+# admin 1, reythe
+76561197997119610|admin
