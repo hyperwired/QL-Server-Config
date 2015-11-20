@@ -71,7 +71,7 @@ class essentials(minqlx.Plugin):
         self.add_command("seen", self.cmd_seen, usage="<steam_id>")
         self.add_command("time", self.cmd_time, usage="[timezone_offset]")
         self.add_command(("teamsize", "ts"), self.cmd_teamsize, 2, usage="<size>")
-        self.add_command("rcon", self.cmd_rcon, 5)
+        self.add_command("rcon", self.cmd_rcon, 4)
         self.add_command(("mappool", "maps", "maplist"), self.cmd_mappool, client_cmd_perm=0)
 
         # Cvars.
