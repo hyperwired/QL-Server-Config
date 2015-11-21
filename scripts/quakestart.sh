@@ -70,7 +70,7 @@ exec $qPathToMinqlxStartScript \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_vqlca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
-    +set g_damage_lg 7
+    +set g_damage_lg 6
 elif [ $1 -eq 2 ]
 # starting PQL Race 1...
 then
@@ -89,7 +89,7 @@ exec $qPathToMinqlxStartScript \
     +set g_voteFlags "9320" \
 	+set g_allowSpecVote 0 \
 	+set g_allowVoteMidGame 0 \
-    +set bot_enable 1 \
+    +set bot_enable 0 \
    	+set bot_nochat 1 \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqlrace.txt" \
@@ -114,6 +114,7 @@ exec $qPathToMinqlxStartScript \
 	+set g_allowVoteMidGame 0 \
     +set bot_enable 1 \
    	+set bot_nochat 1 \
+    +set g_damage_lg 6 \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqlffa.txt" \
 	+set fs_homepath ~/.quakelive/$gameport
