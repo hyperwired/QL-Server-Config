@@ -320,9 +320,10 @@ exec $qPathToVanillaStartScript \
     +set sv_tags "$qServerLocation" \
     +set bot_enable 0 \
     +set g_accessFile "access_reythe.txt" \
-    +set sv_mappoolFile "mappool_duel.txt" \
+    +set sv_mappoolFile "mappool_reythe.txt" \
     +set fs_homepath ~/.quakelive/REYTHE-$gameport \
-    +set g_damage_lg 6
+    +set g_damage_lg 6 \
+    +set g_voteFlags 8
 else
 echo "This system is not intended to host reythe (sub580) server."
 fi
