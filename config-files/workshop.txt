@@ -171,3 +171,12 @@
 
 # Rocket Arena 3 - ra3map2
 558200805
+
+# Quatrix
+558643163
+
+# Dangercity
+558783132
+
+# Pacman
+559324052
