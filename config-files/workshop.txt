@@ -183,3 +183,12 @@
 
 # Maido: Mid-air like mode & map.
 542770475
+
+# Pill City
+558637317
+
+# q3dm17
+559698707
+
+# DeFRaG map: cSu1_a
+560050165
