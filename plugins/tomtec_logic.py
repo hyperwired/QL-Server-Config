@@ -5,6 +5,7 @@ import minqlx
 class tomtec_logic(minqlx.Plugin):
     def __init__(self):
         self.add_hook("new_game", self.new_game)
+        self.add_hook("map", self.map_load)
         self.add_hook("game_countdown", self.game_countdown)
         self.add_hook("player_loaded", self.player_loaded)
         self.add_hook("game_start", self.game_start)
@@ -19,10 +20,16 @@ class tomtec_logic(minqlx.Plugin):
         minqlx.set_configstring(678, "Sponsored by ^5TomTec Solutions^7 (^2quakesupport@tomtecsolutions.com^7).")
         minqlx.set_configstring(679, "Visit our IRC channel on QuakeNet, ^4#thepurgery^7. Visit our Facebook page at ^2http://fb.me/thepurgery^7.")
 
+    def map_load(self, mapname, factory):
+        # turn on infinite ammo for warm-up
+        minqlx.set_cvar("g_infiniteAmmo", "1")
+        
     def game_countdown(self):
         # play the 'battle suit protect' sound, and display a sponsor message during the countdown
         minqlx.send_server_command(None, "cp \"^4The Purgery\n^7Sponsored by ^4TomTec Solutions^7\"\n")
         self.play_sound("sound/items/protect3.ogg")
+
+        # disable infinite ammo after warm-up
         minqlx.set_cvar("g_infiniteAmmo", "0")
         
     def player_loaded(self, player):
@@ -31,8 +38,8 @@ class tomtec_logic(minqlx.Plugin):
         #self.play_sound("sound/items/protect3.ogg") # waaaa, cthulhu's crying about how irritating this sound is...
         
     def game_start(self):
-        minqlx.set_cvar("g_infiniteAmmo", "1")
-        minqlx.console_command("say \"^2New feature: ^4Infinite Ammo^7 is now switched on for warm-up.\"")
+        # nothing yet
+        pass
         
     def game_end(self):
         #channel.tell("Hurrah!")
