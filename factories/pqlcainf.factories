@@ -12,6 +12,7 @@
          "g_startingArmor":"200",
          "g_startingHealthBonus":"0",
          "g_startingWeapons":"8447",
+         "g_startingHealth":"200",
          "weapon_reload_rg":"1200",
          "g_speed":"320",
          "roundlimit":"10",
