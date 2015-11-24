@@ -10,7 +10,7 @@ class fun(minqlx.Plugin):
         self.add_command(("vaginadepth", "vaginaldepth", "vaginialdepth"), self.cmd_vagdep) # Junkyard requested
         self.add_command(("msg", "message"), self.cmd_screenmessage, 1, usage="<text>") # Merozollo requested
         self.add_command(("breastsize", "cupsize", "brasize", "boobsize"), self.cmd_boobsize) # 0regonn requested
-        self.add_command("fuckyou", self.cmd_printfu)
+        self.add_command("fuckyou", self.cmd_printfu, 1)
  
     def cmd_penlen(self, player, msg, channel):
         playerName = player.clean_name
