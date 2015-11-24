@@ -192,3 +192,87 @@
 
 # DeFRaG map: cSu1_a
 560050165
+
+# Hockey
+560187778
+
+# Pinball
+560203097
+
+# Playground
+560234205
+
+# Zastavka
+560255387
+
+# School
+560306383
+
+# The Unofficial Edge
+560394920
+
+# Cut em' Hard
+560523904
+
+# The Dark Zone 2020
+560531568
+
+# Sandstorm [Q4]
+560533566
+
+# Q2DM1-ISH: The Edge Remix
+560533896
+
+# The Edge 2004 CPM Remix
+560535691
+
+# 17 Remix
+560536524
+
+# Club Doom
+560542953
+
+# Campgrounds Redux [Q4DM9]
+560545593
+
+# efq3dm17
+560546791
+
+# The Sinister Zone (q1dm6)
+560547573
+
+# Aero Run (Second Edition)
+560548198
+
+# The Edge by finko
+560550630
+
+# Rockshellwill
+560588722
+
+# Projectile Vomiting
+560610357
+
+# Z-LANparty
+560617233
+
+# Q3DM6 In a hat
+560647562
+
+# Alliance Race Pack
+560783125
+
+# Tokays Towers
+560972307
+
+# The Chastity Belt Duel (ospdm8)
+560989741
+
+# The Frag Pipe
+561036971
+
+# Introduction Map (q3dm0)
+561047265
+
+# Rocket Arena 3 - ra3map5
+561459991
