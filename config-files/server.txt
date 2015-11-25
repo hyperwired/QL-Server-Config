@@ -2,7 +2,7 @@
 
 set sv_mapPoolFile "mappool.txt"  // Map pool that the server will use. See default mapcycle.txt for format.
 set g_accessFile "access.txt"     // Used to determine which 64-bit Steam IDs have admin access, or are banned.
-     
+
 set sv_maxClients "18"     // How many players can connect at once.
 
 set g_password ""          // Set a server-wide password, and stop all users from connecting without it.
@@ -26,7 +26,6 @@ set g_warmupDelay "15"               // Wait x seconds before allowing match to 
 set g_warmupReadyDelay "0"           // Force the game to start after x seconds after someone readies up.
 set g_warmupReadyDelayAction "1"     // Set to 1 to force players to spectator after g_warmupReady Delay, 2 to force ready up.
 
-set g_inactivity "0"  // Kick players who are inactive for x amount of seconds.
 set teamsize 0
 set con_tty 0
 
