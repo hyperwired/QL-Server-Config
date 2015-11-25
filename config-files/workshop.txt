@@ -276,3 +276,24 @@
 
 # Rocket Arena 3 - ra3map5
 561459991
+
+# DeFRaG/race map: BardoK-Statik
+561610262
+
+# Rocket Arena 3 - ra3map3
+561613916
+
+# DeFRaG/race map: Rocket Launcher Training
+561646565
+
+# Rocket Arena 3 - ra3map14
+561683838
+
+# Rocket Arena 3 - ra3map4
+561815150
+
+# DeFRaG/race map: momentum
+561856702
+
+# Rocket Arena 3 - ra3map7
+561877295
