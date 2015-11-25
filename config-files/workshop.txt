@@ -297,3 +297,9 @@
 
 # Rocket Arena 3 - ra3map7
 561877295
+
+# Rocket Arena 3 - ra3map17
+562042961
+
+# polo3dm5 - Ufreeze Map
+562087739
