@@ -11,6 +11,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("game_start", self.game_start)
         self.add_hook("game_end", self.game_end)
         self.add_hook("vote_called", self.handle_vote_called)
+        self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
         
         
@@ -63,6 +64,11 @@ class tomtec_logic(minqlx.Plugin):
         channel.reply("^1  Failure to comply with these rules will result in a mute, a temporary ban, or a permanent ban.")
         channel.reply("^7  Have ^2fun^7, play, enjoy, don't do anything stupid.")
         channel.reply("^4========================================================================================")
+
+    def cmd_help(self, player, msg, channel):
+        player.tell("This server runs ^4tomtec_logic.py^7, a ^4minqlx^7 plugin that adds modification to ^4The Purgery^7 servers.")
+        player.tell("^4tomtec_logic.py^7 is (c) 2015, Thomas Jones, TomTec Solutions.")
+        return minqlx.RET_STOP_EVENT
 
     def handle_vote_called(self, caller, vote, args):
         if vote.lower() == "kick":
