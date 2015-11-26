@@ -22,13 +22,17 @@ class tomtec_logic(minqlx.Plugin):
 
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
-        minqlx.set_cvar("g_infiniteAmmo", "1")
+        minqlx.set_cvar("g_infiniteAmmo", "1")     
         
     def game_countdown(self):
         # play the 'battle suit protect' sound, and display a sponsor message during the countdown
         minqlx.send_server_command(None, "cp \"^4The Purgery\n^7Sponsored by ^4TomTec Solutions^7\"\n")
+        for p in self.players():
+            p.powerups(battlesuit=10000)
+            p.noclip = True
+            
         self.play_sound("sound/items/protect3.ogg")
-
+       
         # disable infinite ammo after warm-up
         minqlx.set_cvar("g_infiniteAmmo", "0")
         
@@ -38,8 +42,9 @@ class tomtec_logic(minqlx.Plugin):
         #self.play_sound("sound/items/protect3.ogg") # waaaa, cthulhu's crying about how irritating this sound is...
         
     def game_start(self):
-        # nothing yet
-        pass
+        # make sure everyone's noclip is off
+        for p in self.players():
+            p.noclip = False
         
     def game_end(self):
         #channel.tell("Hurrah!")
@@ -70,9 +75,6 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("^7Voting to kick a server administrator is prohibited. This incident has been recorded.")
                 return minqlx.RET_STOP_ALL
             if playerName == "0regonn":
-                caller.tell("^7Voting to kick a protected player is prohibited. This incident has been recorded.")
-                return minqlx.RET_STOP_ALL
-            if playerName == "zeoswhoregon":
                 caller.tell("^7Voting to kick a protected player is prohibited. This incident has been recorded.")
                 return minqlx.RET_STOP_ALL
 
