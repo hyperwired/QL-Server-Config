@@ -90,4 +90,29 @@ class tomtec_logic(minqlx.Plugin):
             caller.tell("^7Please use the ^2/cv^7 or ^2/callvote^7 console commands.")
             return minqlx.RET_STOP_ALL
 
+        if vote.lower() == "map":
+            if args.lower() == "ra3map19":
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Zeo^7byte (27/11/15)".format(args.lower()))
+                return minqlx.RET_STOP_ALL
+
+            if args.lower() == "ra3map19a":
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Zeo^7byte (27/11/15)".format(args.lower()))
+                return minqlx.RET_STOP_ALL
+
+            if args.lower() == "ra3map19b":
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Zeo^7byte (27/11/15)".format(args.lower()))
+                return minqlx.RET_STOP_ALL
+
+            if args.lower() == "ra3map19c":
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Zeo^7byte (27/11/15)".format(args.lower()))
+                return minqlx.RET_STOP_ALL
+
+            if args.lower() == "ra3map19d":
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Zeo^7byte (27/11/15)".format(args.lower()))
+                return minqlx.RET_STOP_ALL
+
+            if args.lower() == "ra3map19e":
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Zeo^7byte (27/11/15)".format(args.lower()))
+                return minqlx.RET_STOP_ALL
+
 
