@@ -66,7 +66,7 @@ class tomtec_logic(minqlx.Plugin):
         channel.reply("^4========================================================================================")
 
     def cmd_help(self, player, msg, channel):
-        player.tell("This server runs ^4tomtec_logic.py^7, a ^4minqlx^7 plugin that adds modification to ^4The Purgery^7 servers.")
+        player.tell("This server runs ^4tomtec_logic.py^7, a ^4minqlx^7 plugin designed for ^4The Purgery^7 servers.")
         player.tell("^4tomtec_logic.py^7 is (c) 2015, Thomas Jones, TomTec Solutions.")
         return minqlx.RET_STOP_EVENT
 
