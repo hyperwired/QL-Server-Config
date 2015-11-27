@@ -303,3 +303,72 @@
 
 # polo3dm5 - Ufreeze Map
 562087739
+
+# Lanphi 1 (Amphi Rebuild / Bug Fixes)
+562387741
+
+# Lanphi 2 (Amphi No Lava)
+562396716
+
+# Sarge`s War
+562439444
+
+# DeFRaG/race map: df_slopin
+562448042
+
+# DeFRaG/race map: cos1_beta7b
+562448681
+
+# Duel map: megadm4-09
+562449180
+
+# Duel map: rota3tourney1
+562449385
+
+# DeFRaG/race map: Tr1ckhouse
+562451786
+
+# Duel map: pukka3tourney5
+562530042
+
+# Duel/FFA map: rota3dm1
+562530320
+
+# Duel/FFA map: rota3dm2
+562530598
+
+# Chronic - Ufreeze Map
+562554624
+
+# Sleep - Ufreeze Map
+562564197
+
+# 69 Pickup - Ufreeze Map
+562569404
+
+# DeFRaG/race: Lick Map Pack
+562739597
+
+# DeFRaG/race map: Freestyle_88
+562747010
+
+# Rocket Arena 3 - ra3map11
+562987267
+
+# Rocket Arena 3 - ra3map12
+563005769
+
+# fff - Ufreeze Map
+563100435
+
+# Runtfest - Ufreeze Map
+563103303
+
+# Full Moon - Ufreeze Map
+563105825
+
+# DeFRaG/race map: Palmslane
+563284812
+
+# DeFRaG/race map: Coldrun
+563333349
