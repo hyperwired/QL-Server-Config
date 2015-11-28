@@ -22,6 +22,8 @@
          "g_infiniteAmmo":"1",
          "g_startingWeapons":"657",
          "timelimit":"10",
+         "g_respawn_delay_min":"10",
+         "g_respawn_delay_max":"20",
          "g_startingAmmo_sg":"-1",
          "g_startingAmmo_rl":"-1",
          "g_startingAmmo_rg":"-1",
