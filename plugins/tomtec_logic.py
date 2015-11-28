@@ -13,6 +13,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("vote_called", self.handle_vote_called)
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
+        self.add_command("giveall", self.cmd_giveall, 4)
         
         
     def new_game(self):
@@ -53,6 +54,7 @@ class tomtec_logic(minqlx.Plugin):
         pass
 
     def cmd_showrules(self, player, msg, channel):
+        # show the rules to the channel from whence the command was issued
         channel.reply("^4========================================================================================")
         channel.reply("^4The Purgery^7 - ^3Server Rules:")
         channel.reply("^7    1. No racism, neo-nazism, harassment or abuse toward other players via text or voice chat.")
@@ -90,7 +92,20 @@ class tomtec_logic(minqlx.Plugin):
             caller.tell("^7Please use the ^2/cv^7 or ^2/callvote^7 console commands.")
             return minqlx.RET_STOP_ALL
 
+        if vote.lower() == "infiniteammo":
+            # enables the '/cv infiniteammo [on/off]' command
+            if args.lower() == "off":
+                self.callvote("set g_infiniteAmmo 0", "infinite ammo: off", 30)
+                return minqlx.RET_STOP_ALL
+            elif args.lower() == "on":
+                self.callvote("set g_infiniteAmmo 1", "infinite ammo: on", 30)
+                return minqlx.RET_STOP_ALL
+            else:
+                caller.tell("^2/cv infiniteammo [on/off]^7 is the usage for this callvote command.")
+                return minqlx.RET_STOP_ALL
+
         if vote.lower() == "map":
+            # prevent certain maps from being loaded, if they're found to have issues
             if args.lower() == "ra3map19":
                 caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Zeo^7byte (27/11/15)".format(args.lower()))
                 return minqlx.RET_STOP_ALL
@@ -116,3 +131,59 @@ class tomtec_logic(minqlx.Plugin):
                 return minqlx.RET_STOP_ALL
 
 
+    def cmd_giveall(self, player, msg, channel):
+        # enables the 'giveall' command, to provide all players with items/powerups/others
+        if msg[1] == "kamikaze":
+            for p in self.players():
+                p.holdable = "kamikaze"
+        elif msg[1] == "teleporter":
+            for p in self.players():
+                p.holdable = "teleporter"
+        elif msg[1] == "portal":
+            for p in self.players():
+                p.holdable = "portal"
+        elif msg[1] == "flight":
+            for p in self.players():
+                p.holdable = "flight"
+        elif msg[1] == "quaddamage":
+            if msg[2] == "on":
+                for p in self.players():
+                    p.powerups(quad=1000000000)
+            if msg[2] == "off":
+                for p in self.players():
+                    p.powerups(quad=0)
+        elif msg[1] == "regeneration":
+            if msg[2] == "on":
+                for p in self.players():
+                    p.powerups(regeneration=1000000000)
+            if msg[2] == "off":
+                for p in self.players():
+                    p.powerups(regeneration=0)
+        elif msg[1] == "invisibility":
+            if msg[2] == "on":
+                for p in self.players():
+                    p.powerups(invisibility=1000000000)
+            if msg[2] == "off":
+                for p in self.players():
+                    p.powerups(invisibility=0)
+        elif msg[1] == "haste":
+            if msg[2] == "on":
+                for p in self.players():
+                    p.powerups(haste=1000000000)
+            if msg[2] == "off":
+                for p in self.players():
+                    p.powerups(haste=0)
+        elif msg[1] == "battlesuit":
+            if msg[2] == "on":
+                for p in self.players():
+                    p.powerups(battlesuit=1000000000)
+            if msg[2] == "off":
+                for p in self.players():
+                    p.powerups(battlesuit=0)
+        elif msg[1] == "noclip":
+            if msg[2] == "on":
+                for p in self.players():
+                    p.noclip = True
+            if msg[2] == "off":
+                for p in self.players():
+                    p.noclip = False
