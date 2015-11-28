@@ -21,7 +21,21 @@
          "pmove_AirControl":"1",
          "g_infiniteAmmo":"1",
          "g_startingWeapons":"656",
-         "timelimit":"10"
+         "timelimit":"10",
+         "g_startingAmmo_sg":"-1",
+         "g_startingAmmo_rl":"-1",
+         "g_startingAmmo_rg":"-1",
+         "g_startingAmmo_pl":"-1",
+         "g_startingAmmo_pg":"-1",
+         "g_startingAmmo_ng":"-1",
+         "g_startingAmmo_mg":"-1",
+         "g_startingAmmo_lg":"-1",
+         "g_startingAmmo_hmg":"-1",
+         "g_startingAmmo_gl":"-1",
+         "g_startingAmmo_gh":"-1",
+         "g_startingAmmo_g":"-1",
+         "g_startingAmmo_cg":"-1",
+         "g_startingAmmo_bfg":"-1"
       }
    }
 ]
