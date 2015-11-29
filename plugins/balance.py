@@ -222,7 +222,7 @@ class balance(minqlx.Plugin):
             name = sid
         
         gt = self.game.type_short
-        channel.reply("{} has a rating of ^6{}^7 in {}.".format(name, self.ratings[sid][gt]["elo"], gt.upper()))
+        channel.reply("{} has a rating of ^4{}^7 in {}.".format(name, self.ratings[sid][gt]["elo"], gt.upper()))
 
     def cmd_setrating(self, player, msg, channel):
         if len(msg) < 3:
@@ -262,7 +262,7 @@ class balance(minqlx.Plugin):
                 self.ratings[sid][gt]["local"] = True
                 self.ratings[sid][gt]["time"] = -1
 
-        channel.reply("{}'s {} rating has been set to ^6{}^7.".format(name, gt.upper(), rating))
+        channel.reply("{}'s {} rating has been set to ^4{}^7.".format(name, gt.upper(), rating))
 
     def cmd_remrating(self, player, msg, channel):
         if len(msg) < 2:
@@ -400,7 +400,7 @@ class balance(minqlx.Plugin):
 
         minimum_suggestion_diff = self.get_cvar("qlx_balanceMinimumSuggestionDiff", int)
         if switch and switch[1] >= minimum_suggestion_diff:
-            channel.reply("SUGGESTION: switch ^6{}^7 with ^6{}^7. Type !a to agree."
+            channel.reply("SUGGESTION: switch ^4{}^7 with ^4{}^7. Type !a to agree."
                 .format(switch[0][0].clean_name, switch[0][1].clean_name))
             if not self.suggested_pair or self.suggested_pair[0] != switch[0][0] or self.suggested_pair[1] != switch[0][1]:
                 self.suggested_pair = (switch[0][0], switch[0][1])
@@ -408,7 +408,7 @@ class balance(minqlx.Plugin):
         else:
             i = random.randint(0, 99)
             if not i:
-                channel.reply("Teens look ^6good!")
+                channel.reply("Teens look ^4good!")
             else:
                 channel.reply("Teams look good!")
             self.suggested_pair = None
