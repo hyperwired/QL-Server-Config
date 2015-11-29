@@ -7,9 +7,11 @@
 
 # Defining variables.
 export qServerLocation=$(<~/localConfig-serverLocation.txt)
-export qPathToMinqlxStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64_minqlx.sh"
-export qPathToVanillaStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64.sh"
 export qRconPasswordPurgery=$(<~/localConfig-rconPassword-purgery.txt)
+export qPathToMinqlxStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64_minqlx.sh +set qlx_ircPassword $qRconPasswordPurgery"
+export qPathToVanillaStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64.sh"
+export qIrcNickname="ThePurgery-$qServerLocation-#$1"
+
 sponsortag="$qServerLocation,TomTec Solutions"
 
 gameport=`expr $1 + 27960`
@@ -17,7 +19,7 @@ rconport=`expr $1 + 28960`
 servernum=`expr $1 + 0`
 
 # Starts servers with different settings, based off the process number parsed
-# as argument 1 by supervisord. 
+# as argument 1 by supervisord.
 
 echo "========== QuakeStart.sh has started. =========="
 echo "========= $(date) ========="
@@ -40,13 +42,14 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
-	+set g_allowSpecVote 0 \
-	+set g_allowVoteMidGame 0 \
-	+set bot_enable 1 \
-	+set bot_nochat 1 \
+    +set g_allowSpecVote 0 \
+    +set g_allowVoteMidGame 0 \
+    +set bot_enable 1 \
+    +set bot_nochat 1 \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqlca.txt" \
-	+set fs_homepath ~/.quakelive/$gameport
+    +set fs_homepath ~/.quakelive/$gameport \
+    +set qlx_ircNickname "$qIrcNickname"
 elif [ $1 -eq 1 ]
 # starting VQL CA 1
 then
@@ -70,6 +73,7 @@ exec $qPathToMinqlxStartScript \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_vqlca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
+    +set qlx_ircNickname "$qIrcNickname" \
     +set g_damage_lg 6
 elif [ $1 -eq 2 ]
 # starting PQL Race 1...
@@ -85,15 +89,16 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_enable 1 \
     +set zmq_stats_password "" \
     +set zmq_stats_port $gameport \
-    +set sv_tags "grappling hook, crouch slide,$sponsortag" \
+    +set sv_tags "grappling hook,crouch slide,$sponsortag" \
     +set g_voteFlags "9320" \
-	+set g_allowSpecVote 0 \
-	+set g_allowVoteMidGame 0 \
+    +set g_allowSpecVote 0 \
+    +set g_allowVoteMidGame 0 \
     +set bot_enable 0 \
    	+set bot_nochat 1 \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqlrace.txt" \
-	+set fs_homepath ~/.quakelive/$gameport
+    +set fs_homepath ~/.quakelive/$gameport \
+    +set qlx_ircNickname "$qIrcNickname"
 elif [ $1 -eq 3 ]
 # starting PQL FFA 1...
 then
@@ -110,14 +115,15 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
-	+set g_allowSpecVote 0 \
-	+set g_allowVoteMidGame 0 \
+    +set g_allowSpecVote 0 \
+    +set g_allowVoteMidGame 0 \
     +set bot_enable 1 \
    	+set bot_nochat 1 \
     +set g_damage_lg 6 \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqlffa.txt" \
-	+set fs_homepath ~/.quakelive/$gameport
+    +set fs_homepath ~/.quakelive/$gameport \
+    +set qlx_ircNickname "$qIrcNickname"
 elif [ $1 -eq 4 ]
 # starting PQL CTF 1...
 then
@@ -134,13 +140,14 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
-	+set g_allowSpecVote 0 \
-	+set g_allowVoteMidGame 0 \
+    +set g_allowSpecVote 0 \
+    +set g_allowVoteMidGame 0 \
     +set bot_enable 1 \
    	+set bot_nochat 1 \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_vqlctf.txt" \
-	+set fs_homepath ~/.quakelive/$gameport \
+    +set fs_homepath ~/.quakelive/$gameport \
+    +set qlx_ircNickname "$qIrcNickname" \
     +set g_damage_lg 6
 elif [ $1 -eq 5 ]
 # starting PQL DOM 1...
@@ -158,13 +165,14 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
-	+set g_allowSpecVote 0 \
-	+set g_allowVoteMidGame 0 \
+    +set g_allowSpecVote 0 \
+    +set g_allowVoteMidGame 0 \
     +set bot_enable 1 \
    	+set bot_nochat 1 \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqldom.txt" \
-	+set fs_homepath ~/.quakelive/$gameport
+    +set fs_homepath ~/.quakelive/$gameport \
+    +set qlx_ircNickname "$qIrcNickname"
 elif [ $1 -eq 6 ]
 # starting PQL INFECTED 1...
 then
@@ -181,13 +189,14 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_port $gameport \
     +set sv_tags "zombies,$sponsortag" \
     +set g_voteFlags "9320" \
-	+set g_allowSpecVote 0 \
-	+set g_allowVoteMidGame 0 \
+    +set g_allowSpecVote 0 \
+    +set g_allowVoteMidGame 0 \
     +set bot_enable 1 \
    	+set bot_nochat 1 \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqlinfected.txt" \
-	+set fs_homepath ~/.quakelive/$gameport
+    +set fs_homepath ~/.quakelive/$gameport \
+    +set qlx_ircNickname "$qIrcNickname"
 elif [ $1 -eq 7 ]
 # starting PQL TDM 1...
 then
@@ -204,13 +213,14 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
-	+set g_allowSpecVote 0 \
-	+set g_allowVoteMidGame 0 \
+    +set g_allowSpecVote 0 \
+    +set g_allowVoteMidGame 0 \
     +set bot_enable 1 \
    	+set bot_nochat 1 \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqltdm.txt" \
-	+set fs_homepath ~/.quakelive/$gameport
+    +set fs_homepath ~/.quakelive/$gameport \
+    +set qlx_ircNickname "$qIrcNickname"
 elif [ $1 -eq 8 ]
 # starting PQL MultiGame 1...
 then
@@ -232,7 +242,8 @@ exec $qPathToMinqlxStartScript \
     +set bot_nochat 1 \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqlmulti.txt" \
-    +set fs_homepath ~/.quakelive/$gameport
+    +set fs_homepath ~/.quakelive/$gameport \
+    +set qlx_ircNickname "$qIrcNickname"
 elif [ $1 -eq 9 ]
 # starting vql duel 1...
 then
@@ -256,7 +267,8 @@ exec $qPathToMinqlxStartScript \
     +set g_damage_lg 6 \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_vqlduel.txt" \
-    +set fs_homepath ~/.quakelive/$gameport
+    +set fs_homepath ~/.quakelive/$gameport \
+    +set qlx_ircNickname "$qIrcNickname"
 elif [ $1 -eq 10 ]
 # starting VQL iCTF 1...
 then
@@ -279,6 +291,7 @@ exec $qPathToMinqlxStartScript \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_default.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
+    +set qlx_ircNickname "$qIrcNickname" \
     +set g_damage_lg 6 \
     +set g_voteFlags 0
 elif [ $1 -eq 11 ]
@@ -300,7 +313,8 @@ exec $qPathToMinqlxStartScript \
     +set bot_nochat 1 \
     +set g_accessFile "access_testpurgery.txt" \
     +set sv_mappoolFile "mappool_default.txt" \
-    +set fs_homepath ~/.quakelive/TEST-$gameport
+    +set fs_homepath ~/.quakelive/TEST-$gameport \
+    +set qlx_ircNickname "$qIrcNickname"
 elif [ $1 -eq 12 ]
 # starting reythe (sub580)...
 then
