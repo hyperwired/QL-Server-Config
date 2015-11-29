@@ -14,7 +14,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
         self.add_command("giveall", self.cmd_giveall, 4)
-        self.add_command("map_restart", self.cmd_maprestart)
+        self.add_command("map_restart", self.cmd_maprestart, 3)
         
         
     def new_game(self):
