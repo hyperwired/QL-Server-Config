@@ -10,7 +10,7 @@ export qServerLocation=$(<~/localConfig-serverLocation.txt)
 export qRconPasswordPurgery=$(<~/localConfig-rconPassword-purgery.txt)
 export qPathToMinqlxStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64_minqlx.sh +set qlx_ircPassword $qRconPasswordPurgery"
 export qPathToVanillaStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64.sh"
-export qIrcNickname="ThePurgery-$qServerLocation-#$1"
+export qIrcNickname="$qServerLocation-#$1"
 
 sponsortag="$qServerLocation,TomTec Solutions"
 
