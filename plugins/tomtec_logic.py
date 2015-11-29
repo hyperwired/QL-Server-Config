@@ -14,6 +14,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
         self.add_command("giveall", self.cmd_giveall, 4)
+        self.add_command("map_restart", self.cmd_maprestart)
         
         
     def new_game(self):
@@ -130,7 +131,10 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
                 return minqlx.RET_STOP_ALL
 
-
+    def cmd_maprestart(self, player, msg, channel):
+        # run a map restart
+        minqlx.console_command("map_restart")
+        
     def cmd_giveall(self, player, msg, channel):
         # enables the 'giveall' command, to provide all players with items/powerups/others
         if msg[1] == "kamikaze":
