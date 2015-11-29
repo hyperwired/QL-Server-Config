@@ -32,9 +32,9 @@ echo Updating Quake Server...
 ~/steamcmd/steamcmd.sh +login anonymous +force_install_dir ~/steamcmd/steamapps/common/qlds/ +app_update 349090 +quit
 
 # Removing the .quakelive directories, except for baseq3.
-echo Removing Purgery port directories...
+echo "Removing Purgery 'baseq3' directories..."
 cd ~/.quakelive
-rm -rf 27960 27961 27962 27963 27964 27965 27966 27967 27968 27969 27970
+rm -rf 27960/baseq3 27961/baseq3 27962/baseq3 27963/baseq3 27964/baseq3 27965/baseq3 27966/baseq3 27967/baseq3 27968/baseq3 27969/baseq3 27970/baseq3
 cd ~
 
 # Running 'autodownload.sh' to recache all workshop items before restarting.
