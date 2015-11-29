@@ -62,21 +62,21 @@ class tomtec_logic(minqlx.Plugin):
         channel.reply("^7    3. No cheating, hacking or abuse of server privileges.")
         channel.reply("^7    4. Lack of common sense is prohibited.")
         channel.reply("^7    5. If you've been muted, you're obviously doing something that one or more server ops don't approve of.")
-        channel.reply("^7    6. These servers are being paid for by ^4Zeo^7byte, and the donators that assist with the funding.")
+        channel.reply("^7    6. These servers are being paid for by Sa^4t^7urn, and the donators that assist with the funding.")
         channel.reply("^1  Failure to comply with these rules will result in a mute, a temporary ban, or a permanent ban.")
         channel.reply("^7  Have ^2fun^7, play, enjoy, don't do anything stupid.")
         channel.reply("^4========================================================================================")
 
     def cmd_help(self, player, msg, channel):
         player.tell("This server runs ^4tomtec_logic.py^7, a ^4minqlx^7 plugin designed for ^4The Purgery^7 servers.")
-        player.tell("^4tomtec_logic.py^7 is (c) 2015, Thomas Jones, TomTec Solutions.")
+        player.tell("^4tomtec_logic.py^7 is (c) 2015, Thomas Jones (Sa^4t^7urn), TomTec Solutions.")
         return minqlx.RET_STOP_EVENT
 
     def handle_vote_called(self, caller, vote, args):
         if vote.lower() == "kick":
             # prevent certain players from being kicked via a call-vote
             playerName = args.lower()
-            if playerName == "zeobyte":
+            if playerName == "saturn":
                 caller.tell("^7Voting to kick the server owner is prohibited. This incident has been recorded.")
                 return minqlx.RET_STOP_ALL
             if playerName == "merozollo":
@@ -107,27 +107,27 @@ class tomtec_logic(minqlx.Plugin):
         if vote.lower() == "map":
             # prevent certain maps from being loaded, if they're found to have issues
             if args.lower() == "ra3map19":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Zeo^7byte (27/11/15)".format(args.lower()))
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
                 return minqlx.RET_STOP_ALL
 
             if args.lower() == "ra3map19a":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Zeo^7byte (27/11/15)".format(args.lower()))
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
                 return minqlx.RET_STOP_ALL
 
             if args.lower() == "ra3map19b":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Zeo^7byte (27/11/15)".format(args.lower()))
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
                 return minqlx.RET_STOP_ALL
 
             if args.lower() == "ra3map19c":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Zeo^7byte (27/11/15)".format(args.lower()))
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
                 return minqlx.RET_STOP_ALL
 
             if args.lower() == "ra3map19d":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Zeo^7byte (27/11/15)".format(args.lower()))
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
                 return minqlx.RET_STOP_ALL
 
             if args.lower() == "ra3map19e":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Zeo^7byte (27/11/15)".format(args.lower()))
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
                 return minqlx.RET_STOP_ALL
 
 
