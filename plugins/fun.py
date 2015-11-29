@@ -14,7 +14,7 @@ class fun(minqlx.Plugin):
  
     def cmd_penlen(self, player, msg, channel):
         playerName = player.clean_name
-        if playerName.lower() == "zeobyte":
+        if playerName.lower() == "saturn":
             channel.reply("^7{}^7's penis length: ^412 inches^7".format(player))
         else:
             randNum = randint(0,11)
@@ -25,7 +25,7 @@ class fun(minqlx.Plugin):
 
     def cmd_vagdep(self, player, msg, channel):
         playerName = player.clean_name
-        if playerName.lower() == "zeobyte":
+        if playerName.lower() == "saturn":
             channel.reply("^7{}^7's vaginial depth: ^4-12 inches^7".format(player))
         else:
             randNum = randint(0,11)
@@ -36,7 +36,7 @@ class fun(minqlx.Plugin):
 
     def cmd_boobsize(self, player, msg, channel):
         playerName = player.clean_name
-        if playerName.lower() == "zeobyte":
+        if playerName.lower() == "saturn":
             channel.reply("^7{}^7's cup size: ^4Stop asking, you're male!".format(playerName))
         else:
             randNum = randint(0,5)
@@ -60,7 +60,7 @@ class fun(minqlx.Plugin):
             return minqlx.RET_USAGE
         
         minqlx.console_command("cp ^7{}^7".format(" ".join(msg[1:])))
-        #self.play_sound("sound/world/klaxon2.wav")
+        self.play_sound("sound/world/klaxon2.wav")
 
     def cmd_printfu(self, player, msg, channel):
         minqlx.send_server_command(None, "cp \"^0FUCK YOU\n^1FUCK YOU\n^2FUCK YOU\n^3FUCK YOU\n^4FUCK YOU\n^5FUCK YOU\n^6FUCK YOU\"\n")
