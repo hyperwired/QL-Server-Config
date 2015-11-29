@@ -55,17 +55,17 @@ class tomtec_logic(minqlx.Plugin):
 
     def cmd_showrules(self, player, msg, channel):
         # show the rules to the channel from whence the command was issued
-        channel.reply("^4========================================================================================")
-        channel.reply("^4The Purgery^7 - ^3Server Rules:")
-        channel.reply("^7    1. No racism, neo-nazism, harassment or abuse toward other players via text or voice chat.")
-        channel.reply("^7    2. No disruptive behaviour of any kind, including 'spamming' and repetitive call-voting")
-        channel.reply("^7    3. No cheating, hacking or abuse of server privileges.")
-        channel.reply("^7    4. Lack of common sense is prohibited.")
-        channel.reply("^7    5. If you've been muted, you're obviously doing something that one or more server ops don't approve of.")
-        channel.reply("^7    6. These servers are being paid for by Sa^4t^7urn, and the donators that assist with the funding.")
-        channel.reply("^1  Failure to comply with these rules will result in a mute, a temporary ban, or a permanent ban.")
-        channel.reply("^7  Have ^2fun^7, play, enjoy, don't do anything stupid.")
-        channel.reply("^4========================================================================================")
+        player.tell("^4========================================================================================")
+        player.tell("^4The Purgery^7 - ^3Server Rules:")
+        player.tell("^7    1. No racism, neo-nazism, harassment or abuse toward other players via text or voice chat.")
+        player.tell("^7    2. No disruptive behaviour of any kind, including 'spamming' and repetitive call-voting")
+        player.tell("^7    3. No cheating, hacking or abuse of server privileges.")
+        player.tell("^7    4. Lack of common sense is prohibited.")
+        player.tell("^7    5. If you've been muted, you're obviously doing something that one or more server ops don't approve of.")
+        player.tell("^7    6. These servers are being paid for by Sa^4t^7urn, and the donators that assist with the funding.")
+        player.tell("^1  Failure to comply with these rules will result in a mute, a temporary ban, or a permanent ban.")
+        player.tell("^7  Have ^2fun^7, play, enjoy, don't do anything stupid.")
+        player.tell("^4========================================================================================")
 
     def cmd_help(self, player, msg, channel):
         player.tell("This server runs ^4tomtec_logic.py^7, a ^4minqlx^7 plugin designed for ^4The Purgery^7 servers.")
