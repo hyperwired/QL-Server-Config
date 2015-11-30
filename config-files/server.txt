@@ -41,4 +41,4 @@ set qlx_plugins "plugin_manager, essentials, motd, permission, ban, clan, tomtec
 set qlx_redisAddress "43.229.61.190:6379"
 set qlx_redisPassword "Cathugha"
 set qlx_ircRelayChannel "#thepurgery"
-set qlx_ircColors 1
+set qlx_ircColors 0
