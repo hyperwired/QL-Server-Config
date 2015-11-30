@@ -15,8 +15,19 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("rules", self.cmd_showrules)
         self.add_command("giveall", self.cmd_giveall, 4)
         self.add_command("map_restart", self.cmd_maprestart, 3)
+        self.add_command("muteall", self.cmd_muteall, 4)
+        self.add_command("unmuteall", self.cmd_unmuteall, 4)
         
-        
+    def cmd_muteall(self, player, msg, channel):
+        # mute everybody on the server
+        for p in self.players():
+            p.mute()
+
+    def cmd_unmuteall(self, player, msg, channel):
+        # unmute everybody on the server
+        for p in self.players():
+            p.unmute()
+    
     def new_game(self):
         # brand the map
         minqlx.set_configstring(3, "^4The Purgery^7")
