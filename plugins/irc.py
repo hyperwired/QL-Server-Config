@@ -192,7 +192,7 @@ class SimpleAsyncIrc(threading.Thread):
         while not self.stop_event.is_set():
             loop.run_until_complete(self.connect())
             # Disconnected. Try reconnecting in 60 seconds.
-            time.sleep(60)
+            time.sleep(10)
         loop.close()
 
     def stop(self):
