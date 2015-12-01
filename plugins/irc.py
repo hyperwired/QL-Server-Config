@@ -82,7 +82,7 @@ class irc(minqlx.Plugin):
 
     def handle_msg(self, irc, user, channel, msg):
         if channel == self.relay:
-            minqlx.CHAT_CHANNEL.reply("[IRC] ^4{}^7:^2 {}".format(user[0], " ".join(msg)))
+            minqlx.CHAT_CHANNEL.reply("[TomTec Commlink] ^4{}^7:^2 {}".format(user[0], " ".join(msg)))
         elif channel == user[0]: # Is PM?
             if len(msg) > 1 and msg[0].lower() == ".auth":
                 if user in self.authed:
