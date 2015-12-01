@@ -61,7 +61,7 @@ class irc(minqlx.Plugin):
 
     def handle_chat(self, player, msg, channel):
         if self.irc and self.relay and channel == "chat":
-            text = "^7<{}> ^2{}".format(player.name, msg)
+            text = "^7<{}> ^3{}".format(player.name, msg)
             self.irc.msg(self.relay, self.translate_colors(text))
 
     def handle_unload(self, plugin):
@@ -71,7 +71,7 @@ class irc(minqlx.Plugin):
 
     def handle_player_connect(self, player):
         if self.irc and self.relay:
-            self.irc.msg(self.relay, self.translate_colors("{} connected.".format(player.name)))
+            self.irc.msg(self.relay, self.translate_colors("^3{} connected.".format(player.name)))
 
     def handle_player_disconnect(self, player, reason):
         if reason and reason[-1] not in ("?", "!", "."):
@@ -82,7 +82,7 @@ class irc(minqlx.Plugin):
 
     def handle_msg(self, irc, user, channel, msg):
         if channel == self.relay:
-            minqlx.CHAT_CHANNEL.reply("[TomTec Commlink] ^4{}^7:^2 {}".format(user[0], " ".join(msg)))
+            minqlx.CHAT_CHANNEL.reply("[Server CommLink] ^4{}^7:^2 {}".format(user[0], " ".join(msg)))
         elif channel == user[0]: # Is PM?
             if len(msg) > 1 and msg[0].lower() == ".auth":
                 if user in self.authed:
