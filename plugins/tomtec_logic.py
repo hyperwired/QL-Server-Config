@@ -154,6 +154,30 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
                 return minqlx.RET_STOP_ALL
 
+            if args.lower() == "ra3map6":
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
+                return minqlx.RET_STOP_ALL
+
+            if args.lower() == "ra3map6a":
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
+                return minqlx.RET_STOP_ALL
+
+            if args.lower() == "ra3map6b":
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
+                return minqlx.RET_STOP_ALL
+
+            if args.lower() == "ra3map6c":
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
+                return minqlx.RET_STOP_ALL
+
+            if args.lower() == "ra3map6d":
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
+                return minqlx.RET_STOP_ALL
+
+            if args.lower() == "ra3map6e":
+                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
+                return minqlx.RET_STOP_ALL
+
     def cmd_maprestart(self, player, msg, channel):
         # run a map restart
         minqlx.console_command("map_restart")
