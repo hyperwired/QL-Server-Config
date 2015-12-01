@@ -40,7 +40,7 @@ set qlx_owner "76561198213481765"
 set qlx_plugins "plugin_manager, essentials, motd, permission, ban, clan, tomtec_logic, names, fun, docs, log, silence, balance, irc"
 set qlx_redisAddress "43.229.61.190:6379"
 set qlx_redisPassword "Cathugha"
-set qlx_ircServer "38.99.188.143"
+set qlx_ircServer "43.229.61.190"
 set qlx_ircRelayChannel "#thepurgery-minqlx"
 set qlx_ircColors 0
 
