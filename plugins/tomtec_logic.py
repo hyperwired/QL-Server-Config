@@ -116,6 +116,18 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("^2/cv infiniteammo [on/off]^7 is the usage for this callvote command.")
                 return minqlx.RET_STOP_ALL
 
+        if vote.lower() == "freecam":
+            # enables the '/cv freecam [on/off]' command
+            if args.lower() == "off":
+                self.callvote("set g_teamSpecFreeCam 0", "team spectator free-cam: off", 30)
+                return minqlx.RET_STOP_ALL
+            elif args.lower() == "on":
+                self.callvote("set g_teamSpecFreeCam 1", "team spectator free-cam: on", 30)
+                return minqlx.RET_STOP_ALL
+            else:
+                caller.tell("^2/cv freecam [on/off]^7 is the usage for this callvote command.")
+                return minqlx.RET_STOP_ALL
+
         if vote.lower() == "map":
             # prevent certain maps from being loaded, if they're found to have issues
             if args.lower() == "ra3map19":
