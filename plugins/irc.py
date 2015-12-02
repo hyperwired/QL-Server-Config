@@ -77,14 +77,14 @@ class irc(minqlx.Plugin):
 
     def handle_player_connect(self, player):
         if self.irc and self.relay:
-            self.irc.msg(self.relay, self.translate_colors("^3{} connected.".format(player.name)))
+            self.irc.msg(self.relay, self.translate_colors("^3{}^7 connected.".format(player.name)))
 
     def handle_player_disconnect(self, player, reason):
         if reason and reason[-1] not in ("?", "!", "."):
             reason = reason + "."
         
         if self.irc and self.relay:
-            self.irc.msg(self.relay, self.translate_colors("^3{} {}".format(player.name, reason)))
+            self.irc.msg(self.relay, self.translate_colors("^3{}^7 {}".format(player.name, reason)))
 
     def handle_msg(self, irc, user, channel, msg):
         cmd = msg[0].lower()
@@ -92,7 +92,7 @@ class irc(minqlx.Plugin):
             if cmd in (".players", ".status", ".info", ".map", ".server"):
                 self.server_report(self.relay)
             elif self.get_cvar("qlx_ircRelayIrcChat", bool):
-                minqlx.CHAT_CHANNEL.reply("[CommLink] ^3{}^7:^3 {}".format(user[0], " ".join(msg)))
+                minqlx.CHAT_CHANNEL.reply("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
         elif channel == user[0]: # Is PM?
             if len(msg) > 1 and msg[0].lower() == ".auth" and self.password:
                 if user in self.authed:
