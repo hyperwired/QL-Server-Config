@@ -314,7 +314,7 @@ exec $qPathToMinqlxStartScript \
     +set g_accessFile "access_testpurgery.txt" \
     +set sv_mappoolFile "mappool_default.txt" \
     +set fs_homepath ~/.quakelive/TEST-$gameport \
-    +set qlx_ircNickname "$qIrcNickname"
+    +set qlx_ircNickname "$qServerLocation-TEST"
 elif [ $1 -eq 12 ]
 # starting reythe (sub580)...
 then
