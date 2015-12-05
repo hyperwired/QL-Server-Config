@@ -12,7 +12,7 @@ class tp_fun(minqlx.Plugin):
         self.add_command(("breastsize", "cupsize", "brasize", "boobsize"), self.cmd_boobsize) # 0regonn requested
         self.add_command("fuckyou", self.cmd_printfu, 1)
         self.add_command("bury", self.cmd_bury, 3, usage="<id>")
-        self.add_command("digup", self.cmd_digup, 3, usage="<id>")
+        self.add_command("digup", self.cmd_digup, 4, usage="<id>")
 
  
     def cmd_penlen(self, player, msg, channel):
