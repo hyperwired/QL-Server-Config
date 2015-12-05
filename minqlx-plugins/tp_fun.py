@@ -11,6 +11,9 @@ class tp_fun(minqlx.Plugin):
         self.add_command(("msg", "message"), self.cmd_screenmessage, 1, usage="<text>") # Merozollo requested
         self.add_command(("breastsize", "cupsize", "brasize", "boobsize"), self.cmd_boobsize) # 0regonn requested
         self.add_command("fuckyou", self.cmd_printfu, 1)
+        self.add_command("bury", self.cmd_bury, 3, usage="<id>")
+        self.add_command("digup", self.cmd_digup, 3, usage="<id>")
+
  
     def cmd_penlen(self, player, msg, channel):
         playerName = player.clean_name
@@ -65,3 +68,32 @@ class tp_fun(minqlx.Plugin):
     def cmd_printfu(self, player, msg, channel):
         minqlx.send_server_command(None, "cp \"^0FUCK YOU\n^1FUCK YOU\n^2FUCK YOU\n^3FUCK YOU\n^4FUCK YOU\n^5FUCK YOU\n^6FUCK YOU\"\n")
 
+    def cmd_bury(self, player, msg, channel):
+        if len(msg) < 2:
+            return minqlx.RET_USAGE
+
+        try:
+            i = int(msg[1])
+            target_player = self.player(i)
+            if not (0 <= i < 64) or not target_player:
+                raise ValueError
+        except ValueError:
+            player.tell("Invalid ID.")
+            return minqlx.RET_STOP_ALL
+
+        self.player(msg[1]).position(z=player.state.position.z - 50)
+        
+    def cmd_digup(self, player, msg, channel):
+        if len(msg) < 2:
+            return minqlx.RET_USAGE
+
+        try:
+            i = int(msg[1])
+            target_player = self.player(i)
+            if not (0 <= i < 64) or not target_player:
+                raise ValueError
+        except ValueError:
+            player.tell("Invalid ID.")
+            return minqlx.RET_STOP_ALL
+        
+        self.player(msg[1]).position(z=player.state.position.z + 50)
