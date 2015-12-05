@@ -1,4 +1,4 @@
-# This has been created by TomTec Solutions
+# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 # This file contains community ideas that may be found to be in bad taste. These views do not represent the views of TomTec Solutions
 
 import minqlx

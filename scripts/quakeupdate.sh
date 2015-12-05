@@ -1,4 +1,5 @@
 #! /bin/bash
+# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 # quakestart.sh - quake live multiple server update script, utilising steamcmd.
 # created by Thomas Jones on 09/09/15.
 # purger@tomtecsolutions.com

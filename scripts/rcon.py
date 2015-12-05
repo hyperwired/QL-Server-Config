@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 # TomTec Solutions custom RCON
 
 import sys
@@ -54,15 +54,15 @@ def _checkMonitor( monitor ):
 class Test( unittest.TestCase ):
     def testPair( self ):
         timeline = time.time()
-        
+
         HOST = 'tcp://127.0.0.1:27960'
         POLL_TIMEOUT = 1000
-        
+
         server_ctx = zmq.Context()
         server_socket = server_ctx.socket( zmq.PAIR )
 
         monitor = server_socket.get_monitor_socket( zmq.EVENT_ALL )
-        
+
         server_socket.bind( HOST )
 
         client_ctx_1 = zmq.Context()
@@ -80,7 +80,7 @@ class Test( unittest.TestCase ):
                 break
 
         timeline = time.time()
-        
+
         server_socket.send( 'console line 1' )
         server_socket.send( 'console line 2' )
 
@@ -94,9 +94,9 @@ class Test( unittest.TestCase ):
     def testMix( self ):
         HOST = 'tcp://127.0.0.1:27960'
         POLL_TIMEOUT = 1000
-        
+
         server_ctx = zmq.Context()
-        
+
         server_pub = server_ctx.socket( zmq.PUB )
         server_pub.bind( HOST )
         monitor_pub = server_pub.get_monitor_socket( zmq.EVENT_ALL )
@@ -107,10 +107,10 @@ class Test( unittest.TestCase ):
 
     def testMulti( self ):
         timeline = time.time()
-        
+
         HOST = 'tcp://127.0.0.1:27960'
         POLL_TIMEOUT = 1000
-        
+
         server_ctx = zmq.Context()
 
         server_rep = server_ctx.socket( zmq.REP )
@@ -127,14 +127,14 @@ class Test( unittest.TestCase ):
 
         client_socket_1.send( 'req 1' )
         client_socket_2.send( 'req 2' )
-        
+
         while ( True ):
             event = server_rep.poll( POLL_TIMEOUT )
             _checkMonitor( monitor )
 
             if ( time.time() - timeline > 4 ):
                 break
-            
+
             if ( event == 0 ):
                 continue
 
@@ -147,10 +147,10 @@ class Test( unittest.TestCase ):
 class TestRcon( unittest.TestCase ):
     def test( self ):
         timeline = time.time()
-        
+
         HOST = 'tcp://127.0.0.1:27960'
         POLL_TIMEOUT = 1000
-        
+
         server_ctx = zmq.Context()
         server = server_ctx.socket( zmq.ROUTER )
         server.bind( HOST )
@@ -170,7 +170,7 @@ class TestRcon( unittest.TestCase ):
         client_socket_2.send( 'do that' )
 
         clients = []
-        
+
         while ( True ):
             event = server.poll( POLL_TIMEOUT )
             if ( event == 0 ):
@@ -181,7 +181,7 @@ class TestRcon( unittest.TestCase ):
                         server.send( id, zmq.SNDMORE )
                         server.send( 'console line 1' )
                     break
-                
+
                 continue
 
             client_id = server.recv()
@@ -213,7 +213,7 @@ class TestRcon( unittest.TestCase ):
         client_socket_1.close()
 
         monitor = server.get_monitor_socket( zmq.EVENT_ALL )
-        
+
         server.send( 'client-1', zmq.SNDMORE )
         server.send( 'console line 2' )
 
@@ -293,7 +293,7 @@ if ( __name__ == '__main__' ):
                     time.sleep(1.5)
                     DONE = True
                 threading.Thread(target=set_done).start()
-                
+
             if ( event == 0 ):
                 continue
 

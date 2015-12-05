@@ -1,12 +1,21 @@
+# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 # specify 1 map per line, mapname|factoryid
 # ex: aerowalk|ffa
 # see factories.txt for valid factory id values
 aerowalk|duel
+
 bloodrun|duel
+
 cure|duel
+
 furiousheights|duel
+
 eyetoeye|duel
+
 lostworld|duel
+
 hektik|duel
+
 toxicity|duel
+
 sinister|duel

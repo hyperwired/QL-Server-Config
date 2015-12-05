@@ -1,4 +1,5 @@
 #! /bin/bash
+# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 # searchlogs.sh - quake live dedicated server log view utility.
 # created by Thomas Jones on 02/10/15.
 # purger@tomtecsolutions.com
@@ -18,4 +19,3 @@ echo "Searching for '$1' on server \#$2..."
 sudo grep -niC $3 "$1" /tmp/qzeroded_$2* | more -d
 echo Done.
 exit 0
-
