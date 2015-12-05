@@ -28,11 +28,10 @@ set g_inactivity "120"                // Drop any player who is inactive for 120
 
 // minqlx configuration
 
-set qlx_owner "76561198213481765"                                                                                                                                           // Thomas Jones (server owner).
-set qlx_plugins "plugin_manager, essentials, motd, permission, ban, clan, tomtec_logic, names, tp_fun, fun, docs, log, silence, balance, commlink"                          // Auto-load these plugins on minqlx launch.
-set qlx_redisAddress "43.229.61.190:6379"                                                                                                                                   // QLMaster Redis Server.
-set qlx_redisPassword "Cathugha"                                                                                                                                            // QLMaster Redis Keyword.
-set qlx_ircServer "irc.tomtecsolutions.com.au"                                                                                                                              // TomTec Solutions IRC (required for CommLink functionality).
-set qlx_ircRelayChannel "#thepurgery"                                                                                                                                       // Connect to this channel automatically (default CommLink channel).
-set qlx_ircColors 0                                                                                                                                                         // Enable mIRC-standard colouring.
-
+set qlx_owner "76561198213481765"                                                                                                                           // Thomas Jones (server owner).
+set qlx_plugins "plugin_manager, essentials, motd, permission, ban, clan, tomtec_logic, names, tp_fun, fun, docs, log, silence, balance, commlink"          // Auto-load these plugins on minqlx launch.
+set qlx_redisAddress "43.229.61.190:6379"                                                                                                                   // QLMaster Redis Server.
+set qlx_redisPassword "Cathugha"                                                                                                                            // QLMaster Redis Keyword.
+set qlx_ircServer "irc.tomtecsolutions.com.au"                                                                                                              // TomTec Solutions IRC (required for CommLink functionality).
+set qlx_ircRelayChannel "#thepurgery"                                                                                                                       // Connect to this channel automatically (default CommLink channel).
+set qlx_ircColors 0                                                                                                                                         // Enable mIRC-standard colouring.
