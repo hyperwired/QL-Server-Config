@@ -13,7 +13,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("vote_called", self.handle_vote_called)
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
-        self.add_command("giveall", self.cmd_giveall, 4)
+        self.add_command("giveall", self.cmd_giveall, 5)
         self.add_command("map_restart", self.cmd_maprestart, 3)
         self.add_command("muteall", self.cmd_muteall, 4)
         self.add_command("unmuteall", self.cmd_unmuteall, 4)
