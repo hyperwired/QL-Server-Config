@@ -35,3 +35,5 @@ set qlx_redisPassword "Cathugha"                                                
 set qlx_ircServer "irc.tomtecsolutions.com.au"                                                                                                              // TomTec Solutions IRC (required for CommLink functionality).
 set qlx_ircRelayChannel "#thepurgery"                                                                                                                       // Connect to this channel automatically (default CommLink channel).
 set qlx_ircColors 0                                                                                                                                         // Enable mIRC-standard colouring.
+set qlx_motdSound 0                                                                                                                                         // Stop any sounds from playing on MOTD displaying.
+set qlx_motdHeader ""                                                                                                                                       // Don't have the MOTD tell us what it is.
