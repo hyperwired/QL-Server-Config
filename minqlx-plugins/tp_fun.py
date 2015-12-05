@@ -17,46 +17,37 @@ class tp_fun(minqlx.Plugin):
  
     def cmd_penlen(self, player, msg, channel):
         playerName = player.clean_name
-        if playerName.lower() == "saturn":
-            channel.reply("^7{}^7's penis length: ^412 inches^7".format(player))
+        randNum = randint(0,11)
+        if randNum == 0:
+            channel.reply("^7{}^7's penis length: ^40 inches (inverted!)^7".format(player))
         else:
-            randNum = randint(0,11)
-            if randNum == 0:
-                channel.reply("^7{}^7's penis length: ^40 inches (inverted!)^7".format(player))
-            else:
-                channel.reply("^7{}^7's penis length: ^4{} inch(es)^7".format(player, randNum))
+            channel.reply("^7{}^7's penis length: ^4{} inch(es)^7".format(player, randNum))
 
     def cmd_vagdep(self, player, msg, channel):
         playerName = player.clean_name
-        if playerName.lower() == "saturn":
-            channel.reply("^7{}^7's vaginial depth: ^4-12 inches^7".format(player))
+        randNum = randint(0,11)
+        if randNum == 0:
+            channel.reply("^7{}^7's vaginial depth: ^40 inches (are you trans?)^7".format(player))
         else:
-            randNum = randint(0,11)
-            if randNum == 0:
-                channel.reply("^7{}^7's vaginial depth: ^40 inches (are you trans?)^7".format(player))
-            else:
-                channel.reply("^7{}^7's vaginial depth: ^4{} inch(es)^7".format(player, randNum))
+            channel.reply("^7{}^7's vaginial depth: ^4{} inch(es)^7".format(player, randNum))
 
     def cmd_boobsize(self, player, msg, channel):
         playerName = player.clean_name
-        if playerName.lower() == "saturn":
-            channel.reply("^7{}^7's cup size: ^4Stop asking, you're male!".format(playerName))
-        else:
-            randNum = randint(0,5)
-            if randNum == 0:
-                cupSize = "A"
-            elif randNum == 1:
-                cupSize = "B"
-            elif randNum == 2:
-                cupSize = "C"
-            elif randNum == 3:
-                cupSize = "D"
-            elif randNum == 4:
-                cupSize = "DD"
-            elif randNum == 5:
-                cupSize = "Z (discount wheelbarrow at Bunnings!)"
+        randNum = randint(0,5)
+        if randNum == 0:
+            cupSize = "A"
+        elif randNum == 1:
+            cupSize = "B"
+        elif randNum == 2:
+            cupSize = "C"
+        elif randNum == 3:
+            cupSize = "D"
+        elif randNum == 4:
+            cupSize = "DD"
+        elif randNum == 5:
+            cupSize = "Z (discount wheelbarrow at Bunnings!)"
 
-            channel.reply("^7{}^7's cup size: ^4{}^7".format(playerName, cupSize))
+        channel.reply("^7{}^7's cup size: ^4{}^7".format(playerName, cupSize))
            
     def cmd_screenmessage(self, player, msg, channel):
         if len(msg) < 2:
@@ -81,7 +72,8 @@ class tp_fun(minqlx.Plugin):
             player.tell("Invalid ID.")
             return minqlx.RET_STOP_ALL
 
-        self.player(msg[1]).position(z=player.state.position.z - 50)
+        affected = int(msg[1])
+        self.player(affected).position(z=player.state.position.z - 40)
         
     def cmd_digup(self, player, msg, channel):
         if len(msg) < 2:
@@ -96,4 +88,5 @@ class tp_fun(minqlx.Plugin):
             player.tell("Invalid ID.")
             return minqlx.RET_STOP_ALL
         
-        self.player(msg[1]).position(z=player.state.position.z + 50)
+        affected = int(msg[1])
+        self.player(affected).position(z=player.state.position.z + 50)
