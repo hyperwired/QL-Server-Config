@@ -17,7 +17,7 @@ echo "=== End of pre-run script."
 
 #
 #  Performing main data move.
-# 
+#
 
 echo "Moving access files into place..."
 cd accesses
@@ -47,7 +47,10 @@ dos2unix $BASEQ3/mappool* > /dev/null
 cd ..
 
 echo "Moving minqlx.zip into place..."
-mv minqlx.zip $QLDS/minqlx.zip
+mv minqlx-core/minqlx.zip $QLDS/minqlx.zip
+
+echo "Moving minqlx.so into place..."
+mv minqlx-core/minqlx.so $QLDS/minqlx.so
 
 #echo "Zipping up minqlx core files and moving them into place..."
 #rm -f ~/steamcmd/steamapps/common/qlds/minqlx.zip
@@ -55,7 +58,7 @@ mv minqlx.zip $QLDS/minqlx.zip
 
 echo "Moving minqlx plugins into place..."
 rm -rf ~/steamcmd/steamapps/common/qlds/minqlx-plugins/*.py
-cd plugins
+cd minqlx-plugins
 mv * $QLDS/minqlx-plugins
 cd ..
 
