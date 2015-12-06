@@ -83,7 +83,7 @@ echo "Starting race server 1..."
 exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
-    +set sv_hostname "    #$servernum The Purgery $qServerLocation PQL - Race" \
+    +set sv_hostname "    #$servernum The Purgery $qServerLocation - Race" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
@@ -91,9 +91,9 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_password "" \
     +set zmq_stats_port $gameport \
     +set sv_tags "grappling hook,crouch slide,$sponsortag" \
-    +set g_voteFlags "9320" \
+    +set g_voteFlags "0" \
     +set g_allowSpecVote 0 \
-    +set g_allowVoteMidGame 0 \
+    +set g_allowVoteMidGame 1 \
     +set bot_enable 0 \
    	+set bot_nochat 1 \
     +set g_accessFile "access_purgery.txt" \
@@ -126,126 +126,6 @@ exec $qPathToMinqlxStartScript \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname"
 elif [ $1 -eq 4 ]
-# starting PQL CTF 1...
-then
-echo "Starting capture the flag server 1..."
-exec $qPathToMinqlxStartScript \
-    +set net_strict 1 \
-    +set net_port $gameport \
-    +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Capture the Flag" \
-    +set zmq_rcon_enable 1 \
-    +set zmq_rcon_password "$qRconPasswordPurgery" \
-    +set zmq_rcon_port $rconport \
-    +set zmq_stats_enable 1 \
-    +set zmq_stats_password "" \
-    +set zmq_stats_port $gameport \
-    +set sv_tags "$sponsortag" \
-    +set g_voteFlags "9320" \
-    +set g_allowSpecVote 0 \
-    +set g_allowVoteMidGame 0 \
-    +set bot_enable 1 \
-   	+set bot_nochat 1 \
-    +set g_accessFile "access_purgery.txt" \
-    +set sv_mappoolFile "mappool_vqlctf.txt" \
-    +set fs_homepath ~/.quakelive/$gameport \
-    +set qlx_ircNickname "$qIrcNickname" \
-    +set g_damage_lg 6
-elif [ $1 -eq 5 ]
-# starting PQL DOM 1...
-then
-echo "Starting domination server 1..."
-exec $qPathToMinqlxStartScript \
-    +set net_strict 1 \
-    +set net_port $gameport \
-    +set sv_hostname "    #$servernum The Purgery $qServerLocation PQL - Domination" \
-    +set zmq_rcon_enable 1 \
-    +set zmq_rcon_password "$qRconPasswordPurgery" \
-    +set zmq_rcon_port $rconport \
-    +set zmq_stats_enable 1 \
-    +set zmq_stats_password "" \
-    +set zmq_stats_port $gameport \
-    +set sv_tags "$sponsortag" \
-    +set g_voteFlags "9320" \
-    +set g_allowSpecVote 0 \
-    +set g_allowVoteMidGame 0 \
-    +set bot_enable 1 \
-   	+set bot_nochat 1 \
-    +set g_accessFile "access_purgery.txt" \
-    +set sv_mappoolFile "mappool_pqldom.txt" \
-    +set fs_homepath ~/.quakelive/$gameport \
-    +set qlx_ircNickname "$qIrcNickname"
-elif [ $1 -eq 6 ]
-# starting PQL INFECTED 1...
-then
-echo "Starting infected server 1..."
-exec $qPathToMinqlxStartScript \
-    +set net_strict 1 \
-    +set net_port $gameport \
-    +set sv_hostname "    #$servernum The Purgery $qServerLocation PQL - Infected" \
-    +set zmq_rcon_enable 1 \
-    +set zmq_rcon_password "$qRconPasswordPurgery" \
-    +set zmq_rcon_port $rconport \
-    +set zmq_stats_enable 1 \
-    +set zmq_stats_password "" \
-    +set zmq_stats_port $gameport \
-    +set sv_tags "zombies,$sponsortag" \
-    +set g_voteFlags "9320" \
-    +set g_allowSpecVote 0 \
-    +set g_allowVoteMidGame 0 \
-    +set bot_enable 1 \
-   	+set bot_nochat 1 \
-    +set g_accessFile "access_purgery.txt" \
-    +set sv_mappoolFile "mappool_pqlinfected.txt" \
-    +set fs_homepath ~/.quakelive/$gameport \
-    +set qlx_ircNickname "$qIrcNickname"
-elif [ $1 -eq 7 ]
-# starting PQL TDM 1...
-then
-echo "Starting team deathmatch server 1..."
-exec $qPathToMinqlxStartScript \
-    +set net_strict 1 \
-    +set net_port $gameport \
-    +set sv_hostname "    #$servernum The Purgery $qServerLocation PQL - Team Deathmatch" \
-    +set zmq_rcon_enable 1 \
-    +set zmq_rcon_password "$qRconPasswordPurgery" \
-    +set zmq_rcon_port $rconport \
-    +set zmq_stats_enable 1 \
-    +set zmq_stats_password "" \
-    +set zmq_stats_port $gameport \
-    +set sv_tags "$sponsortag" \
-    +set g_voteFlags "9320" \
-    +set g_allowSpecVote 0 \
-    +set g_allowVoteMidGame 0 \
-    +set bot_enable 1 \
-   	+set bot_nochat 1 \
-    +set g_accessFile "access_purgery.txt" \
-    +set sv_mappoolFile "mappool_pqltdm.txt" \
-    +set fs_homepath ~/.quakelive/$gameport \
-    +set qlx_ircNickname "$qIrcNickname"
-elif [ $1 -eq 8 ]
-# starting PQL MultiGame 1...
-then
-echo "Starting multi game type server 1..."
-exec $qPathToMinqlxStartScript \
-    +set net_strict 1 \
-    +set net_port $gameport \
-    +set sv_hostname "    #$servernum The Purgery $qServerLocation PQL - Multi-Gametype" \
-    +set zmq_rcon_enable 1 \
-    +set zmq_rcon_password "$qRconPasswordPurgery" \
-    +set zmq_rcon_port $rconport \
-    +set zmq_stats_enable 1 \
-    +set zmq_stats_password "" \
-    +set zmq_stats_port $gameport \
-    +set sv_tags "$sponsortag" \
-    +set g_allowSpecVote 0 \
-    +set g_allowVoteMidGame 0 \
-    +set bot_enable 1 \
-    +set bot_nochat 1 \
-    +set g_accessFile "access_purgery.txt" \
-    +set sv_mappoolFile "mappool_pqlmulti.txt" \
-    +set fs_homepath ~/.quakelive/$gameport \
-    +set qlx_ircNickname "$qIrcNickname"
-elif [ $1 -eq 9 ]
 # starting vql duel 1...
 then
 echo "Starting VQL duel server 1..."
@@ -270,14 +150,14 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_vqlduel.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname"
-elif [ $1 -eq 10 ]
-# starting VQL iCTF 1...
+elif [ $1 -eq 5 ]
+# starting VQL Multi-Gametype 1...
 then
-echo "Starting VQL iCTF server 1..."
+echo "Starting VQL Multi-Gametype server 1..."
 exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
-    +set sv_hostname " #$servernum The Purgery $qServerLocation VQL - Multi-Gametype" \
+    +set sv_hostname " #$servernum The Purgery $qServerLocation PQL - Multi-Gametype" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
@@ -290,13 +170,36 @@ exec $qPathToMinqlxStartScript \
     +set bot_enable 1 \
     +set bot_nochat 1 \
     +set g_accessFile "access_purgery.txt" \
-    +set sv_mappoolFile "mappool_default.txt" \
+    +set sv_mappoolFile "mappool_pqlmulti.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set g_damage_lg 6 \
     +set g_voteFlags 0
-elif [ $1 -eq 11 ]
-# starting TEST SEVER 1...
+  elif [ $1 -eq 6 ]
+  # starting PQL MultiGame 1...
+  then
+  echo "Starting multi game type PQL server 1..."
+  exec $qPathToMinqlxStartScript \
+      +set net_strict 1 \
+      +set net_port $gameport \
+      +set sv_hostname " #$servernum The Purgery $qServerLocation VQL - Multi-Gametype" \
+      +set zmq_rcon_enable 1 \
+      +set zmq_rcon_password "$qRconPasswordPurgery" \
+      +set zmq_rcon_port $rconport \
+      +set zmq_stats_enable 1 \
+      +set zmq_stats_password "" \
+      +set zmq_stats_port $gameport \
+      +set sv_tags "$sponsortag" \
+      +set g_allowSpecVote 0 \
+      +set g_allowVoteMidGame 0 \
+      +set bot_enable 1 \
+      +set bot_nochat 1 \
+      +set g_accessFile "access_purgery.txt" \
+      +set sv_mappoolFile "mappool_default.txt" \
+      +set fs_homepath ~/.quakelive/$gameport \
+      +set qlx_ircNickname "$qIrcNickname"
+elif [ $1 -eq 7 ]
+# starting TEST SERVER 1...
 then
 echo "Starting TEST SERVER server 1..."
 exec $qPathToMinqlxStartScript \
@@ -314,9 +217,9 @@ exec $qPathToMinqlxStartScript \
     +set bot_nochat 1 \
     +set g_accessFile "access_testpurgery.txt" \
     +set sv_mappoolFile "mappool_default.txt" \
-    +set fs_homepath ~/.quakelive/TEST-$gameport \
+    +set fs_homepath ~/.quakelive/TEST \
     +set qlx_ircNickname "$qServerLocation-TEST"
-elif [ $1 -eq 12 ]
+elif [ $1 -eq 8 ]
 # starting reythe (sub580)...
 then
 if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
@@ -336,7 +239,7 @@ exec $qPathToVanillaStartScript \
     +set bot_enable 0 \
     +set g_accessFile "access_reythe.txt" \
     +set sv_mappoolFile "mappool_reythe.txt" \
-    +set fs_homepath ~/.quakelive/REYTHE-$gameport \
+    +set fs_homepath ~/.quakelive/REYTHE-SUB580 \
     +set g_damage_lg 6 \
     +set g_voteFlags 8
 else
