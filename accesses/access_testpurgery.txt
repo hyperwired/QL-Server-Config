@@ -16,3 +16,6 @@
 
 # admin 5, junkyard
 76561198257486058|admin
+
+# admin 6, nworb_ (jb)
+76561198041714377|admin
