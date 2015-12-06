@@ -9,7 +9,7 @@
 # Defining variables:
 export qUpdateServerMessage="^7All ^4TomTec Solutions^7 hosted servers are going down ^1within a minute^7 for daily updating. They will be back in ^410 minutes^7."
 export qUpdateLowestRconPort=28960
-export qUpdateHighestRconPort=28970
+export qUpdateHighestRconPort=28967
 export qRconPassword=$(cat ~/localConfig-rconPassword-purgery.txt)
 
 echo "========== QuakeUpdate.sh has started. =========="
