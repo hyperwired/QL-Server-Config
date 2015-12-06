@@ -151,9 +151,9 @@ class fun(minqlx.Plugin):
     def cmd_cookies(self, player, msg, channel):
         x = random.randint(0, 100)
         if not x:
-            channel.reply("^6♥ ^7Here you go, {}. I baked these just for you! ^6♥".format(player))
+            channel.reply("^4♥ ^7Here you go, {}. I baked these just for you! ^4♥".format(player))
         elif x == 1:
-            channel.reply("What, you thought ^6you^7 would get cookies from me, {}? Hah, think again.".format(player))
+            channel.reply("What, you thought ^4you^7 would get cookies from me, {}? Hah, think again.".format(player))
         elif x < 50:
             channel.reply("For me? Thank you, {}!".format(player))
         else:
