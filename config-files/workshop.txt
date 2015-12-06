@@ -373,3 +373,84 @@
 
 # DeFRaG/race map: Coldrun
 563333349
+
+# DeFRaG/race: Slick Map Pack
+563581691
+
+# The Rage
+563655427
+
+# Storm Maps
+564894881
+
+# Polo Maps
+564946744
+
+# Mars
+565025333
+
+# Dracula
+565025815
+
+# Campgrounds CTF
+565082165
+
+# DeFRaG/race Promode & Vanilla Map Pack
+565175871
+
+# Hogwarts
+565357365
+
+# Casablanca
+565358076
+
+# Bid for Power Maps
+565451557
+
+# bdra3
+565482567
+
+# DeFRaG/race map: PiyoFunJumps
+566733850
+
+# DeFRaG/race map: Handbreaker4
+567083637
+
+# OSP-CA1 aka American Can-CO
+567136687
+
+# Winter Map Pack
+567348670
+
+# P3NT4-RZ3
+567364365
+
+# CPM maps by Kragle
+568284101
+
+# raztrainql_beta3
+568582691
+
+# pasteyrox
+569117106
+
+# Clan Arena Jof3CA
+569566066
+
+# DeFRag/Race: Run Map Pack #1
+569569643
+
+# DeFRaG/Race: Freestyle Map Pack #1
+569570727
+
+# Aggressor
+569873334
+
+# Nunuk Maps
+569916167
+
+# Xoylent
+569917004
+
+# koz25
+569922415
