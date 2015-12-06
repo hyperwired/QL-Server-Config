@@ -1,0 +1,43 @@
+[
+   {
+      "author":"TomTec Solutions",
+      "description":"VQL ruleset integration to Race servers.",
+      "basegt":"race",
+      "id":"vqlrace",
+      "title":"VQL Race",
+      "cvars":{
+         "g_loadout":"0",
+         "g_spawnArmor":"0",
+         "dmflags":"60",
+         "g_startingArmor":"0",
+         "g_startingHealth":"100",
+         "g_allowKill":"1",
+         "g_overtime":"0",
+         "pmove_noPlayerClip":"1",
+         "pmove_CrouchSlide":"1",
+         "pmove_WeaponRaiseTime":"10",
+         "pmove_WeaponDropTime":"10",
+         "pmove_RampJump":"0",
+         "pmove_AirControl":"0",
+         "g_infiniteAmmo":"1",
+         "g_startingWeapons":"657",
+         "timelimit":"10",
+         "g_respawn_delay_min":"10",
+         "g_respawn_delay_max":"20",
+         "g_startingAmmo_sg":"-1",
+         "g_startingAmmo_rl":"-1",
+         "g_startingAmmo_rg":"-1",
+         "g_startingAmmo_pl":"-1",
+         "g_startingAmmo_pg":"-1",
+         "g_startingAmmo_ng":"-1",
+         "g_startingAmmo_mg":"-1",
+         "g_startingAmmo_lg":"-1",
+         "g_startingAmmo_hmg":"-1",
+         "g_startingAmmo_gl":"-1",
+         "g_startingAmmo_gh":"-1",
+         "g_startingAmmo_g":"-1",
+         "g_startingAmmo_cg":"-1",
+         "g_startingAmmo_bfg":"-1"
+      }
+   }
+]
