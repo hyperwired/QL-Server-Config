@@ -42,9 +42,6 @@ class names(minqlx.Plugin):
         name_key = _name_key.format(player.steam_id)
         if name_key in self.db:
             db_name = self.db[name_key]
-            if self.clean_text(db_name) == player.clean_name:
-                return
-            
             if not self.get_cvar("qlx_enforceSteamName", bool) or self.clean_text(db_name).lower() == player.clean_name.lower():
                 self.name_set = True
                 player.name = db_name
@@ -107,4 +104,5 @@ class names(minqlx.Plugin):
             return match.group(1)
 
         return _re_remove_excessive_colors.sub(sub_func, name)
+
 
