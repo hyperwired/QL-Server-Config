@@ -35,9 +35,8 @@ mv workshop.txt $BASEQ3/workshop.txt
 dos2unix $BASEQ3/workshop.txt > /dev/null
 cd ..
 
-echo "Reloading and updating supervisor configuration..."
+echo "Reloading supervisor configuration into memory..."
 supervisorctl reread
-supervisorctl reload
 
 echo "Moving factories into place..."
 cd factories

@@ -44,6 +44,9 @@ cd ~
 echo "Running the qzeroded process to download all workshop items once, then exiting the qzeroded process."
 ~/steamcmd/steamapps/common/qlds/run_server_x64.sh +quit > ~/qzeroded_workshopLog.txt
 
+echo "Reloading the 'supervisord' process..."
+/usr/local/bin/supervisorctl reload
+
 # Using 'supervisorctl' to start all servers.
 echo Starting Quake Servers...
 /usr/local/bin/supervisorctl start all
