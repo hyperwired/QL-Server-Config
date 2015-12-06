@@ -19,7 +19,7 @@ set g_warmupDelay "15"                // Wait x seconds before allowing match to
 set g_warmupReadyDelay "0"            // Force the game to start after x seconds after someone readies up.
 set g_warmupReadyDelayAction "1"      // Set to 1 to force players to spectator after g_warmupReady Delay, 2 to force ready up.
 set teamsize 0                        // Make a unlimited teamsize the default until someone changes it with '!ts' or '/cv teamsize'.
-set con_tty 0                         // Stop qzeroded from attempting to bind to the current tty.
+set ttycon 0                          // Stop qzeroded from attempting to bind to the current tty.
 set sv_fps "40"                       // Set server frames-per-second, 40 is the default.
 set sv_idleExit "120"                 // Kill qzeroded if the server remains idle for 120 seconds (idle = mapless).
 set serverstartup "startRandomMap"    // Make the server start a map from the map rotation file once it's finished initialising.
