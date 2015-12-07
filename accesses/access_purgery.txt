@@ -15,35 +15,32 @@
 # mod 1, minco
 # MINCO IS NOT PRESENT ON NEW QUAKE LIVE YET
 
-# mod 2, lion/GALACTUS
-76561198042645339|mod
-
-# mod 3, barley
+# mod 2, barley
 76561197971374552|mod
 
-# mod 4, giantman
+# mod 3, giantman
 76561198206232871|mod
 
-# mod 5, biokemical
+# mod 4, biokemical
 76561198063863745|mod
 
-# mod 6, notes
+# mod 5, notes
 76561198072746913|mod
 
-# mod 7, sifz
+# mod 6, sifz
 76561198002147295|mod
 
-# mod 8, meganfoxxed
+# mod 7, meganfoxxed
 76561198218511531|mod
 
-# mod 9, chef
+# mod 8, chef
 76561198250594530|mod
 
-# mod 10, quarrel
+# mod 9, quarrel
 76561198048831696|mod
 
-# mod 11, junkyard
+# mod 10, junkyard
 76561198257486058|mod
 
-# mod 12, nworb_ (jb)
+# mod 11, nworb_ (jb)
 76561198041714377|mod
