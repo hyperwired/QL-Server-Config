@@ -145,6 +145,11 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("^2/cv alltalk [on/off]^7 is the usage for this callvote command.")
                 return minqlx.RET_STOP_ALL
 
+        if vote.lower() == "allready":
+            # enables the '/cv allready' command
+            self.callvote("allready", "begin game immediately", 30)
+            return minqlx.RET_STOP_ALL
+
         if vote.lower() == "chatsounds":
             # enables the '/cv chatsounds [on/off]' command
             if args.lower() == "off":
