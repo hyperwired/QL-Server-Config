@@ -7,6 +7,9 @@
 # Quake Live Holiday Pack
 539421982
 
+# Quake III Arena: Sound Pack (by Thomas Jones for testing purposes)
+570810346
+
 # Rocket Arena 3 - ra3map18
 550003921
 

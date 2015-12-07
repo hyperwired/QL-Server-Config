@@ -12,12 +12,12 @@ class tp_sounds(minqlx.Plugin):
         
     def map_load(self, mapname, factory):
         if self.get_cvar("qlx_queueSoundPack") == "1":
-            self.game.steamworks_items += [570745980]
+            self.game.steamworks_items += [570810346]
 
     def cmd_queueSoundPack(self, player, msg, channel):
         self.set_cvar("qlx_queueSoundPack", "1")
-        channel.reply("Quake III Arena: Sound pack queued.")
+        channel.reply("^1Quake III Arena^7: Sound pack queued. Reload map to reference steamworks item to clients.")
                         
     def cmd_unqueueSoundPack(self, player, msg, channel):
         self.set_cvar("qlx_queueSoundPack", "0")
-        channel.reply("Quake III Arena: Sound pack unqueued.")
+        channel.reply("^1Quake III Arena^7: Sound pack unqueued.")
