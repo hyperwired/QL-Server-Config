@@ -147,8 +147,21 @@ class tomtec_logic(minqlx.Plugin):
 
         if vote.lower() == "allready":
             # enables the '/cv allready' command
-            self.callvote("allready", "begin game immediately", 30)
-            return minqlx.RET_STOP_ALL
+            if self.game.state == "warmup":
+                self.callvote("allready", "begin game immediately", 30)
+                return minqlx.RET_STOP_ALL
+            else:
+                caller.tell("You can't vote to begin the game when the game is already on.")
+                return minqlx.RET_STOP_ALL
+
+        if vote.lower() == "abort":
+            # enables the '/cv abort' command
+            if self.game.state != "warmup":
+                self.callvote("abort", "abort the game", 30)
+                return minqlx.RET_STOP_ALL
+            else:
+                caller.tell("You can't vote to abort the game when the game isn't in progress.")
+                return minqlx.RET_STOP_ALL
 
         if vote.lower() == "chatsounds":
             # enables the '/cv chatsounds [on/off]' command
