@@ -17,6 +17,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("map_restart", self.cmd_maprestart, 3)
         self.add_command("muteall", self.cmd_muteall, 4)
         self.add_command("unmuteall", self.cmd_unmuteall, 4)
+        self.add_command(("feedback", "fb"), self.cmd_feedback)
         
     def cmd_muteall(self, player, msg, channel):
         # mute everybody on the server
@@ -82,8 +83,12 @@ class tomtec_logic(minqlx.Plugin):
     def cmd_help(self, player, msg, channel):
         player.tell("This server runs ^4tomtec_logic.py^7, a ^4minqlx^7 plugin designed for ^4The Purgery^7 servers.")
         player.tell("^4tomtec_logic.py^7 is (c) 2015, Thomas Jones (Sa^4t^7urn), TomTec Solutions.")
+        player.tell("Please visit ^2http://tomtecsolutions.com.au/thepurgery^7 for information about the servers.")
         return minqlx.RET_STOP_EVENT
 
+    def cmd_feedback(self, player, msg, channel):
+        channel.reply("To provide feedback on ^4The Purgery^7 servers, please email ^2quakesupport@tomtecsolutions.com^7.")
+        
     def handle_vote_called(self, caller, vote, args):
         if vote.lower() == "kick":
             # prevent certain players from being kicked via a call-vote
