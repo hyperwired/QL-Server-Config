@@ -43,8 +43,8 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
-    +set g_allowSpecVote 0 \
-    +set g_allowVoteMidGame 0 \
+    +set g_allowSpecVote 1 \
+    +set g_allowVoteMidGame 1 \
     +set bot_enable 1 \
     +set bot_nochat 1 \
     +set g_accessFile "access_purgery.txt" \
@@ -67,8 +67,8 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
-    +set g_allowSpecVote 0 \
-    +set g_allowVoteMidGame 0 \
+    +set g_allowSpecVote 1 \
+    +set g_allowVoteMidGame 1 \
     +set bot_enable 1 \
     +set bot_nochat 1 \
     +set g_accessFile "access_purgery.txt" \
@@ -92,7 +92,7 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_port $gameport \
     +set sv_tags "grappling hook,crouch slide,$sponsortag" \
     +set g_voteFlags "0" \
-    +set g_allowSpecVote 0 \
+    +set g_allowSpecVote 1 \
     +set g_allowVoteMidGame 1 \
     +set bot_enable 0 \
    	+set bot_nochat 1 \
@@ -116,8 +116,8 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
-    +set g_allowSpecVote 0 \
-    +set g_allowVoteMidGame 0 \
+    +set g_allowSpecVote 1 \
+    +set g_allowVoteMidGame 1 \
     +set bot_enable 1 \
    	+set bot_nochat 1 \
     +set g_damage_lg 6 \
@@ -141,8 +141,8 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
-    +set g_allowSpecVote 0 \
-    +set g_allowVoteMidGame 0 \
+    +set g_allowSpecVote 1 \
+    +set g_allowVoteMidGame 1 \
     +set bot_enable 1 \
     +set bot_nochat 1 \
     +set g_damage_lg 6 \
@@ -165,8 +165,8 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_password "eggplant" \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
-    +set g_allowSpecVote 0 \
-    +set g_allowVoteMidGame 0 \
+    +set g_allowSpecVote 1 \
+    +set g_allowVoteMidGame 1 \
     +set bot_enable 1 \
     +set bot_nochat 1 \
     +set g_accessFile "access_purgery.txt" \
@@ -190,8 +190,8 @@ exec $qPathToMinqlxStartScript \
       +set zmq_stats_password "eggplant" \
       +set zmq_stats_port $gameport \
       +set sv_tags "$sponsortag" \
-      +set g_allowSpecVote 0 \
-      +set g_allowVoteMidGame 0 \
+      +set g_allowSpecVote 1 \
+      +set g_allowVoteMidGame 1 \
       +set bot_enable 1 \
       +set bot_nochat 1 \
       +set g_accessFile "access_purgery.txt" \
