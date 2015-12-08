@@ -39,7 +39,7 @@ exec $qPathToMinqlxStartScript \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
     +set zmq_stats_enable 1 \
-    +set zmq_stats_password "" \
+    +set zmq_stats_password "eggplant" \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
@@ -63,7 +63,7 @@ exec $qPathToMinqlxStartScript \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
     +set zmq_stats_enable 1 \
-    +set zmq_stats_password "" \
+    +set zmq_stats_password "eggplant" \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
@@ -88,7 +88,7 @@ exec $qPathToMinqlxStartScript \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
     +set zmq_stats_enable 1 \
-    +set zmq_stats_password "" \
+    +set zmq_stats_password "eggplant" \
     +set zmq_stats_port $gameport \
     +set sv_tags "grappling hook,crouch slide,$sponsortag" \
     +set g_voteFlags "0" \
@@ -112,7 +112,7 @@ exec $qPathToMinqlxStartScript \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
     +set zmq_stats_enable 1 \
-    +set zmq_stats_password "" \
+    +set zmq_stats_password "eggplant" \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
@@ -137,7 +137,7 @@ exec $qPathToMinqlxStartScript \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
     +set zmq_stats_enable 1 \
-    +set zmq_stats_password "" \
+    +set zmq_stats_password "eggplant" \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
@@ -162,7 +162,7 @@ exec $qPathToMinqlxStartScript \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
     +set zmq_stats_enable 1 \
-    +set zmq_stats_password "" \
+    +set zmq_stats_password "eggplant" \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_allowSpecVote 0 \
@@ -187,7 +187,7 @@ exec $qPathToMinqlxStartScript \
       +set zmq_rcon_password "$qRconPasswordPurgery" \
       +set zmq_rcon_port $rconport \
       +set zmq_stats_enable 1 \
-      +set zmq_stats_password "" \
+      +set zmq_stats_password "eggplant" \
       +set zmq_stats_port $gameport \
       +set sv_tags "$sponsortag" \
       +set g_allowSpecVote 0 \
