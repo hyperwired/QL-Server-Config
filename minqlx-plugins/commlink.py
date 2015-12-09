@@ -91,6 +91,9 @@ class commlink(minqlx.Plugin):
             self.irc.msg(self.relay, self.translate_colors("^3{}^7 {}".format(player.name, reason)))
 
     def handle_msg(self, irc, user, channel, msg):
+        if not msg:
+            return
+        
         cmd = msg[0].lower()
         if channel == self.relay:
             if cmd in (".players", ".status", ".info", ".map", ".server"):
