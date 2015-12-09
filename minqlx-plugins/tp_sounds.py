@@ -7,4 +7,4 @@ class tp_sounds(minqlx.Plugin):
         self.add_hook("map", self.map_load)
         
     def map_load(self, mapname, factory):
-        self.game.steamworks_items += [572140470] # 571878681, quake 3 sounds
+        self.game.steamworks_items += [572192349] # 571878681, quake 3 sounds
