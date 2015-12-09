@@ -12,7 +12,7 @@ class tp_sounds(minqlx.Plugin):
         
     def map_load(self, mapname, factory):
         if self.get_cvar("qlx_queueSoundPack") == "1":
-            self.game.steamworks_items += [570810346]
+            self.game.steamworks_items += [571860199]
 
     def cmd_queueSoundPack(self, player, msg, channel):
         self.set_cvar("qlx_queueSoundPack", "1")
