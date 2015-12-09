@@ -11,7 +11,7 @@
 571878681
 
 # The Purgery - Sound Pack (by Thomas Jones for testing purposes)
-572140470
+571895573
 
 # Rocket Arena 3 - ra3map18
 550003921
@@ -460,3 +460,27 @@
 
 # koz25
 569922415
+
+# Q1&Q2 Duel Maps
+570397580
+
+# hellsgate original item/weapon locations
+570600222
+
+# Patibuh's Lair
+570842177
+
+# Unbalanced
+570844629
+
+# EA DM Map Pack
+571012719
+
+# Tornado with Quad!
+571832391
+
+# Reloaded by Yogi
+571945871
+
+# CS maps: de_dust & de_dust2
+572015381
