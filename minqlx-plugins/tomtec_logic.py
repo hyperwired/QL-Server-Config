@@ -54,14 +54,14 @@ class tomtec_logic(minqlx.Plugin):
     def player_loaded(self, player):
         # display a message to a newly-loaded/connected player
         minqlx.send_server_command(player.id, "cp \"^7Welcome to ^4The Purgery^7\"\n")
-        #self.play_sound("sound/items/protect3.ogg") # waaaa, cthulhu's crying about how irritating this sound is...
+        self.play_sound("tp_sounds/thomas/welcome_purgery.ogg", player)
         
     def game_start(self):
         # make sure everyone's noclip is off
         for p in self.players():
             p.noclip = False
         
-    def game_end(self):
+    def game_end(self, data):
         #channel.tell("Hurrah!")
         #self.play_sound("sound/items/protect3.ogg")
         pass
