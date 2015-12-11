@@ -28,5 +28,5 @@ serverurl=http://127.0.0.1:9001
 command=/home/qlserver/quakestart.sh %(process_num)s           ; Sent to 'quakestart.sh', from 0 to numprocs, see what happens by looking in 'quakestart.sh'. 
 user=qlserver                                                  ; Default Quake Live server account.
 process_name=qzeroded_%(process_num)s                          ; Name the Quake Live dedicated server process, 'qzeroded_numproc'.
-numprocs=9                                                     ; How many server processes should be spawned.
+numprocs=10                                                    ; How many server processes should be spawned.
 autorestart=true                                               ; If the servers crash, or the process exits, start them up again.

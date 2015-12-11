@@ -245,6 +245,32 @@ exec $qPathToVanillaStartScript \
 else
 echo "This system is not intended to host reythe (sub580) server."
 fi
+elif [ $1 -eq 9 ]
+# starting pit (sub586)...
+then
+if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
+then
+echo "Starting pit clan server (sub586) 1..."
+exec $qPathToVanillaStartScript \
+    +set net_strict 1 \
+    +set net_port $gameport \
+    +set sv_hostname "=PIT= Clan Server" \
+    +set zmq_rcon_enable 1 \
+    +set zmq_rcon_password "$(<~/localConfig-rconPassword-pit.txt)" \
+    +set zmq_rcon_port $rconport \
+    +set zmq_stats_enable 1 \
+    +set zmq_stats_password "$(<~/localConfig-rconPassword-pit.txt)" \
+    +set zmq_stats_port $gameport \
+    +set sv_tags "$qServerLocation" \
+    +set bot_enable 1 \
+    +set bot_nochat 1 \
+    +set g_accessFile "access_pit.txt" \
+    +set sv_mappoolFile "mappool_pit.txt" \
+    +set fs_homepath ~/.quakelive/PIT-SUB586 \
+    +set g_damage_lg 6
+else
+echo "This system is not intended to host pit clan (sub586) server."
+fi
 fi
 
 
