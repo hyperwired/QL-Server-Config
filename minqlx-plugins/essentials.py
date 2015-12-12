@@ -606,7 +606,7 @@ class essentials(minqlx.Plugin):
         # TODO: Perhaps print some essential commands in !help
         player.tell("minqlx: ^4{}^7 - Plugins: ^4{}".format(minqlx.__version__, minqlx.__plugins_version__))
         player.tell("See ^4github.com/MinoMino/minqlx^7 for more info about the mod and its commands.")
-        return minqlx.RET_STOP_ALL
+        #return minqlx.RET_STOP_ALL | need this off so tomtec_logic.py can display it's message too.
     
     def cmd_db(self, player, msg, channel):
         """Prints the value of a key in the database."""
