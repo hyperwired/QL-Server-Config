@@ -484,3 +484,6 @@
 
 # CS maps: de_dust & de_dust2
 572015381
+
+# JustOneFix Maps
+573112415
