@@ -1,5 +1,6 @@
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
-# Created by Thomas Jones on 14/
+# Created by Thomas Jones on 14/12/2015 - thomas@tomtecsolutions.com
+
 import minqlx
 import minqlx.database
 
