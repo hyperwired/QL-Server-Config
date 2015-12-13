@@ -1,5 +1,5 @@
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
-
+# Created by Thomas Jones on 14/
 import minqlx
 import minqlx.database
 
@@ -9,6 +9,9 @@ class aliases(minqlx.Plugin):
     def __init__(self):
         self.add_command("alias", self.cmd_alias, usage="<id>")
         self.add_command("clearaliases", self.cmd_clearaliases, 5)
+        self.add_command("tomtec_versions", self.cmd_showversion)
+
+        self.plugin_version = "1.0"
         
     def cmd_alias(self, player, msg, channel):
         if len(msg) < 2:
@@ -32,5 +35,7 @@ class aliases(minqlx.Plugin):
         for p in players:
             del self.db["minqlx:players:{}".format(p)]
 
-        self.msg("All aliases for all players ({} players in total) were cleared.".format(len(players)))
+        channel.reply("All aliases for all players ({} players in total) were cleared.".format(len(players)))
 
+    def cmd_showversion(self, player, msg, channel):
+        channel.reply("^4aliases.py^7 - version {}, created by Thomas Jones on 14/12/2015".format(self.plugin_version))
