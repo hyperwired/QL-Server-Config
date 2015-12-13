@@ -177,51 +177,7 @@ class tomtec_logic(minqlx.Plugin):
 
         if vote.lower() == "map":
             # prevent certain maps from being loaded, if they're found to have issues
-            if args.lower() == "ra3map19":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
-                return minqlx.RET_STOP_ALL
-
-            if args.lower() == "ra3map19a":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
-                return minqlx.RET_STOP_ALL
-
-            if args.lower() == "ra3map19b":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
-                return minqlx.RET_STOP_ALL
-
-            if args.lower() == "ra3map19c":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
-                return minqlx.RET_STOP_ALL
-
-            if args.lower() == "ra3map19d":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
-                return minqlx.RET_STOP_ALL
-
-            if args.lower() == "ra3map19e":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
-                return minqlx.RET_STOP_ALL
-
-            if args.lower() == "ra3map6":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
-                return minqlx.RET_STOP_ALL
-
-            if args.lower() == "ra3map6a":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
-                return minqlx.RET_STOP_ALL
-
-            if args.lower() == "ra3map6b":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
-                return minqlx.RET_STOP_ALL
-
-            if args.lower() == "ra3map6c":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
-                return minqlx.RET_STOP_ALL
-
-            if args.lower() == "ra3map6d":
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
-                return minqlx.RET_STOP_ALL
-
-            if args.lower() == "ra3map6e":
+            if args.lower() == "disabled_test":
                 caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
                 return minqlx.RET_STOP_ALL
 
