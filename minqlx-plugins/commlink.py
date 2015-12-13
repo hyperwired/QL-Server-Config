@@ -124,7 +124,7 @@ class commlink(minqlx.Plugin):
     def send_irc_message(self, player, msg, channel):
          text = "^7<{}> ^3{} ".format(player.name, " ".join(msg[1:]))
          self.irc.msg(self.relay, self.translate_colors(text))
-         player.tell("^3Message sent via CommLink to all The Purgery servers.")
+         player.tell("^3Message sent via CommLink to all ^4The Purgery^3 servers.")
          
     def handle_perform(self, irc):
         self.logger.info("Connected to IRC!".format(self.server))
