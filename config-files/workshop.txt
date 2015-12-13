@@ -198,7 +198,7 @@
 559698707
 
 # DeFRaG map: cSu1_a
-560050165
+# 560050165 - This item has been removed by the author
 
 # Hockey
 560187778
@@ -234,7 +234,7 @@
 560535691
 
 # 17 Remix
-560536524
+# 560536524 - This item has been removed by the author
 
 # Club Doom
 560542953
@@ -243,7 +243,7 @@
 560545593
 
 # efq3dm17
-560546791
+# 560546791 - This item has been removed by the author
 
 # The Sinister Zone (q1dm6)
 560547573
@@ -285,13 +285,13 @@
 561459991
 
 # DeFRaG/race map: BardoK-Statik
-561610262
+# 561610262 - This item has been removed by the author
 
 # Rocket Arena 3 - ra3map3
 561613916
 
 # DeFRaG/race map: Rocket Launcher Training
-561646565
+# 561646565 - This item has been removed by the author
 
 # Rocket Arena 3 - ra3map14
 561683838
@@ -300,7 +300,7 @@
 561815150
 
 # DeFRaG/race map: momentum
-561856702
+# 561856702 - This item has been removed by the author
 
 # Rocket Arena 3 - ra3map7
 561877295
@@ -321,10 +321,10 @@
 562439444
 
 # DeFRaG/race map: df_slopin
-562448042
+# 562448042 - This item has been removed by the author
 
 # DeFRaG/race map: cos1_beta7b
-562448681
+# 562448681 - This item has been removed by the author
 
 # Duel map: megadm4-09
 562449180
@@ -333,7 +333,7 @@
 562449385
 
 # DeFRaG/race map: Tr1ckhouse
-562451786
+# 562451786 - This item has been removed by the author
 
 # Duel map: pukka3tourney5
 562530042
@@ -357,7 +357,7 @@
 562739597
 
 # DeFRaG/race map: Freestyle_88
-562747010
+# 562747010 - This item has been removed by the author
 
 # Rocket Arena 3 - ra3map11
 562987267
@@ -378,7 +378,7 @@
 563284812
 
 # DeFRaG/race map: Coldrun
-563333349
+# 563333349 - This item has been removed by the author
 
 # DeFRaG/race: Slick Map Pack
 563581691
@@ -417,7 +417,7 @@
 565482567
 
 # DeFRaG/race map: PiyoFunJumps
-566733850
+# 566733850 - This item has been removed by the author
 
 # DeFRaG/race map: Handbreaker4
 567083637
