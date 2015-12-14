@@ -18,6 +18,9 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("muteall", self.cmd_muteall, 4)
         self.add_command("unmuteall", self.cmd_unmuteall, 4)
         self.add_command(("feedback", "fb"), self.cmd_feedback)
+        self.add_command("tomtec_versions", self.cmd_showversion)
+
+        self.plugin_version = "1.9"
         
     def cmd_muteall(self, player, msg, channel):
         # mute everybody on the server
@@ -88,6 +91,9 @@ class tomtec_logic(minqlx.Plugin):
 
     def cmd_feedback(self, player, msg, channel):
         channel.reply("To provide feedback on ^4The Purgery^7 servers, please email ^2quakesupport@tomtecsolutions.com^7.")
+
+    def cmd_showversion(self, player, msg, channel):
+        channel.reply("^4tomtec_logic.py^7 - version {}, created by Thomas Jones on 01/11/2015.".format(self.plugin_version))
         
     def handle_vote_called(self, caller, vote, args):
         if vote.lower() == "kick":

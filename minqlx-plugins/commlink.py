@@ -36,7 +36,10 @@ class commlink(minqlx.Plugin):
         self.add_hook("player_disconnect", self.handle_player_disconnect, priority=minqlx.PRI_LOWEST)
 
         self.add_command(("world", "say_world"), self.send_irc_message, priority=minqlx.PRI_LOWEST)
+        self.add_command("tomtec_versions", self.cmd_showversion)
 
+        self.plugin_version = "1.3"
+        
         self.set_cvar_once("qlx_ircServer", "irc.quakenet.org")
         self.set_cvar_once("qlx_ircRelayChannel", "")
         self.set_cvar_once("qlx_ircRelayIrcChat", "1")
@@ -196,6 +199,9 @@ class commlink(minqlx.Plugin):
         self.irc.msg(channel, "{} on \x02{}\x02 ({}) with \x02{}/{}\x02 players:" .format(ginfo, self.clean_text(game.map_title),
             game.type_short.upper(), len(players), self.get_cvar("sv_maxClients")))
         self.irc.msg(channel, "{}".format(" ".join(plist)))
+
+    def cmd_showversion(self, player, msg, channel):
+        channel.reply("^4commlink.py^7 - version {}, originally ^4irc.py^7, created by ^6Mino^7, modified by Thomas Jones on 26/11/2015.".format(self.plugin_version))
 
 # ====================================================================
 #                     DUMMY PLAYER & IRC CHANNEL

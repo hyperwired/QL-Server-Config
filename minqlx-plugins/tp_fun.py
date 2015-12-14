@@ -13,7 +13,9 @@ class tp_fun(minqlx.Plugin):
         self.add_command("fuckyou", self.cmd_printfu, 1)
         self.add_command("bury", self.cmd_bury, 3, usage="<id>")
         self.add_command("digup", self.cmd_digup, 3, usage="<id>")
+        self.add_command("tomtec_versions", self.cmd_showversion)
 
+        self.plugin_version = "1.3"
  
     def cmd_penlen(self, player, msg, channel):
         playerName = player.clean_name
@@ -90,3 +92,6 @@ class tp_fun(minqlx.Plugin):
         
         affected = int(msg[1])
         self.player(affected).position(z=player.state.position.z + 50)
+
+    def cmd_showversion(self, player, msg, channel):
+        channel.reply("^4tp_fun.py^7 - version {}, created by the community.".format(self.plugin_version))

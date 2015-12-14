@@ -39,4 +39,4 @@ class aliases(minqlx.Plugin):
         channel.reply("All aliases for all players ({} players in total) were cleared.".format(len(players)))
 
     def cmd_showversion(self, player, msg, channel):
-        channel.reply("^4aliases.py^7 - version {}, created by Thomas Jones on 14/12/2015".format(self.plugin_version))
+        channel.reply("^4aliases.py^7 - version {}, created by Thomas Jones on 14/12/2015.".format(self.plugin_version))
