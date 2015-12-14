@@ -37,3 +37,4 @@ set qlx_ircRelayChannel "#thepurgery"                                           
 set qlx_ircColors 0                                                                                                                                                    // Enable mIRC-standard colouring.
 set qlx_motdSound 0                                                                                                                                                    // Stop any sounds from playing on MOTD displaying.
 set qlx_motdHeader ""                                                                                                                                                  // Don't have the MOTD tell us what it is.
+set qlx_chatlogs 20                                                                                                                                                    // How many logs do we save for chats/minqlx etc.
