@@ -187,6 +187,18 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
                 return minqlx.RET_STOP_ALL
 
+        if vote.lower() == "silence":
+            # enables the '/cv silence <id>' command
+            try:
+                player_name = self.player(int(args)).clean_name
+                player_id = self.player(int(args)).id
+            except:
+                caller.tell("^1Invalid ID.^7 Use a client ID from the ^2/players^7 command.")
+                return minqlx.RET_STOP_ALL
+
+            self.callvote("qlx !silence {} 10 minutes You were call-voted silent for 10 minutes.; mute {}".format(player_id, player_id), "silence {} for 10 minutes".format(player_name))
+            return minqlx.RET_STOP_ALL
+
     def cmd_maprestart(self, player, msg, channel):
         # run a map restart
         minqlx.console_command("map_restart")
