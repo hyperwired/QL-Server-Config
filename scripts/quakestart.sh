@@ -254,7 +254,7 @@ echo "Starting pit clan server (sub586) 1..."
 exec $qPathToVanillaStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
-    +set sv_hostname "=PIT= Clan Server" \
+    +set sv_hostname "=PiT= Clan Server" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$(<~/localConfig-rconPassword-pit.txt)" \
     +set zmq_rcon_port $rconport \
