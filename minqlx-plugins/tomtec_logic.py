@@ -34,7 +34,9 @@ class tomtec_logic(minqlx.Plugin):
     
     def new_game(self):
         # brand the map
-        minqlx.set_configstring(3, "^4The Purgery^7")
+        server_number = (minqlx.get_cvar("net_port"))
+        server_number = str(server_number[-1])
+        minqlx.set_configstring(3, "^4The Purgery^7 - {} - {} - #{}".format(minqlx.get_cvar("sv_location"), self.game.type, server_number))
         minqlx.set_configstring(678, "Sponsored by ^5TomTec Solutions^7 (^2quakesupport@tomtecsolutions.com^7).")
         minqlx.set_configstring(679, "Visit our IRC channel on QuakeNet, ^4#thepurgery^7. Visit our Facebook page at ^2http://fb.me/thepurgery^7.")
 

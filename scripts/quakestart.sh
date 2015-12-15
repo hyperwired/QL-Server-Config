@@ -50,7 +50,8 @@ exec $qPathToMinqlxStartScript \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqlca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
-    +set qlx_ircNickname "$qIrcNickname"
+    +set qlx_ircNickname "$qIrcNickname" \
+    +set sv_location "$qServerLocation"
 elif [ $1 -eq 1 ]
 # starting VQL CA 1
 then
@@ -75,7 +76,8 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_vqlca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set g_damage_lg 6
+    +set g_damage_lg 6 \
+    +set sv_location "$qServerLocation"
 elif [ $1 -eq 2 ]
 # starting PQL Race 1...
 then
@@ -99,7 +101,8 @@ exec $qPathToMinqlxStartScript \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqlrace.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
-    +set qlx_ircNickname "$qIrcNickname"
+    +set qlx_ircNickname "$qIrcNickname" \
+    +set sv_location "$qServerLocation"
 elif [ $1 -eq 3 ]
 # starting PQL FFA 1...
 then
@@ -124,7 +127,8 @@ exec $qPathToMinqlxStartScript \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqlffa.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
-    +set qlx_ircNickname "$qIrcNickname"
+    +set qlx_ircNickname "$qIrcNickname" \
+    +set sv_location "$qServerLocation"
 elif [ $1 -eq 4 ]
 # starting vql duel 1...
 then
@@ -149,7 +153,8 @@ exec $qPathToMinqlxStartScript \
     +set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_vqlduel.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
-    +set qlx_ircNickname "$qIrcNickname"
+    +set qlx_ircNickname "$qIrcNickname" \
+    +set sv_location "$qServerLocation"
 elif [ $1 -eq 5 ]
 # starting VQL Multi-Gametype 1...
 then
@@ -174,7 +179,8 @@ exec $qPathToMinqlxStartScript \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set g_damage_lg 6 \
-    +set g_voteFlags 0
+    +set g_voteFlags 0 \
+    +set sv_location "$qServerLocation"
   elif [ $1 -eq 6 ]
   # starting PQL MultiGame 1...
   then
@@ -197,7 +203,8 @@ exec $qPathToMinqlxStartScript \
       +set g_accessFile "access_purgery.txt" \
       +set sv_mappoolFile "mappool_default.txt" \
       +set fs_homepath ~/.quakelive/$gameport \
-      +set qlx_ircNickname "$qIrcNickname"
+      +set qlx_ircNickname "$qIrcNickname" \
+      +set sv_location "$qServerLocation"
 elif [ $1 -eq 7 ]
 # starting TEST SERVER 1...
 then
@@ -218,7 +225,8 @@ exec $qPathToMinqlxStartScript \
     +set g_accessFile "access_testpurgery.txt" \
     +set sv_mappoolFile "mappool_default.txt" \
     +set fs_homepath ~/.quakelive/TEST \
-    +set qlx_ircNickname "$qServerLocation-TEST"
+    +set qlx_ircNickname "$qServerLocation-TEST" \
+    +set sv_location "$qServerLocation"
 elif [ $1 -eq 8 ]
 # starting reythe (sub580)...
 then
@@ -241,7 +249,8 @@ exec $qPathToVanillaStartScript \
     +set sv_mappoolFile "mappool_reythe.txt" \
     +set fs_homepath ~/.quakelive/REYTHE-SUB580 \
     +set g_damage_lg 6 \
-    +set g_voteFlags 8
+    +set g_voteFlags 8 \
+    +set sv_location "$qServerLocation"
 else
 echo "This system is not intended to host reythe (sub580) server."
 fi
@@ -267,7 +276,8 @@ exec $qPathToVanillaStartScript \
     +set g_accessFile "access_pit.txt" \
     +set sv_mappoolFile "mappool_pit.txt" \
     +set fs_homepath ~/.quakelive/PIT-SUB586 \
-    +set g_damage_lg 6
+    +set g_damage_lg 6 \
+    +set sv_location "$qServerLocation"
 else
 echo "This system is not intended to host pit clan (sub586) server."
 fi
