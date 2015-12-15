@@ -22,20 +22,19 @@ class aliases(minqlx.Plugin):
             steam_id = self.player(int(msg[1])).steam_id
             player_name = self.player(int(msg[1])).name
         except:
-            channel.reply("^1Invalid ID")
+            channel.reply("^1Invalid Client ID.^7 Enter a valid client ID to see a list of names they've used on this server.")
             return
-    
+        
         key = "minqlx:players:{}".format(steam_id)
         out = list(self.db.lrange(key, 0, -1))
         channel.reply("{}^7 has played on ^4The Purgery^7 under the following names:".format(player_name))
         channel.reply(" ^4*^7  {}".format("   \n ^4*^7  ".join(out)))
 
     def cmd_clearaliases(self, player, msg, channel):
+        # this function came from namesfix.py by Mino
         players = self.db.smembers("minqlx:players")
-
         for p in players:
             del self.db["minqlx:players:{}".format(p)]
-
         channel.reply("All aliases for all players ({} players in total) were cleared.".format(len(players)))
 
     def cmd_showversion(self, player, msg, channel):
