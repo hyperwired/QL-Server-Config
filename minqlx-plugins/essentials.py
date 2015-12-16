@@ -45,6 +45,8 @@ class essentials(minqlx.Plugin):
         self.add_command(("disconnects", "dcs"), self.cmd_disconnects, 1)
         self.add_command(("commands", "cmds"), self.cmd_commands, 2)
         self.add_command("shuffle", self.cmd_shuffle, 1)
+        self.add_command(("pause", "timeout"), self.cmd_pause, 1)
+        self.add_command(("unpause", "timein"), self.cmd_unpause, 1)
         self.add_command("slap", self.cmd_slap, 2, usage="<id> [damage]")
         self.add_command("slay", self.cmd_slay, 2, usage="<id>")
         self.add_command("sounds", self.cmd_enable_sounds, usage="<0/1>")
@@ -235,6 +237,14 @@ class essentials(minqlx.Plugin):
     def cmd_shuffle(self, player, msg, channel):
         """Forces a shuffle instantly."""
         self.shuffle()
+
+    def cmd_pause(self, player, msg, channel):
+        """Pauses the game."""
+        self.pause()
+
+    def cmd_unpause(self, player, msg, channel):
+        """Unpauses the game."""
+        self.unpause()
 
     def cmd_slap(self, player, msg, channel):
         """Slaps a player with optional damage."""
@@ -606,7 +616,7 @@ class essentials(minqlx.Plugin):
         # TODO: Perhaps print some essential commands in !help
         player.tell("minqlx: ^4{}^7 - Plugins: ^4{}".format(minqlx.__version__, minqlx.__plugins_version__))
         player.tell("See ^4github.com/MinoMino/minqlx^7 for more info about the mod and its commands.")
-        #return minqlx.RET_STOP_ALL | need this off so tomtec_logic.py can display it's message too.
+        #return minqlx.RET_STOP_ALL
     
     def cmd_db(self, player, msg, channel):
         """Prints the value of a key in the database."""

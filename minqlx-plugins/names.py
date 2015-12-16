@@ -105,4 +105,3 @@ class names(minqlx.Plugin):
 
         return _re_remove_excessive_colors.sub(sub_func, name)
 
-
