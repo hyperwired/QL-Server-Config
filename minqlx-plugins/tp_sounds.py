@@ -11,7 +11,7 @@ class tp_sounds(minqlx.Plugin):
         
     def map_load(self, mapname, factory):
         # Download the purgery sound pack for all new players, and ref to old
-        self.game.steamworks_items += [572495786] # 571878681, quake 3 sounds
+        self.game.workshop_items += [572495786] # 571878681, quake 3 sounds
 
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4tp_sounds.py^7 - version {}, created by Thomas Jones on 11/12/2015.".format(self.plugin_version))
