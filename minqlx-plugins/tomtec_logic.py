@@ -27,7 +27,7 @@ class tomtec_logic(minqlx.Plugin):
         self.plugin_version = "1.9"
 
     def cmd_addbot(self, player, msg, channel):
-        minqlx.console_command("addbot xaero 5 any 0 '^4Purgery^2Bot'")
+        minqlx.console_command("addbot xaero 5 any 0 ^4Purgery^2Bot")
         player.tell("Remember to ^2!rembot^7 when you're finished with your bot.")
 
     def cmd_rembot(self, player, msg, channel):
