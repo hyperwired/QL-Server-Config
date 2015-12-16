@@ -18,6 +18,8 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("muteall", self.cmd_muteall, 4)
         self.add_command("unmuteall", self.cmd_unmuteall, 4)
         self.add_command(("feedback", "fb"), self.cmd_feedback)
+        self.add_command("killall", self.cmd_killall, 4)
+        self.add_command("excessiveweaps", self.cmd_excessive_weaps, 5, usage="on/off")
         self.add_command("tomtec_versions", self.cmd_showversion)
 
         self.plugin_version = "1.9"
@@ -31,6 +33,11 @@ class tomtec_logic(minqlx.Plugin):
         # unmute everybody on the server
         for p in self.players():
             p.unmute()
+
+    def cmd_killall(self, player, msg, channel):
+        # kill everybody on the server
+        for p in self.players():
+            self.slay(p)
     
     def new_game(self):
         # brand the map
@@ -201,6 +208,48 @@ class tomtec_logic(minqlx.Plugin):
             self.callvote("qlx !silence {} 10 minutes You were call-voted silent for 10 minutes.; mute {}".format(player_id, player_id), "silence {} for 10 minutes".format(player_name))
             return minqlx.RET_STOP_ALL
 
+        if vote.lower() == "excessive":
+            # enables the '/cv excessive [on/off]' command
+            if args.lower() == "off":
+                self.callvote("qlx !excessiveweaps off", "excessive weapons: off")
+                return minqlx.RET_STOP_ALL
+            elif args.lower() == "on":
+                self.callvote("qlx !excessiveweaps on", "excessive weapons: on")
+                return minqlx.RET_STOP_ALL
+            else:
+                caller.tell("^2/cv excessive [on/off]^7 is the usage for this callvote command.")
+                return minqlx.RET_STOP_ALL
+
+    def cmd_excessive_weaps(self, player, msg, channel):
+        if msg[1] == "on":
+            minqlx.set_cvar("weapon_reload_sg", "200")
+            minqlx.set_cvar("weapon_reload_rl", "200")
+            minqlx.set_cvar("weapon_reload_rg", "50")
+            minqlx.set_cvar("weapon_reload_prox", "200")
+            minqlx.set_cvar("weapon_reload_pg", "40")
+            minqlx.set_cvar("weapon_reload_ng", "800")
+            minqlx.set_cvar("weapon_reload_mg", "40")
+            minqlx.set_cvar("weapon_reload_hmg", "40")
+            minqlx.set_cvar("weapon_reload_gl", "200")
+            minqlx.set_cvar("weapon_reload_gauntlet", "100")
+            minqlx.set_cvar("weapon_reload_cg", "30")
+            minqlx.set_cvar("weapon_reload_bfg", "75")
+        if msg[1] == "off":
+            minqlx.set_cvar("weapon_reload_sg", "1000")
+            minqlx.set_cvar("weapon_reload_rl", "800")
+            minqlx.set_cvar("weapon_reload_rg", "1500")
+            minqlx.set_cvar("weapon_reload_prox", "800")
+            minqlx.set_cvar("weapon_reload_pg", "100")
+            minqlx.set_cvar("weapon_reload_ng", "1000")
+            minqlx.set_cvar("weapon_reload_mg", "100")
+            minqlx.set_cvar("weapon_reload_hmg", "75")
+            minqlx.set_cvar("weapon_reload_gl", "800")
+            minqlx.set_cvar("weapon_reload_gauntlet", "400")
+            minqlx.set_cvar("weapon_reload_cg", "50")
+            minqlx.set_cvar("weapon_reload_bfg", "300")
+            
+
+                            
     def cmd_maprestart(self, player, msg, channel):
         # run a map restart
         minqlx.console_command("map_restart")
