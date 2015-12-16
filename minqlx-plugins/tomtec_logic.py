@@ -20,9 +20,18 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("feedback", "fb"), self.cmd_feedback)
         self.add_command("killall", self.cmd_killall, 4)
         self.add_command("excessiveweaps", self.cmd_excessive_weaps, 5, usage="on/off")
+        self.add_command("addbot", self.cmd_addbot, 1)
+        self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
 
         self.plugin_version = "1.9"
+
+    def cmd_addbot(self, player, msg, channel):
+        minqlx.console_command("addbot xaero 5 any 0 '^4Purgery^2Bot'")
+        player.tell("Remember to ^2!rembot^7 when you're finished with your bot.")
+
+    def cmd_rembot(self, player, msg, channel):
+        minqlx.console_command("kick allbots")
         
     def cmd_muteall(self, player, msg, channel):
         # mute everybody on the server
@@ -247,8 +256,6 @@ class tomtec_logic(minqlx.Plugin):
             minqlx.set_cvar("weapon_reload_gauntlet", "400")
             minqlx.set_cvar("weapon_reload_cg", "50")
             minqlx.set_cvar("weapon_reload_bfg", "300")
-            
-
                             
     def cmd_maprestart(self, player, msg, channel):
         # run a map restart
