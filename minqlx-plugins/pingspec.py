@@ -6,7 +6,7 @@ import minqlx
 
 class pingspec(minqlx.Plugin):
     def __init__(self):
-        self.add_hook("frame", self.process_frame)
+        self.add_hook("frame", self.process_frame, priority=minqlx.PRI_LOWEST)
         self.add_command("tomtec_versions", self.cmd_showversion)
         
         self.seconds_between_checks = 15

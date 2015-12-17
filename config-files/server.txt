@@ -29,7 +29,7 @@ set g_inactivity "120"                // Drop any player who is inactive for 120
 // minqlx configuration
 
 set qlx_owner "76561198213481765"                                                                                                                                      // Thomas Jones (server owner).
-set qlx_plugins "DEFAULT, tomtec_logic, tp_fun, fun, balance, commlink, tp_sounds, aliases, pingspec"                                                                  // Auto-load these plugins on minqlx launch.
+set qlx_plugins "DEFAULT, tomtec_logic, tp_fun, fun, balance, commlink, tp_sounds, aliases"                                                                            // Auto-load these plugins on minqlx launch.
 set qlx_redisAddress "43.229.61.190:6379"                                                                                                                              // QLMaster Redis Server.
 set qlx_redisPassword "Cathugha"                                                                                                                                       // QLMaster Redis Keyword.
 set qlx_ircServer "irc.tomtecsolutions.com.au"                                                                                                                         // TomTec Solutions IRC (required for CommLink functionality).
