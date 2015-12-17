@@ -36,4 +36,4 @@ class pingspec(minqlx.Plugin):
                         player.tell("^1Your ping is over {}, the threshold.^7 You have been put in spec.".format(self.max_ping))
 
     def cmd_showversion(self, player, msg, channel):
-        channel.reply("^4pingspec.py^7 - version {}, created by Thomas Jones on 01/11/2015.".format(self.plugin_version))
+        channel.reply("^4pingspec.py^7 - version {}, created by Thomas Jones on 17/12/2015.".format(self.plugin_version))
