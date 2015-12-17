@@ -1,5 +1,6 @@
+# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
+# Created by Thomas Jones on 17/12/2015 - thomas@tomtecsolutions.com
 # pingspec.py - a minqlx plugin to spec players who have network latency over a certain amount.
-# what the fuck is this shit ffs
 
 import minqlx
 
