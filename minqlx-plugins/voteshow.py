@@ -13,9 +13,6 @@ class voteshow(minqlx.Plugin):
 
 
     def process_vote(self, player, yes):
-        if player.privileges != "none":
-            return
-        
         if yes:
             word = "^2yes"
         else:
