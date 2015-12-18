@@ -161,18 +161,18 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("^2/cv freecam [on/off]^7 is the usage for this callvote command.")
                 return minqlx.RET_STOP_ALL
 
-        if vote.lower() == "damagethrusurface":
-            # enables the '/cv damagethrusurface [on/off]' command
+        if vote.lower() == "floordamage":
+            # enables the '/cv floordamage [on/off]' command
             if args.lower() == "off":
-                self.callvote("set g_forceDmgThroughSurface 0", "damage through surfaces: off")
+                self.callvote("set g_forceDmgThroughSurface 0", "damage through floor: off")
                 self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             elif args.lower() == "on":
-                self.callvote("set g_forceDmgThroughSurface 1", "damage through surfaces: on")
+                self.callvote("set g_forceDmgThroughSurface 1", "damage through floor: on")
                 self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             else:
-                caller.tell("^2/cv damagethrusurface [on/off]^7 is the usage for this callvote command.")
+                caller.tell("^2/cv floordamage [on/off]^7 is the usage for this callvote command.")
                 return minqlx.RET_STOP_ALL
 
         if vote.lower() == "alltalk":
