@@ -18,7 +18,7 @@ class voteshow(minqlx.Plugin):
         else:
             word = "^1no"
             
-        self.msg("{}^7 voted {}^7.".format(player, word))
+        self.msg("{}^7 voted {}^7.".format(player.name, word))
     
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4voteshow.py^7 - version {}, created by Thomas Jones on 18/12/2015.".format(self.plugin_version))

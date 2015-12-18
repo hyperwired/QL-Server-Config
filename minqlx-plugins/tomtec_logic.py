@@ -137,9 +137,11 @@ class tomtec_logic(minqlx.Plugin):
             # enables the '/cv infiniteammo [on/off]' command
             if args.lower() == "off":
                 self.callvote("set g_infiniteAmmo 0", "infinite ammo: off", 30)
+                self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             elif args.lower() == "on":
                 self.callvote("set g_infiniteAmmo 1", "infinite ammo: on", 30)
+                self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             else:
                 caller.tell("^2/cv infiniteammo [on/off]^7 is the usage for this callvote command.")
@@ -149,9 +151,11 @@ class tomtec_logic(minqlx.Plugin):
             # enables the '/cv freecam [on/off]' command
             if args.lower() == "off":
                 self.callvote("set g_teamSpecFreeCam 0", "team spectator free-cam: off", 30)
+                self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             elif args.lower() == "on":
                 self.callvote("set g_teamSpecFreeCam 1", "team spectator free-cam: on", 30)
+                self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             else:
                 caller.tell("^2/cv freecam [on/off]^7 is the usage for this callvote command.")
@@ -161,9 +165,11 @@ class tomtec_logic(minqlx.Plugin):
             # enables the '/cv alltalk [on/off]' command
             if args.lower() == "off":
                 self.callvote("set g_allTalk 0", "voice comm between teams: off", 30)
+                self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             elif args.lower() == "on":
                 self.callvote("set g_allTalk 1", "voice comm between teams: on", 30)
+                self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             else:
                 caller.tell("^2/cv alltalk [on/off]^7 is the usage for this callvote command.")
@@ -173,6 +179,7 @@ class tomtec_logic(minqlx.Plugin):
             # enables the '/cv allready' command
             if self.game.state == "warmup":
                 self.callvote("allready", "begin game immediately", 30)
+                self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             else:
                 caller.tell("You can't vote to begin the game when the game is already on.")
@@ -182,6 +189,7 @@ class tomtec_logic(minqlx.Plugin):
             # enables the '/cv abort' command
             if self.game.state != "warmup":
                 self.callvote("abort", "abort the game", 30)
+                self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             else:
                 caller.tell("You can't vote to abort the game when the game isn't in progress.")
@@ -191,9 +199,11 @@ class tomtec_logic(minqlx.Plugin):
             # enables the '/cv chatsounds [on/off]' command
             if args.lower() == "off":
                 self.callvote("qlx !unload fun", "chat-activated sounds: off", 30)
+                self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             elif args.lower() == "on":
                 self.callvote("qlx !load fun", "chat-activated sounds: on", 30)
+                self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             else:
                 caller.tell("^2/cv chatsounds [on/off]^7 is the usage for this callvote command.")
@@ -215,15 +225,18 @@ class tomtec_logic(minqlx.Plugin):
                 return minqlx.RET_STOP_ALL
 
             self.callvote("qlx !silence {} 10 minutes You were call-voted silent for 10 minutes.; mute {}".format(player_id, player_id), "silence {} for 10 minutes".format(player_name))
+            self.msg("{}^7 called a vote.".format(caller.name))
             return minqlx.RET_STOP_ALL
 
         if vote.lower() == "excessive":
             # enables the '/cv excessive [on/off]' command
             if args.lower() == "off":
                 self.callvote("qlx !excessiveweaps off", "excessive weapons: off")
+                self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             elif args.lower() == "on":
                 self.callvote("qlx !excessiveweaps on", "excessive weapons: on")
+                self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             else:
                 caller.tell("^2/cv excessive [on/off]^7 is the usage for this callvote command.")
