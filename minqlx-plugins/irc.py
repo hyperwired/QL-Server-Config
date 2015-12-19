@@ -1,3 +1,5 @@
+# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
+
 # minqlx - A Quake Live server administrator bot.
 # Copyright (C) 2015 Mino <mino@minomino.org>
 
@@ -28,11 +30,16 @@ COLORS = ("\x0301", "\x0304", "\x0303", "\x0308", "\x0302", "\x0311", "\x0306", 
 
 class irc(minqlx.Plugin):
     def __init__(self):
-        self.add_hook("chat", self.handle_chat, priority=minqlx.PRI_LOWEST)
+        #self.add_hook("chat", self.handle_chat, priority=minqlx.PRI_LOWEST)
         self.add_hook("unload", self.handle_unload)
         self.add_hook("player_connect", self.handle_player_connect, priority=minqlx.PRI_LOWEST)
         self.add_hook("player_disconnect", self.handle_player_disconnect, priority=minqlx.PRI_LOWEST)
 
+        self.add_command(("world", "say_world"), self.send_irc_message, priority=minqlx.PRI_LOWEST)
+        self.add_command("tomtec_versions", self.cmd_showversion)
+
+        self.plugin_version = "1.4"
+        
         self.set_cvar_once("qlx_ircServer", "irc.quakenet.org")
         self.set_cvar_once("qlx_ircRelayChannel", "")
         self.set_cvar_once("qlx_ircRelayIrcChat", "1")
@@ -52,7 +59,6 @@ class irc(minqlx.Plugin):
         self.qnet = (self.get_cvar("qlx_ircQuakenetUser"),
             self.get_cvar("qlx_ircQuakenetPass"),
             self.get_cvar("qlx_ircQuakenetHidden", bool))
-        self.is_relaying = self.get_cvar("qlx_ircRelayIrcChat", bool)
 
         self.authed = set()
         self.auth_attempts = {}
@@ -78,25 +84,25 @@ class irc(minqlx.Plugin):
 
     def handle_player_connect(self, player):
         if self.irc and self.relay:
-            self.irc.msg(self.relay, self.translate_colors("{} connected.".format(player.name)))
+            self.irc.msg(self.relay, self.translate_colors("^3{}^7 connected.".format(player.name)))
 
     def handle_player_disconnect(self, player, reason):
         if reason and reason[-1] not in ("?", "!", "."):
             reason = reason + "."
         
         if self.irc and self.relay:
-            self.irc.msg(self.relay, self.translate_colors("{} {}".format(player.name, reason)))
+            self.irc.msg(self.relay, self.translate_colors("^3{}^7 {}".format(player.name, reason)))
 
     def handle_msg(self, irc, user, channel, msg):
         if not msg:
             return
         
         cmd = msg[0].lower()
-        if channel.lower() == self.relay.lower():
+        if channel == self.relay:
             if cmd in (".players", ".status", ".info", ".map", ".server"):
                 self.server_report(self.relay)
-            elif self.is_relaying:
-                minqlx.CHAT_CHANNEL.reply("[IRC] ^4{}^7:^2 {}".format(user[0], " ".join(msg)))
+            elif self.get_cvar("qlx_ircRelayIrcChat", bool):
+                minqlx.CHAT_CHANNEL.reply("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
         elif channel == user[0]: # Is PM?
             if len(msg) > 1 and msg[0].lower() == ".auth" and self.password:
                 if user in self.authed:
@@ -112,15 +118,17 @@ class irc(minqlx.Plugin):
                     if self.auth_attempts[user[2]] > 0:
                         irc.msg(channel, "Wrong password. You have {} attempts left.".format(self.auth_attempts[user[2]]))
             elif len(msg) > 1 and user in self.authed and msg[0].lower() == ".qlx":
-                @minqlx.next_frame
-                def f():
-                    try:
-                        minqlx.COMMANDS.handle_input(IrcDummyPlayer(self.irc, user[0]), " ".join(msg[1:]), IrcChannel(self.irc, user[0]))
-                    except Exception as e:
-                        irc.msg(channel, "{}: {}".format(e.__class__.__name__, e))
-                        minqlx.log_exception()
-                f()
+                try:
+                    minqlx.COMMANDS.handle_input(IrcDummyPlayer(self.irc, user[0]), " ".join(msg[1:]), IrcChannel(self.irc, user[0]))
+                except Exception as e:
+                    irc.msg(channel, "{}: {}".format(e.__class__.__name__, e))
+                    minqlx.log_exception()
 
+    def send_irc_message(self, player, msg, channel):
+         text = "^7<{}> ^3{} ".format(player.name, " ".join(msg[1:]))
+         self.irc.msg(self.relay, self.translate_colors(text))
+         player.tell("^3Message sent via CommLink to all ^4The Purgery^3 servers.")
+         
     def handle_perform(self, irc):
         self.logger.info("Connected to IRC!".format(self.server))
 
@@ -191,6 +199,9 @@ class irc(minqlx.Plugin):
         self.irc.msg(channel, "{} on \x02{}\x02 ({}) with \x02{}/{}\x02 players:" .format(ginfo, self.clean_text(game.map_title),
             game.type_short.upper(), len(players), self.get_cvar("sv_maxClients")))
         self.irc.msg(channel, "{}".format(" ".join(plist)))
+
+    def cmd_showversion(self, player, msg, channel):
+        channel.reply("^4irc.py^7 - version {}, created by ^6Mino^7, modified by Thomas Jones on 26/11/2015.".format(self.plugin_version))
 
 # ====================================================================
 #                     DUMMY PLAYER & IRC CHANNEL
