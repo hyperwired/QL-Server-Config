@@ -59,6 +59,7 @@ class irc(minqlx.Plugin):
         self.qnet = (self.get_cvar("qlx_ircQuakenetUser"),
             self.get_cvar("qlx_ircQuakenetPass"),
             self.get_cvar("qlx_ircQuakenetHidden", bool))
+        self.is_relaying = self.get_cvar("qlx_ircRelayIrcChat", bool) 
 
         self.authed = set()
         self.auth_attempts = {}
@@ -98,10 +99,10 @@ class irc(minqlx.Plugin):
             return
         
         cmd = msg[0].lower()
-        if channel == self.relay:
+        if channel.lower() == self.relay.lower(): 
             if cmd in (".players", ".status", ".info", ".map", ".server"):
                 self.server_report(self.relay)
-            elif self.get_cvar("qlx_ircRelayIrcChat", bool):
+            elif self.is_relaying: 
                 minqlx.CHAT_CHANNEL.reply("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
         elif channel == user[0]: # Is PM?
             if len(msg) > 1 and msg[0].lower() == ".auth" and self.password:
@@ -118,11 +119,15 @@ class irc(minqlx.Plugin):
                     if self.auth_attempts[user[2]] > 0:
                         irc.msg(channel, "Wrong password. You have {} attempts left.".format(self.auth_attempts[user[2]]))
             elif len(msg) > 1 and user in self.authed and msg[0].lower() == ".qlx":
-                try:
-                    minqlx.COMMANDS.handle_input(IrcDummyPlayer(self.irc, user[0]), " ".join(msg[1:]), IrcChannel(self.irc, user[0]))
-                except Exception as e:
-                    irc.msg(channel, "{}: {}".format(e.__class__.__name__, e))
-                    minqlx.log_exception()
+                @minqlx.next_frame  
+                def f():  
+                    try:  
+                        minqlx.COMMANDS.handle_input(IrcDummyPlayer(self.irc, user[0]), " ".join(msg[1:]), IrcChannel(self.irc, user[0]))  
+                    except Exception as e:  
+                        irc.msg(channel, "{}: {}".format(e.__class__.__name__, e))
+                        minqlx.log_exception()  
+                f()  
+
 
     def send_irc_message(self, player, msg, channel):
          text = "^7<{}> ^3{} ".format(player.name, " ".join(msg[1:]))
