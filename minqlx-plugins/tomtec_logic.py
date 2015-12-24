@@ -52,6 +52,9 @@ class tomtec_logic(minqlx.Plugin):
         # brand the map
         server_number = (minqlx.get_cvar("net_port"))
         server_number = str(server_number[-1])
+        if server_number == "7":
+            server_number = "Test"
+            
         minqlx.set_configstring(3, "^1T^2h^1e ^2P^1u^2r^1g^2e^1r^2y^7 - ^1{}^7 - ^2#{}".format(minqlx.get_cvar("sv_location"), server_number))
         minqlx.set_configstring(678, "Sponsored by ^5TomTec Solutions^7 (^2quakesupport@tomtecsolutions.com^7).")
         minqlx.set_configstring(679, "Visit our IRC channel on QuakeNet, ^4#thepurgery^7. Visit our Facebook page at ^2http://fb.me/thepurgery^7.")
