@@ -52,7 +52,7 @@ class tomtec_logic(minqlx.Plugin):
         # brand the map
         server_number = (minqlx.get_cvar("net_port"))
         server_number = str(server_number[-1])
-        minqlx.set_configstring(3, "^4The Purgery^7 - {} - #{}".format(minqlx.get_cvar("sv_location"), server_number))
+        minqlx.set_configstring(3, "^1T^2h^1e ^2P^1u^2r^1g^2e^1r^2y^7 - ^1{}^7 - ^2#{}".format(minqlx.get_cvar("sv_location"), server_number))
         minqlx.set_configstring(678, "Sponsored by ^5TomTec Solutions^7 (^2quakesupport@tomtecsolutions.com^7).")
         minqlx.set_configstring(679, "Visit our IRC channel on QuakeNet, ^4#thepurgery^7. Visit our Facebook page at ^2http://fb.me/thepurgery^7.")
 
@@ -62,9 +62,9 @@ class tomtec_logic(minqlx.Plugin):
         
     def game_countdown(self):
         # play the 'battle suit protect' sound, and display a sponsor message during the countdown
-        minqlx.send_server_command(None, "cp \"^4The Purgery\n^7Sponsored by ^4TomTec Solutions^7\"\n")
+        minqlx.send_server_command(None, "cp \"^1M^2e^1r^2r^1y ^2C^1h^2r^1i^2s^1t^2m^1a^2s^7\n^4The Purgery\n^7Sponsored by ^4TomTec Solutions^7\"\n")
         for p in self.players():
-            p.powerups(battlesuit=10000)
+            p.powerups(battlesuit=10)
             p.noclip = True
             
         self.play_sound("sound/items/protect3.ogg")
@@ -290,6 +290,7 @@ class tomtec_logic(minqlx.Plugin):
         
     def cmd_giveall(self, player, msg, channel):
         # enables the 'giveall' command, to provide all players with items/powerups/others
+        holdTime = minqlx.get_cvar("roundtimelimit")
         if msg[1] == "kamikaze":
             for p in self.players():
                 p.holdable = "kamikaze"
@@ -305,35 +306,35 @@ class tomtec_logic(minqlx.Plugin):
         elif msg[1] == "quaddamage":
             if msg[2] == "on":
                 for p in self.players():
-                    p.powerups(quad=1000000000)
+                    p.powerups(quad=holdTime)
             if msg[2] == "off":
                 for p in self.players():
                     p.powerups(quad=0)
         elif msg[1] == "regeneration":
             if msg[2] == "on":
                 for p in self.players():
-                    p.powerups(regeneration=1000000000)
+                    p.powerups(regeneration=holdTime)
             if msg[2] == "off":
                 for p in self.players():
                     p.powerups(regeneration=0)
         elif msg[1] == "invisibility":
             if msg[2] == "on":
                 for p in self.players():
-                    p.powerups(invisibility=1000000000)
+                    p.powerups(invisibility=holdTime)
             if msg[2] == "off":
                 for p in self.players():
                     p.powerups(invisibility=0)
         elif msg[1] == "haste":
             if msg[2] == "on":
                 for p in self.players():
-                    p.powerups(haste=1000000000)
+                    p.powerups(haste=holdTime)
             if msg[2] == "off":
                 for p in self.players():
                     p.powerups(haste=0)
         elif msg[1] == "battlesuit":
             if msg[2] == "on":
                 for p in self.players():
-                    p.powerups(battlesuit=1000000000)
+                    p.powerups(battlesuit=holdTime)
             if msg[2] == "off":
                 for p in self.players():
                     p.powerups(battlesuit=0)
