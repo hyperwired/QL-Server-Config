@@ -275,10 +275,11 @@ class tomtec_logic(minqlx.Plugin):
             minqlx.set_cvar("weapon_reload_gauntlet", "100")
             minqlx.set_cvar("weapon_reload_cg", "30")
             minqlx.set_cvar("weapon_reload_bfg", "75")
+            self.msg("Excessive weapons are enabled.")
         if msg[1] == "off":
             minqlx.set_cvar("weapon_reload_sg", "1000")
             minqlx.set_cvar("weapon_reload_rl", "800")
-            minqlx.set_cvar("weapon_reload_rg", "1500")
+            minqlx.set_cvar("weapon_reload_rg", "1200")
             minqlx.set_cvar("weapon_reload_prox", "800")
             minqlx.set_cvar("weapon_reload_pg", "100")
             minqlx.set_cvar("weapon_reload_ng", "1000")
@@ -288,13 +289,14 @@ class tomtec_logic(minqlx.Plugin):
             minqlx.set_cvar("weapon_reload_gauntlet", "400")
             minqlx.set_cvar("weapon_reload_cg", "50")
             minqlx.set_cvar("weapon_reload_bfg", "300")
+            self.msg("Excessive weapons are disabled.")
                             
     def cmd_maprestart(self, player, msg, channel):
         # run a map restart
         minqlx.console_command("map_restart")
         
     def cmd_giveall(self, player, msg, channel):
-        # enables the 'giveall' command, to provide all players with items/powerups/others
+        # enables the '!giveall' command, to provide all players with items/powerups/others
         holdTime = minqlx.get_cvar("roundtimelimit")
         if msg[1] == "kamikaze":
             for p in self.players():
