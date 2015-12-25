@@ -285,7 +285,10 @@ class tomtec_logic(minqlx.Plugin):
         if msg[1] == "off":
             minqlx.console_command("reset weapon_reload_sg")
             minqlx.console_command("reset weapon_reload_rl")
-            minqlx.console_command("reset weapon_reload_rg")
+            if (minqlx.get_cvar("pmove_airControl")) == "1":
+                minqlx.set_cvar("weapon_reload_rg", "1200")
+            else
+                minqlx.console_command("reset weapon_reload_rg")
             minqlx.console_command("reset weapon_reload_prox")
             minqlx.console_command("reset weapon_reload_pg")
             minqlx.console_command("reset weapon_reload_ng")
