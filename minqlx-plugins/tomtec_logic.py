@@ -24,7 +24,9 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
 
-        self.plugin_version = "1.9"
+        self.set_cvar_once("qlx_excessive", "0")
+
+        self.plugin_version = "2.1"
 
     def cmd_addbot(self, player, msg, channel):
         minqlx.console_command("addbot anarki 5 any 0 ^7Pur^4g^7obot")
@@ -81,6 +83,9 @@ class tomtec_logic(minqlx.Plugin):
         # display a message to a newly-loaded/connected player
         minqlx.send_server_command(player.id, "cp \"^7Welcome to ^4The Purgery^7\"\n")
         self.play_sound("tp_sounds/thomas/welcome_purgery.ogg", player)
+
+        if (minqlx.get_cvar("qlx_excessive")) == "1":
+            player.tell("Excessive weapons are ^2enabled^7. To disable them, ^2/cv excessive off^7.")
         
     def game_start(self):
         # make sure everyone's noclip is off
@@ -275,6 +280,7 @@ class tomtec_logic(minqlx.Plugin):
             minqlx.set_cvar("weapon_reload_gauntlet", "100")
             minqlx.set_cvar("weapon_reload_cg", "30")
             minqlx.set_cvar("weapon_reload_bfg", "75")
+            minqlx.set_cvar("qlx_excessive", "1")
             self.msg("Excessive weapons are enabled.")
         if msg[1] == "off":
             minqlx.set_cvar("weapon_reload_sg", "1000")
@@ -289,6 +295,7 @@ class tomtec_logic(minqlx.Plugin):
             minqlx.set_cvar("weapon_reload_gauntlet", "400")
             minqlx.set_cvar("weapon_reload_cg", "50")
             minqlx.set_cvar("weapon_reload_bfg", "300")
+            minqlx.set_cvar("qlx_excessive", "0")
             self.msg("Excessive weapons are disabled.")
                             
     def cmd_maprestart(self, player, msg, channel):
