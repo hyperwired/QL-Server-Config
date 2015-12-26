@@ -23,6 +23,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("addbot", self.cmd_addbot, 1)
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
+        self.add_command("ruleset", self.cmd_ruleset, 5, usage="pql/vql")
 
         self.set_cvar_once("qlx_excessive", "0")
 
@@ -34,7 +35,29 @@ class tomtec_logic(minqlx.Plugin):
 
     def cmd_rembot(self, player, msg, channel):
         minqlx.console_command("kick allbots")
+
+    def cmd_ruleset(self, player, msg, channel):
+        if len(msg) < 2:
+            return minqlx.RET_USAGE
         
+        if msg[1].lower() == "pql":
+            minqlx.set_cvar("pmove_airControl", "1")
+            minqlx.set_cvar("pmove_rampJump", "1")
+            minqlx.set_cvar("weapon_reload_rg", "1200")
+            minqlx.set_cvar("pmove_weaponRaiseTime", "10")
+            minqlx.set_cvar("pmove_weaponDropTime", "10")
+            minqlx.console_command("map_restart")
+            self.msg("PQL ruleset is now set.")
+
+        if msg[1].lower() == "vql":
+            minqlx.set_cvar("pmove_airControl", "0")
+            minqlx.set_cvar("pmove_rampJump", "0")
+            minqlx.set_cvar("weapon_reload_rg", "1500")
+            minqlx.set_cvar("pmove_weaponRaiseTime", "200")
+            minqlx.set_cvar("pmove_weaponDropTime", "200")
+            minqlx.console_command("map_restart")
+            self.msg("VQL ruleset is now set.")
+            
     def cmd_muteall(self, player, msg, channel):
         # mute everybody on the server
         for p in self.players():
@@ -209,6 +232,24 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("You can't vote to begin the game when the game is already on.")
                 return minqlx.RET_STOP_ALL
 
+        if vote.lower() == "ruleset":
+            # enables the '/cv ruleset [pql/vql]' command
+            if not (bool(minqlx.get_cvar("qlx_rulesetLocked"))):
+                caller.tell("Voting to change the ruleset is disabled on ruleset-locked servers.")
+                return minqlx.RET_STOP_ALL
+
+            if args.lower() == "pql":
+                self.callvote("qlx !ruleset pql", "ruleset: pql")
+                self.msg("{}^7 called a vote.".format(caller.name))
+                return minqlx.RET_STOP_ALL
+            elif args.lower() == "vql":
+                self.callvote("qlx !ruleset vql", "ruleset: vql")
+                self.msg("{}^7 called a vote.".format(caller.name))
+                return minqlx.RET_STOP_ALL
+            else:
+                caller.tell("^2/cv ruleset [pql/vql]^7 is the usage for this callvote command.")
+                return minqlx.RET_STOP_ALL
+            
         if vote.lower() == "abort":
             # enables the '/cv abort' command
             if self.game.state != "warmup":
@@ -267,6 +308,9 @@ class tomtec_logic(minqlx.Plugin):
                 return minqlx.RET_STOP_ALL
 
     def cmd_excessive_weaps(self, player, msg, channel):
+        if len(msg) < 2:
+            return minqlx.RET_USAGE
+        
         if msg[1] == "on":
             minqlx.set_cvar("weapon_reload_sg", "200")
             minqlx.set_cvar("weapon_reload_rl", "200")

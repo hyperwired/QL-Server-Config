@@ -51,7 +51,8 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_pqlca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set sv_location "$qServerLocation"
+    +set sv_location "$qServerLocation" \
+    +set qlx_rulesetLocked 1
 elif [ $1 -eq 1 ]
 # starting VQL CA 1
 then
@@ -77,7 +78,8 @@ exec $qPathToMinqlxStartScript \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set g_damage_lg 6 \
-    +set sv_location "$qServerLocation"
+    +set sv_location "$qServerLocation" \
+    +set qlx_rulesetLocked 1
 elif [ $1 -eq 2 ]
 # starting PQL Race 1...
 then
@@ -102,7 +104,8 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_pqlrace.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set sv_location "$qServerLocation"
+    +set sv_location "$qServerLocation" \
+    +set qlx_rulesetLocked 0
 elif [ $1 -eq 3 ]
 # starting PQL FFA 1...
 then
@@ -128,7 +131,8 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_pqlffa.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set sv_location "$qServerLocation"
+    +set sv_location "$qServerLocation" \
+    +set qlx_rulesetLocked 1
 elif [ $1 -eq 4 ]
 # starting vql duel 1...
 then
@@ -154,11 +158,12 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_vqlduel.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set sv_location "$qServerLocation"
+    +set sv_location "$qServerLocation" \
+    +set qlx_rulesetLocked 1
 elif [ $1 -eq 5 ]
-# starting VQL Multi-Gametype 1...
+# starting PQL Multi-Gametype 1...
 then
-echo "Starting VQL Multi-Gametype server 1..."
+echo "Starting PQL Multi-Gametype server 1..."
 exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
@@ -180,31 +185,33 @@ exec $qPathToMinqlxStartScript \
     +set qlx_ircNickname "$qIrcNickname" \
     +set g_damage_lg 6 \
     +set g_voteFlags 0 \
-    +set sv_location "$qServerLocation"
-  elif [ $1 -eq 6 ]
-  # starting PQL MultiGame 1...
-  then
-  echo "Starting multi game type PQL server 1..."
-  exec $qPathToMinqlxStartScript \
-      +set net_strict 1 \
-      +set net_port $gameport \
-      +set sv_hostname " #$servernum The Purgery $qServerLocation VQL - Multi-Gametype" \
-      +set zmq_rcon_enable 1 \
-      +set zmq_rcon_password "$qRconPasswordPurgery" \
-      +set zmq_rcon_port $rconport \
-      +set zmq_stats_enable 1 \
-      +set zmq_stats_password "eggplant" \
-      +set zmq_stats_port $gameport \
-      +set sv_tags "$sponsortag" \
-      +set g_allowSpecVote 1 \
-      +set g_allowVoteMidGame 1 \
-      +set bot_enable 1 \
-      +set bot_nochat 1 \
-      +set g_accessFile "access_purgery.txt" \
-      +set sv_mappoolFile "mappool_default.txt" \
-      +set fs_homepath ~/.quakelive/$gameport \
-      +set qlx_ircNickname "$qIrcNickname" \
-      +set sv_location "$qServerLocation"
+    +set sv_location "$qServerLocation" \
+    +set qlx_rulesetLocked 0
+elif [ $1 -eq 6 ]
+# starting VQL MultiGame 1...
+then
+echo "Starting multi game type VQL server 1..."
+exec $qPathToMinqlxStartScript \
+    +set net_strict 1 \
+    +set net_port $gameport \
+    +set sv_hostname " #$servernum The Purgery $qServerLocation VQL - Multi-Gametype" \
+    +set zmq_rcon_enable 1 \
+    +set zmq_rcon_password "$qRconPasswordPurgery" \
+    +set zmq_rcon_port $rconport \
+    +set zmq_stats_enable 1 \
+    +set zmq_stats_password "eggplant" \
+    +set zmq_stats_port $gameport \
+    +set sv_tags "$sponsortag" \
+    +set g_allowSpecVote 1 \
+    +set g_allowVoteMidGame 1 \
+    +set bot_enable 1 \
+    +set bot_nochat 1 \
+    +set g_accessFile "access_purgery.txt" \
+    +set sv_mappoolFile "mappool_default.txt" \
+    +set fs_homepath ~/.quakelive/$gameport \
+    +set qlx_ircNickname "$qIrcNickname" \
+    +set sv_location "$qServerLocation" \
+    +set qlx_rulesetLocked 0
 elif [ $1 -eq 7 ]
 # starting TEST SERVER 1...
 then
@@ -226,7 +233,8 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_default.txt" \
     +set fs_homepath ~/.quakelive/TEST \
     +set qlx_ircNickname "$qServerLocation-TEST" \
-    +set sv_location "$qServerLocation"
+    +set sv_location "$qServerLocation" \
+    +set qlx_rulesetLocked 0
 elif [ $1 -eq 8 ]
 # starting reythe (sub580)...
 then
