@@ -14,7 +14,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("vote_ended", self.handle_vote_ended)
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
-        self.add_command("giveall", self.cmd_giveall, 5)
+        self.add_command("giveall", self.cmd_giveall, 5, usage="<powerup [on/off]>, <holdable>")
         self.add_command("map_restart", self.cmd_maprestart, 1)
         self.add_command("muteall", self.cmd_muteall, 4)
         self.add_command("unmuteall", self.cmd_unmuteall, 4)
@@ -25,11 +25,15 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command("ruleset", self.cmd_ruleset, 5, usage="pql/vql")
+        self.add_command(("wiki", "w"), self.cmd_wiki)
 
         self.set_cvar_once("qlx_excessive", "0")
 
         self.plugin_version = "2.1"
 
+    def cmd_wiki(self, player, msg, channel):
+        channel.reply("Visit ^2tomtecsolutions.com.au/thepurgery^7 to see ^4The Purgery^7's wiki.")
+        
     def cmd_addbot(self, player, msg, channel):
         minqlx.console_command("addbot anarki 5 any 0 ^7Pur^4g^7obot")
         player.tell("Remember to ^2!rembot^7 when you're finished with your bot.")
