@@ -11,6 +11,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("game_start", self.game_start)
         self.add_hook("game_end", self.game_end)
         self.add_hook("vote_called", self.handle_vote_called)
+        self.add_hook("vote_ended", self.handle_vote_ended)
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
         self.add_command("giveall", self.cmd_giveall, 5)
@@ -307,6 +308,13 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("^2/cv excessive [on/off]^7 is the usage for this callvote command.")
                 return minqlx.RET_STOP_ALL
 
+    def handle_vote_ended(self, votes, vote, args, passed):
+        self.msg("Vote results: ^2{}^7 - ^1{}^7.".format(votes[0], votes[1]))
+        
+        if passed:
+            if vote.lower() == "map":
+                self.msg("The map is changing to {}.".format(args))
+                
     def cmd_excessive_weaps(self, player, msg, channel):
         if len(msg) < 2:
             return minqlx.RET_USAGE
