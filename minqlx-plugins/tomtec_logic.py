@@ -234,7 +234,7 @@ class tomtec_logic(minqlx.Plugin):
 
         if vote.lower() == "ruleset":
             # enables the '/cv ruleset [pql/vql]' command
-            if (bool(minqlx.get_cvar("qlx_rulesetLocked"))):
+            if (minqlx.get_cvar("qlx_rulesetLocked")) == "1":
                 caller.tell("Voting to change the ruleset is disabled on ruleset-locked servers.")
                 return minqlx.RET_STOP_ALL
 
