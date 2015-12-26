@@ -46,3 +46,6 @@
 
 # mod 11, sandshark
 76561198082826346|mod
+
+# mod 12, jubblies
+76561197960281938|mod
