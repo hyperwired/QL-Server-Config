@@ -44,8 +44,8 @@
 # mod 10, leon
 76561197966565033|mod
 
-# mod 11, sandshark
-76561198082826346|mod
+# mod 11, stakz
+76561197987265250|mod
 
 # mod 12, jubblies
 76561197960281938|mod
