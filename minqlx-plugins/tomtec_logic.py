@@ -29,7 +29,7 @@ class tomtec_logic(minqlx.Plugin):
 
         self.set_cvar_once("qlx_excessive", "0")
 
-        self.plugin_version = "2.1"
+        self.plugin_version = "2.2"
 
     def cmd_wiki(self, player, msg, channel):
         channel.reply("Visit ^2tomtecsolutions.com.au/thepurgery^7 to see ^4The Purgery^7's wiki.")
@@ -51,6 +51,7 @@ class tomtec_logic(minqlx.Plugin):
             minqlx.set_cvar("weapon_reload_rg", "1200")
             minqlx.set_cvar("pmove_weaponRaiseTime", "10")
             minqlx.set_cvar("pmove_weaponDropTime", "10")
+            minqlx.set_cvar("g_damage_lg", "7")
             minqlx.console_command("map_restart")
             self.msg("PQL ruleset is now set.")
 
@@ -60,6 +61,7 @@ class tomtec_logic(minqlx.Plugin):
             minqlx.set_cvar("weapon_reload_rg", "1500")
             minqlx.set_cvar("pmove_weaponRaiseTime", "200")
             minqlx.set_cvar("pmove_weaponDropTime", "200")
+            minqlx.set_cvar("g_damage_lg", "6")
             minqlx.console_command("map_restart")
             self.msg("VQL ruleset is now set.")
             
