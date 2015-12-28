@@ -2,8 +2,14 @@
 # mickzerofive's access control list:
 
 
-# admin 1, tjone270
+# staff, tjone270
 76561198213481765|admin
 
-# admin 2, mickzerofive
+# admin 1, mickzerofive
 76561198000470509|admin
+
+# admin 2, zlr
+76561198107895201|admin
+
+# admin 3, phy1um
+76561198040797413|admin
