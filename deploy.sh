@@ -13,7 +13,7 @@ cd ~/QL-Server-Config
 
 # Running pre-run script.
 echo "=== Running pre-run script..."
-bash pre-run.sh
+bash deploy-pre-run.sh
 echo "=== End of pre-run script."
 
 #
@@ -76,7 +76,7 @@ cd ..
 
 # Running post-run script.
 echo "=== Running post-run script..."
-bash post-run.sh
+bash deploy-post-run.sh
 echo "=== End of post-run script."
 
 # Finished, cleaning up and exiting.
