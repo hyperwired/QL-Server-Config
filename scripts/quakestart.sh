@@ -8,7 +8,7 @@
 export qMinqlxRedisPassword=$(<~/localconfig-redispassword.txt)
 export qServerLocation=$(<~/localConfig-serverLocation.txt)
 export qGlobalOptions=""
-export qPathToMinqlxStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64_minqlx.sh +set qlx_redisPassword \"$qMinqlxRedisPassword\" $globalOptions"
+export qPathToMinqlxStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64_minqlx.sh +set qlx_redisPassword $qMinqlxRedisPassword $globalOptions"
 export qPathToVanillaStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64.sh $globalOptions"
 export qIrcNickname="$qServerLocation-$1"
 
