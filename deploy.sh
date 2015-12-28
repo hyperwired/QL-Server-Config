@@ -76,6 +76,7 @@ cd ..
 echo "Removing old crontab..."
 crontab -r
 echo "Loading new crontab..."
+dos2unix qlserver-crontab.txt
 crontab qlserver-crontab.txt
 
 # Running post-run script.
