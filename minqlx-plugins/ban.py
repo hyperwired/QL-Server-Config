@@ -28,20 +28,18 @@ PLAYER_KEY = "minqlx:players:{}"
 class ban(minqlx.Plugin):
     def __init__(self):
         super().__init__()
-        self.add_hook("player_connect", self.handle_player_connect, priority=minqlx.PRI_HIGH)
-        self.add_hook("player_loaded", self.handle_player_loaded)
-        self.add_hook("player_disconnect", self.handle_player_disconnect)
-        self.add_hook("game_countdown", self.handle_game_countdown)
-        self.add_hook("game_start", self.handle_game_start)
-        self.add_hook("game_end", self.handle_game_end)
-        self.add_hook("team_switch", self.handle_team_switch)
-        self.add_command("ban", self.cmd_ban, 2, usage="<id> <length> seconds|minutes|hours|days|... [reason]")
-        self.add_command("unban", self.cmd_unban, 2, usage="<id>")
-        self.add_command("checkban", self.cmd_checkban, usage="<id>")
-        self.add_command("forgive", self.cmd_forgive, 2, usage="<id> [leaves_to_forgive]")
-
-        if self.get_cvar("qlx_serverIsIsolated") == "1":
-            minqlx.console_command("qlx !unload ban")
+        if self.get_cvar("qlx_serverExemptFromModeration") == None:
+            self.add_hook("player_connect", self.handle_player_connect, priority=minqlx.PRI_HIGH)
+            self.add_hook("player_loaded", self.handle_player_loaded)
+            self.add_hook("player_disconnect", self.handle_player_disconnect)
+            self.add_hook("game_countdown", self.handle_game_countdown)
+            self.add_hook("game_start", self.handle_game_start)
+            self.add_hook("game_end", self.handle_game_end)
+            self.add_hook("team_switch", self.handle_team_switch)
+            self.add_command("ban", self.cmd_ban, 2, usage="<id> <length> seconds|minutes|hours|days|... [reason]")
+            self.add_command("unban", self.cmd_unban, 2, usage="<id>")
+            self.add_command("checkban", self.cmd_checkban, usage="<id>")
+            self.add_command("forgive", self.cmd_forgive, 2, usage="<id> [leaves_to_forgive]")
             
         # Cvars.
         self.set_cvar_once("qlx_leaverBan", "0")

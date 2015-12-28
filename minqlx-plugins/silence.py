@@ -28,15 +28,13 @@ PLAYER_KEY = "minqlx:players:{}"
 class silence(minqlx.Plugin):
     def __init__(self):
         super().__init__()
-        self.add_hook("player_loaded", self.handle_player_loaded)
-        self.add_hook("player_disconnect", self.handle_player_disconnect)
-        self.add_hook("client_command", self.handle_client_command, priority=minqlx.PRI_HIGH)
-        self.add_command("silence", self.cmd_silence, 2, usage="<id> <length> seconds|minutes|hours|days|... [reason]")
-        self.add_command("unsilence", self.cmd_unsilence, 2, usage="<id>")
-        self.add_command("checksilence", self.cmd_checksilence, usage="<id>")
-
-        if self.get_cvar("qlx_serverIsIsolated") == "1":
-            minqlx.console_command("qlx !unload silence")
+        if self.get_cvar("qlx_serverExemptFromModeration") == None:
+            self.add_hook("player_loaded", self.handle_player_loaded)
+            self.add_hook("player_disconnect", self.handle_player_disconnect)
+            self.add_hook("client_command", self.handle_client_command, priority=minqlx.PRI_HIGH)
+            self.add_command("silence", self.cmd_silence, 2, usage="<id> <length> seconds|minutes|hours|days|... [reason]")
+            self.add_command("unsilence", self.cmd_unsilence, 2, usage="<id>")
+            self.add_command("checksilence", self.cmd_checksilence, usage="<id>")
 
         self.silenced = {}
     
