@@ -2,17 +2,20 @@
 # The Purgery access control list:
 
 
-# admin 1, tjone270
+# staff: tjone270
 76561198213481765|admin
 
-# admin 2, merozollo
+# admin 1, merozollo
 76561198197573413|admin
 
-# admin 3, 0regonn
+# admin 2, 0regonn
 76561198150444650|admin
 
-# admin 4, barley
+# admin 3, barley
 76561197971374552|admin
+
+# admin 4, zlr
+76561198107895201|admin
 
 # mod 1, giantman
 76561198206232871|mod
@@ -20,32 +23,17 @@
 # mod 2, biokemical
 76561198063863745|mod
 
-# mod 3, notes
-76561198072746913|mod
-
-# mod 4, sifz
-76561198002147295|mod
-
-# mod 5, meganfoxxed
-76561198218511531|mod
-
-# mod 6, chef
-76561198250594530|mod
-
-# mod 7, quarrel
+# mod 3, quarrel
 76561198048831696|mod
 
-# mod 8, junkyard
-76561198257486058|mod
+# mod 4, meganfoxxed
+76561198218511531|mod
 
-# mod 9, nworb_ (jb)
-76561198041714377|mod
-
-# mod 10, leon
+# mod 5, leon
 76561197966565033|mod
 
-# mod 11, stakz
+# mod 6, stakz
 76561197987265250|mod
 
-# mod 12, jubblies
+# mod 7, jubblies
 76561197960281938|mod
