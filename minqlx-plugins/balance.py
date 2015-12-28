@@ -426,7 +426,7 @@ class balance(minqlx.Plugin):
 
         minimum_suggestion_diff = self.get_cvar("qlx_balanceMinimumSuggestionDiff", int)
         if switch and switch[1] >= minimum_suggestion_diff:
-            channel.reply("SUGGESTION: switch ^4{}^7 with ^4{}^7. Type !a to agree."
+            channel.reply("SUGGESTION: switch ^4{}^7 with ^4{}^7. Mentioned players can type ^4!a^7 to agree."
                 .format(switch[0][0].clean_name, switch[0][1].clean_name))
             if not self.suggested_pair or self.suggested_pair[0] != switch[0][0] or self.suggested_pair[1] != switch[0][1]:
                 self.suggested_pair = (switch[0][0], switch[0][1])
