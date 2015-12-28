@@ -35,6 +35,9 @@ class silence(minqlx.Plugin):
         self.add_command("unsilence", self.cmd_unsilence, 2, usage="<id>")
         self.add_command("checksilence", self.cmd_checksilence, usage="<id>")
 
+        if self.get_cvar("qlx_serverIsIsolated") == "1":
+            minqlx.console_command("qlx !unload silence")
+
         self.silenced = {}
     
     def handle_player_loaded(self, player):

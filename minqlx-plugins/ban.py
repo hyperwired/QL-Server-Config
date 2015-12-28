@@ -40,6 +40,9 @@ class ban(minqlx.Plugin):
         self.add_command("checkban", self.cmd_checkban, usage="<id>")
         self.add_command("forgive", self.cmd_forgive, 2, usage="<id> [leaves_to_forgive]")
 
+        if self.get_cvar("qlx_serverIsIsolated") == "1":
+            minqlx.console_command("qlx !unload ban")
+            
         # Cvars.
         self.set_cvar_once("qlx_leaverBan", "0")
         self.set_cvar_limit_once("qlx_leaverBanThreshold", "0.63", "0", "1")

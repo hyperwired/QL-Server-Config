@@ -237,7 +237,7 @@ exec $qPathToMinqlxStartScript \
     +set qlx_ircNickname "$qIrcNickname" \
     +set sv_location "$qServerLocation" \
     +set qlx_rulesetLocked 0 \
-    +set qlx_redisDatabase 1
+    +set qlx_serverIsIsolated 1
 elif [ $1 -eq 8 ]
 # starting reythe (sub580)...
 then
