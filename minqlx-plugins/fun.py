@@ -63,7 +63,7 @@ class fun(minqlx.Plugin):
         self.add_command("cookies", self.cmd_cookies)
         self.last_sound = None
 
-        self.set_cvar_once("qlx_funSoundDelay", "3")
+        self.set_cvar_once("qlx_funSoundDelay", "10")
 
     def handle_chat(self, player, msg, channel):
         if channel != "chat":
