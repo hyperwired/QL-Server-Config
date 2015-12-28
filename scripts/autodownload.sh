@@ -10,6 +10,7 @@ echo "========= $(date) ========="
 workshopIDs=`cat ~/steamcmd/steamapps/common/qlds/baseq3/workshop.txt | grep -v '#' | sed '/^[ \t]*$/d'`
 numOfIDs=`echo "$workshopIDs" | wc -l`
 counter=0
+rm -r ~/steamcmd/steamapps/workshop
 while [ $counter -lt $numOfIDs ]; do
 	currentID=`echo $workshopIDs | awk '{ print $1 }'`
 	workshopIDs=`echo $workshopIDs | cut -d ' ' -f2-`
