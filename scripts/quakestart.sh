@@ -2,19 +2,27 @@
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 # quakestart.sh - quake live multiple server spawning script.
 # created by Thomas Jones on 09/09/15.
-# purger@tomtecsolutions.com
+# thomas@tomtecsolutions.com
 
-# This script will be replaced in the near future. Consider this an active legacy script.
-
-# Defining variables.
+# Defining globally used variables/configuration.
+export qMinqlxRedisPassword=$(<~/localconfig-redispassword.txt)
 export qServerLocation=$(<~/localConfig-serverLocation.txt)
-export qRconPasswordPurgery=$(<~/localConfig-rconPassword-purgery.txt)
-export qPathToMinqlxStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64_minqlx.sh +set qlx_ircPassword $qRconPasswordPurgery"
-export qPathToVanillaStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64.sh"
+export qGlobalOptions="+set qlx_redisPassword $qMinqlxRedisPassword"
+export qPathToMinqlxStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64_minqlx.sh $globalOptions"
+export qPathToVanillaStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64.sh $globalOptions"
 export qIrcNickname="$qServerLocation-$1"
 
-sponsortag="$qServerLocation,TomTec Solutions"
+# Purgery specific variables/configuration.
+export qPurgeryOwnerSteam64ID="76561198213481765"
+export qRconPasswordPurgery=$(<~/localConfig-rconPassword-purgery.txt)
+export qPurgeryStart="$qPathToMinqlxStartScript \
++set qlx_owner $qPurgeryOwnerSteam64ID \
++set qlx_plugins \"DEFAULT, tomtec_logic, tp_fun, fun, balance, irc, tp_sounds, aliases, voteshow\" \
++set qlx_ircPassword $qRconPasswordPurgery \
++set sv_location "$qServerLocation" \
++set tomtectest 1"
 
+sponsortag="$qServerLocation,TomTec Solutions"
 gameport=`expr $1 + 27960`
 rconport=`expr $1 + 28960`
 servernum=`expr $1 + 0`
@@ -24,14 +32,13 @@ servernum=`expr $1 + 0`
 
 echo "========== QuakeStart.sh has started. =========="
 echo "========= $(date) ========="
-#echo "arg1 is equal to $1"
 cd ~/steamcmd/steamapps/common/qlds/baseq3
 
 if [ $1 -eq 0 ]
 # starting PQL CA 1
 then
 echo "Starting clan arena server 1..."
-exec $qPathToMinqlxStartScript \
+exec $qPurgeryStart \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "     #$servernum The Purgery $qServerLocation PQL - Clan Arena" \
@@ -51,13 +58,12 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_pqlca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set sv_location "$qServerLocation" \
     +set qlx_rulesetLocked 1
 elif [ $1 -eq 1 ]
 # starting VQL CA 1
 then
 echo "Starting clan arena server 2..."
-exec $qPathToMinqlxStartScript \
+exec $qPurgeryStart \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Clan Arena" \
@@ -78,13 +84,12 @@ exec $qPathToMinqlxStartScript \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set g_damage_lg 6 \
-    +set sv_location "$qServerLocation" \
     +set qlx_rulesetLocked 1
 elif [ $1 -eq 2 ]
 # starting PQL Race 1...
 then
 echo "Starting race server 1..."
-exec $qPathToMinqlxStartScript \
+exec $qPurgeryStart \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "    #$servernum The Purgery $qServerLocation - Race" \
@@ -104,13 +109,12 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_pqlrace.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set sv_location "$qServerLocation" \
     +set qlx_rulesetLocked 0
 elif [ $1 -eq 3 ]
 # starting PQL FFA 1...
 then
 echo "Starting free for all server 1..."
-exec $qPathToMinqlxStartScript \
+exec $qPurgeryStart \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "    #$servernum The Purgery $qServerLocation PQL - Free For All" \
@@ -131,13 +135,12 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_pqlffa.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set sv_location "$qServerLocation" \
     +set qlx_rulesetLocked 1
 elif [ $1 -eq 4 ]
 # starting vql duel 1...
 then
 echo "Starting VQL duel server 1..."
-exec $qPathToMinqlxStartScript \
+exec $qPurgeryStart \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Duel" \
@@ -158,13 +161,12 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_vqlduel.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set sv_location "$qServerLocation" \
     +set qlx_rulesetLocked 1
 elif [ $1 -eq 5 ]
 # starting PQL Multi-Gametype 1...
 then
 echo "Starting PQL Multi-Gametype server 1..."
-exec $qPathToMinqlxStartScript \
+exec $qPurgeryStart \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname " #$servernum The Purgery $qServerLocation PQL - Multi-Gametype" \
@@ -185,13 +187,12 @@ exec $qPathToMinqlxStartScript \
     +set qlx_ircNickname "$qIrcNickname" \
     +set g_damage_lg 6 \
     +set g_voteFlags 0 \
-    +set sv_location "$qServerLocation" \
     +set qlx_rulesetLocked 0
 elif [ $1 -eq 6 ]
 # starting VQL MultiGame 1...
 then
 echo "Starting multi game type VQL server 1..."
-exec $qPathToMinqlxStartScript \
+exec $qPurgeryStart \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname " #$servernum The Purgery $qServerLocation VQL - Multi-Gametype" \
@@ -210,13 +211,12 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_default.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set sv_location "$qServerLocation" \
     +set qlx_rulesetLocked 0
 elif [ $1 -eq 7 ]
 # starting Scrim SERVER 1...
 then
 echo "Starting scrim SERVER server 1..."
-exec $qPathToMinqlxStartScript \
+exec $qPurgeryStart \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname " #$servernum The Purgery $qServerLocation - Unmoderated Scrim Server" \
@@ -235,7 +235,6 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_ca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set sv_location "$qServerLocation" \
     +set qlx_rulesetLocked 0 \
     +set qlx_serverExemptFromModeration 1
 elif [ $1 -eq 8 ]
@@ -293,10 +292,3 @@ else
 echo "This system is not intended to host pit clan (sub586) server."
 fi
 fi
-
-
-# Unused cvars.
-# +set sv_mapPoolFile "mappool_pqlca.txt" \
-# +set net_ip "quakelive.tomtecsolutions.com.au" \
-# +set com_hunkMegs 30 \
-# +set sv_idleExit 0
