@@ -84,12 +84,12 @@ class tomtec_logic(minqlx.Plugin):
         # brand the map
         server_number = (minqlx.get_cvar("net_port"))
         server_number = str(server_number[-1])
-        if server_number == "7":
-            server_number = "Test"
-        else:
-            server_number = "#{}".format(server_number)
+        #if server_number == "7":
+        #    server_number = "Test"
+        #else:
+        #    server_number = "#{}".format(server_number)
             
-        minqlx.set_configstring(3, "^4The Purgery^7 - {} - ^2{}".format(minqlx.get_cvar("sv_location"), server_number))
+        minqlx.set_configstring(3, "^4The Purgery^7 - {} - ^2#{}".format(minqlx.get_cvar("sv_location"), server_number))
         minqlx.set_configstring(678, "Sponsored by ^5TomTec Solutions^7 (^2quakesupport@tomtecsolutions.com^7).")
         minqlx.set_configstring(679, "Visit our Facebook page at ^2http://fb.me/thepurgery^7, or the wiki at ^2http://tomtecsolutions.com.au/thepurgery^7.")
 

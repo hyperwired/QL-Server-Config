@@ -41,7 +41,12 @@ class irc(minqlx.Plugin):
         self.plugin_version = "1.4"
         
         self.set_cvar_once("qlx_ircServer", "irc.quakenet.org")
-        self.set_cvar_once("qlx_ircRelayChannel", "")
+        
+        if self.get_cvar("net_port") == "27967":
+            self.set_cvar("qlx_ircRelayChannel", "#thepurgery-scrim")
+        else:
+            self.set_cvar_once("qlx_ircRelayChannel", "#thepurgery")
+            
         self.set_cvar_once("qlx_ircRelayIrcChat", "1")
         self.set_cvar_once("qlx_ircIdleChannels", "")
         self.set_cvar_once("qlx_ircNickname", "minqlx-{}".format(random.randint(1000, 9999)))

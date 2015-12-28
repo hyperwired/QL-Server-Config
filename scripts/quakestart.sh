@@ -213,28 +213,31 @@ exec $qPathToMinqlxStartScript \
     +set sv_location "$qServerLocation" \
     +set qlx_rulesetLocked 0
 elif [ $1 -eq 7 ]
-# starting TEST SERVER 1...
+# starting Scrim SERVER 1...
 then
-echo "Starting TEST SERVER server 1..."
+echo "Starting scrim SERVER server 1..."
 exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
-    +set sv_hostname " The Purgery $qServerLocation - Test Server" \
+    +set sv_hostname " #$servernum The Purgery $qServerLocation - Unmoderated Scrim Server" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
-    +set zmq_stats_enable 0 \
-    +set sv_tags "$sponsortag" \
+    +set zmq_stats_enable 1 \
+    +set zmq_stats_password "eggplant" \
+    +set zmq_stats_port $gameport \
+    +set sv_tags "unmoderated,$sponsortag" \
     +set g_allowSpecVote 1 \
     +set g_allowVoteMidGame 1 \
     +set bot_enable 1 \
     +set bot_nochat 1 \
-    +set g_accessFile "access_testpurgery.txt" \
-    +set sv_mappoolFile "mappool_default.txt" \
-    +set fs_homepath ~/.quakelive/TEST \
-    +set qlx_ircNickname "$qServerLocation-TEST" \
+    +set g_accessFile "access_staffonly.txt" \
+    +set sv_mappoolFile "mappool_ca.txt" \
+    +set fs_homepath ~/.quakelive/$gameport \
+    +set qlx_ircNickname "$qIrcNickname" \
     +set sv_location "$qServerLocation" \
-    +set qlx_rulesetLocked 0
+    +set qlx_rulesetLocked 0 \
+    +set qlx_redisDatabase 1
 elif [ $1 -eq 8 ]
 # starting reythe (sub580)...
 then
