@@ -5,7 +5,7 @@
 # thomas@tomtecsolutions.com
 
 # Defining globally used variables/configuration.
-export qMinqlxRedisPassword=$(<~/localconfig-redispassword.txt)
+export qMinqlxRedisPassword=$(<~/localConfig-redispassword.txt)
 export qServerLocation=$(<~/localConfig-serverLocation.txt)
 export qGlobalOptions=""
 export qPathToMinqlxStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64_minqlx.sh +set qlx_redisPassword $qMinqlxRedisPassword $globalOptions"
