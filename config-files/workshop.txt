@@ -487,3 +487,210 @@
 
 # JustOneFix Maps
 573112415
+
+# DeFRaG/Race: CS Map Pack
+573229007
+
+# Reservoir Dog Maps
+573806930
+
+# Q-Fraggel Maps
+573807159
+
+# Iron Yard
+573808557
+
+# jrace2
+579302748
+
+# Canyon Chaos
+579105940
+
+# quake live map - easy shaft trainning
+578431746
+
+# zih_roof - Ufreeze Map
+578409849
+
+# walkathon
+578148544
+
+# mineqraft
+578148104
+
+# Nemesis
+577333309
+
+# pro-q3dm6 original Quake III Arena map
+576339240
+
+# Elfinko DM Alpha 1
+575806276
+
+# Fiesling Maps
+575344403
+
+# OSP Maps
+575312620
+
+# decidia
+575088417
+
+# Wakey Maps
+573898676
+
+# Kora
+583405286
+
+# Deck 2k7
+583401688
+
+# PB_run
+583064804
+
+# The Heinous Place
+582961584
+
+# Endurance
+582949583
+
+# The Killing Machine
+582941724
+
+# hydra b
+582933751
+
+# Geotechnic *b
+582926811
+
+# DustBowl
+582915859
+
+# Hit the Floor
+582908190
+
+# Nazi bunker
+582882064
+
+# DeadStrong
+582771824
+
+# The Rage Q3
+582762928
+
+# The Final Hour
+582737620
+
+# Goldleaf *
+582721827
+
+# cos1_beta7b
+582665687
+
+# Aero Space
+582657472
+
+# NSW-Race-Pack
+580028420
+
+# Zero Signal (Quake Live Beta)
+579992130
+
+# Quarea 51
+579974872
+
+# Cow's Map
+579950284
+
+# Quake Live Extra Duel Maps
+579717457
+
+# mvdm09 map
+585785742
+
+# tscabdm2 map
+585785188
+
+# cpm8 map
+585784905
+
+# psidm7 map
+585781036
+
+# Lunaran Maps
+585770260
+
+# Vinyl Room
+585734722
+
+# City1
+585734097
+
+# Retribution (duel)
+585268523
+
+# Derwyll's Castle 2
+585120534
+
+# Davinci
+585119731
+
+# phrantic (cpm24)
+585062856
+
+# Aerowalk [Hubster's Remix II] (cpm22)
+585060057
+
+# Guns
+585043904
+
+# r3tina maps
+585008637
+
+# Grindill 2.0
+584984610
+
+# Station 52
+584984132
+
+# WdW Maps
+584964611
+
+# XCM Tricks 2
+584829444
+
+# Strafez
+584819585
+
+# HMF Clan Practice Map
+584815070
+
+# ful-playground-2-1a
+584809801
+
+# Tr1ckhouse
+584485539
+
+# Charon Maps
+584176488
+
+# Evil Lair Maps
+583920201
+
+# Powahaus Redux
+583821497
+
+# The Abandoned Post
+583821136
+
+# Eulogy
+583820600
+
+# Carnage grounds
+583496556
+
+# No One
+583488902
+
+# q3sg1c
+583483661
