@@ -73,6 +73,10 @@ mv * $HOME/
 chmod +x ~/*.sh
 cd ..
 
+echo "Removing old crontab..."
+crontab -r
+echo "Loading new crontab..."
+crontab qlserver-crontab.txt
 
 # Running post-run script.
 echo "=== Running post-run script..."
