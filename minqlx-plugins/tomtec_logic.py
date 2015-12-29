@@ -126,9 +126,6 @@ class tomtec_logic(minqlx.Plugin):
         if (minqlx.get_cvar("qlx_excessive")) == "1":
             player.tell("Excessive weapons are ^2enabled^7. To disable them, ^2/cv excessive off^7.")
 
-        if player.steam_id == "76561198090935087":
-            player.name = "<insert name>"
-        
     def game_start(self):
         # make sure everyone's noclip is off
         for p in self.players():
