@@ -109,7 +109,7 @@ class cleverbot(minqlx.Plugin):
         response = self.post_data("https://cleverbot.io/1.0/ask", text)
         if response:
             nick = self.get_cvar("qlx_cleverbotNick")
-            channel.reply("^4{}^7: {}".format(nick, response["response"]))
+            channel.reply("{}^7:^2 {}".format(nick, response["response"]))
 
     def post_data(self, url, text=''):
         """POSTS data to cleverbot.io
