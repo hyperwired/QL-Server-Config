@@ -18,9 +18,9 @@ class cleverbot(minqlx.Plugin):
     def __init__(self):
         super().__init__()
         self.add_hook("chat", self.handle_chat)
-        self.add_command("create", self.cmd_create, 2, usage="<nick>")
+        self.add_command("create", self.cmd_create, 5, usage="<nick>")
         self.add_command("chat", self.cmd_chat, usage="<some text>")
-        self.add_command("chance", self.cmd_chance, 2, usage="<chance (0-1)>")
+        self.add_command("chance", self.cmd_chance, 5, usage="<chance (0-1)>")
 
         # Get an API key at cleverbot.io
         self.set_cvar("qlx_cleverbotUser", "04twdDLhNypTzdET")
@@ -97,7 +97,7 @@ class cleverbot(minqlx.Plugin):
         response = self.post_data("https://cleverbot.io/1.0/create")
         if response:
             nick = self.get_cvar("qlx_cleverbotNick")
-            self.msg("^7Bot called ^6{} ^7was created.".format(nick))
+            self.msg("^7Bot called ^4{} ^7was created.".format(nick))
             self.created = True
 
     @minqlx.thread
@@ -109,7 +109,7 @@ class cleverbot(minqlx.Plugin):
         response = self.post_data("https://cleverbot.io/1.0/ask", text)
         if response:
             nick = self.get_cvar("qlx_cleverbotNick")
-            channel.reply("^6{}^7: {}".format(nick, response["response"]))
+            channel.reply("^4{}^7: {}".format(nick, response["response"]))
 
     def post_data(self, url, text=''):
         """POSTS data to cleverbot.io
