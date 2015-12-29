@@ -107,9 +107,11 @@ class tomtec_logic(minqlx.Plugin):
     def game_countdown(self):
         # play the 'battle suit protect' sound, and display a sponsor message during the countdown
         minqlx.send_server_command(None, "cp \"^4The Purgery\n^7Sponsored by ^4TomTec Solutions^7\"\n")
-        for p in self.players():
-            p.powerups(battlesuit=10)
-            p.noclip = True
+
+        if minqlx.get_cvar("net_port") != "27964":
+            for p in self.players():
+                p.powerups(battlesuit=10)
+                p.noclip = True
             
         self.play_sound("sound/items/protect3.ogg")
        
