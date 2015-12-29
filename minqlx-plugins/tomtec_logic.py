@@ -52,6 +52,10 @@ class tomtec_logic(minqlx.Plugin):
             minqlx.set_cvar("pmove_weaponRaiseTime", "10")
             minqlx.set_cvar("pmove_weaponDropTime", "10")
             minqlx.set_cvar("g_damage_lg", "7")
+            minqlx.set_cvar("dmflags", "60")
+            if self.game.type_short == "ca":
+                minqlx.set_cvar("g_startingHealth", "200")
+                minqlx.set_cvar("g_startingArmor", "200")
             minqlx.console_command("map_restart")
             self.msg("PQL ruleset is now set.")
 
@@ -62,6 +66,9 @@ class tomtec_logic(minqlx.Plugin):
             minqlx.set_cvar("pmove_weaponRaiseTime", "200")
             minqlx.set_cvar("pmove_weaponDropTime", "200")
             minqlx.set_cvar("g_damage_lg", "6")
+            minqlx.console_command("reset dmflags")
+            minqlx.console_command("reset g_startingHealth")
+            minqlx.console_command("reset g_startingArmor")
             minqlx.console_command("map_restart")
             self.msg("VQL ruleset is now set.")
             
