@@ -309,6 +309,32 @@ class tomtec_logic(minqlx.Plugin):
             self.msg("{}^7 called a vote.".format(caller.name))
             return minqlx.RET_STOP_ALL
 
+        if vote.lower() == "tempban":
+            # enables the '/cv tempban <id>' command
+            try:
+                player_name = self.player(int(args)).clean_name
+                player_id = self.player(int(args)).id
+            except:
+                caller.tell("^1Invalid ID.^7 Use a client ID from the ^2/players^7 command.")
+                return minqlx.RET_STOP_ALL
+
+            self.callvote("tempban {}".format(player_id), "^1ban {} until the map changes^3".format(player_name))
+            self.msg("{}^7 called a vote.".format(caller.name))
+            return minqlx.RET_STOP_ALL
+
+        if vote.lower() == "spec":
+            # enables the '/cv spec <id>' command
+            try:
+                player_name = self.player(int(args)).clean_name
+                player_id = self.player(int(args)).id
+            except:
+                caller.tell("^1Invalid ID.^7 Use a client ID from the ^2/players^7 command.")
+                return minqlx.RET_STOP_ALL
+
+            self.callvote("put {} spec".format(player_id), "move {} to the spectators".format(player_name))
+            self.msg("{}^7 called a vote.".format(caller.name))
+            return minqlx.RET_STOP_ALL
+
         if vote.lower() == "excessive":
             # enables the '/cv excessive [on/off]' command
             if args.lower() == "off":
