@@ -305,6 +305,10 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("^1Invalid ID.^7 Use a client ID from the ^2/players^7 command.")
                 return minqlx.RET_STOP_ALL
 
+            if self.get_cvar("qlx_serverExemptFromModeration") == "1":
+                caller.tell("This server has the serverExemptFromModeration flag set, and therefore, silencing is disabled.")
+                return minqlx.RET_STOP_ALL
+            
             self.callvote("qlx !silence {} 10 minutes You were call-voted silent for 10 minutes.; mute {}".format(player_id, player_id), "silence {} for 10 minutes".format(player_name))
             self.msg("{}^7 called a vote.".format(caller.name))
             return minqlx.RET_STOP_ALL
@@ -318,6 +322,10 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("^1Invalid ID.^7 Use a client ID from the ^2/players^7 command.")
                 return minqlx.RET_STOP_ALL
 
+            if self.player(int(args)).privileges != None:
+                caller.tell("The player specified is an admin, a mod or banned, and cannot be tempbanned.")
+                return minqlx.RET_STOP_ALL
+            
             self.callvote("tempban {}".format(player_id), "^1ban {} until the map changes^3".format(player_name))
             self.msg("{}^7 called a vote.".format(caller.name))
             return minqlx.RET_STOP_ALL
@@ -331,6 +339,10 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("^1Invalid ID.^7 Use a client ID from the ^2/players^7 command.")
                 return minqlx.RET_STOP_ALL
 
+            if self.player(int(args)).team == "spectator":
+                caller.tell("That player is already in the spectators.")
+                return minqlx.RET_STOP_ALL
+            
             self.callvote("put {} spec".format(player_id), "move {} to the spectators".format(player_name))
             self.msg("{}^7 called a vote.".format(caller.name))
             return minqlx.RET_STOP_ALL
