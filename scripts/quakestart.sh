@@ -7,7 +7,7 @@
 # Defining globally used variables/configuration.
 export qMinqlxRedisPassword=$(<~/localConfig-redispassword.txt)
 export qServerLocation=$(<~/localConfig-serverLocation.txt)
-export qGlobalOptions=""
+export qGlobalOptions="+set sv_location $qServerLocation"
 export qPathToMinqlxStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64_minqlx.sh +set qlx_redisPassword $qMinqlxRedisPassword $globalOptions"
 export qPathToVanillaStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64.sh $globalOptions"
 export qIrcNickname="$qServerLocation-$1"
@@ -18,9 +18,7 @@ export qRconPasswordPurgery=$(<~/localConfig-rconPassword-purgery.txt)
 export qPurgeryStart="$qPathToMinqlxStartScript \
 +set qlx_owner $qPurgeryOwnerSteam64ID \
 +set qlx_plugins \"DEFAULT, tomtec_logic, tp_fun, fun, balance, irc, tp_sounds, aliases, voteshow, cleverbot\" \
-+set qlx_ircPassword \"$qRconPasswordPurgery\" \
-+set sv_location \"$qServerLocation\" \
-+set tomtectest 1"
++set qlx_ircPassword $qRconPasswordPurgery"
 
 sponsortag="$qServerLocation,TomTec Solutions"
 gameport=`expr $1 + 27960`
