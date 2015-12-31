@@ -8,8 +8,8 @@
 export qMinqlxRedisPassword=$(<~/localConfig-redispassword.txt)
 export qServerLocation=$(<~/localConfig-serverLocation.txt)
 export qGlobalOptions="+set sv_location $qServerLocation"
-export qPathToMinqlxStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64_minqlx.sh +set qlx_redisPassword $qMinqlxRedisPassword $globalOptions"
-export qPathToVanillaStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64.sh $globalOptions"
+export qPathToMinqlxStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64_minqlx.sh +set qlx_redisPassword $qMinqlxRedisPassword $qGlobalOptions"
+export qPathToVanillaStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64.sh $qGlobalOptions"
 export qIrcNickname="$qServerLocation-$1"
 
 # Purgery specific variables/configuration.
