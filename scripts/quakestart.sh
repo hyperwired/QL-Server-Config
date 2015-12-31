@@ -7,10 +7,11 @@
 # Defining globally used variables/configuration.
 export qMinqlxRedisPassword=$(<~/localConfig-redispassword.txt)
 export qServerLocation=$(<~/localConfig-serverLocation.txt)
+export qServerLocationHyphenated=`echo $qServerLocation | sed 's/ /-/g'`
 export qGlobalOptions="+set sv_location $qServerLocation"
 export qPathToMinqlxStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64_minqlx.sh +set qlx_redisPassword $qMinqlxRedisPassword $qGlobalOptions"
 export qPathToVanillaStartScript="~/steamcmd/steamapps/common/qlds/run_server_x64.sh $qGlobalOptions"
-export qIrcNickname="$qServerLocation-$1"
+export qIrcNickname="$qServerLocationHyphenated-$1"
 
 # Purgery specific variables/configuration.
 export qPurgeryOwnerSteam64ID="76561198213481765"
