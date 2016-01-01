@@ -11,7 +11,6 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("game_start", self.game_start)
         self.add_hook("game_end", self.game_end)
         self.add_hook("vote_called", self.handle_vote_called)
-        self.add_hook("vote_ended", self.handle_vote_ended)
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
         self.add_command("giveall", self.cmd_giveall, 5, usage="<powerup [on/off]>, <holdable>")
@@ -26,7 +25,9 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command("ruleset", self.cmd_ruleset, 5, usage="pql/vql")
         self.add_command(("wiki", "w"), self.cmd_wiki)
-
+    
+        self.disabled_maps = []
+        
         self.set_cvar_once("qlx_excessive", "0")
 
         self.plugin_version = "2.2"
@@ -66,7 +67,10 @@ class tomtec_logic(minqlx.Plugin):
             minqlx.set_cvar("pmove_weaponRaiseTime", "200")
             minqlx.set_cvar("pmove_weaponDropTime", "200")
             minqlx.set_cvar("g_damage_lg", "6")
-            minqlx.console_command("reset dmflags")
+            if self.game.type_short == "ca":
+                minqlx.set_cvar("dmflags", "28")
+            else:
+                minqlx.console_command("reset dmflags")
             minqlx.console_command("reset g_startingHealth")
             minqlx.console_command("reset g_startingArmor")
             minqlx.console_command("map_restart")
@@ -161,213 +165,14 @@ class tomtec_logic(minqlx.Plugin):
 
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4tomtec_logic.py^7 - version {}, created by Thomas Jones on 01/11/2015.".format(self.plugin_version))
-        
+
     def handle_vote_called(self, caller, vote, args):
-        if vote.lower() == "kick":
-            # prevent certain players from being kicked via a call-vote
-            playerName = args.lower()
-            if playerName == "saturn":
-                caller.tell("^7Voting to kick the server owner is prohibited. This incident has been recorded.")
-                return minqlx.RET_STOP_ALL
-            if playerName == "merozollo":
-                caller.tell("^7Voting to kick a server administrator is prohibited. This incident has been recorded.")
-                return minqlx.RET_STOP_ALL
-            if playerName == "0regonn":
-                caller.tell("^7Voting to kick a protected player is prohibited. This incident has been recorded.")
-                return minqlx.RET_STOP_ALL
-
-        if vote.lower() == "clientkick":
-            # disable client-kick, as it interferes with player protection
-            caller.tell("^7Voting from the in-game menu/clientkick is disabled, as it conflicts with the player protection system.")
-            caller.tell("^7Please use the ^2/cv^7 or ^2/callvote^7 console commands.")
-            return minqlx.RET_STOP_ALL
-
-        if vote.lower() == "infiniteammo":
-            # enables the '/cv infiniteammo [on/off]' command
-            if args.lower() == "off":
-                self.callvote("set g_infiniteAmmo 0", "infinite ammo: off")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            elif args.lower() == "on":
-                self.callvote("set g_infiniteAmmo 1", "infinite ammo: on")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            else:
-                caller.tell("^2/cv infiniteammo [on/off]^7 is the usage for this callvote command.")
-                return minqlx.RET_STOP_ALL
-
-        if vote.lower() == "freecam":
-            # enables the '/cv freecam [on/off]' command
-            if args.lower() == "off":
-                self.callvote("set g_teamSpecFreeCam 0", "team spectator free-cam: off")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            elif args.lower() == "on":
-                self.callvote("set g_teamSpecFreeCam 1", "team spectator free-cam: on")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            else:
-                caller.tell("^2/cv freecam [on/off]^7 is the usage for this callvote command.")
-                return minqlx.RET_STOP_ALL
-
-        if vote.lower() == "floordamage":
-            # enables the '/cv floordamage [on/off]' command
-            if args.lower() == "off":
-                self.callvote("set g_forceDmgThroughSurface 0", "damage through floor: off")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            elif args.lower() == "on":
-                self.callvote("set g_forceDmgThroughSurface 1", "damage through floor: on")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            else:
-                caller.tell("^2/cv floordamage [on/off]^7 is the usage for this callvote command.")
-                return minqlx.RET_STOP_ALL
-
-        if vote.lower() == "alltalk":
-            # enables the '/cv alltalk [on/off]' command
-            if args.lower() == "off":
-                self.callvote("set g_allTalk 0", "voice comm between teams: off")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            elif args.lower() == "on":
-                self.callvote("set g_allTalk 1", "voice comm between teams: on")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            else:
-                caller.tell("^2/cv alltalk [on/off]^7 is the usage for this callvote command.")
-                return minqlx.RET_STOP_ALL
-
-        if vote.lower() == "allready":
-            # enables the '/cv allready' command
-            if self.game.state == "warmup":
-                self.callvote("allready", "begin game immediately")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            else:
-                caller.tell("You can't vote to begin the game when the game is already on.")
-                return minqlx.RET_STOP_ALL
-
-        if vote.lower() == "ruleset":
-            # enables the '/cv ruleset [pql/vql]' command
-            if (minqlx.get_cvar("qlx_rulesetLocked")) == "1":
-                caller.tell("Voting to change the ruleset is disabled on ruleset-locked servers.")
-                return minqlx.RET_STOP_ALL
-
-            if args.lower() == "pql":
-                self.callvote("qlx !ruleset pql", "ruleset: pql")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            elif args.lower() == "vql":
-                self.callvote("qlx !ruleset vql", "ruleset: vql")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            else:
-                caller.tell("^2/cv ruleset [pql/vql]^7 is the usage for this callvote command.")
-                return minqlx.RET_STOP_ALL
-            
-        if vote.lower() == "abort":
-            # enables the '/cv abort' command
-            if self.game.state != "warmup":
-                self.callvote("abort", "abort the game", 30)
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            else:
-                caller.tell("You can't vote to abort the game when the game isn't in progress.")
-                return minqlx.RET_STOP_ALL
-
-        if vote.lower() == "chatsounds":
-            # enables the '/cv chatsounds [on/off]' command
-            if args.lower() == "off":
-                self.callvote("qlx !unload fun", "chat-activated sounds: off")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            elif args.lower() == "on":
-                self.callvote("qlx !load fun", "chat-activated sounds: on")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            else:
-                caller.tell("^2/cv chatsounds [on/off]^7 is the usage for this callvote command.")
-                return minqlx.RET_STOP_ALL
-
         if vote.lower() == "map":
             # prevent certain maps from being loaded, if they're found to have issues
-            if args.lower() == "disabled_test":
+            if args.lower() is "disabled_test" or args.lower() in self.disabled_maps:
                 caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
                 return minqlx.RET_STOP_ALL
 
-        if vote.lower() == "silence":
-            # enables the '/cv silence <id>' command
-            try:
-                player_name = self.player(int(args)).clean_name
-                player_id = self.player(int(args)).id
-            except:
-                caller.tell("^1Invalid ID.^7 Use a client ID from the ^2/players^7 command.")
-                return minqlx.RET_STOP_ALL
-
-            if self.get_cvar("qlx_serverExemptFromModeration") == "1":
-                caller.tell("This server has the serverExemptFromModeration flag set, and therefore, silencing is disabled.")
-                return minqlx.RET_STOP_ALL
-            
-            self.callvote("qlx !silence {} 10 minutes You were call-voted silent for 10 minutes.; mute {}".format(player_id, player_id), "silence {} for 10 minutes".format(player_name))
-            self.msg("{}^7 called a vote.".format(caller.name))
-            return minqlx.RET_STOP_ALL
-
-        if vote.lower() == "tempban":
-            # enables the '/cv tempban <id>' command
-            try:
-                player_name = self.player(int(args)).clean_name
-                player_id = self.player(int(args)).id
-            except:
-                caller.tell("^1Invalid ID.^7 Use a client ID from the ^2/players^7 command.")
-                return minqlx.RET_STOP_ALL
-
-            if self.player(int(args)).privileges != None:
-                caller.tell("The player specified is an admin, a mod or banned, and cannot be tempbanned.")
-                return minqlx.RET_STOP_ALL
-            
-            self.callvote("tempban {}".format(player_id), "^1ban {} until the map changes^3".format(player_name))
-            self.msg("{}^7 called a vote.".format(caller.name))
-            return minqlx.RET_STOP_ALL
-
-        if vote.lower() == "spec":
-            # enables the '/cv spec <id>' command
-            try:
-                player_name = self.player(int(args)).clean_name
-                player_id = self.player(int(args)).id
-            except:
-                caller.tell("^1Invalid ID.^7 Use a client ID from the ^2/players^7 command.")
-                return minqlx.RET_STOP_ALL
-
-            if self.player(int(args)).team == "spectator":
-                caller.tell("That player is already in the spectators.")
-                return minqlx.RET_STOP_ALL
-            
-            self.callvote("put {} spec".format(player_id), "move {} to the spectators".format(player_name))
-            self.msg("{}^7 called a vote.".format(caller.name))
-            return minqlx.RET_STOP_ALL
-
-        if vote.lower() == "excessive":
-            # enables the '/cv excessive [on/off]' command
-            if args.lower() == "off":
-                self.callvote("qlx !excessiveweaps off", "excessive weapons: off")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            elif args.lower() == "on":
-                self.callvote("qlx !excessiveweaps on", "excessive weapons: on")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            else:
-                caller.tell("^2/cv excessive [on/off]^7 is the usage for this callvote command.")
-                return minqlx.RET_STOP_ALL
-
-    def handle_vote_ended(self, votes, vote, args, passed):
-        self.msg("Vote results: ^2{}^7 - ^1{}^7.".format(votes[0], votes[1]))
-        
-        if passed:
-            if vote.lower() == "map":
-                self.msg("The map is changing to {}.".format(args))
-                
     def cmd_excessive_weaps(self, player, msg, channel):
         if len(msg) < 2:
             return minqlx.RET_USAGE
