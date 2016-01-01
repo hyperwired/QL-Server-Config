@@ -11,7 +11,7 @@ class votestats(minqlx.Plugin):
         
         self.add_command("tomtec_versions", self.cmd_showversion)
         
-        self.plugin_version = "1.2"
+        self.plugin_version = "1.4"
 
 
     def process_vote(self, player, yes):
