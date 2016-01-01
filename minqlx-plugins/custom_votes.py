@@ -12,6 +12,8 @@ class custom_votes(minqlx.Plugin):
         
         self.plugin_version = "1.1"
 
+    def cmd_showversion(self, player, msg, channel):
+        channel.reply("^4custom_votes.py^7 - version {}, created by Thomas Jones on 01/01/2016.".format(self.plugin_version))
         
     def handle_vote_called(self, caller, vote, args):
         if vote.lower() == "kick":
