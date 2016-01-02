@@ -17,7 +17,7 @@ echo "Changed PWD to ~."
 rm -rf "QL-Server-Config" # removes failed installs
 until echo "Downloading the 'QL-Server-Config.git' repository..."; git clone $GITURL; do
   echo "Repository download failed (error $?). Retrying..."
-  sleep 10
+  sleep 3
 done
 cd QL-Server-Config
 cp deploy.sh ~/deploy.sh
