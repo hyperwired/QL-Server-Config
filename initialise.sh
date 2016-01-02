@@ -15,8 +15,10 @@ echo "Initialiser has started."
 cd ~
 echo "Changed PWD to ~."
 rm -rf "QL-Server-Config" # removes failed installs
-echo "Downloading the 'QL-Server-Config.git' repository..."
-git clone $GITURL > /dev/null
+until echo "Downloading the 'QL-Server-Config.git' repository..."; git clone $GITURL; do
+  echo "Repository download failed (error $?). Retrying..."
+  sleep 10
+done
 cd QL-Server-Config
 cp deploy.sh ~/deploy.sh
 chmod +x ~/deploy.sh
