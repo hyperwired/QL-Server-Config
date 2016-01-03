@@ -19,7 +19,14 @@ export qRconPasswordPurgery=$(<~/localConfig-rconPassword-purgery.txt)
 export qPurgeryStart="$qPathToMinqlxStartScript \
 +set qlx_owner $qPurgeryOwnerSteam64ID \
 +set qlx_plugins \"DEFAULT, tomtec_logic, tp_fun, fun, balance, irc, aliases, votestats, custom_votes, cleverbot\" \
-+set qlx_ircPassword $qRconPasswordPurgery"
++set qlx_ircPassword $qRconPasswordPurgery \
++set qlx_ircRelayChannel #thepurgery \
++set qlx_ircServer irc.tomtecsolutions.com.au \
++set qlx_chatlogs 20 \
++set qlx_motdHeader '' \
++set qlx_motdSound 0 \
++set qlx_ircColors 0 \
++set g_inactivity 120"
 
 sponsortag="$qServerLocation,TomTec Solutions"
 gameport=`expr $1 + 27960`
