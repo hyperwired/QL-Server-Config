@@ -307,6 +307,7 @@ exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set qlx_redisDatabase 1 \
     +set net_port $gameport \
+    +set qlx_owner $qPurgeryOwnerSteam64ID \
     +set sv_hostname "4SGv2 - Tournament CA" \
     +set qlx_plugins "DEFAULT, branding, custom_votes" \
     +set qlx_serverBrandName "^54SGv2 Tournament - Clan Arena" \
@@ -318,7 +319,7 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_enable 1 \
     +set zmq_stats_password "$(<~/localConfig-rconPassword-4sg.txt)" \
     +set zmq_stats_port $gameport \
-    +set sv_tags "$qServerLocation" \
+    +set sv_tags "$qServerLocation,4Seasons Gaming" \
     +set bot_enable 0 \
     +set g_accessFile "access_4seasonsgaming.txt" \
     +set sv_mappoolFile "mappool_4sg_ca.txt" \
@@ -339,6 +340,7 @@ exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
     +set qlx_redisDatabase 1 \
     +set net_port $gameport \
+    +set qlx_owner $qPurgeryOwnerSteam64ID \
     +set sv_hostname "4SGv2 - Tournament DUEL" \
     +set qlx_plugins "DEFAULT, branding, custom_votes" \
     +set qlx_serverBrandName "^54SGv2 Tournament - Duel" \
@@ -350,7 +352,7 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_enable 1 \
     +set zmq_stats_password "$(<~/localConfig-rconPassword-4sg.txt)" \
     +set zmq_stats_port $gameport \
-    +set sv_tags "$qServerLocation" \
+    +set sv_tags "$qServerLocation,4Seasons Gaming" \
     +set bot_enable 0 \
     +set g_accessFile "access_4seasonsgaming.txt" \
     +set sv_mappoolFile "mappool_4sg_duel.txt" \
