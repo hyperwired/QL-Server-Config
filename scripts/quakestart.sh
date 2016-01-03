@@ -326,7 +326,9 @@ exec $qPathToMinqlxStartScript \
     +set fs_homepath ~/.quakelive/4sg-tournament-ca \
     +set g_damage_lg 6 \
     +set sv_location "$qServerLocation" \
-    +set g_password "$(<~/localConfig-rconPassword-4sg.txt)"
+    +set g_password "$(<~/localConfig-rconPassword-4sg.txt)" \
+    +set qlx_teamsizeMaximum 2 \
+    +set teamsize 2
 else
 echo "This system is not intended to host 4sg tournament server CA"
 fi
