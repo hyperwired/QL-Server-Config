@@ -41,14 +41,14 @@ class balance(minqlx.Plugin):
         self.add_hook("round_countdown", self.handle_round_countdown)
         self.add_hook("round_start", self.handle_round_start)
         self.add_hook("vote_ended", self.handle_vote_ended)
-        self.add_command(("setrating", "setelo"), self.cmd_setrating, 3, usage="<id> <rating>")
-        self.add_command(("getrating", "getelo", "elo"), self.cmd_getrating, usage="<id> [gametype]")
-        self.add_command(("remrating", "remelo"), self.cmd_remrating, 3, usage="<id>")
+        self.add_command(("setrating", "setelo", "setglicko"), self.cmd_setrating, 3, usage="<id> <rating>")
+        self.add_command(("getrating", "getelo", "elo", "glicko"), self.cmd_getrating, usage="<id> [gametype]")
+        self.add_command(("remrating", "remelo", "remglicko"), self.cmd_remrating, 3, usage="<id>")
         self.add_command("balance", self.cmd_balance, 1)
         self.add_command(("teams", "teens"), self.cmd_teams)
         self.add_command("do", self.cmd_do, 1)
         self.add_command(("agree", "a"), self.cmd_agree)
-        self.add_command(("ratings", "elos", "selo"), self.cmd_ratings)
+        self.add_command(("ratings", "elos", "selo", "sglickos"), self.cmd_ratings)
 
         self.ratings_lock = threading.RLock()
         # Keys: steam_id - Items: {"ffa": {"elo": 123, "games": 321, "local": False}, ...}
@@ -175,7 +175,7 @@ class balance(minqlx.Plugin):
         del self.requests[request_id]
         if status_code != requests.codes.ok:
             # TODO: Put a couple of known errors here for more detailed feedback.
-            channel.reply("ERROR {}: Failed to fetch ratings.".format(status_code))
+            channel.reply("ERROR {}: Failed to fetch glicko ratings.".format(status_code))
         else:
             callback(players, channel, *args)
 
@@ -241,7 +241,7 @@ class balance(minqlx.Plugin):
         else:
             name = sid
         
-        channel.reply("{} has a rating of ^4{}^7 in {}.".format(name, self.ratings[sid][gametype]["elo"], gametype.upper()))
+        channel.reply("{} has a glicko rating of ^4{}^7 in {}.".format(name, self.ratings[sid][gametype]["elo"], gametype.upper()))
 
     def cmd_setrating(self, player, msg, channel):
         if len(msg) < 3:
@@ -263,7 +263,7 @@ class balance(minqlx.Plugin):
         try:
             rating = int(msg[2])
         except ValueError:
-            channel.reply("Invalid rating.")
+            channel.reply("Invalid glicko rating.")
             return minqlx.RET_STOP_ALL
 
         if target_player:
@@ -281,7 +281,7 @@ class balance(minqlx.Plugin):
                 self.ratings[sid][gt]["local"] = True
                 self.ratings[sid][gt]["time"] = -1
 
-        channel.reply("{}'s {} rating has been set to ^4{}^7.".format(name, gt.upper(), rating))
+        channel.reply("{}'s {} glicko rating has been set to ^4{}^7.".format(name, gt.upper(), rating))
 
     def cmd_remrating(self, player, msg, channel):
         if len(msg) < 2:
