@@ -18,7 +18,7 @@ export qPurgeryOwnerSteam64ID="76561198213481765"
 export qRconPasswordPurgery=$(<~/localConfig-rconPassword-purgery.txt)
 export qPurgeryStart="$qPathToMinqlxStartScript \
 +set qlx_owner $qPurgeryOwnerSteam64ID \
-+set qlx_plugins \"DEFAULT, tomtec_logic, tp_fun, fun, balance, irc, tp_sounds, aliases, votestats, custom_votes, cleverbot\" \
++set qlx_plugins \"DEFAULT, tomtec_logic, tp_fun, fun, balance, irc, aliases, votestats, custom_votes, cleverbot\" \
 +set qlx_ircPassword $qRconPasswordPurgery"
 
 sponsortag="$qServerLocation,TomTec Solutions"
