@@ -694,3 +694,63 @@
 
 # q3sg1c
 583483661
+
+# dm6swift
+583467750
+
+# pillars
+582740326
+
+# Opium
+586817666
+
+# Haunted
+586818000
+
+# Nu Clear Lunch Time
+586859581
+
+# Plus Maps
+587950516
+
+# Hall of Fame - 1.31 eFreeze community
+588212572
+
+# Bal3dm4 - Scrap Metal ][
+588238794
+
+# Uzuldaroum III
+588286307
+
+# Nemesis Online
+588297581
+
+# Feel the Way You Hate
+588430438
+
+# Bal3dm3 - Disinformation
+588859229
+
+# Bal3void2 - Malfunctioning Nano-Constructor
+588911765
+
+# Bal3dm1 - Ash Rain
+588941415
+
+# Bal3dm2 - Golconda
+588956903
+
+# Bal3void1 - Peaceful Holidays in Egypt
+588972906
+
+# Bal3dm5 - Junk Data
+588990000
+
+# Big Box
+589208436
+
+# Facing Worlds (Unreal Tournament CTF map)
+589313020
+
+# Portal Mayhem
+589919154
