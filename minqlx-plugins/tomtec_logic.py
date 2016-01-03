@@ -19,18 +19,16 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("unmuteall", self.cmd_unmuteall, 4)
         self.add_command(("feedback", "fb"), self.cmd_feedback)
         self.add_command("killall", self.cmd_killall, 4)
-        self.add_command("excessiveweaps", self.cmd_excessive_weaps, 5, usage="on/off")
         self.add_command("addbot", self.cmd_addbot, 1)
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
-        self.add_command("ruleset", self.cmd_ruleset, 5, usage="pql/vql")
         self.add_command(("wiki", "w"), self.cmd_wiki)
     
         self.disabled_maps = []
         
         self.set_cvar_once("qlx_excessive", "0")
 
-        self.plugin_version = "2.2"
+        self.plugin_version = "2.3"
 
     def cmd_wiki(self, player, msg, channel):
         channel.reply("Visit ^2tomtecsolutions.com.au/thepurgery^7 to see ^4The Purgery^7's wiki.")
@@ -41,40 +39,6 @@ class tomtec_logic(minqlx.Plugin):
 
     def cmd_rembot(self, player, msg, channel):
         minqlx.console_command("kick allbots")
-
-    def cmd_ruleset(self, player, msg, channel):
-        if len(msg) < 2:
-            return minqlx.RET_USAGE
-        
-        if msg[1].lower() == "pql":
-            minqlx.set_cvar("pmove_airControl", "1")
-            minqlx.set_cvar("pmove_rampJump", "1")
-            minqlx.set_cvar("weapon_reload_rg", "1200")
-            minqlx.set_cvar("pmove_weaponRaiseTime", "10")
-            minqlx.set_cvar("pmove_weaponDropTime", "10")
-            minqlx.set_cvar("g_damage_lg", "7")
-            minqlx.set_cvar("dmflags", "60")
-            if self.game.type_short == "ca":
-                minqlx.set_cvar("g_startingHealth", "200")
-                minqlx.set_cvar("g_startingArmor", "200")
-            minqlx.console_command("map_restart")
-            self.msg("PQL ruleset is now set.")
-
-        if msg[1].lower() == "vql":
-            minqlx.set_cvar("pmove_airControl", "0")
-            minqlx.set_cvar("pmove_rampJump", "0")
-            minqlx.set_cvar("weapon_reload_rg", "1500")
-            minqlx.set_cvar("pmove_weaponRaiseTime", "200")
-            minqlx.set_cvar("pmove_weaponDropTime", "200")
-            minqlx.set_cvar("g_damage_lg", "6")
-            if self.game.type_short == "ca":
-                minqlx.set_cvar("dmflags", "28")
-            else:
-                minqlx.console_command("reset dmflags")
-            minqlx.console_command("reset g_startingHealth")
-            minqlx.console_command("reset g_startingArmor")
-            minqlx.console_command("map_restart")
-            self.msg("VQL ruleset is now set.")
             
     def cmd_muteall(self, player, msg, channel):
         # mute everybody on the server
@@ -172,44 +136,6 @@ class tomtec_logic(minqlx.Plugin):
             if args.lower() is "disabled_test" or args.lower() in self.disabled_maps:
                 caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
                 return minqlx.RET_STOP_ALL
-
-    def cmd_excessive_weaps(self, player, msg, channel):
-        if len(msg) < 2:
-            return minqlx.RET_USAGE
-        
-        if msg[1] == "on":
-            minqlx.set_cvar("weapon_reload_sg", "200")
-            minqlx.set_cvar("weapon_reload_rl", "200")
-            minqlx.set_cvar("weapon_reload_rg", "50")
-            minqlx.set_cvar("weapon_reload_prox", "200")
-            minqlx.set_cvar("weapon_reload_pg", "40")
-            minqlx.set_cvar("weapon_reload_ng", "800")
-            minqlx.set_cvar("weapon_reload_mg", "40")
-            minqlx.set_cvar("weapon_reload_hmg", "40")
-            minqlx.set_cvar("weapon_reload_gl", "200")
-            minqlx.set_cvar("weapon_reload_gauntlet", "100")
-            minqlx.set_cvar("weapon_reload_cg", "30")
-            minqlx.set_cvar("weapon_reload_bfg", "75")
-            minqlx.set_cvar("qlx_excessive", "1")
-            self.msg("Excessive weapons are enabled.")
-        if msg[1] == "off":
-            minqlx.console_command("reset weapon_reload_sg")
-            minqlx.console_command("reset weapon_reload_rl")
-            if (minqlx.get_cvar("pmove_airControl")) == "1":
-                minqlx.set_cvar("weapon_reload_rg", "1200")
-            else:
-                minqlx.console_command("reset weapon_reload_rg")
-            minqlx.console_command("reset weapon_reload_prox")
-            minqlx.console_command("reset weapon_reload_pg")
-            minqlx.console_command("reset weapon_reload_ng")
-            minqlx.console_command("reset weapon_reload_mg")
-            minqlx.console_command("reset weapon_reload_hmg")
-            minqlx.console_command("reset weapon_reload_gl")
-            minqlx.console_command("reset weapon_reload_gauntlet")
-            minqlx.console_command("reset weapon_reload_cg")
-            minqlx.console_command("reset weapon_reload_bfg")
-            minqlx.set_cvar("qlx_excessive", "0")
-            self.msg("Excessive weapons are disabled.")
                             
     def cmd_maprestart(self, player, msg, channel):
         # run a map restart
