@@ -1,5 +1,4 @@
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
-# Some of the votes here rely on the tomtec_logic plugin (ruleset for example).
 # custom_votes.py - a minqlx plugin to enable the ability to have custom vote functionality in-game.
 
 import minqlx
@@ -9,32 +8,87 @@ class custom_votes(minqlx.Plugin):
         self.add_hook("vote_called", self.handle_vote_called)
 
         self.add_command("tomtec_versions", self.cmd_showversion)
+        self.add_command("excessiveweaps", self.cmd_excessive_weaps, 5, usage="on/off")
+        self.add_command("ruleset", self.cmd_ruleset, 5, usage="pql/vql")
         
-        self.plugin_version = "1.1"
+        self.plugin_version = "1.3"
 
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4custom_votes.py^7 - version {}, created by Thomas Jones on 01/01/2016.".format(self.plugin_version))
+
+    def cmd_ruleset(self, player, msg, channel):
+        if len(msg) < 2:
+            return minqlx.RET_USAGE
         
+        if msg[1].lower() == "pql":
+            minqlx.set_cvar("pmove_airControl", "1")
+            minqlx.set_cvar("pmove_rampJump", "1")
+            minqlx.set_cvar("weapon_reload_rg", "1200")
+            minqlx.set_cvar("pmove_weaponRaiseTime", "10")
+            minqlx.set_cvar("pmove_weaponDropTime", "10")
+            minqlx.set_cvar("g_damage_lg", "7")
+            minqlx.set_cvar("dmflags", "60")
+            if self.game.type_short == "ca":
+                minqlx.set_cvar("g_startingHealth", "200")
+                minqlx.set_cvar("g_startingArmor", "200")
+            minqlx.console_command("map_restart")
+            self.msg("PQL ruleset is now set.")
+
+        if msg[1].lower() == "vql":
+            minqlx.set_cvar("pmove_airControl", "0")
+            minqlx.set_cvar("pmove_rampJump", "0")
+            minqlx.set_cvar("weapon_reload_rg", "1500")
+            minqlx.set_cvar("pmove_weaponRaiseTime", "200")
+            minqlx.set_cvar("pmove_weaponDropTime", "200")
+            minqlx.set_cvar("g_damage_lg", "6")
+            if self.game.type_short == "ca":
+                minqlx.set_cvar("dmflags", "28")
+            else:
+                minqlx.console_command("reset dmflags")
+            minqlx.console_command("reset g_startingHealth")
+            minqlx.console_command("reset g_startingArmor")
+            minqlx.console_command("map_restart")
+            self.msg("VQL ruleset is now set.")
+
+    def cmd_excessive_weaps(self, player, msg, channel):
+        if len(msg) < 2:
+            return minqlx.RET_USAGE
+        
+        if msg[1] == "on":
+            minqlx.set_cvar("weapon_reload_sg", "200")
+            minqlx.set_cvar("weapon_reload_rl", "200")
+            minqlx.set_cvar("weapon_reload_rg", "50")
+            minqlx.set_cvar("weapon_reload_prox", "200")
+            minqlx.set_cvar("weapon_reload_pg", "40")
+            minqlx.set_cvar("weapon_reload_ng", "800")
+            minqlx.set_cvar("weapon_reload_mg", "40")
+            minqlx.set_cvar("weapon_reload_hmg", "40")
+            minqlx.set_cvar("weapon_reload_gl", "200")
+            minqlx.set_cvar("weapon_reload_gauntlet", "100")
+            minqlx.set_cvar("weapon_reload_cg", "30")
+            minqlx.set_cvar("weapon_reload_bfg", "75")
+            minqlx.set_cvar("qlx_excessive", "1")
+            self.msg("Excessive weapons are enabled.")
+        if msg[1] == "off":
+            minqlx.console_command("reset weapon_reload_sg")
+            minqlx.console_command("reset weapon_reload_rl")
+            if (minqlx.get_cvar("pmove_airControl")) == "1":
+                minqlx.set_cvar("weapon_reload_rg", "1200")
+            else:
+                minqlx.console_command("reset weapon_reload_rg")
+            minqlx.console_command("reset weapon_reload_prox")
+            minqlx.console_command("reset weapon_reload_pg")
+            minqlx.console_command("reset weapon_reload_ng")
+            minqlx.console_command("reset weapon_reload_mg")
+            minqlx.console_command("reset weapon_reload_hmg")
+            minqlx.console_command("reset weapon_reload_gl")
+            minqlx.console_command("reset weapon_reload_gauntlet")
+            minqlx.console_command("reset weapon_reload_cg")
+            minqlx.console_command("reset weapon_reload_bfg")
+            minqlx.set_cvar("qlx_excessive", "0")
+            self.msg("Excessive weapons are disabled.")
+            
     def handle_vote_called(self, caller, vote, args):
-        if vote.lower() == "kick":
-            # prevent certain players from being kicked via a call-vote
-            playerName = args.lower()
-            if playerName == "saturn":
-                caller.tell("^7Voting to kick the server owner is prohibited. This incident has been recorded.")
-                return minqlx.RET_STOP_ALL
-            if playerName == "merozollo":
-                caller.tell("^7Voting to kick a server administrator is prohibited. This incident has been recorded.")
-                return minqlx.RET_STOP_ALL
-            if playerName == "0regonn":
-                caller.tell("^7Voting to kick a protected player is prohibited. This incident has been recorded.")
-                return minqlx.RET_STOP_ALL
-
-        if vote.lower() == "clientkick":
-            # disable client-kick, as it interferes with player protection
-            caller.tell("^7Voting from the in-game menu/clientkick is disabled, as it conflicts with the player protection system.")
-            caller.tell("^7Please use the ^2/cv^7 or ^2/callvote^7 console commands.")
-            return minqlx.RET_STOP_ALL
-
         if vote.lower() == "infiniteammo":
             # enables the '/cv infiniteammo [on/off]' command
             if args.lower() == "off":
