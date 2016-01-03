@@ -297,4 +297,68 @@ exec $qPathToVanillaStartScript \
 else
 echo "This system is not intended to host pit clan (sub586) server."
 fi
+elif [ $1 -eq 10 ]
+# starting 4sg tournament server CA
+then
+if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
+then
+echo "Starting starting 4sg tournament server CA..."
+exec $qPathToMinqlxStartScript \
+    +set net_strict 1 \
+    +set qlx_redisDatabase 1 \
+    +set net_port $gameport \
+    +set sv_hostname "4SGv2 - Tournament CA" \
+    +set qlx_plugins "DEFAULT, branding, custom_votes" \
+    +set qlx_serverBrandName "^54SGv2 Tournament - Clan Arena" \
+    +set qlx_serverBrandTopField "Run by ^54Seasons Gaming^7. ^2http://4seasonsgaming.com^7." \
+    +set qlx_serverBrandBottomField "Admins: ^4mickzerofive, zlr, phy1um^7." \
+    +set zmq_rcon_enable 1 \
+    +set zmq_rcon_password "$(<~/localConfig-rconPassword-4sg.txt)" \
+    +set zmq_rcon_port $rconport \
+    +set zmq_stats_enable 1 \
+    +set zmq_stats_password "$(<~/localConfig-rconPassword-4sg.txt)" \
+    +set zmq_stats_port $gameport \
+    +set sv_tags "$qServerLocation" \
+    +set bot_enable 0 \
+    +set g_accessFile "access_4seasonsgaming.txt" \
+    +set sv_mappoolFile "mappool_4sg_ca.txt" \
+    +set fs_homepath ~/.quakelive/4sg-tournament-ca \
+    +set g_damage_lg 6 \
+    +set sv_location "$qServerLocation" \
+    +set g_password "$(<~/localConfig-rconPassword-4sg.txt)"
+else
+echo "This system is not intended to host 4sg tournament server CA"
+fi
+elif [ $1 -eq 11 ]
+# starting 4sg tournament server DUEL
+then
+if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
+then
+echo "Starting starting 4sg tournament server DUEL..."
+exec $qPathToMinqlxStartScript \
+    +set net_strict 1 \
+    +set qlx_redisDatabase 1 \
+    +set net_port $gameport \
+    +set sv_hostname "4SGv2 - Tournament DUEL" \
+    +set qlx_plugins "DEFAULT, branding, custom_votes" \
+    +set qlx_serverBrandName "^54SGv2 Tournament - Duel" \
+    +set qlx_serverBrandTopField "Run by ^54Seasons Gaming^7. ^2http://4seasonsgaming.com^7." \
+    +set qlx_serverBrandBottomField "Admins: ^4mickzerofive, zlr, phy1um^7." \
+    +set zmq_rcon_enable 1 \
+    +set zmq_rcon_password "$(<~/localConfig-rconPassword-4sg.txt)" \
+    +set zmq_rcon_port $rconport \
+    +set zmq_stats_enable 1 \
+    +set zmq_stats_password "$(<~/localConfig-rconPassword-4sg.txt)" \
+    +set zmq_stats_port $gameport \
+    +set sv_tags "$qServerLocation" \
+    +set bot_enable 0 \
+    +set g_accessFile "access_4seasonsgaming.txt" \
+    +set sv_mappoolFile "mappool_4sg_duel.txt" \
+    +set fs_homepath ~/.quakelive/4sg-tournament-duel \
+    +set g_damage_lg 6 \
+    +set sv_location "$qServerLocation" \
+    +set g_password "$(<~/localConfig-rconPassword-4sg.txt)"
+else
+echo "This system is not intended to host 4sg tournament server DUEL"
+fi
 fi
