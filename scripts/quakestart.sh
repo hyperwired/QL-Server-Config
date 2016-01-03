@@ -361,7 +361,8 @@ exec $qPathToMinqlxStartScript \
     +set fs_homepath ~/.quakelive/4sg-tournament-duel \
     +set g_damage_lg 6 \
     +set sv_location "$qServerLocation" \
-    +set g_password "$(<~/localConfig-rconPassword-4sg.txt)"
+    +set g_password "$(<~/localConfig-rconPassword-4sg.txt)" \
+    +set g_voteFlags 2048
 else
 echo "This system is not intended to host 4sg tournament server DUEL"
 fi
