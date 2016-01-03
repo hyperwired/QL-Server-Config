@@ -1,5 +1,5 @@
 // This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
-// server.cfg - TomTec Solutions' Quake Live servers' primary configuration file.
+// server.cfg - TomTec Solutions' Quake Live servers' primary/global configuration file.
 
 set sv_mapPoolFile "mappool.txt"      // Map pool that the server will use. See default mapcycle.txt for format.
 set g_accessFile "access.txt"         // Used to determine which 64-bit Steam IDs have admin access, or are banned.
@@ -23,15 +23,8 @@ set ttycon 0                          // Stop qzeroded from attempting to bind t
 set sv_fps "40"                       // Set server frames-per-second, 40 is the default.
 set sv_idleExit "120"                 // Kill qzeroded if the server remains idle for 120 seconds (idle = mapless).
 set serverstartup "startRandomMap"    // Make the server start a map from the map rotation file once it's finished initialising.
-set g_inactivity "120"                // Drop any player who is inactive for 120 seconds.
 
 
 // minqlx configuration
 
-set qlx_redisAddress "43.229.61.190:6379"                                                                                                                              // QLMaster Redis Server.
-set qlx_ircServer "irc.tomtecsolutions.com.au"                                                                                                                         // TomTec Solutions IRC (required for CommLink functionality).
-set qlx_ircRelayChannel "#thepurgery"                                                                                                                                  // Connect to this channel automatically (default CommLink channel).
-set qlx_ircColors 0                                                                                                                                                    // Enable mIRC-standard colouring.
-set qlx_motdSound 0                                                                                                                                                    // Stop any sounds from playing on MOTD displaying.
-set qlx_motdHeader ""                                                                                                                                                  // Don't have the MOTD tell us what it is.
-set qlx_chatlogs 20                                                                                                                                                    // How many logs do we save for chats/minqlx etc.
+set qlx_redisAddress "43.229.61.190:6379"                                    // QLMaster Redis Server.
