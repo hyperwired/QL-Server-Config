@@ -10,6 +10,9 @@ class custom_votes(minqlx.Plugin):
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command("excessiveweaps", self.cmd_excessive_weaps, 5, usage="on/off")
         self.add_command("ruleset", self.cmd_ruleset, 5, usage="pql/vql")
+
+        self.set_cvar_once("qlx_rulesetLocked", "0")
+        self.set_cvar_once("qlx_serverExemptFromModeration", "0")
         
         self.plugin_version = "1.3"
 
