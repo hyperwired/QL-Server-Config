@@ -20,7 +20,7 @@ class pingspec(minqlx.Plugin):
 
     def process_frame(self):
         self.frame_counter += 1
-        if self.frame_counter == (self.seconds_between_checks * int(minqlx.get_cvar("sv_fps"))):
+        if self.frame_counter == (self.seconds_between_checks * minqlx.get_cvar("sv_fps", int)):
             self.frame_counter = 0
             self.check_ping()
 
