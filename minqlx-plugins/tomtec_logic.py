@@ -89,7 +89,7 @@ class tomtec_logic(minqlx.Plugin):
     def player_loaded(self, player):
         # display a message to a newly-loaded/connected player
         minqlx.send_server_command(player.id, "cp \"^7Welcome to ^4The Purgery^7\"\n")
-        self.play_sound("tp_sounds/thomas/welcome_purgery.ogg", player)
+        #self.play_sound("tp_sounds/thomas/welcome_purgery.ogg", player)
 
         if (minqlx.get_cvar("qlx_excessive")) == "1":
             player.tell("Excessive weapons are ^2enabled^7. To disable them, ^2/cv excessive off^7.")
