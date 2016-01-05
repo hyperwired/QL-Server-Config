@@ -141,6 +141,7 @@ class irc(minqlx.Plugin):
          
     def handle_perform(self, irc):
         self.logger.info("Connected to IRC!".format(self.server))
+        self.msg("Connected to ^3CommLink^7.")
 
         quser, qpass, qhidden = self.qnet
         if quser and qpass and "NETWORK" in self.irc.server_options and self.irc.server_options["NETWORK"] == "QuakeNet":
