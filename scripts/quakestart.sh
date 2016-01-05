@@ -23,7 +23,6 @@ export qPurgeryStart="$qPathToMinqlxStartScript \
 +set qlx_ircRelayChannel #thepurgery \
 +set qlx_ircServer irc.tomtecsolutions.com.au \
 +set qlx_chatlogs 20 \
-+set qlx_motdHeader '' \
 +set qlx_motdSound 0 \
 +set qlx_ircColors 0 \
 +set g_inactivity 120"
