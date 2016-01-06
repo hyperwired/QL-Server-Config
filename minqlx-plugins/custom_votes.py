@@ -267,6 +267,6 @@ class custom_votes(minqlx.Plugin):
                 caller.tell("^2/cv excessive [on/off]^7 is the usage for this callvote command.")
                 return minqlx.RET_STOP_ALL
 
-        def cmd_showversion(self, player, msg, channel):
-            channel.reply("^4custom_votes.py^7 - version {}, created by Thomas Jones on 01/01/2016.".format(self.plugin_version))
+    def cmd_showversion(self, player, msg, channel):
+        channel.reply("^4custom_votes.py^7 - version {}, created by Thomas Jones on 01/01/2016.".format(self.plugin_version))
 
