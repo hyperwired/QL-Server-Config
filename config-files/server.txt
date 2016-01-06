@@ -23,6 +23,7 @@ set ttycon 0                          // Stop qzeroded from attempting to bind t
 set sv_fps "40"                       // Set server frames-per-second, 40 is the default.
 set sv_idleExit "120"                 // Kill qzeroded if the server remains idle for 120 seconds (idle = mapless).
 set serverstartup "startRandomMap"    // Make the server start a map from the map rotation file once it's finished initialising.
+set sv_vac 1                          // Enable the Valve Anti-Cheat protection system.
 
 
 // minqlx configuration
