@@ -13,7 +13,6 @@ class custom_votes(minqlx.Plugin):
         self.add_command("ruleset", self.cmd_ruleset, 5, usage="pql/vql")
 
         self.set_cvar_once("qlx_rulesetLocked", "0")
-        self.set_cvar_once("qlx_serverExemptFromModeration", "0")
         self.set_cvar_once("qlx_excessive", "0")
         
         self.plugin_version = "1.3"
