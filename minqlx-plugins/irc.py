@@ -34,7 +34,8 @@ class irc(minqlx.Plugin):
         self.add_hook("unload", self.handle_unload)
         self.add_hook("player_connect", self.handle_player_connect, priority=minqlx.PRI_LOWEST)
         self.add_hook("player_disconnect", self.handle_player_disconnect, priority=minqlx.PRI_LOWEST)
-
+        self.add_hook("game_countdown", self.game_countdown)
+        
         self.add_command(("world", "say_world"), self.send_irc_message, priority=minqlx.PRI_LOWEST)
         self.add_command("tomtec_versions", self.cmd_showversion)
 
@@ -99,6 +100,10 @@ class irc(minqlx.Plugin):
         if self.irc and self.relay:
             self.irc.msg(self.relay, self.translate_colors("^3{}^7 {}".format(player.name, reason)))
 
+    def game_countdown(self):
+        if minqlx.get_cvar("net_port") == "27964":
+            self.msg("^3CommLink^7 message reception has been disabled during your Duel.")
+
     def handle_msg(self, irc, user, channel, msg):
         if not msg:
             return
@@ -107,8 +112,13 @@ class irc(minqlx.Plugin):
         if channel.lower() == self.relay.lower(): 
             if cmd in (".players", ".status", ".info", ".map", ".server"):
                 self.server_report(self.relay)
-            elif self.is_relaying: 
-                minqlx.CHAT_CHANNEL.reply("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
+            elif self.is_relaying:
+                if minqlx.get_cvar("net_port") != "27964":
+                    minqlx.CHAT_CHANNEL.reply("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
+                else:
+                    if self.game.state == "warmup":
+                        minqlx.CHAT_CHANNEL.reply("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
+                        
         elif channel == user[0]: # Is PM?
             if len(msg) > 1 and msg[0].lower() == ".auth" and self.password:
                 if user in self.authed:
