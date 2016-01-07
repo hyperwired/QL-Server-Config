@@ -9,7 +9,7 @@
 76561198197573413|admin
 
 # admin 2, 0regonn
-76561198150444650|admin
+# 76561198150444650|admin (ON REQUESTED LEAVE)
 
 # admin 3, barley
 76561197971374552|admin
