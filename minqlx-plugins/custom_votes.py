@@ -94,6 +94,10 @@ class custom_votes(minqlx.Plugin):
             self.msg("Excessive weapons are disabled.")
             
     def handle_vote_called(self, caller, vote, args):
+        if not (self.get_cvar("g_allowSpecVote", bool)) and caller.team == "spectator":
+            caller.tell("You are not allowed to call a vote as spectator.")
+            return
+
         if vote.lower() == "infiniteammo":
             # enables the '/cv infiniteammo [on/off]' command
             if args.lower() == "off":
