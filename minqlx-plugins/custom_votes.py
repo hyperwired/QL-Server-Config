@@ -229,8 +229,8 @@ class custom_votes(minqlx.Plugin):
             # enables the '/cv tempban <id>' command
             if self.get_cvar("qlx_disablePlayerRemoval", bool):
                 if caller.privileges == None:
-                    caller.tell("Voting to kick/clientkick is disabled in this server due to repeated misuse.")
-                    caller.tell("^2/cv spec <id>^7 and ^2/cv silence <id>^7 exist as substitutes to kicking.")
+                    caller.tell("Voting to tempban is disabled in this server due to repeated misuse.")
+                    caller.tell("^2/cv spec <id>^7 and ^2/cv silence <id>^7 exist as substitutes to kicking/tempbanning.")
                     caller.tell("If you believe a player requires further attention, consult a mod/admin in-game or over ^2!world^7.")
                     return minqlx.RET_STOP_ALL
             try:
