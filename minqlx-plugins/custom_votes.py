@@ -14,6 +14,7 @@ class custom_votes(minqlx.Plugin):
 
         self.set_cvar_once("qlx_rulesetLocked", "0")
         self.set_cvar_once("qlx_excessive", "0")
+        self.set_cvar_once("qlx_disablePlayerRemoval", "0")
         
         self.plugin_version = "1.3"
 
@@ -95,8 +96,9 @@ class custom_votes(minqlx.Plugin):
             
     def handle_vote_called(self, caller, vote, args):
         if not (self.get_cvar("g_allowSpecVote", bool)) and caller.team == "spectator":
-            caller.tell("You are not allowed to call a vote as spectator.")
-            return
+            if caller.privileges == None:
+                caller.tell("You are not allowed to call a vote as spectator.")
+                return minqlx.RET_STOP_ALL
 
         if vote.lower() == "infiniteammo":
             # enables the '/cv infiniteammo [on/off]' command
@@ -206,7 +208,7 @@ class custom_votes(minqlx.Plugin):
                 caller.tell("^2/cv chatsounds [on/off]^7 is the usage for this callvote command.")
                 return minqlx.RET_STOP_ALL
 
-        if vote.lower() == "silence":
+        if vote.lower() in ("silence", "mute"):
             # enables the '/cv silence <id>' command
             try:
                 player_name = self.player(int(args)).clean_name
@@ -225,6 +227,12 @@ class custom_votes(minqlx.Plugin):
 
         if vote.lower() == "tempban":
             # enables the '/cv tempban <id>' command
+            if self.get_cvar("qlx_disablePlayerRemoval", bool):
+                if caller.privileges == None:
+                    caller.tell("Voting to kick/clientkick is disabled in this server due to repeated misuse.")
+                    caller.tell("^2/cv spec <id>^7 and ^2/cv silence <id>^7 exist as substitutes to kicking.")
+                    caller.tell("If you believe a player requires further attention, consult a mod/admin in-game or over ^2!world^7.")
+                    return minqlx.RET_STOP_ALL
             try:
                 player_name = self.player(int(args)).clean_name
                 player_id = self.player(int(args)).id
@@ -271,6 +279,14 @@ class custom_votes(minqlx.Plugin):
                 caller.tell("^2/cv excessive [on/off]^7 is the usage for this callvote command.")
                 return minqlx.RET_STOP_ALL
 
+        if vote.lower() in ("kick", "clientkick"):
+            if self.get_cvar("qlx_disablePlayerRemoval", bool):
+                if caller.privileges == None:
+                    caller.tell("Voting to kick/clientkick is disabled in this server due to repeated misuse.")
+                    caller.tell("^2/cv spec <id>^7 and ^2/cv silence <id>^7 exist as substitutes to kicking.")
+                    caller.tell("If you believe a player requires further attention, consult a mod/admin in-game or over ^2!world^7.")
+                    return minqlx.RET_STOP_ALL
+                
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4custom_votes.py^7 - version {}, created by Thomas Jones on 01/01/2016.".format(self.plugin_version))
 

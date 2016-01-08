@@ -89,7 +89,8 @@ exec $qPurgeryStart \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set g_damage_lg 6 \
-    +set qlx_rulesetLocked 1
+    +set qlx_rulesetLocked 1 \
+    +set qlx_disablePlayerRemoval 1
 elif [ $1 -eq 2 ]
 # starting PQL Race 1...
 then
