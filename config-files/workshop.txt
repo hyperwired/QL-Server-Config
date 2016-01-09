@@ -522,7 +522,7 @@
 577333309
 
 # pro-q3dm6 original Quake III Arena map
-576339240
+# 576339240 - This item loads QVM files, and is considered malicious. Please do not re-enable this map.
 
 # Elfinko DM Alpha 1
 575806276

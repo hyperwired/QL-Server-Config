@@ -24,7 +24,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command(("wiki", "w"), self.cmd_wiki)
     
-        self.disabled_maps = []
+        self.disabled_maps = ["proq3dm6"]
         
         self.set_cvar_once("qlx_excessive", "0")
 
@@ -110,14 +110,14 @@ class tomtec_logic(minqlx.Plugin):
         player.tell("^7    3. No cheating, hacking or abuse of server privileges.")
         player.tell("^7    4. Lack of common sense is prohibited.")
         player.tell("^7    5. If you've been muted, you're obviously doing something that one or more server ops don't approve of.")
-        player.tell("^7    6. These servers are being paid for by Sa^4t^7urn, and the donators that assist with the funding.")
+        player.tell("^7    6. These servers are being paid for by Pur^4g^7er, and the donators that assist with the funding.")
         player.tell("^1  Failure to comply with these rules will result in a mute, a temporary ban, or a permanent ban.")
         player.tell("^7  Have ^2fun^7, play, enjoy, don't do anything stupid.")
         player.tell("^4========================================================================================")
 
     def cmd_help(self, player, msg, channel):
         player.tell("This server runs ^4tomtec_logic.py^7, a ^4minqlx^7 plugin designed for ^4The Purgery^7 servers.")
-        player.tell("^4tomtec_logic.py^7 is (c) 2015, Thomas Jones (Sa^4t^7urn), TomTec Solutions.")
+        player.tell("^4tomtec_logic.py^7 is (c) 2015, Thomas Jones (Pur^4g^7er), TomTec Solutions.")
         player.tell("Please visit ^2http://tomtecsolutions.com.au/thepurgery^7 for information about the servers.")
         return minqlx.RET_STOP_EVENT
 
