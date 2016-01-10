@@ -757,3 +757,33 @@
 
 # Hypersonic Tourney
 597391077
+
+# Cloudwalk
+590113525
+
+# koz24
+591213538
+
+# trippy_run
+592754466
+
+# jLHC
+593100602
+
+# jLHC2
+595181354
+
+# Midair Map Pack
+596113472
+
+# jCommon
+596370556
+
+# mkbase
+596909949
+
+# Iris | rota3ctf1
+596919463
+
+# Capture the Karin | rota3ctf2
+596924297
