@@ -1,4 +1,4 @@
-All files and data on this repository is part of the Quake Live server implementation by TomTec Solutions.
+All files and data on this repository is part of the Quake Live server implementation by TomTec Solutions, and is the property of TomTec Solutions.
 
 Do not use, modify, redistribute or link to this repository and/or it's files without the express written permission of Thomas Jones (thomas@tomtecsolutions.com)
 
