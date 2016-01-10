@@ -131,7 +131,7 @@ class tomtec_logic(minqlx.Plugin):
         if vote.lower() == "map":
             # prevent certain maps from being loaded, if they're found to have issues
             if args.lower() is "disabled_test" or args.lower() in self.disabled_maps:
-                caller.tell("Map ^4{}^7 is currently disabled, as it breaks the server. ^4-- Sa^4t^7urn (27/11/15)".format(args.lower()))
+                caller.tell("Map ^4{}^7 is currently disabled, please contact an admin/mod for details.".format(args.lower()))
                 return minqlx.RET_STOP_ALL
                             
     def cmd_maprestart(self, player, msg, channel):
