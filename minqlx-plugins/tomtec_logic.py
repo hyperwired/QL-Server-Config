@@ -24,7 +24,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command(("wiki", "w"), self.cmd_wiki)
     
-        self.disabled_maps = ["proq3dm6"]
+        self.disabled_maps = ["proq3dm6", "ra3map1"]
         
         self.set_cvar_once("qlx_excessive", "0")
 
