@@ -281,7 +281,7 @@ exec $qPathToMinqlxStartScript \
     +set qlx_redisDatabase 2 \
     +set net_port $gameport \
     +set qlx_owner $qPurgeryOwnerSteam64ID \
-    +set qlx_plugins "DEFAULT, branding" \
+    +set qlx_plugins "DEFAULT, branding, fun" \
     +set qlx_serverBrandName "=^4P^1i^4T^7= Clan Server" \
     +set qlx_serverBrandTopField "Check out our forums at ^2http://intothepit.org^7" \
     +set qlx_serverBrandBottomField "Owner: Dv8" \
