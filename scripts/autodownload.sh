@@ -21,5 +21,10 @@ done
 echo "Removing old workshop data and moving new items into place..."
 rm -r ~/steamcmd/steamapps/common/qlds/steamapps/workshop
 mv ~/steamcmd/steamapps/workshop/ ~/steamcmd/steamapps/common/qlds/steamapps/workshop
-echo Done.
+counter=1
+while [ $counter -lt 6 ]; do
+	echo Running qzeroded.x64 to make sure all workshop items are downloaded... (instance $counter of 5)
+	~/steamcmd/steamapps/common/qlds/run_server_x64.sh +quit > ~/qzeroded_autoDownload.txt
+	((counter++))
+done
 exit 0
