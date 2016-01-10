@@ -2,6 +2,7 @@
 ### Live configuration of the TomTec Solutions servers.
 
 Please read the LICENCE file in the root of this repository now.
+You are most likely looking for this repository: http://github.com/tjone270/Quake-Live
 
 This is the live configuration of TomTec Solutions' servers in Australia.
 
