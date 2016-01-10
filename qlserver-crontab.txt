@@ -1,1 +1,2 @@
 0 3 * * * /home/qlserver/initialise.sh
+0 1 * * 7 /home/qlserver/autodownload.sh
