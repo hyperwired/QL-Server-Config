@@ -276,9 +276,15 @@ then
 if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
 then
 echo "Starting pit clan server (sub586) 1..."
-exec $qPathToVanillaStartScript \
+exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
+    +set qlx_redisDatabase 2 \
     +set net_port $gameport \
+    +set qlx_owner $qPurgeryOwnerSteam64ID \
+    +set qlx_plugins "DEFAULT, branding" \
+    +set qlx_serverBrandName "=^4P^1i^4T^7= Clan Server" \
+    +set qlx_serverBrandTopField "Check out our forums at ^2http://intothepit.org^7" \
+    +set qlx_serverBrandBottomField "Owner: Dv8" \
     +set sv_hostname "=PiT= Clan Server" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$(<~/localConfig-rconPassword-pit.txt)" \
