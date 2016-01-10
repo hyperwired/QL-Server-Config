@@ -283,8 +283,8 @@ exec $qPathToMinqlxStartScript \
     +set qlx_owner $qPurgeryOwnerSteam64ID \
     +set qlx_plugins "DEFAULT, branding, fun" \
     +set qlx_serverBrandName "=^4P^1i^4T^7= Clan Server" \
-    +set qlx_serverBrandTopField "Check out our forums at ^2http://intothepit.org^7" \
-    +set qlx_serverBrandBottomField "Owner: Dv8" \
+    +set qlx_serverBrandTopField "Check out our forums at ^2http://intothepit.org^7." \
+    +set qlx_serverBrandBottomField "" \
     +set sv_hostname "=PiT= Clan Server" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$(<~/localConfig-rconPassword-pit.txt)" \
