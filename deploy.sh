@@ -50,18 +50,15 @@ mv * $BASEQ3/
 dos2unix $BASEQ3/mappool* > /dev/null
 cd ..
 
-echo "Moving minqlx.zip into place..."
-mv minqlx-core/minqlx.zip $QLDS/minqlx.zip
+echo "Moving minqlx core python files into place..."
+rm -rf ~/steamcmd/steamapps/common/qlds/minqlx/*
+mv minqlx-core/minqlx/* $QLDS/minqlx/*
 
 echo "Moving minqlx.so into place..."
 mv minqlx-core/minqlx.so $QLDS/minqlx.so
 
-#echo "Zipping up minqlx core files and moving them into place..."
-#rm -f ~/steamcmd/steamapps/common/qlds/minqlx.zip
-#zip -r ~/steamcmd/steamapps/common/qlds/minqlx.zip minqlx/*
-
 echo "Moving minqlx plugins into place..."
-rm -rf ~/steamcmd/steamapps/common/qlds/minqlx-plugins/*.py
+rm -rf ~/steamcmd/steamapps/common/qlds/minqlx-plugins/*
 cd minqlx-plugins
 mv * $QLDS/minqlx-plugins
 cd ..
