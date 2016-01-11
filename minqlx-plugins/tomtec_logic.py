@@ -65,8 +65,14 @@ class tomtec_logic(minqlx.Plugin):
         #    server_number = "#{}".format(server_number)
             
         minqlx.set_configstring(3, "^4The Purgery^7 - {} - ^2#{}".format(minqlx.get_cvar("sv_location"), server_number))
-        minqlx.set_configstring(678, "Sponsored by ^5TomTec Solutions^7 (^2quakesupport@tomtecsolutions.com^7).")
-        minqlx.set_configstring(679, "Visit our Facebook page at ^2http://fb.me/thepurgery^7, or the wiki at ^2http://tomtecsolutions.com.au/thepurgery^7.")
+        cs = minqlx.get_configstring(678)
+        if cs:
+            cs += " - "
+        minqlx.set_configstring(678, cs + "Sponsored by ^5TomTec Solutions^7 (^2quakesupport@tomtecsolutions.com^7).")
+        cs = minqlx.get_configstring(679)
+        if cs:
+            cs += " - "
+        minqlx.set_configstring(679, cs + "Visit our Facebook page at ^2http://fb.me/thepurgery^7, or the wiki at ^2http://tomtecsolutions.com.au/thepurgery^7.")
 
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
