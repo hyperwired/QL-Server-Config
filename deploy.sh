@@ -52,7 +52,7 @@ cd ..
 
 echo "Moving minqlx core python files into place..."
 rm -rf ~/steamcmd/steamapps/common/qlds/minqlx/*
-mv minqlx-core/minqlx/* $QLDS/minqlx/*
+mv minqlx-core/minqlx/* $QLDS/minqlx/
 
 echo "Moving minqlx.so into place..."
 mv minqlx-core/minqlx.so $QLDS/minqlx.so
