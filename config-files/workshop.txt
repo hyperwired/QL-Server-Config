@@ -787,3 +787,6 @@
 
 # Capture the Karin | rota3ctf2
 596924297
+
+# Hell Box - Small Duel Map
+598441241
