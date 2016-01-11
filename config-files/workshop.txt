@@ -1,3 +1,4 @@
+# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy, use, redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 # TomTec Solutions' loaded workshop maps. Please only load maps here, other items will most likely cause issues.
 # Get these numbers from the ?id= ending of the workshop URL.
 
@@ -788,5 +789,5 @@
 # Capture the Karin | rota3ctf2
 596924297
 
-# Hell Box - Small Duel Map
+# Hell Box - Small Duel Map (requires /cv map hellbox hellbox, has it's own built-in factory)
 598441241
