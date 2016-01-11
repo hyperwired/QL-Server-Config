@@ -63,7 +63,8 @@ exec $qPurgeryStart \
     +set sv_mappoolFile "mappool_pqlca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set qlx_rulesetLocked 1
+    +set qlx_rulesetLocked 1 \
+    +set qlx_balanceApi elo_b
 elif [ $1 -eq 1 ]
 # starting VQL CA 1
 then
