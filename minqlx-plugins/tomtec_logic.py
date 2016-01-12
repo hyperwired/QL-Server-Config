@@ -11,6 +11,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("game_start", self.game_start)
         self.add_hook("game_end", self.game_end)
         self.add_hook("vote_called", self.handle_vote_called)
+        self.add_hook("vote_ended", self.handle_vote_ended)
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
         self.add_command("giveall", self.cmd_giveall, 5, usage="<powerup [on/off]>, <holdable>")
@@ -26,9 +27,9 @@ class tomtec_logic(minqlx.Plugin):
     
         self.disabled_maps = ["proq3dm6", "ra3map1"]
         
-        self.set_cvar_once("qlx_excessive", "0")
-
-        self.plugin_version = "2.3"
+        self.set_cvar_once("qlx_freezePlayersDuringVote", "0")
+        
+        self.plugin_version = "2.5"
 
     def cmd_wiki(self, player, msg, channel):
         channel.reply("Visit ^2tomtecsolutions.com.au/thepurgery^7 to see ^4The Purgery^7's wiki.")
@@ -101,6 +102,7 @@ class tomtec_logic(minqlx.Plugin):
         # make sure everyone's noclip is off
         for p in self.players():
             p.noclip = False
+        self.set_cvar("g_speed", "320")
         
     def game_end(self, data):
         #channel.tell("Hurrah!")
@@ -134,12 +136,27 @@ class tomtec_logic(minqlx.Plugin):
         channel.reply("^4tomtec_logic.py^7 - version {}, created by Thomas Jones on 01/11/2015.".format(self.plugin_version))
 
     def handle_vote_called(self, caller, vote, args):
+        if self.game.state == "warmup":
+            if self.get_cvar("qlx_freezePlayersDuringVote", bool):
+                self.set_cvar("g_speed", "0")
+                self.play_sound("sound/world/klaxon1.wav")
+
+            minqlx.send_server_command(None, "cp \"^7VOTE NOW\"\n")
+            
         if vote.lower() == "map":
             # prevent certain maps from being loaded, if they're found to have issues
             if args.lower() is "disabled_test" or args.lower() in self.disabled_maps:
                 caller.tell("Map ^4{}^7 is currently disabled, please contact an admin/mod for details.".format(args.lower()))
                 return minqlx.RET_STOP_ALL
-                            
+
+    def handle_vote_ended(self, votes, vote, args, passed):
+        if passed:
+            minqlx.send_server_command(None, "cp \"^2VOTE PASSED^7\"\n")
+        else:
+            minqlx.send_server_command(None, "cp \"^1VOTE FAILED^7\"\n")
+
+        self.set_cvar("g_speed", "320")
+        
     def cmd_maprestart(self, player, msg, channel):
         # run a map restart
         minqlx.console_command("map_restart")
