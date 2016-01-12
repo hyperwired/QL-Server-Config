@@ -140,8 +140,9 @@ class tomtec_logic(minqlx.Plugin):
             if self.get_cvar("qlx_freezePlayersDuringVote", bool):
                 self.set_cvar("g_speed", "0")
                 self.play_sound("sound/world/klaxon1.wav")
-
-            minqlx.send_server_command(None, "cp \"^7VOTE NOW\"\n")
+                minqlx.send_server_command(None, "cp \"^7PLEASE VOTE NOW\nPLAYER MOVEMENT IS DISABLED\nUNTIL THE VOTE ENDS\"\n")
+        else:
+            minqlx.send_server_command(None, "cp \"^7PLEASE VOTE NOW\"\n")
             
         if vote.lower() == "map":
             # prevent certain maps from being loaded, if they're found to have issues
