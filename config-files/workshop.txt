@@ -791,3 +791,9 @@
 
 # Hell Box - Small Duel Map (requires /cv map hellbox hellbox, has it's own built-in factory)
 598441241
+
+# ca_tamb
+597914676
+
+# ts_ca1 - Fly on Rocket
+597920398
