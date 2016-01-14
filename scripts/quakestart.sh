@@ -282,7 +282,7 @@ exec $qPathToMinqlxStartScript \
     +set qlx_redisDatabase 2 \
     +set net_port $gameport \
     +set qlx_owner $qPurgeryOwnerSteam64ID \
-    +set qlx_plugins "DEFAULT, branding, fun" \
+    +set qlx_plugins "DEFAULT, branding, fun, balance" \
     +set qlx_serverBrandName "^1=^4P^1i^4T^1=^7 Clan Server" \
     +set qlx_serverBrandTopField "Check out our forums at ^2http://intothepit.org^7." \
     +set qlx_serverBrandBottomField "" \
