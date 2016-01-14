@@ -38,11 +38,8 @@ class irc(minqlx.Plugin):
         
         self.add_command(("world", "say_world"), self.send_irc_message, priority=minqlx.PRI_LOWEST)
         self.add_command("tomtec_versions", self.cmd_showversion)
-        self.add_hook("vote_started", self.handle_vote_started)
-        self.add_hook("vote_ended", self.handle_vote_ended)
-        self.add_hook("map", self.handle_map)
 
-        self.plugin_version = "1.4"
+        self.plugin_version = "1.5"
         
         self.set_cvar_once("qlx_ircServer", "irc.quakenet.org")
         
