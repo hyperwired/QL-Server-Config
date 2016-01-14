@@ -274,7 +274,7 @@
 560972307
 
 # The Chastity Belt Duel (ospdm8)
-560989741
+# 560989741 - This item has been removed by the author
 
 # The Frag Pipe
 561036971
@@ -328,22 +328,22 @@
 # 562448681 - This item has been removed by the author
 
 # Duel map: megadm4-09
-562449180
+# 562449180 - This item has been removed by the author
 
 # Duel map: rota3tourney1
-562449385
+# 562449385 - This item has been removed by the author
 
 # DeFRaG/race map: Tr1ckhouse
 # 562451786 - This item has been removed by the author
 
 # Duel map: pukka3tourney5
-562530042
+# 562530042 - This item has been removed by the author
 
 # Duel/FFA map: rota3dm1
-562530320
+# 562530320 - This item has been removed by the author
 
 # Duel/FFA map: rota3dm2
-562530598
+# 562530598 - This item has been removed by the author
 
 # Chronic - Ufreeze Map
 562554624
@@ -457,7 +457,7 @@
 569916167
 
 # Xoylent
-569917004
+# 569917004 - This item has been removed by the author
 
 # koz25
 569922415
@@ -556,16 +556,16 @@
 582949583
 
 # The Killing Machine
-582941724
+# 582941724 - This item has been removed by the author
 
 # hydra b
-582933751
+# 582933751 - This item has been removed by the author
 
 # Geotechnic *b
-582926811
+# 582926811 - This item has been removed by the author
 
 # DustBowl
-582915859
+# 582915859 - This item has been removed by the author
 
 # Hit the Floor
 582908190
@@ -574,16 +574,16 @@
 582882064
 
 # DeadStrong
-582771824
+# 582771824 - This item has been removed by the author
 
 # The Rage Q3
-582762928
+# 582762928 - This item has been removed by the author
 
 # The Final Hour
-582737620
+# 582737620 - This item has been removed by the author
 
 # Goldleaf *
-582721827
+# 582721827 - This item has been removed by the author
 
 # cos1_beta7b
 582665687
@@ -691,10 +691,10 @@
 583496556
 
 # No One
-583488902
+# 583488902 - This item has been removed by the author
 
 # q3sg1c
-583483661
+# 583483661 - This item has been removed by the author
 
 # dm6swift
 583467750
