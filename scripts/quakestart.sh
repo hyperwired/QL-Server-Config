@@ -305,47 +305,11 @@ else
 echo "This system is not intended to host pit clan (sub586) server."
 fi
 elif [ $1 -ge 10 ] && [ $1 -le 13 ]
-# starting 4sg tournament servers
-then
-if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
-then
-servernum=`expr $1 - 9`
-echo "Starting starting 4sg tournament server CA $servernum..."
-exec $qPathToMinqlxStartScript \
-    +set net_strict 1 \
-    +set qlx_redisDatabase 1 \
-    +set net_port $gameport \
-    +set qlx_owner $qPurgeryOwnerSteam64ID \
-    +set sv_hostname "#$servernum 4SGv2 - Tournament CA" \
-    +set qlx_plugins "DEFAULT, branding, custom_votes" \
-    +set qlx_serverBrandName "^54SGv2 Tournament - Clan Arena^7" \
-    +set qlx_serverBrandTopField "Run by ^54Seasons Gaming^7. ^2http://4seasonsgaming.com^7. Admins: ^4mickzerofive, zlr, phy1um^7." \
-    +set qlx_serverBrandBottomField "Server $servernum of 4." \
-    +set zmq_rcon_enable 1 \
-    +set zmq_rcon_password "$(<~/localConfig-rconPassword-4sg.txt)" \
-    +set zmq_rcon_port $rconport \
-    +set zmq_stats_enable 1 \
-    +set zmq_stats_password "$(<~/localConfig-rconPassword-4sg.txt)" \
-    +set zmq_stats_port $gameport \
-    +set sv_tags "$qServerLocation,4Seasons Gaming" \
-    +set bot_enable 0 \
-    +set g_accessFile "access_4seasonsgaming.txt" \
-    +set sv_mappoolFile "mappool_4sg_ca.txt" \
-    +set fs_homepath ~/.quakelive/4sg-tournament-ca \
-    +set g_damage_lg 6 \
-    +set sv_location "$qServerLocation" \
-    +set g_password "test" \
-    +set qlx_teamsizeMaximum 2 \
-    +set teamsize 2
-else
-echo "This system is not intended to host 4sg tournament server CA"
-fi
-elif [ $1 -ge 14 ] && [ $1 -le 17 ]
 # starting 4sg tournament server DUEL
 then
 if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
 then
-servernum=`expr $1 - 13`
+servernum=`expr $1 - 9`
 echo "Starting starting 4sg tournament server DUEL $servernum..."
 exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
@@ -370,7 +334,6 @@ exec $qPathToMinqlxStartScript \
     +set fs_homepath ~/.quakelive/4sg-tournament-duel \
     +set g_damage_lg 6 \
     +set sv_location "$qServerLocation" \
-    +set g_password "test" \
     +set g_voteFlags 2048
 else
 echo "This system is not intended to host 4sg tournament server DUEL"
