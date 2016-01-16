@@ -334,13 +334,13 @@ exec $qPathToMinqlxStartScript \
     +set fs_homepath ~/.quakelive/4sg-tournament-ca \
     +set g_damage_lg 6 \
     +set sv_location "$qServerLocation" \
-    +set g_password "$(<~/localConfig-rconPassword-4sg.txt)" \
+    +set g_password "test" \
     +set qlx_teamsizeMaximum 2 \
     +set teamsize 2
 else
 echo "This system is not intended to host 4sg tournament server CA"
 fi
-elif [ $1 -ge 14 ] && [ $1 -le 18]
+elif [ $1 -ge 14 ] && [ $1 -le 18 ]
 # starting 4sg tournament server DUEL
 then
 if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
@@ -370,7 +370,7 @@ exec $qPathToMinqlxStartScript \
     +set fs_homepath ~/.quakelive/4sg-tournament-duel \
     +set g_damage_lg 6 \
     +set sv_location "$qServerLocation" \
-    +set g_password "$(<~/localConfig-rconPassword-4sg.txt)" \
+    +set g_password "test" \
     +set g_voteFlags 2048
 else
 echo "This system is not intended to host 4sg tournament server DUEL"
