@@ -309,7 +309,7 @@ elif [ $1 -ge 10 ] && [ $1 -le 13 ]
 then
 if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
 then
-servernum=`expr $1 - 10`
+servernum=`expr $1 - 9`
 echo "Starting starting 4sg tournament server CA $servernum..."
 exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
@@ -340,12 +340,12 @@ exec $qPathToMinqlxStartScript \
 else
 echo "This system is not intended to host 4sg tournament server CA"
 fi
-elif [ $1 -ge 14 ] && [ $1 -le 18 ]
+elif [ $1 -ge 14 ] && [ $1 -le 17 ]
 # starting 4sg tournament server DUEL
 then
 if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
 then
-servernum=`expr $1 - 14`
+servernum=`expr $1 - 13`
 echo "Starting starting 4sg tournament server DUEL $servernum..."
 exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
