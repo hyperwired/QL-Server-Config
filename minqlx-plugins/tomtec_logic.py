@@ -18,21 +18,25 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("map_restart", self.cmd_maprestart, 1)
         self.add_command("muteall", self.cmd_muteall, 4)
         self.add_command("unmuteall", self.cmd_unmuteall, 4)
-        self.add_command(("feedback", "fb"), self.cmd_feedback)
+        self.add_command(("feedback", "f"), self.cmd_feedback)
         self.add_command("killall", self.cmd_killall, 4)
         self.add_command("addbot", self.cmd_addbot, 1)
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command(("wiki", "w"), self.cmd_wiki)
+        self.add_command(("facebook", "fb"), self.cmd_facebook)
     
         self.disabled_maps = ["proq3dm6", "ra3map1"]
         
         self.set_cvar_once("qlx_freezePlayersDuringVote", "0")
         
-        self.plugin_version = "2.5"
+        self.plugin_version = "2.6"
 
     def cmd_wiki(self, player, msg, channel):
-        channel.reply("Visit ^2tomtecsolutions.com.au/thepurgery^7 to see ^4The Purgery^7's wiki.")
+        channel.reply("Visit ^2thepurgery.com^7 to see ^4The Purgery^7's wiki and documentation.")
+
+    def cmd_facebook(self, player, msg, channel):
+        channel.reply("Visit ^2fb.me/thepurgery^7 to see ^4The Purgery^7's Facebook page.")
         
     def cmd_addbot(self, player, msg, channel):
         minqlx.console_command("addbot anarki 5 any 0 ^7Pur^4g^7obot")
@@ -69,11 +73,11 @@ class tomtec_logic(minqlx.Plugin):
         cs = minqlx.get_configstring(678)
         if cs:
             cs += " - "
-        minqlx.set_configstring(678, cs + "Sponsored by ^5TomTec Solutions^7 (^2quakesupport@tomtecsolutions.com^7).")
+        minqlx.set_configstring(678, cs + "Sponsored by ^5TomTec Solutions^7.")
         cs = minqlx.get_configstring(679)
         if cs:
             cs += " - "
-        minqlx.set_configstring(679, cs + "Visit our Facebook page at ^2http://fb.me/thepurgery^7, or the wiki at ^2http://tomtecsolutions.com.au/thepurgery^7.")
+        minqlx.set_configstring(679, cs + "Visit our Wiki at ^2thepurgery.com^7.")
 
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
@@ -130,7 +134,7 @@ class tomtec_logic(minqlx.Plugin):
         return minqlx.RET_STOP_EVENT
 
     def cmd_feedback(self, player, msg, channel):
-        channel.reply("To provide feedback on ^4The Purgery^7 servers, please email ^2quakesupport@tomtecsolutions.com^7.")
+        channel.reply("To provide feedback on ^4The Purgery^7 servers, please email ^2thomas@tomtecsolutions.com^7.")
 
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4tomtec_logic.py^7 - version {}, created by Thomas Jones on 01/11/2015.".format(self.plugin_version))
