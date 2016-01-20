@@ -12,7 +12,7 @@ class votemanager(minqlx.Plugin):
         
         self.has_voted = []
 
-        self.set_cvar_once("qlx_privatiseVotes", "0")
+        self.set_cvar_once("qlx_privatiseVotes", "0") # check out votestats.py to see how this integrates.
 
         self.plugin_version = "1.1"
 
@@ -45,6 +45,7 @@ class votemanager(minqlx.Plugin):
         self.has_voted.append(player)
         
         if (player.privileges != None):
+            # at least give the impression that the admin/mod voted normally.
             if yes:
                 yes_votes = int(minqlx.get_configstring(10))
                 yes_votes += 1
