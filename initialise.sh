@@ -23,12 +23,15 @@ cd QL-Server-Config
 cp deploy.sh ~/deploy.sh
 chmod +x ~/deploy.sh
 
+if [ "$1" == "--no-restart"]; then
+  echo "The no-restart flag has been appended. Not restarting servers."
+fi
 
 #
 #  Running 'deploy.sh'
 #
 echo "'deploy.sh' has arrived. Executing."
-bash ~/deploy.sh
+bash ~/deploy.sh "$@"
 echo "'deploy.sh' has left. Exiting."
 
 cp -f initialise.sh ~; cd ~; chmod +x ~/initialise.sh; rm -rf ~/QL-Server-Config; exit
