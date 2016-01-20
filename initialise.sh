@@ -23,7 +23,7 @@ cd QL-Server-Config
 cp deploy.sh ~/deploy.sh
 chmod +x ~/deploy.sh
 
-if [ "$1" == "--no-restart"]; then
+if [ "$1" == "--no-restart" ]; then
   echo "The no-restart flag has been appended. Not restarting servers."
 fi
 
