@@ -12,7 +12,9 @@ class votemanager(minqlx.Plugin):
         
         self.has_voted = []
 
-        self.plugin_version = "1.0"
+        self.set_cvar_once("qlx_privatiseVotes", "0")
+
+        self.plugin_version = "1.1"
 
     def handle_vote_called(self, caller, vote, args):
         self.has_voted.append(caller)
@@ -31,6 +33,14 @@ class votemanager(minqlx.Plugin):
                     word = "vetoed"
                     
                 self.msg("{}^7 {} the vote.".format(player.name, word))
+        else:
+            if not self.get_cvar("qlx_privatiseVotes", bool):
+                if yes:
+                    word = "^2yes"
+                else:
+                    word = "^1no"
+            
+                self.msg("{}^7 voted {}^7.".format(player.name, word))
 
         self.has_voted.append(player)
         
@@ -44,6 +54,7 @@ class votemanager(minqlx.Plugin):
                 no_votes += 1
                 minqlx.set_configstring(11, str(no_votes))
             return minqlx.RET_STOP_ALL
+
                 
         #self.msg("self.has_voted == {}".format(str(self.has_voted)))
 
