@@ -45,6 +45,9 @@ echo "Running the qzeroded process to download all workshop items once, then exi
 echo "Reloading the 'supervisord' process..."
 /usr/local/bin/supervisorctl reload
 
+echo "Sleeping for 10 seconds to allow Supervisor to fully spawn..."
+sleep 10
+
 # Using 'supervisorctl' to start all servers.
 echo Starting Quake Servers...
 /usr/local/bin/supervisorctl start all
