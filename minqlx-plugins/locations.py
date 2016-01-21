@@ -30,6 +30,7 @@ class locations(minqlx.Plugin):
         ipDataParsed = json.loads(ipData)
 
         channel.reply("{}^7's approximate location details:\n    Country Code: {}\n    Country Name: {}\n    Region Code: {}\n    Region Name: {}\n    City: {}\n    Post Code: {}\n    Time Zone: {}".format(player_name, ipDataParsed['country_code'], ipDataParsed['country_name'], ipDataParsed['region_code'], ipDataParsed['region_name'], ipDataParsed['city'], ipDataParsed['zip_code'], ipDataParsed['time_zone']))
-
+        return
+    
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4locations.py^7 - version {}, created by Thomas Jones on 21/01/2016.".format(self.plugin_version))
