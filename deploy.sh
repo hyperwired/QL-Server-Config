@@ -21,6 +21,7 @@ echo "=== End of pre-run script."
 #
 
 echo "Moving access files into place..."
+rm -rf ~/steamcmd/steamapps/common/qlds/baseq3/access*.txt
 cd accesses
 mv * $BASEQ3/
 cd ..
