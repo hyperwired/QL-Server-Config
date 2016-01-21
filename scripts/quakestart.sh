@@ -59,7 +59,7 @@ exec $qPurgeryStart \
     +set g_allowVoteMidGame 1 \
     +set bot_enable 1 \
     +set bot_nochat 1 \
-    +set g_accessFile "access_purgery.txt" \
+    #+set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqlca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
@@ -85,7 +85,7 @@ exec $qPurgeryStart \
     +set g_allowVoteMidGame 1 \
     +set bot_enable 1 \
     +set bot_nochat 1 \
-    +set g_accessFile "access_purgery.txt" \
+    #+set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_vqlca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
@@ -112,7 +112,7 @@ exec $qPurgeryStart \
     +set g_allowVoteMidGame 1 \
     +set bot_enable 0 \
    	+set bot_nochat 1 \
-    +set g_accessFile "access_purgery.txt" \
+    #+set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqlrace.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
@@ -138,7 +138,7 @@ exec $qPurgeryStart \
     +set bot_enable 1 \
    	+set bot_nochat 1 \
     +set g_damage_lg 6 \
-    +set g_accessFile "access_purgery.txt" \
+    #+set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqlffa.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
@@ -164,7 +164,7 @@ exec $qPurgeryStart \
     +set bot_enable 1 \
     +set bot_nochat 1 \
     +set g_damage_lg 6 \
-    +set g_accessFile "access_purgery.txt" \
+    #+set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_vqlduel.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
@@ -188,7 +188,7 @@ exec $qPurgeryStart \
     +set g_allowVoteMidGame 1 \
     +set bot_enable 1 \
     +set bot_nochat 1 \
-    +set g_accessFile "access_purgery.txt" \
+    #+set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_pqlmulti.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
@@ -214,7 +214,7 @@ exec $qPurgeryStart \
     +set g_allowVoteMidGame 1 \
     +set bot_enable 1 \
     +set bot_nochat 1 \
-    +set g_accessFile "access_purgery.txt" \
+    #+set g_accessFile "access_purgery.txt" \
     +set sv_mappoolFile "mappool_default.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
@@ -238,7 +238,7 @@ exec $qPurgeryStart \
     +set g_allowVoteMidGame 1 \
     +set bot_enable 1 \
     +set bot_nochat 1 \
-    +set g_accessFile "access_staffonly.txt" \
+    #+set g_accessFile "access_staffonly.txt" \
     +set sv_mappoolFile "mappool_ca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
