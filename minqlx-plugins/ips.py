@@ -1,7 +1,5 @@
-# Created by Thomas Jones on 21/01/2016 - thomas@tomtecsolutions.com
-# ips.py, a plugin for minqlx to show a list of IPs that a player has used to connect to the server. Reads from the Redis database.
-# This plugin is released to everyone, for any purpose. It comes with no warranty, no guarantee it works, it's released AS IS.
-# You can modify everything, except for lines 1-4 and the !tomtec_versions code. They're there to indicate I whacked this together originally. Please make it better :D
+# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
+# Created by Thomas Jones on 14/12/2015 - thomas@tomtecsolutions.com
 
 import minqlx
 import minqlx.database
