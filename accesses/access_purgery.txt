@@ -2,6 +2,11 @@
 # The Purgery access control list:
 
 
+#
+#    This file is being phased out as we adopt the minqlx permissions system. It is no longer read from, and will be removed soon.
+#
+
+
 # staff: tjone270
 76561198213481765|admin
 
