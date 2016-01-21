@@ -14,7 +14,7 @@ class votemanager(minqlx.Plugin):
 
         self.set_cvar_once("qlx_privatiseVotes", "0") # check out votestats.py to see how this integrates.
 
-        self.plugin_version = "1.1"
+        self.plugin_version = "1.2"
 
     def handle_vote_called(self, caller, vote, args):
         self.has_voted.append(caller)
@@ -33,15 +33,7 @@ class votemanager(minqlx.Plugin):
                     word = "vetoed"
                     
                 self.msg("{}^7 {} the vote.".format(player.name, word))
-        else:
-            if not self.get_cvar("qlx_privatiseVotes", bool):
-                if yes:
-                    word = "^2yes"
-                else:
-                    word = "^1no"
-            
-                self.msg("{}^7 voted {}^7.".format(player.name, word))
-
+                
         self.has_voted.append(player)
         
         if (player.privileges != None):
