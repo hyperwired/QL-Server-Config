@@ -11,6 +11,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("game_start", self.game_start)
         self.add_hook("game_end", self.game_end)
         self.add_hook("vote_called", self.handle_vote_called)
+        self.add_hook("vote_started", self.handle_vote_started)
         self.add_hook("vote_ended", self.handle_vote_ended)
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
@@ -139,7 +140,14 @@ class tomtec_logic(minqlx.Plugin):
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4tomtec_logic.py^7 - version {}, created by Thomas Jones on 01/11/2015.".format(self.plugin_version))
 
-    def handle_vote_called(self, caller, vote, args):
+    def handle_vote_called(self, caller, vote, args):            
+        if vote.lower() == "map":
+            # prevent certain maps from being loaded, if they're found to have issues
+            if args.lower() is "disabled_test" or args.lower() in self.disabled_maps:
+                caller.tell("Map ^4{}^7 is currently disabled, please contact an admin/mod for details.".format(args.lower()))
+                return minqlx.RET_STOP_ALL
+
+    def handle_vote_started(self, caller, vote, args):
         if self.game.state == "warmup":
             if self.get_cvar("qlx_freezePlayersDuringVote", bool):
                 self.set_cvar("g_speed", "0")
@@ -148,12 +156,6 @@ class tomtec_logic(minqlx.Plugin):
         else:
             minqlx.send_server_command(None, "cp \"^7PLEASE VOTE NOW\"\n")
             
-        if vote.lower() == "map":
-            # prevent certain maps from being loaded, if they're found to have issues
-            if args.lower() is "disabled_test" or args.lower() in self.disabled_maps:
-                caller.tell("Map ^4{}^7 is currently disabled, please contact an admin/mod for details.".format(args.lower()))
-                return minqlx.RET_STOP_ALL
-
     def handle_vote_ended(self, votes, vote, args, passed):
         if passed:
             minqlx.send_server_command(None, "cp \"^2VOTE PASSED^7\"\n")
