@@ -105,7 +105,7 @@ class tomtec_logic(minqlx.Plugin):
     def player_connect(self, player):
         if player not in self.playerConnectedYetList:
             self.playerConnectedYetList.append(player)
-            return "{}\nLoading ^4The Purgery^7...\n")
+            return "Connected to TomTec Solutions\nLoading ^4The Purgery^7...\n\n^4The Purgery^7 is run by Thomas Jones (Pur^4g^7er).\n"
         
     def player_loaded(self, player):
         # display a message to a newly-loaded/connected player
