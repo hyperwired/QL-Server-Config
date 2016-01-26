@@ -78,7 +78,7 @@ class tomtec_logic(minqlx.Plugin):
         cs = self.game.map_subtitle2
         if cs:
             cs += " | "
-        minqlx.set_configstring(679, cs + "^7Map: {}".format(self.game.map_title)
+        minqlx.set_configstring(679, cs + "^7Map: {}".format(self.game.map_title))
 
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
