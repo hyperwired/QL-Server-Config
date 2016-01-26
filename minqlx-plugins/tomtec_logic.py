@@ -7,6 +7,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("new_game", self.new_game)
         self.add_hook("map", self.map_load)
         self.add_hook("game_countdown", self.game_countdown)
+        self.add_hook("player_connect", self.player_connect)
         self.add_hook("player_loaded", self.player_loaded)
         self.add_hook("game_start", self.game_start)
         self.add_hook("game_end", self.game_end)
@@ -31,8 +32,11 @@ class tomtec_logic(minqlx.Plugin):
         
         self.set_cvar_once("qlx_freezePlayersDuringVote", "0")
         
-        self.plugin_version = "2.6"
+        self.plugin_version = "2.7"
 
+        self.playerConnectedYetList = []
+
+        
     def cmd_wiki(self, player, msg, channel):
         channel.reply("Visit ^2thepurgery.com^7 to see ^4The Purgery^7's wiki and documentation.")
 
@@ -97,11 +101,16 @@ class tomtec_logic(minqlx.Plugin):
        
         # disable infinite ammo after warm-up
         minqlx.set_cvar("g_infiniteAmmo", "0")
+
+    def player_connect(self, player):
+        if player not in self.playerConnectedYetList:
+            self.playerConnectedYetList.append(player)
+            return "{}\nLoading ^4The Purgery^7...\n")
         
     def player_loaded(self, player):
         # display a message to a newly-loaded/connected player
         minqlx.send_server_command(player.id, "cp \"^7Welcome to ^4The Purgery^7\"\n")
-        #self.play_sound("tp_sounds/thomas/welcome_purgery.ogg", player)
+        self.playerConnectedYetList.remove(player)
 
     def game_start(self, data):
         # make sure everyone's noclip is off
