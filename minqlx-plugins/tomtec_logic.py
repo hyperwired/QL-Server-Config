@@ -71,11 +71,11 @@ class tomtec_logic(minqlx.Plugin):
         #    server_number = "#{}".format(server_number)
             
         minqlx.set_configstring(3, "^4The Purgery^7 - {} - ^2#{}".format(minqlx.get_cvar("sv_location"), server_number))
-        cs = minqlx.get_configstring(678)
+        cs = self.game.map_subtitle1
         if cs:
             cs += " - "
         minqlx.set_configstring(678, cs + "Sponsored by ^5TomTec Solutions^7.")
-        cs = minqlx.get_configstring(679)
+        cs = self.game.map_subtitle2
         if cs:
             cs += " - "
         minqlx.set_configstring(679, cs + "Visit our Wiki at ^2thepurgery.com^7.")

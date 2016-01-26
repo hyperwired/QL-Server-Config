@@ -42,9 +42,9 @@ class checkplayers(minqlx.Plugin):
                 reason = longest_silence["reason"]
                 if (expires - datetime.datetime.now()).total_seconds() > 0:
                     if reason:
-                        player.tell("^6{} ^7(^6{}^7): ^6{}^7:^6 {}^7.".format(steamids[i], id_name, expires, reason))
+                        player.tell("^4{} ^7(^4{}^7): ^4{}^7:^4 {}^7.".format(steamids[i], id_name, expires, reason))
                     else:
-                        player.tell("^6{} ^7(^6{}^7): ^6{}^7.".format(steamids[i], id_name, expires))
+                        player.tell("^4{} ^7(^4{}^7): ^4{}^7.".format(steamids[i], id_name, expires))
             i += 1
 
     def cmd_banned(self, player, msg, channel):
@@ -70,9 +70,9 @@ class checkplayers(minqlx.Plugin):
                 reason = longest_ban["reason"]
                 if (expires - datetime.datetime.now()).total_seconds() > 0:
                     if reason:
-                        player.tell("^6{} ^7(^6{}^7): ^6{}^7:^6 {}^7.".format(steamids[i], id_name, expires, reason))
+                        player.tell("^4{} ^7(^4{}^7): ^4{}^7:^4 {}^7.".format(steamids[i], id_name, expires, reason))
                     else:
-                        player.tell("^6{} ^7(^6{}^7): ^6{}^7.".format(steamids[i], id_name, expires))
+                        player.tell("^4{} ^7(^4{}^7): ^4{}^7.".format(steamids[i], id_name, expires))
             i += 1
 
     def cmd_permissions(self, player, msg, channel):
@@ -101,6 +101,6 @@ class checkplayers(minqlx.Plugin):
             owner_name = self.db.lindex(PLAYER_KEY.format(minqlx.owner()), 0)
             self.adminlist.insert(0, (owner_name, str(minqlx.owner()), "1337"))
         for id_name, steamid, perm in self.adminlist:
-            player.tell(id_name + " ^7(" + steamid + "^7) ^2Level: ^6" + perm)
+            player.tell(id_name + " ^7(" + steamid + "^7) ^2Level: ^4" + perm)
         self.adminlist = []
 
