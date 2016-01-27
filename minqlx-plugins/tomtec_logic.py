@@ -4,13 +4,9 @@ import minqlx
 
 class tomtec_logic(minqlx.Plugin):
     def __init__(self):
-        self.add_hook("new_game", self.new_game)
         self.add_hook("map", self.map_load)
         self.add_hook("game_countdown", self.game_countdown)
-        self.add_hook("player_connect", self.player_connect)
-        self.add_hook("player_loaded", self.player_loaded)
         self.add_hook("game_start", self.game_start)
-        self.add_hook("game_end", self.game_end)
         self.add_hook("vote_called", self.handle_vote_called)
         self.add_hook("vote_started", self.handle_vote_started)
         self.add_hook("vote_ended", self.handle_vote_ended)
@@ -64,64 +60,20 @@ class tomtec_logic(minqlx.Plugin):
         # kill everybody on the server
         for p in self.players():
             self.slay(p)
-    
-    def new_game(self):
-        # brand the map
-        server_number = (minqlx.get_cvar("net_port"))
-        server_number = str(server_number[-1])
-        #if server_number == "7":
-        #    server_number = "Test"
-        #else:
-        #    server_number = "#{}".format(server_number)
-            
-        minqlx.set_configstring(3, "^4The Purgery^7 - {} - ^2#{}".format(minqlx.get_cvar("sv_location"), server_number))
-        cs = self.game.map_subtitle1
-        if cs:
-            cs += " - "
-        minqlx.set_configstring(678, cs + "^7Sponsored by ^5TomTec Solutions^7. Visit our Wiki at ^2thepurgery.com^7.")
-        cs = self.game.map_subtitle2
-        if cs:
-            cs += " | "
-        minqlx.set_configstring(679, cs + "^7Map: {}".format(self.game.map_title))
 
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
         minqlx.set_cvar("g_infiniteAmmo", "1")     
         
     def game_countdown(self):
-        # play the 'battle suit protect' sound, and display a sponsor message during the countdown
-        minqlx.send_server_command(None, "cp \"^4The Purgery\n^7Sponsored by ^4TomTec Solutions^7\"\n")
-
-        if minqlx.get_cvar("net_port") != "27964":
-            for p in self.players():
-                p.powerups(battlesuit=10)
-                p.noclip = True
-            
         self.play_sound("sound/items/protect3.ogg")
-       
-        # disable infinite ammo after warm-up
         minqlx.set_cvar("g_infiniteAmmo", "0")
-
-    def player_connect(self, player):
-        if player not in self.playerConnectedYetList:
-            self.playerConnectedYetList.append(player)
-            return "Connected to TomTec Solutions\nLoading ^4The Purgery^7...\n\n^4The Purgery^7 is run by Thomas Jones (Pur^4g^7er).\n"
-        
-    def player_loaded(self, player):
-        # display a message to a newly-loaded/connected player
-        minqlx.send_server_command(player.id, "cp \"^7Welcome to ^4The Purgery^7\"\n")
-        self.playerConnectedYetList.remove(player)
 
     def game_start(self, data):
         # make sure everyone's noclip is off
         for p in self.players():
             p.noclip = False
         self.set_cvar("g_speed", "320")
-        
-    def game_end(self, data):
-        #channel.tell("Hurrah!")
-        #self.play_sound("sound/items/protect3.ogg")
-        pass
 
     def cmd_showrules(self, player, msg, channel):
         # show the rules to the channel from whence the command was issued

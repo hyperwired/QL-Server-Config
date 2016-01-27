@@ -16,16 +16,24 @@ export qIrcNickname="$qServerLocationHyphenated-$1"
 # Purgery specific variables/configuration.
 export qPurgeryOwnerSteam64ID="76561198213481765"
 export qRconPasswordPurgery=$(<~/localConfig-rconPassword-purgery.txt)
+export qPurgeryServerTitle="^4The Purgery^7 - $qServerLocation - ^2#$1"
 export qPurgeryStart="$qPathToMinqlxStartScript \
 +set qlx_owner $qPurgeryOwnerSteam64ID \
-+set qlx_plugins \"DEFAULT, tomtec_logic, tp_fun, fun, balance, irc, aliases, votestats, custom_votes, votemanager\" \
++set qlx_plugins DEFAULT, tomtec_logic, tp_fun, fun, balance, irc, aliases, votestats, custom_votes, votemanager \
 +set qlx_ircPassword $qRconPasswordPurgery \
 +set qlx_ircRelayChannel #thepurgery \
 +set qlx_ircServer irc.tomtecsolutions.com.au \
 +set qlx_chatlogs 20 \
 +set qlx_motdSound 0 \
 +set qlx_ircColors 0 \
-+set g_inactivity 120"
++set g_inactivity 120 \
++set qlx_serverBrandName $qPurgeryServerTitle \
++set qlx_serverBrandTopField ^7Sponsored by ^5TomTec Solutions^7. Visit our Wiki at ^2thepurgery.com^7. \
++set qlx_serverBrandBottomField For assistance with issues on ^4The Purgery^7, contact Pur^4g^7er or ^1Barley^7. \
++set qlx_connectMessage Connected to TomTec Solutions \
++set qlx_loadedMessage Welcome to ^4The Purgery^7 \
++set qlx_countdownMessage Good luck, and have fun. \
++set qlx_endOfGameMessage Good game!"
 
 sponsortag="$qServerLocation,TomTec Solutions"
 gameport=`expr $1 + 27960`

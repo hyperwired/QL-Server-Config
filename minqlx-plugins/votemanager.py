@@ -1,4 +1,12 @@
-# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
+# Created by Thomas Jones on 19/01/2016 - thomas@tomtecsolutions.com
+# votemanager.py - a minqlx plugin to permit privileged players to vote normally initially, then vote a second time to force the vote either way.
+# This plugin is released to everyone, for any purpose. It comes with no warranty, no guarantee it works, it's released AS IS.
+# You can modify everything, except for lines 1-4 and the !tomtec_versions code. They're there to indicate I whacked this together originally. Please make it better :D
+
+"""
+This plugin works best when the player isn't a QLDS mod/admin, otherwise it can only be
+used to give the impression that a QLDS mod/admin voted.
+"""
 
 import minqlx
 
@@ -11,8 +19,6 @@ class votemanager(minqlx.Plugin):
         self.add_command("tomtec_versions", self.cmd_showversion)
         
         self.has_voted = []
-
-        self.set_cvar_once("qlx_privatiseVotes", "0") # check out votestats.py to see how this integrates.
 
         self.plugin_version = "1.2"
 
@@ -33,11 +39,11 @@ class votemanager(minqlx.Plugin):
                     word = "vetoed"
                     
                 self.msg("{}^7 {} the vote.".format(player.name, word))
-                
+
         self.has_voted.append(player)
         
         if (player.privileges != None):
-            # at least give the impression that the admin/mod voted normally.
+            # at least give the impression that the QLDS admin/mod voted normally.
             if yes:
                 yes_votes = int(minqlx.get_configstring(10))
                 yes_votes += 1
@@ -49,7 +55,7 @@ class votemanager(minqlx.Plugin):
             return minqlx.RET_STOP_ALL
 
                 
-        #self.msg("self.has_voted == {}".format(str(self.has_voted)))
+        #self.msg("self.has_voted == {}".format(str(self.has_voted))) # was used to make sure we stored player objects properly.
 
     def handle_vote_ended(self, votes, vote, args, passed):
         self.has_voted = []

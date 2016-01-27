@@ -1,5 +1,7 @@
-# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 # Created by Thomas Jones on 14/12/2015 - thomas@tomtecsolutions.com
+# aliases.py, a plugin for minqlx to show aliases from the redis database.
+# This plugin is released to everyone, for any purpose. It comes with no warranty, no guarantee it works, it's released AS IS.
+# You can modify everything, except for lines 1-4 and the !tomtec_versions code. They're there to indicate I whacked this together originally. Please make it better :D
 
 import minqlx
 import minqlx.database
@@ -12,8 +14,8 @@ class aliases(minqlx.Plugin):
         self.add_command("clearaliases", self.cmd_clearaliases, 5)
         self.add_command("tomtec_versions", self.cmd_showversion)
 
-        self.plugin_version = "1.0"
-        
+        self.plugin_version = "1.6"
+
     def cmd_alias(self, player, msg, channel):
         if len(msg) < 2:
             return minqlx.RET_USAGE
@@ -27,7 +29,7 @@ class aliases(minqlx.Plugin):
         
         key = "minqlx:players:{}".format(steam_id)
         out = list(self.db.lrange(key, 0, -1))
-        channel.reply("{}^7 has played on ^4The Purgery^7 under the following names:".format(player_name))
+        channel.reply("{}^7 has played on this server under the following names:".format(player_name))
         channel.reply(" ^4*^7  {}".format("   \n ^4*^7  ".join(out)))
 
     def cmd_clearaliases(self, player, msg, channel):
