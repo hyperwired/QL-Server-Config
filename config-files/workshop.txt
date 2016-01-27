@@ -30,9 +30,6 @@
 545699336
 546960020
 
-# Rocket Arena 3 - ra3map14
-549447613
-
 # 6+ (Q3: 6++)
 547252823
 
@@ -803,3 +800,216 @@
 
 # The Gridworks - Duel Map
 599720061
+
+# cowdm1
+607026809
+
+# Dreamcast Map Pack
+607031259
+
+# hope
+607034812
+
+# imr3dm1
+607037676
+
+# js_tourney1
+607039540
+
+# kineterra1
+607041073
+
+# klhights
+607042346
+
+# lsjg_coop
+607043831
+
+# lun3dm1
+607046379
+
+# lun3dm2
+607048277
+
+# mario_ctf
+607051057
+
+# nodm18
+607052130
+
+# pqarena
+607054267
+
+# prodcmap7
+607055481
+
+# q3mexx1
+607057423
+
+# Q3mIKE5
+607060272
+
+# qfraggel2
+607062910
+
+# rdogdm4
+607063967
+
+# thunda3dm2
+607067048
+
+# uberkill
+607068129
+
+# ShakenNotStirredPP
+607909342
+
+# ctf_faceoff3
+607994732
+
+# Cubicle - MAP
+608370630
+
+# j6torments
+609334248
+
+# turnK16
+602200309
+
+# ctf_mapel4
+602772147
+
+# CTF Map
+602774640
+
+# ctf_faceoff2
+602797735
+
+# TG Rest Map
+602865603
+
+# Terror Twilight
+603287286
+
+# Where fears collide
+603289201
+
+# pro_faceoff
+603520158
+
+# The King's Curse (ctf_tkc)
+603533073
+
+# trippy_run2
+603545627
+
+# ctf_voy4
+603681966
+
+# NeoEgypt
+604054934
+
+# JumbyPaddy
+604249474
+
+# jRace3
+604427316
+
+# mega_ramp
+605120401
+
+# Upsilon Complex II (ctf_upsilon2)
+605383478
+
+# OverkillPP
+605561819
+
+# plasma_climb
+605613413
+
+# Feel The Base
+605677816
+
+# earth_run_v2
+606150607
+
+# Heroscerated (dm4 & dm9 mix)
+606599547
+
+# tele_world
+606945800
+
+# bah
+607018623
+
+# Speedyctf
+598327329
+
+# Mario
+598733591
+
+# Hyperbolic Time Chamber
+598743459
+
+# cpmkitchen - Race map
+598752473
+
+# Gothic Dawn
+598911025
+
+# Dynablast
+598911133
+
+# Arena Gate CTF
+598911298
+
+# QuakeWorld aim map: vrmdmm4 (povdmm4 remake)
+599013329
+
+# Rocket Map Pack
+599095486
+
+# jTheJump
+599477605
+
+# Geit3dm6 - Black Shining Leather
+599947198
+
+# CTFs Compilation
+600046781
+
+# The Lost Village (dust_dm1)
+600287256
+
+# Thril Kill (gd_tourney1a)
+600299201
+
+# CTF Map
+600363917
+
+# CTF Map
+602257473
+
+# CTF Map
+600366782
+
+# CTF Map
+600568620
+
+# CTF Map
+600985936
+
+# lava_hell
+601020709
+
+# jTheRocketJump
+601074113
+
+# Poptart: scavenger hunt map
+601093276
+
+# Frozen Colors
+601222594
+
+# pro_rings
+601701357
