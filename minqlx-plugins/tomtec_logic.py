@@ -23,14 +23,13 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command(("wiki", "w"), self.cmd_wiki)
         self.add_command(("facebook", "fb"), self.cmd_facebook)
+        self.add_command(("acommands", "acmds"), self.cmd_acommands)
     
-        self.disabled_maps = ["proq3dm6", "ra3map1"]
+        self.disabled_maps = ["proq3dm6", "ra3map1", "ra3map6"]
         
         self.set_cvar_once("qlx_freezePlayersDuringVote", "0")
         
-        self.plugin_version = "2.7"
-
-        self.playerConnectedYetList = []
+        self.plugin_version = "2.8"
 
         
     def cmd_wiki(self, player, msg, channel):
@@ -94,6 +93,10 @@ class tomtec_logic(minqlx.Plugin):
         player.tell("^4tomtec_logic.py^7 is (c) 2015, Thomas Jones (Pur^4g^7er), TomTec Solutions.")
         player.tell("Please visit ^2http://tomtecsolutions.com.au/thepurgery^7 for information about the servers.")
         return minqlx.RET_STOP_EVENT
+
+    def cmd_acommands(self, player, msg, channel):
+        channel.reply("To see mod/admin commands, check out ^2thepurgery.com^7.")
+
 
     def cmd_feedback(self, player, msg, channel):
         channel.reply("To provide feedback on ^4The Purgery^7 servers, please email ^2thomas@tomtecsolutions.com^7.")
