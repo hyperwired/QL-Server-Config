@@ -1,6 +1,7 @@
-# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 # Created by Thomas Jones on 01/01/2016 - thomas@tomtecsolutions.com
 # votestats.py - a minqlx plugin to show who votes yes or no in-game/vote results.
+# This plugin is released to everyone, for any purpose. It comes with no warranty, no guarantee it works, it's released AS IS.
+# You can modify everything, except for lines 1-4 and the !tomtec_versions code. They're there to indicate I whacked this together originally. Please make it better :D
 
 """
 If you want to re-privatise votes, set the following cvar to 1: qlx_privatiseVotes
@@ -12,18 +13,30 @@ class votestats(minqlx.Plugin):
     def __init__(self):
         self.add_hook("vote", self.process_vote, priority=minqlx.PRI_LOWEST)
         self.add_hook("vote_ended", self.handle_vote_ended, priority=minqlx.PRI_LOWEST)
-        
+
+        self.add_command("votes", self.cmd_votes)
         self.add_command("tomtec_versions", self.cmd_showversion)
 
         self.set_cvar_once("qlx_privatiseVotes", "0")
-        self.plugin_version = "1.5"
+
+        self.plugin_version = "1.6"
 
         self.has_voted = []
 
+    def cmd_votes(self, player, msg, channel):
+        flag = self.db.get_flag(player, "votestats:votes_enabled", default=True)
+        self.db.set_flag(player, "votestats:votes_enabled", not flag)
+        if flag:
+            word = "disabled"
+        else:
+            word = "enabled"
+        player.tell("Player votes have been ^4{}^7.".format(word))
+        return minqlx.RET_STOP_ALL
+    
     def process_vote(self, player, yes):
         if (self.get_cvar("qlx_privatiseVotes", bool)):
             return
-        
+
         if player in self.has_voted:
             return
         
@@ -31,8 +44,11 @@ class votestats(minqlx.Plugin):
             word = "^2yes"
         else:
             word = "^1no"
-            
-        self.msg("{}^7 voted {}^7.".format(player.name, word))
+
+        for p in self.players():
+            if self.db.get_flag(p, "votestats:votes_enabled", default=True):
+                p.tell("{}^7 voted {}^7.".format(player.name, word))
+                
         self.has_voted.append(player)
 
     def handle_vote_ended(self, votes, vote, args, passed):
