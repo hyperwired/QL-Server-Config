@@ -282,7 +282,7 @@ exec $qPathToMinqlxStartScript \
     +set qlx_redisDatabase 2 \
     +set net_port $gameport \
     +set qlx_owner $qPurgeryOwnerSteam64ID \
-    +set qlx_plugins "DEFAULT, branding, fun, balance" \
+    +set qlx_plugins "DEFAULT, branding, fun, balance, votestats" \
     +set qlx_serverBrandName "^1=^4P^1i^4T^1=^7 Clan Server" \
     +set qlx_serverBrandTopField "Check out our forums at ^2http://intothepit.org^7." \
     +set qlx_serverBrandBottomField "" \
@@ -300,7 +300,10 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_pit.txt" \
     +set fs_homepath ~/.quakelive/PIT-SUB586 \
     +set g_damage_lg 6 \
-    +set sv_location "$qServerLocation"
+    +set sv_location "$qServerLocation" \
+    +set qlx_connectMessage Connected to the ^1=^4P^1i^4T^1=^7 Clan Server \
+    +set qlx_loadedMessage Welcome to ^4The ^1=^4P^1i^4T^1=^7 Clan Server^7 \
+    +set qlx_countdownMessage ^1Good luck, and have fun!^7
 else
 echo "This system is not intended to host pit clan (sub586) server."
 fi
