@@ -12,8 +12,7 @@ class maintenance(minqlx.Plugin):
         self.msg("^1Servers are going down for routine maintenance/updates.^7")
         minqlx.unload_plugin("tomtec_logic")
         minqlx.unload_plugin("irc")
-        for p in self.players():
-            minqlx.send_server_command(p.id, "cs 0 0")
+        minqlx.console_command("kick all \"All TomTec Solutions servers are going down for routine maintenance/updates. Sorry about that, we'll be up again shortly.\"")
         minqlx.console_command("map campgrounds ffa")
         self.counter = 0
 
