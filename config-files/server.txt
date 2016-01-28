@@ -7,8 +7,8 @@ set sv_maxClients "18"                // How many players can connect at once.
 set g_password ""                     // Set a server-wide password, and stop all users from connecting without it.
 set sv_privateClients "1"             // Reserve clients that can be used with sv_privatePassword.
 set sv_privatePassword "givemeaspot"  // Keyword to use in conjunction with sv_privateClients.
-set com_hunkMegs 80                   // May need to be increased for additional players.
-set com_zoneMegs 20                   // Amount of memory allocated to the main zone (in MB)
+set com_hunkMegs 60                   // Amount of memory allocated to the hunk (in MB)
+set com_zoneMegs 10                   // Amount of memory allocated to the main zone (in MB)
 set sv_master 1                       // Put the server on the Steam server master list.
 set sv_serverType 2                   // Indicate that the server is a full internet Quake Live server.
 set g_floodprot_maxcount "10"         // Kick the player when their flood counter reaches this level.
