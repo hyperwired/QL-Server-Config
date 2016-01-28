@@ -189,8 +189,6 @@ exec $qPurgeryStart \
     +set sv_tags "$sponsortag" \
     +set g_allowSpecVote 1 \
     +set g_allowVoteMidGame 1 \
-    +set bot_enable 1 \
-    +set bot_nochat 1 \
     +set sv_mappoolFile "mappool_pqlmulti.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
@@ -214,8 +212,6 @@ exec $qPurgeryStart \
     +set sv_tags "$sponsortag" \
     +set g_allowSpecVote 1 \
     +set g_allowVoteMidGame 1 \
-    +set bot_enable 1 \
-    +set bot_nochat 1 \
     +set sv_mappoolFile "mappool_default.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
@@ -237,8 +233,6 @@ exec $qPurgeryStart \
     +set sv_tags "unmoderated,$sponsortag" \
     +set g_allowSpecVote 1 \
     +set g_allowVoteMidGame 1 \
-    +set bot_enable 1 \
-    +set bot_nochat 1 \
     +set sv_mappoolFile "mappool_ca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
@@ -294,8 +288,6 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_password "$(<~/localConfig-rconPassword-pit.txt)" \
     +set zmq_stats_port $gameport \
     +set sv_tags "$qServerLocation" \
-    +set bot_enable 1 \
-    +set bot_nochat 1 \
     +set g_accessFile "access_pit.txt" \
     +set sv_mappoolFile "mappool_pit.txt" \
     +set fs_homepath ~/.quakelive/PIT-SUB586 \
