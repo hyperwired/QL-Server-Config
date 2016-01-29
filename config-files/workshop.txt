@@ -880,7 +880,7 @@
 602772147
 
 # CTF Map
-602774640
+# 602774640 - This item has been removed by the author
 
 # ctf_faceoff2
 602797735
@@ -997,7 +997,7 @@
 600568620
 
 # CTF Map
-600985936
+# 600985936 - This item has been removed by the author
 
 # lava_hell
 601020709
