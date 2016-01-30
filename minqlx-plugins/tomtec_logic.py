@@ -62,8 +62,8 @@ class tomtec_logic(minqlx.Plugin):
             self.slay(p)
 
     def handle_player_loaded(self, player):
-        if str(player.steam_id) == "76561198213481765": # cryptix is here
-            player.name == "Cryptix"
+        if str(player.steam_id) == "76561197960279482": # cryptix is here
+            player.name = "Cryptix"
             
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
