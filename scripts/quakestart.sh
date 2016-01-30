@@ -247,8 +247,7 @@ else
 echo "This system is not intended to host reythe (sub580) server."
 fi
 elif [ $1 -eq 9 ]; then
-if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
-then
+if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]; then
 echo "Starting pit clan server (sub586) 1..."
 exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
