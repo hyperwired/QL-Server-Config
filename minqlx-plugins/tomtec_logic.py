@@ -7,6 +7,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("map", self.map_load)
         self.add_hook("game_countdown", self.game_countdown)
         self.add_hook("game_start", self.game_start)
+        self.add_hook("player_loaded", self.handle_player_loaded)
         self.add_hook("vote_called", self.handle_vote_called)
         self.add_hook("vote_started", self.handle_vote_started)
         self.add_hook("vote_ended", self.handle_vote_ended)
@@ -60,6 +61,10 @@ class tomtec_logic(minqlx.Plugin):
         for p in self.players():
             self.slay(p)
 
+    def handle_player_loaded(self, player):
+        if str(player.steam_id) == "76561198213481765": # cryptix is here
+            player.name == "Cryptix"
+            
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
         minqlx.set_cvar("g_infiniteAmmo", "1")     
