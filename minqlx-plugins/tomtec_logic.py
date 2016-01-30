@@ -63,7 +63,7 @@ class tomtec_logic(minqlx.Plugin):
 
     def handle_player_loaded(self, player):
         if str(player.steam_id) == "76561197960279482": # cryptix is here
-            player.name = "Cryptix"
+            player.name = "^4crypt^7ix"
             
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
