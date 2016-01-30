@@ -47,9 +47,7 @@ echo "========== QuakeStart.sh has started. =========="
 echo "========= $(date) ========="
 cd ~/steamcmd/steamapps/common/qlds/baseq3
 
-if [ $1 -eq 0 ]
-# starting PQL CA 1
-then
+if [ $1 -eq 0 ]; then
 echo "Starting clan arena server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -72,9 +70,7 @@ exec $qPurgeryStart \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 1 \
     +set qlx_balanceApi elo_b
-elif [ $1 -eq 1 ]
-# starting VQL CA 1
-then
+elif [ $1 -eq 1 ]; then
 echo "Starting clan arena server 2..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -98,9 +94,7 @@ exec $qPurgeryStart \
     +set g_damage_lg 6 \
     +set qlx_rulesetLocked 1 \
     +set qlx_disablePlayerRemoval 0
-elif [ $1 -eq 2 ]
-# starting PQL Race 1...
-then
+elif [ $1 -eq 2 ]; then
 echo "Starting race server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -122,9 +116,7 @@ exec $qPurgeryStart \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 0
-elif [ $1 -eq 3 ]
-# starting PQL FFA 1...
-then
+elif [ $1 -eq 3 ]; then
 echo "Starting free for all server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -147,9 +139,7 @@ exec $qPurgeryStart \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 1
-elif [ $1 -eq 4 ]
-# starting vql duel 1...
-then
+elif [ $1 -eq 4 ]; then
 echo "Starting VQL duel server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -172,9 +162,7 @@ exec $qPurgeryStart \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 1
-elif [ $1 -eq 5 ]
-# starting PQL Multi-Gametype 1...
-then
+elif [ $1 -eq 5 ]; then
 echo "Starting PQL Multi-Gametype server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -195,9 +183,7 @@ exec $qPurgeryStart \
     +set g_damage_lg 6 \
     +set g_voteFlags 0 \
     +set qlx_rulesetLocked 0
-elif [ $1 -eq 6 ]
-# starting VQL MultiGame 1...
-then
+elif [ $1 -eq 6 ]; then
 echo "Starting multi game type VQL server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -216,9 +202,7 @@ exec $qPurgeryStart \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 0
-elif [ $1 -eq 7 ]
-# starting Scrim SERVER 1...
-then
+elif [ $1 -eq 7 ]; then
 echo "Starting scrim SERVER server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -238,11 +222,8 @@ exec $qPurgeryStart \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 0 \
     +set qlx_serverExemptFromModeration 1
-elif [ $1 -eq 8 ]
-# starting reythe (sub580)...
-then
-if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
-then
+elif [ $1 -eq 8 ]; then
+if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]; then
 echo "Starting reythe's duel house (sub580) 1..."
 exec $qPathToVanillaStartScript \
     +set net_strict 1 \
@@ -265,9 +246,7 @@ exec $qPathToVanillaStartScript \
 else
 echo "This system is not intended to host reythe (sub580) server."
 fi
-elif [ $1 -eq 9 ]
-# starting pit (sub586)...
-then
+elif [ $1 -eq 9 ]; then
 if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]
 then
 echo "Starting pit clan server (sub586) 1..."
