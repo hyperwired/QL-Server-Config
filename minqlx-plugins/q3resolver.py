@@ -5,7 +5,7 @@
 
 import minqlx
 
-class aliases(minqlx.Plugin):
+class q3resolver(minqlx.Plugin):
     def __init__(self):
         self.add_hook("vote_called", self.handle_vote_called)
         self.plugin_version = "1.0"
