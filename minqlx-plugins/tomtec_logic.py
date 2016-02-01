@@ -27,15 +27,10 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("acommands", "acmds"), self.cmd_acommands)
     
         self.disabled_maps = ["proq3dm6", "ra3map1", "ra3map6"]
-
-        self.q3mapTranslationMapNamesQ3 = ["q3dm0", "q3dm1", "q3dm2", "q3dm3", "q3dm4", "q3dm5", "q3dm6", "q3dm7", "q3dm8", "q3dm9", "q3dm10", "q3dm11", "q3dm12", "q3dm13", "q3dm14", "q3dm15", "q3dm16", "q3dm17", "q3dm18", "q3dm19", "q3tourney1", "q3tourney2", "q3tourney3", "q3tourney4", "q3tourney5", "q3tourney6", "q3ctf1", "q3ctf2", "q3ctf3", "q3ctf4"]
-        self.q3mapTranslationMapNamesQL = ["introduction", "arenagate", "spillway", "hearth", "eviscerated", "forgotten", "campgrounds", "retribution", "brimstoneabbey", "heroskeep", "namelessplace", "chemicalreaction", "dredwerkz", "lostworld", "grimdungeons", "demonkeep", "cobaltstation", "longestyard", "spacechamber", "terminalheights", "powerstation", "provinggrounds", "hellsgate", "verticalvengeance", "fatalinstinct", "beyondreality", "duelingkeeps", "troubledwaters", None, "spacectf"]
-        self.q3mapTranslationLongNamesQ3 = ["Introduction", "Arena Gate", "House of Pain", "Arena of Death", "The Place of Many Deaths", "The Forgotten Place", "The Campgrounds", "Temple of Retribution", "Brimstone Abbey", "Hero's Keep", "The Nameless Place", "Deva Station", "The Dredwerkz", "Lost World", "Grim Dungeons", "Demon Keep", "The Bouncy Map", "The Longest Yard", "Space Chamber", "Apocalypse Void", "Power Station 0218", "The Proving Grounds", "Hell's Gate", "Vertical Vengeance", "Fatal Instinct", "The Very End of You", "Dueling Keeps", "Troubled Waters", "The Stronghold", "Space CTF"] 
-        self.q3mapTranslationLongNamesQL = ["Introduction", "Arena Gate", "Spillway", "Hearth", "Eviscerated", "Forgotten", "Campgrounds", "Retribution", "Brimstone Abbey", "Hero's Keep", "Nameless Place", "Chemical Reaction", "Dredwerkz", "Lost World", "Grim Dungeons", "Demon Keep", "Cobalt Station", "Longest Yard", "Space Chamber", "Terminal Heights", "Power Station", "Proving Grounds", "Hell's Gate", "Vertical Vengeance", "Fatal Instinct", "Beyond Reality", "Dueling Keeps", "Troubled Waters", None, "Space CTF"]
-                                          
+        
         self.set_cvar_once("qlx_freezePlayersDuringVote", "0")
         
-        self.plugin_version = "2.9"
+        self.plugin_version = "2.8"
 
         
     def cmd_wiki(self, player, msg, channel):
@@ -120,16 +115,6 @@ class tomtec_logic(minqlx.Plugin):
             if args.lower() is "disabled_test" or args.lower() in self.disabled_maps:
                 caller.tell("Map ^4{}^7 is currently disabled, please contact an admin/mod for details.".format(args.lower()))
                 return minqlx.RET_STOP_ALL
-
-            for index, item in enumerate(self.q3mapTranslationMapNamesQ3):
-                if args.lower() == item:
-                    q3mapName = str(self.q3mapTranslationMapNamesQ3[index])
-                    q3longName = str(self.q3mapTranslationLongNamesQ3[index])
-                    qLmapName = str(self.q3mapTranslationMapNamesQL[index])
-                    qLlongName = str(self.q3mapTranslationLongNamesQL[index])
-                    caller.tell("^1Q3A^7: Resolving Q3A map: ^1{}^7 (long name: ^4{}^7) to QL map: ^4{}^7.".format(q3mapName, q3longName, qLlongName))
-                    minqlx.client_command(caller.id, "callvote map {}".format(qLmapName))
-                    return minqlx.RET_STOP_ALL
 
     def handle_vote_started(self, caller, vote, args):
         if self.game.state == "warmup":
