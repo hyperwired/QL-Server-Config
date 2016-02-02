@@ -29,7 +29,7 @@ export qPurgeryStart="$qPathToMinqlxStartScript \
 +set g_inactivity 120 \
 +set qlx_serverBrandName $qPurgeryServerTitle \
 +set qlx_serverBrandTopField ^7Sponsored by ^5TomTec Solutions^7. Visit our Wiki at ^2thepurgery.com^7. \
-+set qlx_serverBrandBottomField For assistance with issues on ^4The Purgery^7, contact Pur^4g^7er or ^1Barley^7. \
++set qlx_serverBrandBottomField ^5www.4seasonsgaming.com^7, home to the Australian and New Zealand Quake community. \
 +set qlx_connectMessage Connected to ^4TomTec Solutions \
 +set qlx_loadedMessage Welcome to ^4The Purgery^7 \
 +set qlx_countdownMessage ^5Good luck, and have fun.^7 \
