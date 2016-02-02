@@ -51,4 +51,9 @@ no self splash-damage on health        4
 no self splash-damage on armor         8
 no falling damage                      16
 no footsteps                           32
+
+// g_dropCmds
+dropFlag           1
+dropPowerup        2
+dropWeapon         4
 ```
