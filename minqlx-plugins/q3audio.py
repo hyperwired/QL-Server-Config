@@ -9,6 +9,7 @@ class q3audio(minqlx.Plugin):
         self.add_hook("vote_ended", self.handle_vote_ended)
         self.add_hook("game_countdown", self.handle_game_countdown)
         self.add_hook("game_start", self.handle_game_start)
+        self.add_hook("game_end", self.handle_game_end)
         self.add_hook("round_countdown", self.handle_round_countdown)
         self.add_hook("round_start", self.handle_round_start)
         self.add_command("tomtec_versions", self.cmd_showversion)
@@ -18,6 +19,7 @@ class q3audio(minqlx.Plugin):
         
         self.plugin_version = "1.0"
 
+            
     def map_load(self, *args, **kwargs):
         self.game.workshop_items += [614429927]
 
@@ -107,6 +109,28 @@ class q3audio(minqlx.Plugin):
             self.stop_sound()
             self.play_sound("q3_audio/vo/gamestates/countdown/F.wav")
             
-        
+    def handle_game_end(self, *args, **kwargs):
+        if self.game.type_short == "duel":
+            teams = self.teams()
+            free_team = teams["free"]
+            score1 = free_team[0].score
+            player1 = self.player(free_team[0].id)
+            score2 = free_team[1].score
+            player2 = self.player(free_team[1].id)
+            if score1 > score2:
+                @minqlx.next_frame
+                def conclusion():
+                    self.stop_sound()
+                    self.play_sound("q3_audio/vo/gamestates/you_win.wav", player1)
+                    self.play_sound("q3_audio/vo/gamestates/you_lose.wav", player2)
+                conclusion()
+            elif score2 > score1:
+                @minqlx.next_frame
+                def conclusion():
+                    self.stop_sound()
+                    self.play_sound("q3_audio/vo/gamestates/you_win.wav", player2)
+                    self.play_sound("q3_audio/vo/gamestates/you_lose.wav", player1)
+                conclusion()
+            
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4q3audio.py^7 - version {}, created by Thomas Jones on 03/02/2016.".format(self.plugin_version))
