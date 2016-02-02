@@ -14,6 +14,9 @@
 # The Purgery - Sound Pack (by Thomas Jones for testing purposes)
 572495786
 
+# Quake III Arena/Team Arena VO Integration (testing)
+614429927
+
 # Rocket Arena 3 - ra3map18
 550003921
 
