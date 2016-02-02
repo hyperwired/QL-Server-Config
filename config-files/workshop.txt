@@ -858,9 +858,6 @@
 # thunda3dm2
 607067048
 
-# uberkill
-607068129
-
 # ShakenNotStirredPP
 607909342
 
@@ -875,9 +872,6 @@
 
 # turnK16
 602200309
-
-# ctf_mapel4
-602772147
 
 # CTF Map
 # 602774640 - This item has been removed by the author
@@ -920,9 +914,6 @@
 
 # Upsilon Complex II (ctf_upsilon2)
 605383478
-
-# OverkillPP
-605561819
 
 # plasma_climb
 605613413
@@ -1022,3 +1013,9 @@
 
 # uberkill
 607068129
+
+# ctf_faceoff2
+602797735 
+
+# ctf_mapel4
+602772147
