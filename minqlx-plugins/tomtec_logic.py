@@ -62,6 +62,9 @@ class tomtec_logic(minqlx.Plugin):
             self.slay(p)
 
     def handle_player_loaded(self, player):
+        if player.steam_id == minqlx.owner(): # purger is here, sound effect
+            self.play_sound("q3_audio/sounds/xaero_deathchime.wav")
+            
         if str(player.steam_id) == "76561197960279482": # cryptix is here
             player.name = "^4crypt^7ix"
             
