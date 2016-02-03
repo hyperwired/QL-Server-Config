@@ -29,6 +29,9 @@
 # OSPCA1 - American Can-CO
 547440173
 
+# Cubicle - MAP
+608370630
+
 # Threewave q3wpak 0, 1, 2, 3, 4
 546209430
 546895198
@@ -875,9 +878,6 @@
 
 # ctf_faceoff3
 607994732
-
-# Cubicle - MAP
-608370630
 
 # j6torments
 609334248
