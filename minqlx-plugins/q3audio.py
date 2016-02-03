@@ -12,13 +12,18 @@ class q3audio(minqlx.Plugin):
         self.add_hook("game_end", self.handle_game_end)
         self.add_hook("round_countdown", self.handle_round_countdown)
         self.add_hook("round_start", self.handle_round_start)
+        self.add_hook("round_end", self.handle_round_end)
         self.add_command("tomtec_versions", self.cmd_showversion)
 
         self.team_gametypes = ["tdm", "ca", "ctf", "1f", "har", "ft", "dom", "ad", "rr"]
         self.free_gametypes = ["ffa", "duel", "race"]
+
+        self.stored_score_red = 0
+        self.stored_score_blue = 0
         
         self.plugin_version = "1.0"
 
+        self.isFirstRound = True
             
     def map_load(self, *args, **kwargs):
         self.game.workshop_items += [614429927]
@@ -74,28 +79,53 @@ class q3audio(minqlx.Plugin):
 
 
     def handle_round_countdown(self, *args, **kwargs):
-        @minqlx.delay(4.6)
-        def stop_round_begins_in():
-            self.stop_sound()
-        stop_round_begins_in()
-        
-        @minqlx.delay(6.6)
-        def three():
-            self.stop_sound()
-            self.play_sound("q3_audio/vo/gamestates/countdown/3.wav")
-        three()
+        if self.isFirstRound:
+            self.isFirstRound = False
+            @minqlx.delay(4.6)
+            def stop_round_begins_in():
+                self.stop_sound()
+            stop_round_begins_in()
 
-        @minqlx.delay(7.6)
-        def two():
-            self.stop_sound()
-            self.play_sound("q3_audio/vo/gamestates/countdown/2.wav")
-        two()
+            @minqlx.delay(6.6)
+            def three():
+                self.stop_sound()
+                self.play_sound("q3_audio/vo/gamestates/countdown/3.wav")
+            three()
 
-        @minqlx.delay(8.6)
-        def one():
-            self.stop_sound()
-            self.play_sound("q3_audio/vo/gamestates/countdown/1.wav")
-        one()
+            @minqlx.delay(7.6)
+            def two():
+                self.stop_sound()
+                self.play_sound("q3_audio/vo/gamestates/countdown/2.wav")
+            two()
+
+            @minqlx.delay(8.6)
+            def one():
+                self.stop_sound()
+                self.play_sound("q3_audio/vo/gamestates/countdown/1.wav")
+            one()
+        else:
+            @minqlx.delay(5)
+            def stop_round_begins_in():
+                self.stop_sound()
+            stop_round_begins_in()
+
+            @minqlx.delay(7)
+            def three():
+                self.stop_sound()
+                self.play_sound("q3_audio/vo/gamestates/countdown/3.wav")
+            three()
+
+            @minqlx.delay(8)
+            def two():
+                self.stop_sound()
+                self.play_sound("q3_audio/vo/gamestates/countdown/2.wav")
+            two()
+
+            @minqlx.delay(9)
+            def one():
+                self.stop_sound()
+                self.play_sound("q3_audio/vo/gamestates/countdown/1.wav")
+            one()
         
     def handle_round_start(self, *args, **kwargs):
         @minqlx.next_frame
@@ -104,7 +134,22 @@ class q3audio(minqlx.Plugin):
             self.play_sound("q3_audio/vo/gamestates/countdown/F.wav")
         fight()
 
+    def handle_round_end(self, *args, **kwargs):
+        if self.game.type_short in self.team_gametypes:
+            if self.game.red_score != self.stored_score_red:
+                self.stored_score_red = self.game.red_score
+                self.stop_sound()
+                self.play_sound("q3_audio/vo/teamgame/red_scores.wav")
+            elif self.game.blue_score != self.stored_score_blue:
+                self.stored_score_blue = self.game.blue_score
+                self.stop_sound()
+                self.play_sound("q3_audio/vo/teamgame/blue_scores.wav")
+            
+        
     def handle_game_start(self, *args, **kwargs):
+        self.stored_score_red = self.game.red_score
+        self.stored_score_blue = self.game.blue_score
+        self.isFirstRound = True
         if self.game.type_short in self.free_gametypes:
             self.stop_sound()
             self.play_sound("q3_audio/vo/gamestates/countdown/F.wav")
