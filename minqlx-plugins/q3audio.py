@@ -21,7 +21,7 @@ class q3audio(minqlx.Plugin):
         self.stored_score_red = 0
         self.stored_score_blue = 0
         
-        self.plugin_version = "1.0"
+        self.plugin_version = "0.1"
 
         self.isFirstRound = True
             
