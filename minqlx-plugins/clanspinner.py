@@ -7,11 +7,15 @@ class clanspinner(minqlx.Plugin):
     def __init__(self):
         self.add_hook("player_loaded", self.handle_player_loaded)
         self.add_hook("player_disconnect", self.handle_player_disconnect)
-
+        self.add_hook("unload", self.handle_unload_plugin)
+        
         self.add_command("clanspinner", self.cmd_clanspinner, 5, usage="debug commands: [break, continue, initialise]")
         
-        self.kolos = []
-
+        self.clanMembers = []
+        self.clanTag = "^0kolo^6."
+        self.clanAnimation = ["^0k^6.^0olo", "^0ko^6.^0lo", "^0kol^6.^0o", "^0kolo^6.", "^0kol^6.^0o", "^0ko^6.^0lo", "^0k^6.^0olo", "^6.^0kolo"]
+        self.clanAnimationDelay = 0.5
+        
         self.keep_going = True
         self.initialise()
 
@@ -29,80 +33,46 @@ class clanspinner(minqlx.Plugin):
         if msg[1].lower() == "initialise":
             self.initialise()
 
+    def handle_plugin_unload(self, plugin):
+        if plugin == "clanspinner":
+            self.keep_going = False
             
     @minqlx.next_frame
     def handle_player_loaded(self, player):
-        if player.clan == "^0kolo^6.":
-            self.kolos.append(player)
-            if len(self.kolos) == 1:
+        if player.clan == self.clanTag:
+            self.clanMembers.append(player)
+            if len(self.clanMembers) == 1:
                 self.keep_going = True
                 self.start_rotating()
-            self.msg("A ^0kolo^6.^7 has connected!")
     
     def handle_player_disconnect(self, player, reason):
         try:
-            self.kolos.remove(player)
-            if len(self.kolos) <= 1:
+            self.clanMembers.remove(player)
+            if len(self.clanMembers) <= 1:
                 self.keep_going = False
-                
         except KeyError:
             return
         
     def initialise(self):
         for player in self.players():
-            if player.clan == "^0kolo^6.":
-                self.kolos.append(player)
+            if player.clan == self.clanTag:
+                self.clanMembers.append(player)
 
-        if len(self.kolos) >= 1:
+        if len(self.clanMembers) >= 1:
             self.keep_going = True
             self.start_rotating()
                 
     @minqlx.thread
     def start_rotating(self):
         while True:
-            if (len(self.kolos) == 0 or self.keep_going == False):
-                break
+            for text in self.clanAnimation:
+                # Make sure we're still supposed to run, otherwise exit.
+                if (len(self.clanMembers) == 0 or self.keep_going == False):
+                    break
+                
+                # Set the clan tag to the next animation in the list.
+                for k in self.kolos:
+                    k.clan = text
 
-            for k in self.kolos:
-                k.clan = "^0k^6.^0olo"
-
-            time.sleep(0.5)
-
-            for k in self.kolos:
-                k.clan = "^0ko^6.^0lo"
-
-            time.sleep(0.5)
-
-            for k in self.kolos:
-                k.clan = "^0kol^6.^0o"
-
-            time.sleep(0.5)
-
-            for k in self.kolos:
-                k.clan = "^0kolo^6."
-
-            time.sleep(0.5)
-
-            for k in self.kolos:
-                k.clan = "^0kol^6.^0o"
-
-            time.sleep(0.5)
-
-            for k in self.kolos:
-                k.clan = "^0ko^6.^0lo"
-
-            time.sleep(0.5)
-
-            for k in self.kolos:
-                k.clan = "^0k^6.^0olo"
-
-            time.sleep(0.5)
-
-            for k in self.kolos:
-                k.clan = "^6.^0kolo"
-
-            time.sleep(0.5)
-
-            
-
-            
+                # Wait for a bit until we begin again.
+                time.sleep(self.clanAnimationDelay)
