@@ -7,7 +7,7 @@ class clanspinner(minqlx.Plugin):
     def __init__(self):
         self.add_hook("player_loaded", self.handle_player_loaded)
         self.add_hook("player_disconnect", self.handle_player_disconnect)
-        self.add_hook("unload", self.handle_unload_plugin)
+        self.add_hook("unload", self.handle_plugin_unload)
         
         self.add_command("clanspinner", self.cmd_clanspinner, 5, usage="debug commands: [break, continue, initialise]")
         
