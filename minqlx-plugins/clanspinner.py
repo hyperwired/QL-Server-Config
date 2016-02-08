@@ -71,8 +71,8 @@ class clanspinner(minqlx.Plugin):
                     break
                 
                 # Set the clan tag to the next animation in the list.
-                for k in self.kolos:
-                    k.clan = text
+                for p in self.clanMembers:
+                    p.clan = text
 
                 # Wait for a bit until we begin again.
                 time.sleep(self.clanAnimationDelay)
