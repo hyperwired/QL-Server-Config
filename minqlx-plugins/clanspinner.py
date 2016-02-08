@@ -65,8 +65,11 @@ class clanspinner(minqlx.Plugin):
     @minqlx.thread
     def start_rotating(self):
         while True:
+            # Make sure we're still supposed to run, otherwise exit the while loop.
+            if (len(self.clanMembers) == 0 or self.keep_going == False):
+                break
             for text in self.clanAnimation:
-                # Make sure we're still supposed to run, otherwise exit.
+                # Make sure we're still supposed to run, otherwise exit the for loop.
                 if (len(self.clanMembers) == 0 or self.keep_going == False):
                     break
                 
