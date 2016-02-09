@@ -5,7 +5,7 @@
 # thomas@tomtecsolutions.com
 
 # Defining globally used variables/configuration.
-export qMinqlxRedisPassword=$(<~/localConfig-redispassword.txt)
+export qMinqlxRedisPassword=$(<~/localConfig-redisPassword.txt)
 export qServerLocation=$(<~/localConfig-serverLocation.txt)
 export qServerLocationHyphenated=`echo $qServerLocation | sed 's/ /-/g'`
 export qGlobalOptions="+set sv_location $qServerLocation"
