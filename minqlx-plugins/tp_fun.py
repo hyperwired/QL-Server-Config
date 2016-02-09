@@ -20,6 +20,9 @@ class tp_fun(minqlx.Plugin):
 
 
     def cmd_pentagram(self, player, msg, channel):
+        if len(msg) < 2:
+            return minqlx.RET_USAGE
+        
         try:
             pentagramee = self.player(int(msg[1]))
         except:
