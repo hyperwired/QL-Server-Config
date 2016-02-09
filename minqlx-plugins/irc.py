@@ -38,8 +38,9 @@ class irc(minqlx.Plugin):
         
         self.add_command(("world", "say_world"), self.send_irc_message, priority=minqlx.PRI_LOWEST)
         self.add_command("tomtec_versions", self.cmd_showversion)
+        self.add_command("commlink", self.cmd_toggle_commlink)
 
-        self.plugin_version = "1.5"
+        self.plugin_version = "1.6"
         
         self.set_cvar_once("qlx_ircServer", "irc.quakenet.org")
         
@@ -79,6 +80,17 @@ class irc(minqlx.Plugin):
             self.irc.start()
             self.logger.info("Connecting to {}...".format(self.server))
 
+
+    def cmd_toggle_commlink(self, player, msg, channel):
+        flag = self.db.get_flag(player, "commlink:enabled", default=True)
+        self.db.set_flag(player, "commlink:enabled", not flag)
+        if flag:
+            word = "disabled"
+        else:
+            word = "enabled"
+        player.tell("^3CommLink^7 notices have been ^4{}^7.".format(word))
+        return minqlx.RET_STOP_ALL
+    
     def handle_chat(self, player, msg, channel):
         if self.irc and self.relay and channel == "chat":
             text = "^7<{}> ^2{}".format(player.name, msg)
@@ -114,10 +126,14 @@ class irc(minqlx.Plugin):
                 self.server_report(self.relay)
             elif self.is_relaying:
                 if minqlx.get_cvar("net_port") != "27964":
-                    minqlx.CHAT_CHANNEL.reply("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
+                    for p in self.players():
+                        if self.db.get_flag(p, "commlink:enabled", default=True):
+                            p.tell("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
                 else:
                     if self.game.state == "warmup":
-                        minqlx.CHAT_CHANNEL.reply("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
+                        for p in self.players():
+                            if self.db.get_flag(p, "commlink:enabled", default=True):
+                                p.tell("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
                         
         elif channel == user[0]: # Is PM?
             if len(msg) > 1 and msg[0].lower() == ".auth" and self.password:
