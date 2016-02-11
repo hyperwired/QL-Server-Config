@@ -189,7 +189,9 @@ exec $qPurgeryStart \
     +set sv_mappoolFile "mappool_vqlduel.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set qlx_rulesetLocked 1
+    +set qlx_rulesetLocked 1 \
+    +set g_timeoutCount 2 \
+    +set g_timeoutLen 90
 elif [ $1 -eq 6 ]; then
 echo "Starting PQL Multi-Gametype server 1..."
 exec $qPurgeryStart \
