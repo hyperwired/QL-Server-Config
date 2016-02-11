@@ -44,10 +44,7 @@ class irc(minqlx.Plugin):
         
         self.set_cvar_once("qlx_ircServer", "irc.quakenet.org")
         
-        if self.get_cvar("net_port") == "27967":
-            self.set_cvar("qlx_ircRelayChannel", "#thepurgery-scrim")
-        else:
-            self.set_cvar_once("qlx_ircRelayChannel", "#thepurgery")
+        self.set_cvar_once("qlx_ircRelayChannel", "#thepurgery")
             
         self.set_cvar_once("qlx_ircRelayIrcChat", "1")
         self.set_cvar_once("qlx_ircIdleChannels", "")
@@ -113,7 +110,7 @@ class irc(minqlx.Plugin):
             self.irc.msg(self.relay, self.translate_colors("^3{}^7 {}".format(player.name, reason)))
 
     def game_countdown(self):
-        if minqlx.get_cvar("net_port") == "27964":
+        if self.game.type_short == "duel":
             self.msg("^3CommLink^7 message reception has been disabled during your Duel.")
 
     def handle_msg(self, irc, user, channel, msg):
@@ -125,7 +122,7 @@ class irc(minqlx.Plugin):
             if cmd in (".players", ".status", ".info", ".map", ".server"):
                 self.server_report(self.relay)
             elif self.is_relaying:
-                if minqlx.get_cvar("net_port") != "27964":
+                if self.game.type_short != "duel":
                     for p in self.players():
                         if self.db.get_flag(p, "commlink:enabled", default=True):
                             p.tell("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
