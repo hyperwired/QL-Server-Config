@@ -93,7 +93,7 @@ exec $qPurgeryStart \
     +set g_damage_lg 6 \
     +set qlx_rulesetLocked 1 \
     +set qlx_disablePlayerRemoval 0 \
-    +set qlx_maxTeamsize 7 \
+    +set qlx_teamsizeMaximum 7 \
     +set qlx_privatiseVotes 1 \
     +set qlx_strictVql 1
   elif [ $1 -eq 2 ]; then
@@ -119,7 +119,7 @@ exec $qPurgeryStart \
       +set g_damage_lg 6 \
       +set qlx_rulesetLocked 1 \
       +set qlx_disablePlayerRemoval 0 \
-      +set qlx_maxTeamsize 5 \
+      +set qlx_teamsizeMaximum 5 \
       +set qlx_privatiseVotes 1 \
       +set qlx_strictVql 1
 elif [ $1 -eq 3 ]; then
