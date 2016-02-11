@@ -75,7 +75,7 @@ echo "Starting clan arena server 2..."
 exec $qPurgeryStart \
     +set net_strict 1 \
     +set net_port $gameport \
-    +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Clan Arena #1 (Max 7v7)" \
+    +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Clan Arena #1 (Max 6v6)" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
@@ -93,7 +93,7 @@ exec $qPurgeryStart \
     +set g_damage_lg 6 \
     +set qlx_rulesetLocked 1 \
     +set qlx_disablePlayerRemoval 0 \
-    +set qlx_teamsizeMaximum 7 \
+    +set qlx_teamsizeMaximum 6 \
     +set qlx_privatiseVotes 1 \
     +set qlx_strictVql 1 \
     +set teamsize 4
