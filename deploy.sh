@@ -71,6 +71,12 @@ mv * $HOME/
 chmod +x ~/*.sh
 cd ..
 
+echo "Moving run-server scripts into place..."
+cd run-server
+mv * $HOME/
+chmod +x ~/steamcmd/steamapps/common/qlds/*.sh
+cd ..
+
 echo "Removing old crontab..."
 crontab -r
 echo "Loading new crontab..."
