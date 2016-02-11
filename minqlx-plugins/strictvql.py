@@ -14,12 +14,12 @@ class strictvql(minqlx.Plugin):
         self.add_hook("vote_called", self.handle_vote_called)
         self.add_hook("new_game", self.handle_new_game)
         
-        self.plugin_version = "1.0"
+        self.plugin_version = "1.1"
 
     def handle_vote_called(self, caller, vote, args):
         if vote.lower() == "teamsize":
             if self.game.state != "warmup":
-                if self.get_cvar("teamsize", str) >= args:
+                if args >= self.get_cvar("teamsize", str):
                     caller.tell("You can only vote to lower the teamsize ({}) once the game has begun.".format(self.get_cvar("teamsize")))
                     return minqlx.RET_STOP_ALL
         elif (vote.lower() == "kick" or vote.lower() == "spec"):
