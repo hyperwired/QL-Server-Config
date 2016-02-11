@@ -73,7 +73,7 @@ cd ..
 
 echo "Moving run-server scripts into place..."
 cd run-server
-mv * $HOME/
+mv * ~/steamcmd/steamapps/common/qlds/
 chmod +x ~/steamcmd/steamapps/common/qlds/*.sh
 cd ..
 
