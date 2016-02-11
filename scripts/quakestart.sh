@@ -75,7 +75,7 @@ echo "Starting clan arena server 2..."
 exec $qPurgeryStart \
     +set net_strict 1 \
     +set net_port $gameport \
-    +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Clan Arena" \
+    +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Clan Arena #1 (Max 7v7)" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
@@ -84,7 +84,6 @@ exec $qPurgeryStart \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
-    +set g_allowSpecVote 1 \
     +set g_allowVoteMidGame 1 \
     +set bot_enable 1 \
     +set bot_nochat 1 \
@@ -93,8 +92,37 @@ exec $qPurgeryStart \
     +set qlx_ircNickname "$qIrcNickname" \
     +set g_damage_lg 6 \
     +set qlx_rulesetLocked 1 \
-    +set qlx_disablePlayerRemoval 0
-elif [ $1 -eq 2 ]; then
+    +set qlx_disablePlayerRemoval 0 \
+    +set qlx_maxTeamsize 7 \
+    +set qlx_privatiseVotes 1 \
+    +set qlx_strictVql 1
+  elif [ $1 -eq 2 ]; then
+  echo "Starting clan arena server 3..."
+  exec $qPurgeryStart \
+      +set net_strict 1 \
+      +set net_port $gameport \
+      +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Clan Arena #2 (Max 5v5)" \
+      +set zmq_rcon_enable 1 \
+      +set zmq_rcon_password "$qRconPasswordPurgery" \
+      +set zmq_rcon_port $rconport \
+      +set zmq_stats_enable 1 \
+      +set zmq_stats_password "eggplant" \
+      +set zmq_stats_port $gameport \
+      +set sv_tags "$sponsortag" \
+      +set g_voteFlags "9320" \
+      +set g_allowVoteMidGame 1 \
+      +set bot_enable 1 \
+      +set bot_nochat 1 \
+      +set sv_mappoolFile "mappool_vqlca.txt" \
+      +set fs_homepath ~/.quakelive/$gameport \
+      +set qlx_ircNickname "$qIrcNickname" \
+      +set g_damage_lg 6 \
+      +set qlx_rulesetLocked 1 \
+      +set qlx_disablePlayerRemoval 0 \
+      +set qlx_maxTeamsize 5 \
+      +set qlx_privatiseVotes 1 \
+      +set qlx_strictVql 1
+elif [ $1 -eq 3 ]; then
 echo "Starting race server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -116,7 +144,7 @@ exec $qPurgeryStart \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 0
-elif [ $1 -eq 3 ]; then
+elif [ $1 -eq 4 ]; then
 echo "Starting free for all server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -139,7 +167,7 @@ exec $qPurgeryStart \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 1
-elif [ $1 -eq 4 ]; then
+elif [ $1 -eq 5 ]; then
 echo "Starting VQL duel server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -162,7 +190,7 @@ exec $qPurgeryStart \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 1
-elif [ $1 -eq 5 ]; then
+elif [ $1 -eq 6 ]; then
 echo "Starting PQL Multi-Gametype server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -183,7 +211,7 @@ exec $qPurgeryStart \
     +set g_damage_lg 6 \
     +set g_voteFlags 0 \
     +set qlx_rulesetLocked 0
-elif [ $1 -eq 6 ]; then
+elif [ $1 -eq 7 ]; then
 echo "Starting multi game type VQL server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -202,26 +230,6 @@ exec $qPurgeryStart \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 0
-elif [ $1 -eq 7 ]; then
-echo "Starting scrim SERVER server 1..."
-exec $qPurgeryStart \
-    +set net_strict 1 \
-    +set net_port $gameport \
-    +set sv_hostname " #$servernum The Purgery $qServerLocation - Unmoderated Scrim Server" \
-    +set zmq_rcon_enable 1 \
-    +set zmq_rcon_password "$qRconPasswordPurgery" \
-    +set zmq_rcon_port $rconport \
-    +set zmq_stats_enable 1 \
-    +set zmq_stats_password "eggplant" \
-    +set zmq_stats_port $gameport \
-    +set sv_tags "unmoderated,$sponsortag" \
-    +set g_allowSpecVote 1 \
-    +set g_allowVoteMidGame 1 \
-    +set sv_mappoolFile "mappool_ca.txt" \
-    +set fs_homepath ~/.quakelive/$gameport \
-    +set qlx_ircNickname "$qIrcNickname" \
-    +set qlx_rulesetLocked 0 \
-    +set qlx_serverExemptFromModeration 1
 elif [ $1 -eq 8 ]; then
 if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]; then
 echo "Starting reythe's duel house (sub580) 1..."
