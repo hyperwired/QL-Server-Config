@@ -168,7 +168,7 @@ exec $qPurgeryStart \
     +set sv_mappoolFile "mappool_pqlffa.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set qlx_rulesetLocked 1
+    +set qlx_rulesetLocked 0
 elif [ $1 -eq 5 ]; then
 echo "Starting VQL duel server 1..."
 exec $qPurgeryStart \
