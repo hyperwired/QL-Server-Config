@@ -17,6 +17,9 @@
 # The Purgery - Sound Pack (by Thomas Jones for testing purposes)
 572495786
 
+# Summer
+622119130
+
 # Quake III Arena/Team Arena VO Integration (testing)
 614429927
 
@@ -1021,7 +1024,7 @@
 604816027
 
 # ctf_faceoff2
-602797735 
+602797735
 
 # ctf_mapel4
 602772147
