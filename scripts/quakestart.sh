@@ -69,7 +69,8 @@ exec $qPurgeryStart \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 1 \
-    +set qlx_balanceApi elo_b
+    +set qlx_balanceApi elo_b \
+    +set qlx_leaverBan 1
 elif [ $1 -eq 1 ]; then
 echo "Starting clan arena server 2..."
 exec $qPurgeryStart \
