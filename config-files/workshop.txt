@@ -111,9 +111,6 @@
 # Test Big Box
 545598325
 
-# CoralCTF
-544276062
-
 # Winter's Edge Original
 540986862
 
@@ -158,9 +155,6 @@
 
 # Rocket Arena 3 - ra3map6
 553095317
-
-# Theatre of Pain - ra3map1
-551678612
 
 # Crypt
 552635969
