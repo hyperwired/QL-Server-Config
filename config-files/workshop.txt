@@ -843,9 +843,6 @@
 # lun3dm2
 607048277
 
-# mario_ctf
-607051057
-
 # nodm18
 607052130
 
@@ -881,9 +878,6 @@
 
 # turnK16
 602200309
-
-# CTF Map
-# 602774640 - This item has been removed by the author
 
 # ctf_faceoff2
 602797735
@@ -942,9 +936,6 @@
 # bah
 607018623
 
-# Speedyctf
-598327329
-
 # Mario
 598733591
 
@@ -984,21 +975,6 @@
 # Thril Kill (gd_tourney1a)
 600299201
 
-# CTF Map
-600363917
-
-# CTF Map
-602257473
-
-# CTF Map
-600366782
-
-# CTF Map
-600568620
-
-# CTF Map
-# 600985936 - This item has been removed by the author
-
 # lava_hell
 601020709
 
@@ -1014,11 +990,5 @@
 # pro_rings
 601701357
 
-# 140 CTF Maps
-604816027
-
 # ctf_faceoff2
 602797735
-
-# ctf_mapel4
-602772147
