@@ -23,6 +23,7 @@ class tp_fun(minqlx.Plugin):
         num1 = randint(0,6)
         num2 = randint(0,6)
         minqlx.client_command(player.id, "say ^{}:^{}D".format(num1, num2))
+        return minqlx.RET_STOP_ALL
         
     def cmd_pentagram(self, player, msg, channel):
         if len(msg) < 2:
