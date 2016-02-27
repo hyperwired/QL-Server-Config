@@ -17,8 +17,8 @@ class clanspinner(minqlx.Plugin):
         self.add_command("clanspinner", self.cmd_clanspinner, 5, usage="debug commands: [break, pause, continue, initialise]")
         
         self.clanMembers = []
-        self.clanTag = "^0kolo^6."
-        self.clanAnimation = ["^0k^6.^0olo", "^0ko^6.^0lo", "^0kol^6.^0o", "^0kolo^6.", "^0kol^6.^0o", "^0ko^6.^0lo", "^0k^6.^0olo", "^6.^0kolo"]
+        self.clanTag = "^0kolo^4."
+        self.clanAnimation = ["^0k^4.^0olo", "^0ko^4.^0lo", "^0kol^4.^0o", "^0kolo^4.", "^0kol^4.^0o", "^0ko^4.^0lo", "^0k^4.^0olo", "^4.^0kolo"]
         self.clanAnimationDelay = 0.5
         
         self.keep_going = True

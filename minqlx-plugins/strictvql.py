@@ -14,7 +14,8 @@ class strictvql(minqlx.Plugin):
         self.add_hook("vote_called", self.handle_vote_called)
         self.add_hook("new_game", self.handle_new_game)
         
-        self.plugin_version = "1.1"
+        self.plugin_version = "1.2"
+
 
     def handle_vote_called(self, caller, vote, args):
         if vote.lower() == "teamsize":

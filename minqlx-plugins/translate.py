@@ -190,7 +190,7 @@ class translate(minqlx.Plugin):
                     if not (pref_tag in translations):
                         translations[pref_tag] = blob.translate(to=pref_tag).raw
                     # Tell translation
-                    p.tell("^6AutoTrans^7({}->{}){}: {}".format(l, pref_tag, C, translations[pref_tag]))
+                    p.tell("^4AutoTrans^7({}->{}){}: {}".format(l, pref_tag, C, translations[pref_tag]))
 
 
         except Exception as e:
@@ -201,10 +201,10 @@ class translate(minqlx.Plugin):
             return minqlx.RET_USAGE
 
         def download_wordnet():
-            self.msg("^6TranslatePlugin: ^7Starting one-time package 'wordnet' download...")
+            self.msg("^4TranslatePlugin: ^7Starting one-time package 'wordnet' download...")
             import nltk
             nltk.download('wordnet')
-            self.msg("^6TranslatePlugin: ^7Wordnet downloading successfull. Installing... ^2complete!")
+            self.msg("^4TranslatePlugin: ^7Wordnet downloading successfull. Installing... ^2complete!")
             try:
                 callback(True)
             except Exception as e:
@@ -233,7 +233,7 @@ class translate(minqlx.Plugin):
         channel.reply("^7TranslationCommands: ^2!languages^7, ^2!lang^7, ^2!define^7, ^2!urban^7, ^2!translate^7, ^2!stranslate^7, ^2!autotrans")
 
     def cmd_silent_translate(self, player, msg, channel):
-        player.tell("^6TranslateRequest: ^2{}".format(msg[1:]))
+        player.tell("^4TranslateRequest: ^2{}".format(msg[1:]))
         self.cmd_translate(player, msg, channel, True)
         return minqlx.RET_STOP_ALL
 
@@ -251,14 +251,14 @@ class translate(minqlx.Plugin):
                 if msg[1].title() in lang:
                     matches.append([lang, LANGS[lang]])
             if not matches:
-                player.tell("^6No languages matched {}... Try ^2!languages ^6for a list.".format(msg[1]))
+                player.tell("^4No languages matched {}... Try ^2!languages ^4for a list.".format(msg[1]))
                 return minqlx.RET_STOP_ALL
             elif len(matches) == 1:
                 lang, tag = matches[0]
                 to = tag
             else:
                 _map = map(lambda pair: "{}->{}".format(pair[0], pair[1]), matches)
-                player.tell("^6Multiple matches found: ^7" + ", ".join(list(_map)))
+                player.tell("^4Multiple matches found: ^7" + ", ".join(list(_map)))
                 return minqlx.RET_STOP_ALL
 
 
@@ -272,14 +272,14 @@ class translate(minqlx.Plugin):
 
         output = "^7Translation: {}{}".format(C, translated)
         if silent:
-            player.tell("^6Psst: " + output)
+            player.tell("^4Psst: " + output)
             return minqlx.RET_STOP_ALL
         channel.reply(output)
 
 
     @minqlx.delay(1)
     def help_textblob(self):
-        self.msg("^1TranslationError^7: missing library textblob. Install via ^6$ sudo pip install textblob ^7and restart server.")
+        self.msg("^1TranslationError^7: missing library textblob. Install via ^4$ sudo pip install textblob ^7and restart server.")
 
 
     def cmd_language(self, player, msg, channel):
@@ -288,7 +288,7 @@ class translate(minqlx.Plugin):
             if self.help_get_auto_pref(player):
                 tag = self.help_get_lang_tag(player)
                 lang = TAGS.get(tag, DEFAULT_LANG)
-                channel.reply("^7Your default language is: ^6{}^7({}). Use ^2!lang^7 to change it.".format(lang, tag))
+                channel.reply("^7Your default language is: ^4{}^7({}). Use ^2!lang^7 to change it.".format(lang, tag))
                 return
             else:
                 channel.reply("^7AutoTranslation is turned off. Activate with !autotrans or !language X")
@@ -298,7 +298,7 @@ class translate(minqlx.Plugin):
             lang = TAGS.get(msg[1].lower()) # try correct tag
             if lang:
                 self.help_set_lang_tag(player, msg[1].lower())
-                channel.reply("^7AutoTranslate language changed to: ^6{}^7({}).".format(lang, msg[1]))
+                channel.reply("^7AutoTranslate language changed to: ^4{}^7({}).".format(lang, msg[1]))
                 self.help_change_auto_pref(player, 1)
                 return
             else: # try every language for a match
@@ -307,24 +307,24 @@ class translate(minqlx.Plugin):
                     if msg[1].title() in lang:
                         maybe.append([lang, LANGS[lang]])
                 if not maybe:
-                    player.tell("^6No languages matched {}... Try ^2!languages ^6for a list.".format(msg[1]))
+                    player.tell("^4No languages matched {}... Try ^2!languages ^4for a list.".format(msg[1]))
                     return minqlx.RET_STOP_ALL
                 elif len(maybe) == 1:
                     lang, tag = maybe[0]
                     self.help_set_lang_tag(player, tag)
-                    channel.reply("^7AutoTranslate language changed to: ^6{}^7({}).".format(lang, tag))
+                    channel.reply("^7AutoTranslate language changed to: ^4{}^7({}).".format(lang, tag))
                     self.help_change_auto_pref(player, 1)
                     return
                 else:
                     _map = map(lambda pair: "{}->{}".format(pair[0], pair[1]), maybe)
-                    player.tell("^6Multiple matches found: ^7" + ", ".join(list(_map)))
+                    player.tell("^4Multiple matches found: ^7" + ", ".join(list(_map)))
                     return minqlx.RET_STOP_ALL
 
 
 
     def cmd_languages(self, player, msg, channel):
         _printable = map(lambda key: "^5{}^7({})".format(key, LANGS[key]), sorted(LANGS))
-        player.tell("^6Supported languages: ^5" + ", ".join(list(_printable)))
+        player.tell("^4Supported languages: ^5" + ", ".join(list(_printable)))
         channel.reply("^7{} can open their console to see all the supported languages.".format(player.name))
 
 
@@ -406,15 +406,15 @@ class translate(minqlx.Plugin):
                 line = line.replace(b'"', b'')
                 # If called manually and outdated
                 if channel and VERSION.encode() != line:
-                    channel.reply("^7Currently using ^3iou^7one^4girl^7's ^6{}^7 plugin ^1outdated^7 version ^6{}^7.".format(self.__class__.__name__, VERSION))
+                    channel.reply("^7Currently using ^3iou^7one^4girl^7's ^4{}^7 plugin ^1outdated^7 version ^4{}^7.".format(self.__class__.__name__, VERSION))
                 # If called manually and alright
                 elif channel and VERSION.encode() == line:
-                    channel.reply("^7Currently using ^3iou^7one^4girl^7's latest ^6{}^7 plugin version ^6{}^7.".format(self.__class__.__name__, VERSION))
+                    channel.reply("^7Currently using ^3iou^7one^4girl^7's latest ^4{}^7 plugin version ^4{}^7.".format(self.__class__.__name__, VERSION))
                 # If routine check and it's not alright.
                 elif player and VERSION.encode() != line:
                     time.sleep(15)
                     try:
-                        player.tell("^3Plugin update alert^7:^6 {}^7's latest version is ^6{}^7 and you're using ^6{}^7!".format(self.__class__.__name__, line.decode(), VERSION))
+                        player.tell("^3Plugin update alert^7:^4 {}^7's latest version is ^4{}^7 and you're using ^4{}^7!".format(self.__class__.__name__, line.decode(), VERSION))
                     except Exception as e: minqlx.console_command("echo {}".format(e))
                 return
 
