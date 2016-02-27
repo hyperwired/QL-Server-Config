@@ -37,6 +37,7 @@ class tomtec_logic(minqlx.Plugin):
         if self.get_cvar("qlx_strictVql", bool):
             minqlx.load_plugin("strictvql")
 
+        @minqlx.delay(10)
         if self.get_cvar("qlx_useMyBalance", bool):
             minqlx.unload_plugin("balance")
             minqlx.load_plugin("mybalance")
