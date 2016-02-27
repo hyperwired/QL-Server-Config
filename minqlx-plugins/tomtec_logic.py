@@ -32,15 +32,18 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_useMyBalance", "0")
         
-        self.plugin_version = "3.0"
+        self.plugin_version = "3.1"
 
         if self.get_cvar("qlx_strictVql", bool):
             minqlx.load_plugin("strictvql")
 
-        @minqlx.delay(10)
-        if self.get_cvar("qlx_useMyBalance", bool):
-            minqlx.unload_plugin("balance")
-            minqlx.load_plugin("mybalance")
+        
+        if self.get_cvar("qlx_useMyBalance", bool): # wrap like this so we let other plugins load
+            @minqlx.delay(10)
+            def f():
+                minqlx.unload_plugin("balance")
+                minqlx.load_plugin("mybalance")
+            f()
             
     def cmd_wiki(self, player, msg, channel):
         channel.reply("Visit ^2thepurgery.com^7 to see ^4The Purgery^7's wiki and documentation.")
