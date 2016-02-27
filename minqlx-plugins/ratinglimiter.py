@@ -13,6 +13,7 @@ class ratinglimiter(minqlx.Plugin):
         self.add_hook("player_loaded", self.handle_player_loaded)
         self.add_hook("team_switch_attempt", self.handle_team_switch)
         self.add_hook("new_game", self.handle_new_game)
+
         self.add_command("tomtec_versions", self.cmd_showversion)
 
         self.set_cvar_once("qlx_minRating", "0")
