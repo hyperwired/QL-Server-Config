@@ -30,6 +30,7 @@ class tomtec_logic(minqlx.Plugin):
         
         self.set_cvar_once("qlx_freezePlayersDuringVote", "0")
         self.set_cvar_once("qlx_strictVql", "0")
+        self.set_cvar_once("qlx_useMyBalance", "0")
         
         self.plugin_version = "3.0"
 
