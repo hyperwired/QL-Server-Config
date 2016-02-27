@@ -315,6 +315,30 @@ exec $qPathToMinqlxStartScript \
 else
 echo "This system is not intended to host pit clan (sub586) server."
 fi
+elif [ $1 -eq 11 ]; then
+if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]; then
+echo "Starting ginababy's server (sub593) 1..."
+exec $qPathToMinqlxStartScript \
+    +set net_strict 1 \
+    +set qlx_redisDatabase 4 \
+    +set net_port $gameport \
+    +set qlx_owner $qPurgeryOwnerSteam64ID \
+    +set qlx_plugins "DEFAULT, balance" \
+    +set sv_hostname "Pew Pew no QQ" \
+    +set zmq_rcon_enable 1 \
+    +set zmq_rcon_password "$(<~/localConfig-rconPassword-gina.txt)" \
+    +set zmq_rcon_port $rconport \
+    +set zmq_stats_enable 1 \
+    +set zmq_stats_password "$(<~/localConfig-rconPassword-gina.txt)" \
+    +set zmq_stats_port $gameport \
+    +set sv_tags "$qServerLocation" \
+    +set g_accessFile "access_gina.txt" \
+    +set sv_mappoolFile "mappool_default.txt" \
+    +set fs_homepath ~/.quakelive/GINA-SUB593 \
+    +set sv_location "$qServerLocation"
+else
+echo "This system is not intended to host ginababy's (sub593) server."
+fi
 fi
 
 #elif [ $1 -ge 10 ] && [ $1 -le 13 ]
