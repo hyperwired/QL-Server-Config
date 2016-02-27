@@ -31,10 +31,14 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_freezePlayersDuringVote", "0")
         self.set_cvar_once("qlx_strictVql", "0")
         
-        self.plugin_version = "2.9"
+        self.plugin_version = "3.0"
 
         if self.get_cvar("qlx_strictVql", bool):
             minqlx.load_plugin("strictvql")
+
+        if self.get_cvar("qlx_useMyBalance", bool):
+            minqlx.unload_plugin("balance")
+            minqlx.load_plugin("mybalance")
             
     def cmd_wiki(self, player, msg, channel):
         channel.reply("Visit ^2thepurgery.com^7 to see ^4The Purgery^7's wiki and documentation.")

@@ -72,6 +72,33 @@ exec $qPurgeryStart \
     +set qlx_balanceApi elo_b \
     +set qlx_leaverBan 1
 elif [ $1 -eq 1 ]; then
+echo "Starting beginner's clan arena server 1..."
+exec $qPurgeryStart \
+    +set net_strict 1 \
+    +set net_port $gameport \
+    +set sv_hostname "     #$servernum The Purgery $qServerLocation Novice PQL (<1600 Glicko) - Clan Arena" \
+    +set zmq_rcon_enable 1 \
+    +set zmq_rcon_password "$qRconPasswordPurgery" \
+    +set zmq_rcon_port $rconport \
+    +set zmq_stats_enable 1 \
+    +set zmq_stats_password "eggplant" \
+    +set zmq_stats_port $gameport \
+    +set sv_tags "$sponsortag" \
+    +set g_voteFlags "9320" \
+    +set g_allowSpecVote 1 \
+    +set g_allowVoteMidGame 1 \
+    +set bot_enable 1 \
+    +set bot_nochat 1 \
+    +set sv_mappoolFile "mappool_pqlca.txt" \
+    +set fs_homepath ~/.quakelive/$gameport \
+    +set qlx_ircNickname "$qIrcNickname" \
+    +set qlx_rulesetLocked 1 \
+    +set qlx_balanceApi elo_b \
+    +set qlx_leaverBan 1 \
+    +set qlx_useMyBalance 1 \
+    +set qlx_elo_limit_max 1600 \
+    +set qlx_elo_kick 1
+elif [ $1 -eq 2 ]; then
 echo "Starting clan arena server 2..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -98,7 +125,7 @@ exec $qPurgeryStart \
     +set qlx_privatiseVotes 1 \
     +set qlx_strictVql 1 \
     +set teamsize 4
-  elif [ $1 -eq 2 ]; then
+  elif [ $1 -eq 3 ]; then
   echo "Starting clan arena server 3..."
   exec $qPurgeryStart \
       +set net_strict 1 \
@@ -125,7 +152,7 @@ exec $qPurgeryStart \
       +set qlx_privatiseVotes 1 \
       +set qlx_strictVql 1 \
       +set teamsize 4
-elif [ $1 -eq 3 ]; then
+elif [ $1 -eq 4 ]; then
 echo "Starting race server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -147,7 +174,7 @@ exec $qPurgeryStart \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 0
-elif [ $1 -eq 4 ]; then
+elif [ $1 -eq 5 ]; then
 echo "Starting free for all server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -170,7 +197,7 @@ exec $qPurgeryStart \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 0
-elif [ $1 -eq 5 ]; then
+elif [ $1 -eq 6 ]; then
 echo "Starting VQL duel server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -195,7 +222,7 @@ exec $qPurgeryStart \
     +set qlx_rulesetLocked 1 \
     +set g_timeoutCount 2 \
     +set g_timeoutLen 90
-elif [ $1 -eq 6 ]; then
+elif [ $1 -eq 7 ]; then
 echo "Starting PQL Multi-Gametype server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -216,7 +243,7 @@ exec $qPurgeryStart \
     +set g_damage_lg 6 \
     +set g_voteFlags 0 \
     +set qlx_rulesetLocked 0
-elif [ $1 -eq 7 ]; then
+elif [ $1 -eq 8 ]; then
 echo "Starting multi game type VQL server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
@@ -235,7 +262,7 @@ exec $qPurgeryStart \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 0
-elif [ $1 -eq 8 ]; then
+elif [ $1 -eq 9 ]; then
 if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]; then
 echo "Starting reythe's duel house (sub580) 1..."
 exec $qPathToVanillaStartScript \
@@ -259,7 +286,7 @@ exec $qPathToVanillaStartScript \
 else
 echo "This system is not intended to host reythe (sub580) server."
 fi
-elif [ $1 -eq 9 ]; then
+elif [ $1 -eq 10 ]; then
 if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]; then
 echo "Starting pit clan server (sub586) 1..."
 exec $qPathToMinqlxStartScript \
