@@ -28,19 +28,18 @@ PLAYER_KEY = "minqlx:players:{}"
 class ban(minqlx.Plugin):
     def __init__(self):
         super().__init__()
-        if self.get_cvar("qlx_serverExemptFromModeration") == None:
-            self.add_hook("player_connect", self.handle_player_connect, priority=minqlx.PRI_HIGH)
-            self.add_hook("player_loaded", self.handle_player_loaded)
-            self.add_hook("player_disconnect", self.handle_player_disconnect)
-            self.add_hook("game_countdown", self.handle_game_countdown)
-            self.add_hook("game_start", self.handle_game_start)
-            self.add_hook("game_end", self.handle_game_end)
-            self.add_hook("team_switch", self.handle_team_switch)
-            self.add_command("ban", self.cmd_ban, 2, usage="<id> <length> seconds|minutes|hours|days|... [reason]")
-            self.add_command("unban", self.cmd_unban, 2, usage="<id>")
-            self.add_command("checkban", self.cmd_checkban, usage="<id>")
-            self.add_command("forgive", self.cmd_forgive, 2, usage="<id> [leaves_to_forgive]")
-            
+        self.add_hook("player_connect", self.handle_player_connect, priority=minqlx.PRI_HIGH)
+        self.add_hook("player_loaded", self.handle_player_loaded)
+        self.add_hook("player_disconnect", self.handle_player_disconnect)
+        self.add_hook("game_countdown", self.handle_game_countdown)
+        self.add_hook("game_start", self.handle_game_start)
+        self.add_hook("game_end", self.handle_game_end)
+        self.add_hook("team_switch", self.handle_team_switch)
+        self.add_command("ban", self.cmd_ban, 2, usage="<id> <length> seconds|minutes|hours|days|... [reason]")
+        self.add_command("unban", self.cmd_unban, 2, usage="<id>")
+        self.add_command("checkban", self.cmd_checkban, usage="<id>")
+        self.add_command("forgive", self.cmd_forgive, 2, usage="<id> [leaves_to_forgive]")
+
         # Cvars.
         self.set_cvar_once("qlx_leaverBan", "0")
         self.set_cvar_limit_once("qlx_leaverBanThreshold", "0.63", "0", "1")
@@ -316,7 +315,7 @@ class ban(minqlx.Plugin):
             leaves = int(self.db[base_key + ":games_left"])
         except KeyError:
             leaves = 0
-            
+        
         if leaves <= 0:
             channel.reply("^4{}^7's leaves are already at ^4{}^7.".format(name, leaves))
             return
@@ -364,13 +363,14 @@ class ban(minqlx.Plugin):
         if not self.get_cvar("qlx_leaverBan", bool):
             return None
 
-        completed = self.db[PLAYER_KEY.format(steam_id) + ":games_completed"]
-        left = self.db[PLAYER_KEY.format(steam_id) + ":games_left"]
-        if completed is None or left is None:
+        try:
+            completed = self.db[PLAYER_KEY.format(steam_id) + ":games_completed"]
+            left = self.db[PLAYER_KEY.format(steam_id) + ":games_left"]
+        except KeyError:
             return None
-        else:
-            completed = int(completed)
-            left = int(left)
+        
+        completed = int(completed)
+        left = int(left)
 
         min_games_completed = self.get_cvar("qlx_leaverBanMinimumGames", int)
         warn_threshold = self.get_cvar("qlx_leaverBanWarnThreshold", float)
@@ -397,5 +397,6 @@ class ban(minqlx.Plugin):
         return action, completed / total
 
     def warn_player(self, player, ratio):
-        player.tell("^7You have only completed ^4{}^7 percent of your games.".format(round(ratio * 100, 1))) 
+        player.tell("^7You have only completed ^4{}^7 percent of your games.".format(round(ratio * 100, 1)))
         player.tell("^7If you keep leaving you ^4will^7 be banned.")
+
