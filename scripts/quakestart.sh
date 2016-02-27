@@ -76,7 +76,7 @@ echo "Starting beginner's clan arena server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
     +set net_port $gameport \
-    +set sv_hostname "     #$servernum The Purgery $qServerLocation Novice PQL (<1600 Glicko) - Clan Arena" \
+    +set sv_hostname "     #$servernum The Purgery $qServerLocation PQL (<1600 Glicko) - Clan Arena" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
