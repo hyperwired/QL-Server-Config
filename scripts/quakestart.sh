@@ -323,7 +323,7 @@ exec $qPathToMinqlxStartScript \
     +set qlx_redisDatabase 4 \
     +set net_port $gameport \
     +set qlx_owner $qPurgeryOwnerSteam64ID \
-    +set qlx_plugins "DEFAULT, balance" \
+    +set qlx_plugins "DEFAULT, balance, custom_votes, branding" \
     +set sv_hostname "Pew Pew no QQ" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$(<~/localConfig-rconPassword-gina.txt)" \
@@ -335,7 +335,10 @@ exec $qPathToMinqlxStartScript \
     +set g_accessFile "access_gina.txt" \
     +set sv_mappoolFile "mappool_ctf.txt" \
     +set fs_homepath ~/.quakelive/GINA-SUB593 \
-    +set sv_location "$qServerLocation"
+    +set sv_location "$qServerLocation" \
+    +set qlx_serverBrandName "Pew Pew no QQ" \
+    +set qlx_serverBrandTopField "" \
+    +set qlx_serverBrandBottomField ""
 else
 echo "This system is not intended to host ginababy's (sub593) server."
 fi
