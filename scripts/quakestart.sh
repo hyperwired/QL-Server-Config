@@ -95,9 +95,7 @@ exec $qPurgeryStart \
     +set qlx_rulesetLocked 1 \
     +set qlx_balanceApi elo_b \
     +set qlx_leaverBan 1 \
-    +set qlx_useMyBalance 1 \
-    +set qlx_elo_limit_max 1600 \
-    +set qlx_elo_kick 1
+    +set qlx_ratingLimiter 1
 elif [ $1 -eq 2 ]; then
 echo "Starting clan arena server 2..."
 exec $qPurgeryStart \
