@@ -24,6 +24,7 @@
 # - qlx_elo_kick "1"
 # - qlx_elo_block_connecters "0"
 
+# this plugin has been modified to work better for the purgery's environment.
 
 import minqlx
 import requests
@@ -35,7 +36,7 @@ import os
 
 from minqlx.database import Redis
 
-VERSION = "v0.47"
+VERSION = "v0.47c"
 
 # Add a little bump to the boundary for regulars.
 # This list must be in ordered lists of [games_needed, elo_bump] from small to big
@@ -45,12 +46,12 @@ VERSION = "v0.47"
 BOUNDARIES = [ [50,100], [75,200], [100,400] ]
 
 # If this is True, a message will be printed on the screen of the person who should spec when teams are uneven
-CP = True
+CP = False
 CP_MESS = "\n\n\nTeams are uneven. You will be forced to spec."
 
 # Default action to be performed when teams are uneven:
 # Options: spec, slay, ignore
-DEFAULT_LAST_ACTION = "spec"
+DEFAULT_LAST_ACTION = "ignore"
 
 # Database Keys
 TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
@@ -79,7 +80,7 @@ class mybalance(minqlx.Plugin):
         self.set_cvar_once("qlx_elo_limit_min", "0")
         self.set_cvar_once("qlx_elo_limit_max", "1600")
         self.set_cvar_once("qlx_elo_games_needed", "10")
-        self.set_cvar_once("qlx_balanceApi", "elo")
+        #self.set_cvar_once("qlx_balanceApi", "elo")
         self.set_cvar_once("qlx_elo_kick", "1")
         self.set_cvar_once("qlx_elo_block_connecters", "0")
 
@@ -105,29 +106,29 @@ class mybalance(minqlx.Plugin):
         self.exceptions = []
         self.cmd_help_load_exceptions(None, None, None)
 
-        self.add_command("prevent", self.cmd_prevent_last, 2)
-        self.add_command("last", self.cmd_last_action, 2, usage="[SLAY|SPEC|IGNORE]")
+        #self.add_command("prevent", self.cmd_prevent_last, 2)
+        #self.add_command("last", self.cmd_last_action, 2, usage="[SLAY|SPEC|IGNORE]")
         self.add_command(("load_exceptions", "reload_exceptions"), self.cmd_help_load_exceptions, 3)
         self.add_command("add_exception", self.cmd_add_exception, 3, usage="<name>|<steam_id> <name>")
         self.add_command("elokicked", self.cmd_elo_kicked)
         self.add_command("remkicked", self.cmd_rem_kicked, 2, usage="<id>")
         self.add_command(("nokick", "dontkick"), self.cmd_nokick, 2, usage="[<name>]")
-        self.add_command(("v_mybalance", "version_mybalance"), self.cmd_version)
+        #self.add_command(("v_mybalance", "version_mybalance"), self.cmd_version)
         self.add_command(("limit", "limits", "elolimit"), self.cmd_elo_limit)
         self.add_command(("elomin", "minelo"), self.cmd_min_elo, 3, usage="[ELO]")
         self.add_command(("elomax", "maxelo"), self.cmd_max_elo, 3, usage="[ELO]")
-        self.add_command(("rankings", "elotype"), self.cmd_elo_type, usage="[A|B]")
+        #self.add_command(("rankings", "elotype"), self.cmd_elo_type, usage="[A|B]")
         self.add_hook("team_switch", self.handle_team_switch)
-        self.add_hook("round_end", self.handle_round_end)
-        self.add_hook("round_countdown", self.handle_round_count)
+        #self.add_hook("round_end", self.handle_round_end)
+        #self.add_hook("round_countdown", self.handle_round_count)
         self.add_hook("player_connect", self.handle_player_connect)
         self.add_hook("player_disconnect", self.handle_player_disconnect)
 
-        self.add_command(("setrating", "setelo"), self.cmd_setrating, 3, usage="<id>|<name> <rating>")
-        self.add_command(("getrating", "getelo", "elo"), self.cmd_getrating, usage="<id>|<name> [gametype]")
-        self.add_command(("remrating", "remelo"), self.cmd_remrating, 3, usage="<id>|<name>")
+        #self.add_command(("setrating", "setelo"), self.cmd_setrating, 3, usage="<id>|<name> <rating>")
+        #self.add_command(("getrating", "getelo", "elo"), self.cmd_getrating, usage="<id>|<name> [gametype]")
+        #self.add_command(("remrating", "remelo"), self.cmd_remrating, 3, usage="<id>|<name>")
 
-        self.unload_overlapping_commands()
+        #self.unload_overlapping_commands()
 
     @minqlx.delay(1)
     def unload_overlapping_commands(self):
@@ -337,7 +338,7 @@ class mybalance(minqlx.Plugin):
                 self.exceptions.append(add_sid)
             if add_sid in self.kicked:
                 del self.kicked[add_sid]
-            player.tell("^4Psst: ^2Succesfully ^7added ^4{} ^7to the exception list.".format(add_nam))
+            player.tell("^4Psst: ^2Successfully ^7added ^4{} ^7to the exception list.".format(add_nam))
             return minqlx.RET_STOP_ALL
 
         except IOError as e:
@@ -420,14 +421,14 @@ class mybalance(minqlx.Plugin):
                     except Exception as e: minqlx.console_command("echo {}".format(e))
                 return
 
-
+    @minqlx.thread
     def handle_player_connect(self, player):
         # If admin, check version number
-        if self.db.has_permission(player, 5):
-            self.check_version(player=player)
+        #if self.db.has_permission(player, 5):
+        #    self.check_version(player=player)
 
         # If you are not an exception, you must be checked for elo limit
-        if not (player.steam_id in self.exceptions):
+        if False:
 
             if int(self.get_cvar("qlx_elo_block_connecters")):
                 try:
@@ -450,7 +451,7 @@ class mybalance(minqlx.Plugin):
 
 
         # Record their join times regardless
-        self.jointimes[player.steam_id] = time.time()
+        #self.jointimes[player.steam_id] = time.time()
 
     def handle_player_disconnect(self, player, reason):
         if player.steam_id in self.jointimes:
@@ -474,71 +475,11 @@ class mybalance(minqlx.Plugin):
             if player.steam_id in self.kicked:
                 player.put("spectator")
                 if self.get_cvar("qlx_elo_kick") == "1":
-                    kickmsg = "so you'll be kicked shortly..."
+                    kickmsg = "so you'll be kicked shortly."
                 else:
                     kickmsg = "but you are free to keep watching."
                 player.tell("^4You do not meet the skill rating requirements to play on this server, {}".format(kickmsg))
                 player.center_print("^4You do not meet the skill rating requirements to play on this server, {}".format(kickmsg))
-
-
-
-    @minqlx.thread
-    def balance_before_start(self, roundnumber):
-        def is_even(n):
-            return n % 2 == 0
-
-        # Calculate the difference between teams (optional excluded teams argument)
-        def red_min_blue(t = False):
-            if not t: t = self.teams()
-            return len(t['red']) - len(t['blue'])
-
-        # Return a copy of the teams without the given player
-        def exclude_player(p):
-            t = self.teams().copy()
-            if p in t['red']: t['red'].remove(p)
-            if p in t['blue']: t['blue'].remove(p)
-            return t
-
-        # Wait until round almost starts
-        countdown = int(self.get_cvar('g_roundWarmupDelay'))
-        if self.game.type_short == "ft":
-            countdown = int(self.get_cvar('g_freezeRoundDelay'))
-        time.sleep(max(countdown / 1000 - 0.5, 0))
-
-        # Grab the teams
-        teams = self.teams()
-        player_count = len(teams["red"] + teams["blue"])
-
-        # If it is the last player, don't do this and let the game finish normally
-        if player_count == 1:
-            return
-
-        # If the last person is prevented or ignored to spec, we need to exclude him to balance the rest.
-        excluded_teams = False
-
-        # While there is a difference in teams of more than 1
-        while abs(red_min_blue(excluded_teams)) >= 1:
-
-            diff = red_min_blue(excluded_teams)
-            last = self.algo_get_last(excluded_teams)
-
-            if is_even(diff): # one team has an even amount of people more than the other
-
-                to, fr = ['blue','red'] if diff > 0 else ['red', 'blue']
-                last.put(to)
-                self.msg("^4Uneven teams action^7: Moved {} from {} to {}".format(last.name, fr, to))
-
-            else: # there is an odd number of uneven, then one will have to spec
-
-                if self.prevent or self.last_action == "ignore":
-                    excluded_teams = exclude_player(last)
-                    self.msg("^4Uneven teams^7: {} will not be moved to spec".format(last.name))
-                else:
-                    last.put("spectator")
-                    self.msg("^4Uneven teams action^7: {} was moved to spec to even teams!".format(last.name))
-
-
-
 
 
     def cmd_last_action(self, player, msg, channel):
