@@ -333,7 +333,7 @@ exec $qPathToMinqlxStartScript \
     +set zmq_stats_port $gameport \
     +set sv_tags "$qServerLocation" \
     +set g_accessFile "access_gina.txt" \
-    +set sv_mappoolFile "mappool_default.txt" \
+    +set sv_mappoolFile "mappool_ctf.txt" \
     +set fs_homepath ~/.quakelive/GINA-SUB593 \
     +set sv_location "$qServerLocation"
 else
