@@ -30,15 +30,15 @@ class tomtec_logic(minqlx.Plugin):
         
         self.set_cvar_once("qlx_freezePlayersDuringVote", "0")
         self.set_cvar_once("qlx_strictVql", "0")
-        self.set_cvar_once("qlx_useMyBalance", "0")
+        self.set_cvar_once("qlx_ratingLimiter", "0")
         
         self.plugin_version = "3.1"
 
         if self.get_cvar("qlx_strictVql", bool):
             minqlx.load_plugin("strictvql")
         
-        if self.get_cvar("qlx_useMyBalance", bool):
-            minqlx.load_plugin("mybalance")
+        if self.get_cvar("qlx_ratingLimiter", bool):
+            minqlx.load_plugin("ratinglimiter")
 
         
     def cmd_wiki(self, player, msg, channel):
