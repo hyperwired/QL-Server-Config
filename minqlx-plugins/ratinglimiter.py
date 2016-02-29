@@ -1,4 +1,4 @@
-# Created by Thomas Jones on 14/12/2015 - thomas@tomtecsolutions.com
+# Created by Thomas Jones on 27/02/16 - thomas@tomtecsolutions.com
 # ratinglimiter.py, a plugin for minqlx to limit a server to players within certain ratings.
 # This plugin is released to everyone, for any purpose. It comes with no warranty, no guarantee it works, it's released AS IS.
 # You can modify everything, except for lines 1-4 and the !tomtec_versions code. They're there to indicate I whacked this together originally. Please make it better :D
@@ -71,7 +71,8 @@ class ratinglimiter(minqlx.Plugin):
             playerIs = "under"
         elif (glicko == self.get_cvar("qlx_minRating", int)) or (glicko == self.get_cvar("qlx_maxRating", int)): # player's glicko is the same as either of the limits
             player.tell("Your glicko ({}) is on the borderline of the server's glicko limits. Don't be surprised if you're kicked after some games.".format(glicko))
-
+            return
+        
         if player in self.prohibitedPlayers:
             if playerIs == "over": limit = self.get_cvar("qlx_maxRating", int)
             else: limit = self.get_cvar("qlx_minRating", int)
