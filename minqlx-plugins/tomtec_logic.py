@@ -22,6 +22,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("feedback", "f"), self.cmd_feedback)
         self.add_command("killall", self.cmd_killall, 4)
         self.add_command("addbot", self.cmd_addbot, 1)
+        self.add_command("sinfected", self.cmd_sinfected, 3)
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command(("wiki", "w"), self.cmd_wiki)
@@ -34,9 +35,10 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "3.2"
+        self.plugin_version = "3.3"
 
         self.surprise_infected = False
+        self.queue_infected = False
         
         if self.get_cvar("qlx_strictVql", bool):
             minqlx.load_plugin("strictvql")
@@ -91,10 +93,11 @@ class tomtec_logic(minqlx.Plugin):
         minqlx.set_cvar("g_infiniteAmmo", "1")
         if self.get_cvar("pmove_airControl", bool):
             chance = randint(0,50)
-            if chance == 25:
+            if (chance == 25) or self.queue_infected:
                 self.surprise_infected = True
                 self.msg("Switched to Surprise ^1Infected^7.")
                 self.change_map(mapname, "pqlinfected")
+                self.queue_infected = False
 
         
     def game_countdown(self):
@@ -133,7 +136,14 @@ class tomtec_logic(minqlx.Plugin):
     def cmd_acommands(self, player, msg, channel):
         channel.reply("To see mod/admin commands, check out ^2thepurgery.com^7.")
 
-
+    def cmd_sinfected(self, player, msg, channel):
+        if self.queue_infected == True:
+            self.queue_infected = False
+            player.tell("Surprise Infected is un-queued.")
+        else:
+            self.queue_infected = True
+            player.tell("Surprise Infected is queued.")
+        
     def cmd_feedback(self, player, msg, channel):
         channel.reply("To provide feedback on ^4The Purgery^7 servers, please email ^2thomas@tomtecsolutions.com^7.")
 
