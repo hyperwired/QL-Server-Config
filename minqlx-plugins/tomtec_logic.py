@@ -1,6 +1,7 @@
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 
 import minqlx
+from random import randint
 
 class tomtec_logic(minqlx.Plugin):
     def __init__(self):
@@ -141,8 +142,19 @@ class tomtec_logic(minqlx.Plugin):
             minqlx.send_server_command(None, "cp \"^2VOTE PASSED^7\"\n")
         else:
             minqlx.send_server_command(None, "cp \"^1VOTE FAILED^7\"\n")
-
         self.set_cvar("g_speed", "320")
+
+        if passed:
+            if self.get_cvar("pmove_airControl", bool):
+                if vote == "map":
+                    chance = randint(0,100)
+                    if chance == 42:
+                        self.play_sound("sound/world/klaxon2.wav")
+                        self.center_print("Switching to Surprise ^1Infected^7.")
+                        args = args.split()
+                        mapname = args[0]
+                        minqlx.console_command("map {} pqlinfected")
+                    
         
     def cmd_maprestart(self, player, msg, channel):
         # run a map restart
