@@ -143,6 +143,8 @@ class tomtec_logic(minqlx.Plugin):
         else:
             self.queue_infected = True
             player.tell("Surprise Infected is queued.")
+
+        return minqlx.RET_STOP_ALL
         
     def cmd_feedback(self, player, msg, channel):
         channel.reply("To provide feedback on ^4The Purgery^7 servers, please email ^2thomas@tomtecsolutions.com^7.")
