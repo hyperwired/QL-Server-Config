@@ -82,8 +82,8 @@ class tomtec_logic(minqlx.Plugin):
 
         if self.surprise_infected:
             player.tell("Surprise ^1Infected^7!")
-            self.center_print("Surprise ^1Infected^7!", player.id)
-            self.play_sound("sound/vo_evil/infected.wav", player.id)
+            self.center_print("Surprise ^1Infected^7!", player)
+            self.play_sound("sound/vo_evil/infected.wav", player)
 
     @minqlx.next_frame   
     def map_load(self, mapname, factory):
