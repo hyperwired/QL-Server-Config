@@ -8,6 +8,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("map", self.map_load)
         self.add_hook("game_countdown", self.game_countdown)
         self.add_hook("game_start", self.game_start)
+        self.add_hook("game_end", self.game_end)
         self.add_hook("player_loaded", self.handle_player_loaded)
         self.add_hook("vote_called", self.handle_vote_called)
         self.add_hook("vote_started", self.handle_vote_started)
@@ -33,14 +34,15 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "3.1"
+        self.plugin_version = "3.2"
 
+        self.surprise_infected = False
+        
         if self.get_cvar("qlx_strictVql", bool):
             minqlx.load_plugin("strictvql")
         
         if self.get_cvar("qlx_ratingLimiter", bool):
             minqlx.load_plugin("ratinglimiter")
-
         
     def cmd_wiki(self, player, msg, channel):
         channel.reply("Visit ^2thepurgery.com^7 to see ^4The Purgery^7's wiki and documentation.")
@@ -70,20 +72,37 @@ class tomtec_logic(minqlx.Plugin):
         for p in self.players():
             self.slay(p)
 
+    @minqlx.next_frame
     def handle_player_loaded(self, player):
         #if player.steam_id == minqlx.owner(): # purger is here, sound effect
         #    self.play_sound("q3_audio/sounds/xaero_deathchime.wav")
             
         if str(player.steam_id) == "76561197960279482": # cryptix is here
             player.name = "^4crypt^7ix"
-            
+
+        if self.surprise_infected:
+            player.tell("Surprise ^1Infected^7!")
+            self.center_print("Surprise ^1Infected^7!", player.id)
+            self.play_sound("sound/vo_evil/infected.wav", player.id)
+
+    @minqlx.next_frame   
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
-        minqlx.set_cvar("g_infiniteAmmo", "1")     
+        minqlx.set_cvar("g_infiniteAmmo", "1")
+        if self.get_cvar("pmove_airControl", bool):
+            chance = randint(0,50)
+            if chance == 25:
+                self.surprise_infected = True
+                self.msg("Switched to Surprise ^1Infected^7.")
+                self.change_map(mapname, "pqlinfected")
+
         
     def game_countdown(self):
         self.play_sound("sound/items/protect3.ogg")
         minqlx.set_cvar("g_infiniteAmmo", "0")
+
+    def game_end(self, data):
+        self.surprise_infected = False
 
     def game_start(self, data):
         # make sure everyone's noclip is off
@@ -139,22 +158,12 @@ class tomtec_logic(minqlx.Plugin):
             
     def handle_vote_ended(self, votes, vote, args, passed):
         if passed:
+            if vote == "map":
+                self.surprise_infected = False
             minqlx.send_server_command(None, "cp \"^2VOTE PASSED^7\"\n")
         else:
             minqlx.send_server_command(None, "cp \"^1VOTE FAILED^7\"\n")
         self.set_cvar("g_speed", "320")
-
-        if passed:
-            if self.get_cvar("pmove_airControl", bool):
-                if vote == "map":
-                    chance = randint(0,100)
-                    if chance == 42:
-                        self.play_sound("sound/world/klaxon2.wav")
-                        self.center_print("Switching to Surprise ^1Infected^7.")
-                        args = args.split()
-                        mapname = args[0]
-                        minqlx.console_command("map {} pqlinfected")
-                    
         
     def cmd_maprestart(self, player, msg, channel):
         # run a map restart
