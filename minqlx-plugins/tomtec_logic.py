@@ -162,6 +162,9 @@ class tomtec_logic(minqlx.Plugin):
                 return minqlx.RET_STOP_ALL
 
         if (vote.lower() == "kick") or (vote.lower() == "clientkick"):
+            if len(args.split()) < 1:
+                return minqlx.RET_STOP
+            
             for steam_id in self.protectedPlayers:
                 try:
                     if vote.lower() == "kick":
