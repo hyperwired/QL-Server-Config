@@ -35,8 +35,10 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "3.3"
+        self.plugin_version = "3.4"
 
+        self.protectedPlayers = ["76561198213481765", "76561198197573413", "76561197971374552"] # purger, merozollo, barley
+        
         self.surprise_infected = False
         self.queue_infected = False
         
@@ -158,6 +160,20 @@ class tomtec_logic(minqlx.Plugin):
             if args.lower() is "disabled_test" or args.lower() in self.disabled_maps:
                 caller.tell("Map ^4{}^7 is currently disabled, please contact an admin/mod for details.".format(args.lower()))
                 return minqlx.RET_STOP_ALL
+
+        if (vote.lower() == "kick") or (vote.lower() == "clientkick"):
+            for steam_id in self.protectedPlayers:
+                try:
+                    if vote.lower() == "kick":
+                        kickee = self.find_player(args.lower())[0]
+                    elif vote.lower() == "clientkick":
+                        kickee = self.player(int(args))
+                except:
+                    return minqlx.RET_STOP
+                    
+                if str(steam_id) == str(kickee.steam_id):
+                    caller.tell("{}^7 is in the list of protected players and cannot be kicked.".format(kickee.name))
+                    return minqlx.RET_STOP_ALL
 
     def handle_vote_started(self, caller, vote, args):
         if self.game.state == "warmup":
