@@ -40,7 +40,7 @@ class irc(minqlx.Plugin):
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command("commlink", self.cmd_toggle_commlink)
 
-        self.plugin_version = "1.6"
+        self.plugin_version = "2.0"
         
         self.set_cvar_once("qlx_ircServer", "irc.quakenet.org")
         
@@ -76,6 +76,7 @@ class irc(minqlx.Plugin):
             self.irc = SimpleAsyncIrc(self.server, self.nickname, self.handle_msg, self.handle_perform, self.handle_raw)
             self.irc.start()
             self.logger.info("Connecting to {}...".format(self.server))
+            self.msg("Connecting to ^3CommLink^7...")
 
 
     def cmd_toggle_commlink(self, player, msg, channel):
@@ -308,6 +309,7 @@ class SimpleAsyncIrc(threading.Thread):
             
             # Disconnected. Try reconnecting in 30 seconds.
             logger.info("Disconnected from IRC. Reconnecting in 30 seconds...")
+            minqlx.msg("Connection attempt to ^3CommLink^7 failed, retrying in 30 seconds.")
             time.sleep(30)
         loop.close()
 
