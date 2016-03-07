@@ -309,7 +309,7 @@ class SimpleAsyncIrc(threading.Thread):
             
             # Disconnected. Try reconnecting in 30 seconds.
             logger.info("Disconnected from IRC. Reconnecting in 30 seconds...")
-            minqlx.msg("Connection attempt to ^3CommLink^7 failed, retrying in 30 seconds.")
+            minqlx.CHAT_CHANNEL.reply("Connection attempt to ^3CommLink^7 server failed, retrying in 30 seconds.")
             time.sleep(30)
         loop.close()
 
