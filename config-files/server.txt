@@ -1,30 +1,30 @@
 // This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 // server.cfg - TomTec Solutions' Quake Live servers' primary/global configuration file.
 
-set sv_mapPoolFile "mappool.txt"      // Map pool that the server will use. See default mapcycle.txt for format.
-set g_accessFile "access.txt"         // Used to determine which 64-bit Steam IDs have admin access, or are banned.
-set sv_maxClients "18"                // How many players can connect at once.
-set g_password ""                     // Set a server-wide password, and stop all users from connecting without it.
-set sv_privateClients "1"             // Reserve clients that can be used with sv_privatePassword.
-set sv_privatePassword "givemeaspot"  // Keyword to use in conjunction with sv_privateClients.
-set com_hunkMegs 60                   // Amount of memory allocated to the hunk (in MB)
-set com_zoneMegs 10                   // Amount of memory allocated to the main zone (in MB)
-set sv_master 1                       // Put the server on the Steam server master list.
-set sv_serverType 2                   // Indicate that the server is a full internet Quake Live server.
-set g_floodprot_maxcount "10"         // Kick the player when their flood counter reaches this level.
-set g_floodprot_decay "1000"          // Decrease the flood counter by 1 this often, in milliseconds.
-set g_voteDelay "0"                   // Delay allowing votes for x milliseconds after map load.
-set g_voteLimit "0"                   // Limit users to x votes per map.
-set sv_warmupReadyPercentage "0.51"   // Ratio of players that must be ready before the match starts.
-set g_warmupDelay "15"                // Wait x seconds before allowing match to start to allow all players to connect.
-set g_warmupReadyDelay "0"            // Force the game to start after x seconds after someone readies up.
-set g_warmupReadyDelayAction "1"      // Set to 1 to force players to spectator after g_warmupReady Delay, 2 to force ready up.
-set ttycon 0                          // Stop qzeroded from attempting to bind to the current tty.
-set sv_fps "40"                       // Set server frames-per-second, 40 is the default.
-set sv_idleExit "120"                 // Kill qzeroded if the server remains idle for 120 seconds (idle = mapless).
-set serverstartup "startRandomMap"    // Make the server start a map from the map rotation file once it's finished initialising.
-set sv_vac 1                          // Enable the Valve Anti-Cheat protection system.
-
+set sv_mapPoolFile "mappool.txt"           // Map pool that the server will use. See default mapcycle.txt for format.
+set g_accessFile "access.txt"              // Used to determine which 64-bit Steam IDs have admin access, or are banned.
+set sv_maxClients "18"                     // How many players can connect at once.
+set g_password ""                          // Set a server-wide password, and stop all users from connecting without it.
+set sv_privateClients "1"                  // Reserve clients that can be used with sv_privatePassword.
+set sv_privatePassword "givemeaspot"       // Keyword to use in conjunction with sv_privateClients.
+set com_hunkMegs 60                        // Amount of memory allocated to the hunk (in MB)
+set com_zoneMegs 10                        // Amount of memory allocated to the main zone (in MB)
+set sv_master 1                            // Put the server on the Steam server master list.
+set sv_serverType 2                        // Indicate that the server is a full internet Quake Live server.
+set g_floodprot_maxcount "10"              // Kick the player when their flood counter reaches this level.
+set g_floodprot_decay "1000"               // Decrease the flood counter by 1 this often, in milliseconds.
+set g_voteDelay "0"                        // Delay allowing votes for x milliseconds after map load.
+set g_voteLimit "0"                        // Limit users to x votes per map.
+set sv_warmupReadyPercentage "0.51"        // Ratio of players that must be ready before the match starts.
+set g_warmupDelay "15"                     // Wait x seconds before allowing match to start to allow all players to connect.
+set g_warmupReadyDelay "0"                 // Force the game to start after x seconds after someone readies up.
+set g_warmupReadyDelayAction "1"           // Set to 1 to force players to spectator after g_warmupReady Delay, 2 to force ready up.
+set ttycon 0                               // Stop qzeroded from attempting to bind to the current tty.
+set sv_fps "40"                            // Set server frames-per-second, 40 is the default.
+set sv_idleExit "120"                      // Kill qzeroded if the server remains idle for 120 seconds (idle = mapless).
+set serverstartup "startRandomMap"         // Make the server start a map from the map rotation file once it's finished initialising.
+set sv_vac 1                               // Enable the Valve Anti-Cheat protection system.
+set sv_workshopFile "workshop_default.txt" // Sets the default workshop file in situations when a custom file isn't used.
 
 // minqlx configuration
 

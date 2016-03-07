@@ -32,8 +32,12 @@ mv server.txt $BASEQ3/server.cfg
 dos2unix $BASEQ3/server.cfg > /dev/null
 sudo mv supervisord.txt /etc/supervisord.conf
 sudo dos2unix /etc/supervisord.conf > /dev/null
-mv workshop.txt $BASEQ3/workshop.txt
-dos2unix $BASEQ3/workshop.txt > /dev/null
+cd ..
+
+echo "Moving workshop files into place..."
+cd workshop-files
+mv * $BASEQ3/
+dos2unix $BASEQ3/workshop*.txt > /dev/null
 cd ..
 
 echo "Reloading supervisor configuration into memory..."
