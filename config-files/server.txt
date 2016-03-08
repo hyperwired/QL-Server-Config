@@ -28,4 +28,4 @@ set sv_workshopFile "workshop_default.txt" // Sets the default workshop file in 
 
 // minqlx configuration
 
-set qlx_redisAddress "43.229.61.190:6379"                                    // QLMaster Redis Server.
+set qlx_redisAddress "163.47.126.13:6379"                                    // QLMaster Redis Server.
