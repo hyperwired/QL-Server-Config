@@ -7,7 +7,7 @@
 
 # Defining variables:
 export qUpdateLowestRconPort=28960
-export qUpdateHighestRconPort=28967
+export qUpdateHighestRconPort=28968
 export qRconPassword=$(cat ~/localConfig-rconPassword-purgery.txt)
 
 echo "========== QuakeUpdate.sh has started. =========="
