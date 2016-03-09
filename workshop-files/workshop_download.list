@@ -6,6 +6,9 @@
 #    This file needs to have every single workshop item from all other workshop files listed here
 #        so the server can re-download all of them as per the cronjob every Sunday.
 #
+#    Eventually, a system will be made that gets the workshop ids from all the other files, and then
+#        removes the duplicate entries, but until then, we're using this .list file.
+#
 
 
 # Quake Live Extras Pack
