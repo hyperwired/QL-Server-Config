@@ -28,7 +28,7 @@ export qPurgeryStart="$qPathToMinqlxStartScript \
 +set qlx_ircColors 0 \
 +set g_inactivity 120 \
 +set qlx_serverBrandName $qPurgeryServerTitle \
-+set qlx_serverBrandTopField ^7Sponsored by ^5TomTec Solutions^7. Visit our Wiki at ^2thepurgery.com^7. \
++set qlx_serverBrandTopField ^7Sponsored by ^5TomTec Solutions^7. Visit our Wiki at ^2thepurgery.com^7. Change the server configuration here: ^2github.com/TomTec-Solutions/QL-Server-Config^7. \
 +set qlx_serverBrandBottomField ^5www.4seasonsgaming.com^7, home to the Australian and New Zealand Quake community. \
 +set qlx_connectMessage Connected to ^4TomTec Solutions \
 +set qlx_loadedMessage Welcome to ^4The Purgery^7 \
