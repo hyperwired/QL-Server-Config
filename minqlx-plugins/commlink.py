@@ -53,7 +53,7 @@ class commlink(minqlx.Plugin):
         self.identity = ("#" + self.get_cvar("qlx_commlinkIdentity"))
         self.clientName = self.get_cvar("qlx_commlinkServerName")
 
-        self.add_command(("world", "say_world"), self.send_commlink_message, priority=minqlx.PRI_LOWEST)
+        self.add_command(("world", "say_world"), self.send_commlink_message, priority=minqlx.PRI_LOWEST, usage="message")
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command("commlink", self.cmd_toggle_commlink)
         
@@ -62,7 +62,7 @@ class commlink(minqlx.Plugin):
         self.logger.info("Connecting to {}...".format(self.server))
         self.msg("Connecting to ^3CommLink^7 server...")
 
-        self.plugin_version = "0.9"
+        self.plugin_version = "1.0"
         
     def game_countdown(self):
         if self.game.type_short == "duel":
@@ -84,17 +84,22 @@ class commlink(minqlx.Plugin):
             self.irc.stop()
 
     def handle_player_connect(self, player):
-        if self.irc and self.relay:
-            self.irc.msg(self.relay, self.translate_colors("{} connected.".format(player.name)))
+        if self.irc:
+            self.irc.msg(self.identity, self.translate_colors("{} connected.".format(player.name)))
 
     def handle_player_disconnect(self, player, reason):
         if reason and reason[-1] not in ("?", "!", "."):
             reason = reason + "."
         
-        if self.irc and self.relay:
-            self.irc.msg(self.relay, self.translate_colors("{} {}".format(player.name, reason)))
-
+        if self.irc:
+            self.irc.msg(self.identity, self.translate_colors("{} {}".format(player.name, reason)))
+        
     def handle_msg(self, irc, user, channel, msg):
+        def broadcast_commlink(msg):
+            for p in self.players():
+                if self.db.get_flag(p, "commlink:enabled", default=True):
+                    p.tell("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
+
         if not msg:
             return
         
@@ -104,20 +109,18 @@ class commlink(minqlx.Plugin):
             if self.game.state == "warmup":
                 broadcast_commlink(msg)
 
-    def broadcast_commlink(self, msg):
-        for p in self.players():
-                if self.db.get_flag(p, "commlink:enabled", default=True):
-                    p.tell("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
-
     def handle_perform(self, irc):
         self.logger.info("Connected to CommLink!".format(self.server))
         self.msg("Connected to ^3CommLink^7.")
         irc.join(self.identity)
 
     def send_commlink_message(self, player, msg, channel):
-         text = "^7<{}> ^3{} ".format(player.name, " ".join(msg[1:]))
-         self.irc.msg(self.identity, self.translate_colors(text))
-         player.tell("^3Message sent via ^3CommLink^7.")
+        if len(msg) < 2:
+            return minqlx.RET_USAGE
+        
+        text = "^7<{}> ^3{} ".format(player.name, " ".join(msg[1:]))
+        self.irc.msg(self.identity, self.translate_colors(text))
+        player.tell("^3Message sent via ^3CommLink^7.")
          
     def handle_raw(self, irc, msg):
         split_msg = msg.split()
