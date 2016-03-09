@@ -4,7 +4,7 @@
 # created by Thomas Jones on 03/10/15.
 # thomas@tomtecsolutions.com
 
-workshopFile="~/steamcmd/steamapps/common/qlds/baseq3/workshop_default.txt"
+workshopFile="~/steamcmd/steamapps/common/qlds/baseq3/workshop_download.list"
 
 echo "========== AutoDownload.sh has started. =========="
 echo "========= $(date) ========="

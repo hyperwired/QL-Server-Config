@@ -36,8 +36,8 @@ cd ..
 
 echo "Moving workshop files into place..."
 cd workshop-files
-mv * $BASEQ3/
-dos2unix $BASEQ3/workshop*.txt > /dev/null
+mv workshop* $BASEQ3/
+dos2unix $BASEQ3/workshop* > /dev/null
 cd ..
 
 echo "Reloading supervisor configuration into memory..."
