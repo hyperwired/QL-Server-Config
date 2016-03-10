@@ -22,7 +22,6 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("feedback", "f"), self.cmd_feedback)
         self.add_command("killall", self.cmd_killall, 4)
         self.add_command("addbot", self.cmd_addbot, 1)
-        self.add_command("sinfected", self.cmd_sinfected, 3)
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command(("wiki", "w"), self.cmd_wiki)
@@ -39,8 +38,6 @@ class tomtec_logic(minqlx.Plugin):
 
         self.protectedPlayers = ["76561198213481765", "76561198197573413", "76561197971374552"] # purger, merozollo, barley
         
-        self.surprise_infected = False
-        self.queue_infected = False
         
         if self.get_cvar("qlx_strictVql", bool):
             minqlx.load_plugin("strictvql")
@@ -84,30 +81,18 @@ class tomtec_logic(minqlx.Plugin):
         if str(player.steam_id) == "76561197960279482": # cryptix is here
             player.name = "^4crypt^7ix"
 
-        if self.surprise_infected:
-            player.tell("Surprise ^1Infected^7!")
-            self.center_print("Surprise ^1Infected^7!", player)
-            self.play_sound("sound/vo_evil/infected.wav", player)
 
     @minqlx.next_frame   
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
         minqlx.set_cvar("g_infiniteAmmo", "1")
-        if self.get_cvar("pmove_airControl", bool):
-            chance = randint(0,50)
-            if (chance == 25) or self.queue_infected:
-                self.surprise_infected = True
-                self.msg("Switched to Surprise ^1Infected^7.")
-                self.change_map(mapname, "pqlinfected")
-                self.queue_infected = False
-
         
     def game_countdown(self):
         self.play_sound("sound/items/protect3.ogg")
         minqlx.set_cvar("g_infiniteAmmo", "0")
 
     def game_end(self, data):
-        self.surprise_infected = False
+        return
 
     def game_start(self, data):
         # make sure everyone's noclip is off
@@ -138,16 +123,6 @@ class tomtec_logic(minqlx.Plugin):
     def cmd_acommands(self, player, msg, channel):
         channel.reply("To see mod/admin commands, check out ^2thepurgery.com^7.")
 
-    def cmd_sinfected(self, player, msg, channel):
-        if self.queue_infected == True:
-            self.queue_infected = False
-            player.tell("Surprise Infected is un-queued.")
-        else:
-            self.queue_infected = True
-            player.tell("Surprise Infected is queued.")
-
-        return minqlx.RET_STOP_ALL
-        
     def cmd_feedback(self, player, msg, channel):
         channel.reply("To provide feedback on ^4The Purgery^7 servers, please email ^2thomas@tomtecsolutions.com^7.")
 
