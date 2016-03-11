@@ -177,7 +177,7 @@ class tomtec_logic(minqlx.Plugin):
         
     def cmd_giveall(self, player, msg, channel):
         # enables the '!giveall' command, to provide all players with items/powerups/others
-        holdTime = minqlx.get_cvar("roundtimelimit")
+        holdTime = self.get_cvar("roundtimelimit", int)
         if msg[1] == "kamikaze":
             for p in self.players():
                 p.holdable = "kamikaze"
