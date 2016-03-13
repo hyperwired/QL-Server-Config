@@ -2,6 +2,7 @@
 
 import minqlx
 from random import randint
+import datetime
 
 class tomtec_logic(minqlx.Plugin):
     def __init__(self):
@@ -34,11 +35,20 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "3.4"
+        self.plugin_version = "3.5"
 
+        self.serverId = int((self.get_cvar("net_port", str))[-1:])
+        
         self.protectedPlayers = ["76561198213481765", "76561198197573413", "76561197971374552"] # purger, merozollo, barley
+
+        self.purgersBirthday = False
         
-        
+        if (datetime.datetime.now().month == 3) and (datetime.datetime.now().day == 18):
+            # It's Purger's birthday.
+            self.purgersBirthday = True
+            self.set_cvar("qlx_connectMessage", "^7It's Pur^4g^7er's Birthday!")
+            self.set_cvar("qlx_countdownMessage", "^7It's Pur^4g^7er's Birthday!")
+            
         if self.get_cvar("qlx_strictVql", bool):
             minqlx.load_plugin("strictvql")
         
@@ -90,6 +100,13 @@ class tomtec_logic(minqlx.Plugin):
     def game_countdown(self):
         self.play_sound("sound/items/protect3.ogg")
         minqlx.set_cvar("g_infiniteAmmo", "0")
+        if self.game.type_short != "duel":
+            for p in self.players():
+                p.noclip = True
+                if self.purgersBirthday:
+                    p.powerups(quad=10)
+                else:
+                    p.powerups(battlesuit=10)
 
     def game_end(self, data):
         return
