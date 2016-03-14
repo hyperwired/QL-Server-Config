@@ -28,6 +28,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("wiki", "w"), self.cmd_wiki)
         self.add_command(("facebook", "fb"), self.cmd_facebook)
         self.add_command(("acommands", "acmds"), self.cmd_acommands)
+        self.add_command("mapname", self.cmd_mapname)
     
         self.disabled_maps = ["proq3dm6", "ra3map1", "ra3map6"]
         
@@ -35,7 +36,7 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "3.5"
+        self.plugin_version = "3.6"
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         
@@ -54,6 +55,9 @@ class tomtec_logic(minqlx.Plugin):
         
         if self.get_cvar("qlx_ratingLimiter", bool):
             minqlx.load_plugin("ratinglimiter")
+
+    def cmd_mapname(self, player, msg, channel):
+        channel.reply("The current map's name is ^4{}^7.".format(self.game.map))
         
     def cmd_wiki(self, player, msg, channel):
         channel.reply("Visit ^2thepurgery.com^7 to see ^4The Purgery^7's wiki and documentation.")
