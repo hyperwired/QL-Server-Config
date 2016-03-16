@@ -309,7 +309,8 @@ exec $qPathToMinqlxStartScript \
     +set sv_location "$qServerLocation" \
     +set qlx_connectMessage Connected to the ^1=^4P^1i^4T^1=^7 Clan Server \
     +set qlx_loadedMessage Welcome to ^4The ^1=^4P^1i^4T^1=^7 Clan Server^7 \
-    +set qlx_countdownMessage ^1Good luck, and have fun!^7
+    +set qlx_countdownMessage ^1Good luck, and have fun!^7 \
+    +set qlx_balanceUrl stats.quakelive.tomtecsolutions.com.au:8080
 else
 echo "This system is not intended to host pit clan (sub586) server."
 fi
