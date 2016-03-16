@@ -13,3 +13,9 @@
 
 # admin 3, phy1um
 76561198040797413|admin
+
+# admin 4, grrrdian
+76561197990076531|admin
+
+# admin 5, luna
+76561197976883896|admin
