@@ -363,7 +363,7 @@ exec $qPathToMinqlxStartScript \
     +set bot_enable 0 \
     +set g_accessFile "access_4seasonsgaming.txt" \
     +set sv_mappoolFile "mappool_4sg.txt" \
-    +set fs_homepath ~/.quakelive/4sg-tournament \
+    +set fs_homepath ~/.quakelive/4sg-tournament-$gameport \
     +set g_damage_lg 6 \
     +set sv_location "$qServerLocation" \
     +set g_voteFlags 264 \
@@ -395,7 +395,7 @@ exec $qPathToMinqlxStartScript \
     +set bot_enable 0 \
     +set g_accessFile "access_4seasonsgaming.txt" \
     +set sv_mappoolFile "mappool_4sg.txt" \
-    +set fs_homepath ~/.quakelive/4sg-tournament \
+    +set fs_homepath ~/.quakelive/4sg-tournament-$gameport \
     +set g_damage_lg 6 \
     +set sv_location "$qServerLocation" \
     +set g_voteFlags 264 \
