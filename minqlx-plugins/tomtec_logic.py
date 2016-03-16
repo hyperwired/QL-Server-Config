@@ -3,6 +3,7 @@
 import minqlx
 from random import randint
 import datetime
+import time
 
 class tomtec_logic(minqlx.Plugin):
     def __init__(self):
@@ -11,6 +12,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("game_start", self.game_start)
         self.add_hook("game_end", self.game_end)
         self.add_hook("player_loaded", self.handle_player_loaded)
+        self.add_hook("player_spawn", self.handle_player_spawn)
         self.add_hook("vote_called", self.handle_vote_called)
         self.add_hook("vote_started", self.handle_vote_started)
         self.add_hook("vote_ended", self.handle_vote_ended)
@@ -37,7 +39,7 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_ratingLimiter", "0")
         self.set_cvar_once("purgersBirthday", "0")
         
-        self.plugin_version = "3.6"
+        self.plugin_version = "3.7"
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         
@@ -97,7 +99,18 @@ class tomtec_logic(minqlx.Plugin):
         if str(player.steam_id) == "76561197960279482": # cryptix is here
             player.name = "^4crypt^7ix"
 
+    def handle_player_spawn(self, player):
+        # Add in ExcessivePlus-like feeling, mimicing the spawn behaviour in EP.
+        if self.game.type_short != "duel":
+            if player.team != "spectator":
+                player.powerups(battlesuit=3)
+                @minqlx.delay(2.5)
+                def f():
+                    self.play_sound("sound/items/protect3.ogg", player)
+                f()
 
+        return minqlx.RET_NONE
+        
     @minqlx.next_frame   
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
