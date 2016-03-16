@@ -340,7 +340,7 @@ exec $qPathToMinqlxStartScript \
 else
 echo "This system is not intended to host ginababy's (sub593) server."
 fi
-elif [ $1 -ge 10 ] && [ $1 -le 14 ]; then
+elif [ $1 -ge 12 ] && [ $1 -le 16 ]; then
 if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]; then
 servernum=`expr $1 - 9`
 echo "Starting starting 4sg tournament server $servernum..."
@@ -372,7 +372,7 @@ exec $qPathToMinqlxStartScript \
 else
 echo "This system is not intended to host 4sg tournament servers SYD"
 fi
-elif [ $1 -eq 15 ]; then
+elif [ $1 -eq 17 ]; then
 if [ $(hostname) == "perth.quakelive.tomtecsolutions.com.au" ]; then
 servernum=`expr $1 - 10`
 echo "Starting starting 4sg tournament server $servernum..."
