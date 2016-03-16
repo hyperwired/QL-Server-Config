@@ -11,7 +11,7 @@ class maintenance(minqlx.Plugin):
         self.add_hook("player_connect", self.handle_player_connected)
         self.msg("^1Servers are going down for routine maintenance/updates.^7")
         minqlx.unload_plugin("tomtec_logic")
-        minqlx.unload_plugin("irc")
+        minqlx.unload_plugin("commlink")
         minqlx.console_command("kick all \"All TomTec Solutions servers are going down for routine maintenance/updates. Sorry about that, we'll be up again shortly.\"")
         minqlx.console_command("map campgrounds ffa")
         self.counter = 0
