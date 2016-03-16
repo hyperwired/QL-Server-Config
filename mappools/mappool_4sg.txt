@@ -1,0 +1,5 @@
+campgrounds|ca
+asylum|ca
+quarantine|ca
+4sgca2|ca
+trinity|ca

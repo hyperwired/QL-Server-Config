@@ -1,5 +1,0 @@
-aerowalk|duel
-sinister|duel
-cure|duel
-toxicity|duel
-furiousheights|duel
