@@ -37,7 +37,6 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_freezePlayersDuringVote", "0")
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
-        self.set_cvar_once("purgersBirthday", "0")
         
         self.plugin_version = "3.7"
 
@@ -50,11 +49,11 @@ class tomtec_logic(minqlx.Plugin):
         if (datetime.datetime.now().month == 3) and (datetime.datetime.now().day == 18):
             # It's Purger's birthday.
             self.purgersBirthday = True
-            self.set_cvar("purgersBirthday", "1", flags=68)
+            self.set_cvar("purgersBirthday", "1", 68)
             self.set_cvar("qlx_connectMessage", "^7It's Pur^4g^7er's Birthday!")
             self.set_cvar("qlx_countdownMessage", "^7It's Pur^4g^7er's Birthday!")
         else:
-            self.set_cvar("purgersBirthday", "0", flags=68)
+            self.set_cvar("purgersBirthday", "0", 68)
             
         if self.get_cvar("qlx_strictVql", bool):
             minqlx.load_plugin("strictvql")
