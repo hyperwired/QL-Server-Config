@@ -352,7 +352,7 @@ exec $qPathToMinqlxStartScript \
     +set qlx_owner $qPurgeryOwnerSteam64ID \
     +set sv_hostname "4SG CA Tournament Server #$servernum" \
     +set qlx_plugins "DEFAULT, branding" \
-    +set qlx_serverBrandName "^54SGv2 Tournament - Duel^7" \
+    +set qlx_serverBrandName "^54SG CA Tournament Server^7" \
     +set qlx_serverBrandTopField "Run by ^54Seasons Gaming^7. ^2http://4seasonsgaming.com^7. Admins: mickzerofive, zlr, phy1um, luna, grrrdian^7." \
     +set qlx_serverBrandBottomField "Server $servernum of 6." \
     +set zmq_rcon_enable 0 \
@@ -384,7 +384,7 @@ exec $qPathToMinqlxStartScript \
     +set qlx_owner $qPurgeryOwnerSteam64ID \
     +set sv_hostname "4SG CA Tournament Server #6" \
     +set qlx_plugins "DEFAULT, branding" \
-    +set qlx_serverBrandName "^54SG CA Tournament Server #6^7" \
+    +set qlx_serverBrandName "^54SG CA Tournament Server^7" \
     +set qlx_serverBrandTopField "Run by ^54Seasons Gaming^7. ^2http://4seasonsgaming.com^7. Admins: mickzerofive, zlr, phy1um, luna, grrrdian^7." \
     +set qlx_serverBrandBottomField "Server 6 of 6." \
     +set zmq_rcon_enable 0 \
