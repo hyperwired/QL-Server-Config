@@ -12,7 +12,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("game_start", self.game_start)
         self.add_hook("game_end", self.game_end)
         self.add_hook("player_loaded", self.handle_player_loaded)
-        self.add_hook("player_spawn", self.handle_player_spawn)
+        #self.add_hook("player_spawn", self.handle_player_spawn) disable battle-suits
         self.add_hook("vote_called", self.handle_vote_called)
         self.add_hook("vote_started", self.handle_vote_started)
         self.add_hook("vote_ended", self.handle_vote_ended)
@@ -50,9 +50,11 @@ class tomtec_logic(minqlx.Plugin):
         if (datetime.datetime.now().month == 3) and (datetime.datetime.now().day == 18):
             # It's Purger's birthday.
             self.purgersBirthday = True
-            self.set_cvar("purgersBirthday", "1")
+            self.set_cvar("purgersBirthday", "1", 68)
             self.set_cvar("qlx_connectMessage", "^7It's Pur^4g^7er's Birthday!")
             self.set_cvar("qlx_countdownMessage", "^7It's Pur^4g^7er's Birthday!")
+        else:
+            self.set_cvar("purgersBirthday", "0", 68)
             
         if self.get_cvar("qlx_strictVql", bool):
             minqlx.load_plugin("strictvql")
@@ -103,7 +105,10 @@ class tomtec_logic(minqlx.Plugin):
         # Add in ExcessivePlus-like feeling, mimicing the spawn behaviour in EP.
         if self.game.type_short != "duel":
             if player.team != "spectator":
-                player.powerups(battlesuit=3)
+                if self.purgersBirthday:
+                    p.powerups(quad=3)
+                else:
+                    p.powerups(battlesuit=3)
                 @minqlx.delay(2.5)
                 def f():
                     self.play_sound("sound/items/protect3.ogg", player)
