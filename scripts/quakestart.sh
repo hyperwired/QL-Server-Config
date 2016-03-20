@@ -341,68 +341,69 @@ exec $qPathToMinqlxStartScript \
 else
 echo "This system is not intended to host ginababy's (sub593) server."
 fi
-elif [ $1 -ge 12 ] && [ $1 -le 16 ]; then
-if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]; then
-servernum=`expr $1 - 11`
-echo "Starting starting 4sg tournament server $servernum..."
-exec $qPathToMinqlxStartScript \
-    +set net_strict 1 \
-    +set qlx_redisDatabase 1 \
-    +set net_port $gameport \
-    +set qlx_owner $qPurgeryOwnerSteam64ID \
-    +set sv_hostname "4SG CA Tournament Server #$servernum" \
-    +set qlx_plugins "DEFAULT, branding" \
-    +set qlx_serverBrandName "^54SG CA Tournament Server^7" \
-    +set qlx_serverBrandTopField "Run by ^54Seasons Gaming^7. ^2http://4seasonsgaming.com^7. Admins: mickzerofive, zlr, phy1um, luna, grrrdian^7." \
-    +set qlx_serverBrandBottomField "Server $servernum of 6." \
-    +set zmq_rcon_enable 0 \
-    +set zmq_stats_enable 1 \
-    +set zmq_stats_password "eggplant" \
-    +set zmq_stats_port $gameport \
-    +set sv_tags "$qServerLocation,4Seasons Gaming" \
-    +set bot_enable 0 \
-    +set g_accessFile "access_4seasonsgaming.txt" \
-    +set sv_mappoolFile "mappool_4sg.txt" \
-    +set fs_homepath ~/.quakelive/4sg-tournament-$gameport \
-    +set g_damage_lg 6 \
-    +set sv_location "$qServerLocation" \
-    +set g_voteFlags 264 \
-    +set g_allowVoteMidGame 1 \
-    +set g_allowSpecVote 0 \
-    +set teamsize 4
-else
-echo "This system is not intended to host 4sg tournament servers SYD"
 fi
-elif [ $1 -eq 17 ]; then
-if [ $(hostname) == "perth.quakelive.tomtecsolutions.com.au" ]; then
-servernum=`expr $1 - 11`
-echo "Starting starting 4sg tournament server $servernum..."
-exec $qPathToMinqlxStartScript \
-    +set net_strict 1 \
-    +set qlx_redisDatabase 1 \
-    +set net_port $gameport \
-    +set qlx_owner $qPurgeryOwnerSteam64ID \
-    +set sv_hostname "4SG CA Tournament Server #6" \
-    +set qlx_plugins "DEFAULT, branding" \
-    +set qlx_serverBrandName "^54SG CA Tournament Server^7" \
-    +set qlx_serverBrandTopField "Run by ^54Seasons Gaming^7. ^2http://4seasonsgaming.com^7. Admins: mickzerofive, zlr, phy1um, luna, grrrdian^7." \
-    +set qlx_serverBrandBottomField "Server 6 of 6." \
-    +set zmq_rcon_enable 0 \
-    +set zmq_stats_enable 1 \
-    +set zmq_stats_password "eggplant" \
-    +set zmq_stats_port $gameport \
-    +set sv_tags "$qServerLocation,4Seasons Gaming" \
-    +set bot_enable 0 \
-    +set g_accessFile "access_4seasonsgaming.txt" \
-    +set sv_mappoolFile "mappool_4sg.txt" \
-    +set fs_homepath ~/.quakelive/4sg-tournament-$gameport \
-    +set g_damage_lg 6 \
-    +set sv_location "$qServerLocation" \
-    +set g_voteFlags 264 \
-    +set g_allowVoteMidGame 1 \
-    +set g_allowSpecVote 0 \
-    +set teamsize 4
-else
-echo "This system is not intended to host 4sg tournament servers PER"
-fi
-fi
+
+#elif [ $1 -ge 12 ] && [ $1 -le 16 ]; then
+#if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]; then
+#servernum=`expr $1 - 11`
+#echo "Starting starting 4sg tournament server $servernum..."
+#exec $qPathToMinqlxStartScript \
+#    +set net_strict 1 \
+#    +set qlx_redisDatabase 1 \
+#    +set net_port $gameport \
+#    +set qlx_owner $qPurgeryOwnerSteam64ID \
+#    +set sv_hostname "4SG CA Tournament Server #$servernum" \
+#    +set qlx_plugins "DEFAULT, branding" \
+#    +set qlx_serverBrandName "^54SG CA Tournament Server^7" \
+#    +set qlx_serverBrandTopField "Run by ^54Seasons Gaming^7. ^2http://4seasonsgaming.com^7. Admins: mickzerofive, zlr, phy1um, luna, grrrdian^7." \
+#    +set qlx_serverBrandBottomField "Server $servernum of 6." \
+#    +set zmq_rcon_enable 0 \
+#    +set zmq_stats_enable 1 \
+#    +set zmq_stats_password "eggplant" \
+#    +set zmq_stats_port $gameport \
+#    +set sv_tags "$qServerLocation,4Seasons Gaming" \
+#    +set bot_enable 0 \
+#    +set g_accessFile "access_4seasonsgaming.txt" \
+#    +set sv_mappoolFile "mappool_4sg.txt" \
+#    +set fs_homepath ~/.quakelive/4sg-tournament-$gameport \
+#    +set g_damage_lg 6 \
+#    +set sv_location "$qServerLocation" \
+#    +set g_voteFlags 264 \
+#    +set g_allowVoteMidGame 1 \
+#    +set g_allowSpecVote 0 \
+#    +set teamsize 4
+#else
+#echo "This system is not intended to host 4sg tournament servers SYD"
+#fi
+#elif [ $1 -eq 17 ]; then
+#if [ $(hostname) == "perth.quakelive.tomtecsolutions.com.au" ]; then
+#servernum=`expr $1 - 11`
+#echo "Starting starting 4sg tournament server $servernum..."
+#exec $qPathToMinqlxStartScript \
+#    +set net_strict 1 \
+#    +set qlx_redisDatabase 1 \
+#    +set net_port $gameport \
+#    +set qlx_owner $qPurgeryOwnerSteam64ID \
+#    +set sv_hostname "4SG CA Tournament Server #6" \
+#    +set qlx_plugins "DEFAULT, branding" \
+#    +set qlx_serverBrandName "^54SG CA Tournament Server^7" \
+#    +set qlx_serverBrandTopField "Run by ^54Seasons Gaming^7. ^2http://4seasonsgaming.com^7. Admins: mickzerofive, zlr, phy1um, luna, grrrdian^7." \
+#    +set qlx_serverBrandBottomField "Server 6 of 6." \
+#    +set zmq_rcon_enable 0 \
+#    +set zmq_stats_enable 1 \
+#    +set zmq_stats_password "eggplant" \
+#    +set zmq_stats_port $gameport \
+#    +set sv_tags "$qServerLocation,4Seasons Gaming" \
+#    +set bot_enable 0 \
+#    +set g_accessFile "access_4seasonsgaming.txt" \
+#    +set sv_mappoolFile "mappool_4sg.txt" \
+#    +set fs_homepath ~/.quakelive/4sg-tournament-$gameport \
+#    +set g_damage_lg 6 \
+#    +set sv_location "$qServerLocation" \
+#    +set g_voteFlags 264 \
+#    +set g_allowVoteMidGame 1 \
+#    +set g_allowSpecVote 0 \
+#    +set teamsize 4
+#else
+#echo "This system is not intended to host 4sg tournament servers PER"
+#fi
