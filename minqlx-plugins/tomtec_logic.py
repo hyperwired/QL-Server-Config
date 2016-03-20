@@ -176,6 +176,19 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("Map ^4{}^7 is currently disabled, please contact an admin/mod for details.".format(args.lower()))
                 return minqlx.RET_STOP_ALL
 
+            # exception for maido map
+            if args.lower() in "maido":
+                voteFlags = self.get_cvar("g_voteFlags")
+                self.set_cvar("g_voteFlags", "0")
+                
+                @minqlx.next_frame
+                def f(theFlags):
+                    minqlx.client_command(caller.id, "callvote map maido maido")
+                    self.set_cvar("g_voteFlags", theFlags)
+                f(voteFlags)
+
+                return minqlx.RET_STOP_ALL
+
         if (vote.lower() == "kick") or (vote.lower() == "clientkick"):
             if len(args.split()) < 1:
                 return minqlx.RET_STOP
