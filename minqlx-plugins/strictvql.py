@@ -13,9 +13,12 @@ class strictvql(minqlx.Plugin):
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_hook("vote_called", self.handle_vote_called)
         self.add_hook("new_game", self.handle_new_game)
+        self.add_hook("game_countdown", self.handle_game_countdown)
+        self.add_hook("game_end", self.handle_game_end)
         
-        self.plugin_version = "1.2"
+        self.plugin_version = "1.3"
 
+        self.has_ended = False
 
     def handle_vote_called(self, caller, vote, args):
         if vote.lower() == "teamsize":
@@ -35,11 +38,17 @@ class strictvql(minqlx.Plugin):
 
     @minqlx.thread        
     def handle_new_game(self):
+        self.has_started = False
         time.sleep(ALLREADY_DELAY_SECS)
+        if self.has_ended: # game was aborted and we should not auto-start the match.
+            return
         if self.game.state == "warmup":
             self.allready()
             minutes = (ALLREADY_DELAY_SECS / 60)
             self.msg("{} minutes have passed, the game is starting now.".format(minutes))
-            
+
+    def handle_game_end(self, *args, **kwargs):
+        self.has_ended = True
+        
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4strictvql.py^7 - version {}, created by Thomas Jones on 11/02/2016.".format(self.plugin_version))
