@@ -323,7 +323,7 @@ exec $qPathToMinqlxStartScript \
     +set net_port $gameport \
     +set qlx_owner $qPurgeryOwnerSteam64ID \
     +set qlx_plugins "DEFAULT, balance, custom_votes, branding" \
-    +set sv_hostname "Pew Pew no QQ" \
+    +set sv_hostname "CTF" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$(<~/localConfig-rconPassword-gina.txt)" \
     +set zmq_rcon_port $rconport \
@@ -335,7 +335,7 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_ctf.txt" \
     +set fs_homepath ~/.quakelive/GINA-SUB593 \
     +set sv_location "$qServerLocation" \
-    +set qlx_serverBrandName "Pew Pew no QQ" \
+    +set qlx_serverBrandName "CTF" \
     +set qlx_serverBrandTopField "" \
     +set qlx_serverBrandBottomField ""
 else
