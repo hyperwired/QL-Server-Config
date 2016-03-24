@@ -13,7 +13,6 @@ class strictvql(minqlx.Plugin):
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_hook("vote_called", self.handle_vote_called)
         self.add_hook("new_game", self.handle_new_game)
-        self.add_hook("game_countdown", self.handle_game_countdown)
         self.add_hook("game_end", self.handle_game_end)
         
         self.plugin_version = "1.3"
