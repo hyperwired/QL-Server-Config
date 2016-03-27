@@ -21,7 +21,7 @@ class gamemode_triweapon(minqlx.Plugin):
         self.add_hook("round_end", self.handle_round_end)
         self.add_hook("game_end", self.handle_game_end)
         self.original_startingweapons = self.get_cvar("g_startingWeapons") # is usually 8447 in CA
-        self.weapons_bitfield_values = [2, 4, 8, 16, 32, 64, 128, 256, 1024, 4096, 8192] # mg, sg, gl, rl, lg, rg, pg, bfg, cg, ng, hmg
+        self.weapons_bitfield_values = [2, 4, 8, 16, 32, 64, 128, 8192] # mg, sg, gl, rl, lg, rg, pg, bfg, cg, ng, hmg
 
     def selectWeapons(self):
         _weapons_bitfield_values = self.weapons_bitfield_values
