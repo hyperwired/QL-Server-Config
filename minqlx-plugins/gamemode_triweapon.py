@@ -1,4 +1,5 @@
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
+# Player selection system for short-mid-long range weapon distribution created by zlr.
 
 GAMEMODE_NAME = "Tri-Weapon CA"
 CALLVOTE_STRING = "triweapon"
@@ -16,45 +17,32 @@ class gamemode_triweapon(minqlx.Plugin):
         self.gamemode_active = False
 
 ######### define your hooks/commands/stuff below
-        self.plugin_version = "1.0"
-        self.add_hook("game_countdown", self.handle_game_countdown)
-        self.add_hook("round_end", self.handle_round_end)
-        self.add_hook("game_end", self.handle_game_end)
-        self.original_startingweapons = self.get_cvar("g_startingWeapons") # is usually 8447 in CA
-        self.weapons_bitfield_values = [2, 4, 8, 16, 32, 64, 128, 8192] # mg, sg, gl, rl, lg, rg, pg, bfg, cg, ng, hmg
+        self.plugin_version = "1.1"
+        self.add_hook("round_countdown", self.handle_round_countdown)
+    
 
-    def selectWeapons(self):
-        _weapons_bitfield_values = self.weapons_bitfield_values
-        randomWeapons = random.sample(range(0, len(_weapons_bitfield_values)), 3)
-        weapons = []
-        weapons.append(_weapons_bitfield_values[randomWeapons[0]])
-        weapons.append(_weapons_bitfield_values[randomWeapons[1]])
-        weapons.append(_weapons_bitfield_values[randomWeapons[2]])
-        return weapons
-
-    def handle_game_end(self, *args, **kwargs):
-        self.set_cvar("g_startingWeapons", self.original_startingweapons)
-        
-    def handle_game_countdown(self, *args, **kwargs):
+    def handle_round_countdown(self, *args, **kwargs): 
         if self.gamemode_active == True:
-            weapons = self.selectWeapons()
-            bitfield_value = 0
-            for weapon in weapons:
-                bitfield_value += weapon
-            bitfield_value += 1 # add gauntlet
-            self.set_cvar("g_startingWeapons", bitfield_value)
-
-    def handle_round_end(self, *args, **kwargs):
-        if self.gamemode_active == True:
-            weapons = self.selectWeapons()
-            bitfield_value = 0
-            for weapon in weapons:
-                bitfield_value += weapon
-            bitfield_value += 1 # add gauntlet
-            self.set_cvar("g_startingWeapons", bitfield_value)
+            for team in self.teams():
+                if (team != "spectator") or (team != "free"):
+                    teams = self.teams()
+                    close_range_counter = 0
+                    toggle = 1
+                    for player in teams[team]:
+                        if close_range_counter <= 2: # close-range
+                            player.weapons(reset=True, g=True, rl=True, gl=True, mg=True)
+                            close_range_counter += 1
+                        else:
+                            if toggle == 1: # mid-range
+                                player.weapons(reset=True, g=True, lg=True, sg=True, hmg=True)
+                                toggle = 0
+                            else: # long-range
+                                player.weapons(reset=True, g=True, rg=True, sg=True, pg=True)
+                                toggle = 1
+                
             
     def housekeeping_tasks(self): # runs when the plugin unloads and when the mode is call-voted off
-        self.set_cvar("g_startingWeapons", self.original_startingweapons)
+        return
 
         
 ### Don't touch the below, it morphs to your code:
