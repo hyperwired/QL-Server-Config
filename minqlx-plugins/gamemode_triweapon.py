@@ -53,7 +53,7 @@ class gamemode_triweapon(minqlx.Plugin):
             bitfield_value += 1 # add gauntlet
             self.set_cvar("g_startingWeapons", bitfield_value)
             
-    def housekeeping_tasks(self): # runs when the plugin unloads
+    def housekeeping_tasks(self): # runs when the plugin unloads and when the mode is call-voted off
         self.set_cvar("g_startingWeapons", self.original_startingweapons)
 
         
@@ -71,6 +71,7 @@ class gamemode_triweapon(minqlx.Plugin):
             self.gamemode_active = True
         elif msg[1].lower() == "off":
             self.gamemode_active = False
+            self.housekeeping_tasks()
         else:
             return minqlx.RET_USAGE
 
