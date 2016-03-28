@@ -12,7 +12,7 @@ class gamemode_triweapon(minqlx.Plugin):
         self.add_hook("player_loaded", self.handle_player_loaded, priority=minqlx.PRI_LOW)
         self.add_hook("vote_called", self.handle_vote_called)
         self.add_hook("unload", self.handle_plugin_unload)
-        self.add_command((self.__class__.__name__), self.cmd_gametype_switch, 5, usage="on/off")
+        self.add_command((self.__class__.__name__), self.cmd_gamemode_switch, 5, usage="on/off")
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.gamemode_active = False
 
@@ -51,7 +51,7 @@ class gamemode_triweapon(minqlx.Plugin):
             self.gamemode_active == False
             self.housekeeping_tasks()
             
-    def cmd_gametype_switch(self, player, msg, channel):
+    def cmd_gamemode_switch(self, player, msg, channel):
         if len(msg) < 2:
             return minqlx.RET_USAGE
         
