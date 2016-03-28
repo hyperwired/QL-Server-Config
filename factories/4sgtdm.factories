@@ -19,7 +19,8 @@
         "g_ammoRespawn":"40",
         "sv_warmupReadyPercentage":"1",
         "mercylimit":"50",
-        "g_startingWeapons":"3"
+        "g_startingWeapons":"3",
+        "dmflags":"0"
       }
     }
 ]
