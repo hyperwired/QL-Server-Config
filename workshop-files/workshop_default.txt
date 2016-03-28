@@ -26,6 +26,9 @@
 # Quake III Arena/Team Arena VO Integration (testing)
 614429927
 
+# Base One - Zy
+654057011
+
 # Rocket Arena 3 - ra3map18
 550003921
 
