@@ -4,12 +4,12 @@
 # created by Thomas Jones on 03/10/15.
 # thomas@tomtecsolutions.com
 
-workshopFile="~/steamcmd/steamapps/common/qlds/baseq3/workshop_download.list"
+workshopFile="download.list"
 
 echo "========== AutoDownload.sh has started. =========="
 echo "========= $(date) ========="
 
-workshopIDs=`cat $workshopFile | grep -v '#' | sed '/^[ \t]*$/d'`
+workshopIDs=`cat ~/steamcmd/steamapps/common/qlds/baseq3/workshop_* | sort -u | grep -v '#' | sed '/^[ \t]*$/d'`
 numOfIDs=`echo "$workshopIDs" | wc -l`
 counter=0
 rm -r ~/steamcmd/steamapps/workshop

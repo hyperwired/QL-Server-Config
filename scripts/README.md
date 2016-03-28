@@ -1,7 +1,7 @@
 # Quake Live Server Scripts
 
 ### `autodownload.sh`
-This script downloads all workshop items listed in `workshop_download.list` via SteamCMD and moves them into place in the qlds/ directory.
+This script downloads all workshop items listed in the workshop listing files via SteamCMD and moves them into place in the qlds/ directory.
 
 ### `quakestart.sh`
 This script is executed by `supervisord`, it starts all the Quake Live dedicated servers with different configurations depending on the arguments parsed by supervisor during launch.
