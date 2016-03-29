@@ -34,7 +34,7 @@ class gamemode_triweapon(minqlx.Plugin):
                         if close_range_counter <= 2: # this player will be a close-range weapons-holder
                             player.weapons(reset=True, g=True, rl=True, gl=True, mg=True) # assign weapons to the player
                             player.center_print("Weapon Assignment:\n^1SHORT-RANGE WEAPONS") # announce their weapon assignment
-                            close_range_counter += 1# zlr stuff
+                            close_range_counter += 1 # zlr stuff
                         else:
                             if toggle == 1: # this player will be a mid-range weapons-holder
                                 player.weapons(reset=True, g=True, lg=True, sg=True, hmg=True) # assign weapons to the player
