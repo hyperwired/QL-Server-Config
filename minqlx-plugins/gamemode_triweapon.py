@@ -2,6 +2,7 @@
 # This plugin is not yet released for other servers at this stage.
 
 # Player selection system for short-mid-long range weapon distribution created by zlr.
+# http://pastebin.com/B8Ruq1YM
 
 GAMEMODE_NAME = "Tri-Weapon CA"
 CALLVOTE_STRING = "triweapon"
