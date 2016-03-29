@@ -20,28 +20,34 @@ class gamemode_triweapon(minqlx.Plugin):
         self.plugin_version = "1.1"
         self.add_hook("round_countdown", self.handle_round_countdown)
     
-
+    @minqlx.next_frame
     def handle_round_countdown(self, *args, **kwargs): 
         if self.gamemode_active == True:
-            for team in self.teams():
-                if (team != "spectator") or (team != "free"):
-                    teams = self.teams()
-                    close_range_counter = 0
-                    toggle = 1
-                    for player in teams[team]:
-                        if close_range_counter <= 2: # close-range
-                            player.weapons(reset=True, g=True, rl=True, gl=True, mg=True)
-                            close_range_counter += 1
+            for team in self.teams(): # cycle through teams, red, blue, specs, free (free team is the team that players are placed into in team-less gametypes (eg. FFA))
+                if (team != "spectator") and (team != "free"): # don't want to be giving weapons to players in the spectator/free teams, will likely crash server.
+                    teams = self.teams() # copy the teams dictionary so we don't try to modify the original
+                    close_range_counter = 1 # zlr stuff
+                    toggle = 1 # zlr stuff
+                    theTeam = teams[team] #<<< have to do some fuckery so random.shuffle below works
+                    random.shuffle(theTeam) # randomly shuffle players to change their weapon assignment every round
+                    for player in theTeam:
+                        if close_range_counter <= 2: # this player will be a close-range weapons-holder
+                            player.weapons(reset=True, g=True, rl=True, gl=True, mg=True) # assign weapons to the player
+                            player.center_print("Weapon Assignment:\n^1SHORT-RANGE WEAPONS") # announce their weapon assignment
+                            close_range_counter += 1# zlr stuff
                         else:
-                            if toggle == 1: # mid-range
-                                player.weapons(reset=True, g=True, lg=True, sg=True, hmg=True)
-                                toggle = 0
-                            else: # long-range
-                                player.weapons(reset=True, g=True, rg=True, sg=True, pg=True)
-                                toggle = 1
+                            if toggle == 1: # this player will be a mid-range weapons-holder
+                                player.weapons(reset=True, g=True, lg=True, sg=True, hmg=True) # assign weapons to the player
+                                player.center_print("Weapon Assignment:\n^3MID-RANGE WEAPONS") # announce their weapon assignment
+                                toggle = 0 # zlr stuff
+                            else: # this player will be a long-range weapons-holder
+                                player.weapons(reset=True, g=True, rg=True, sg=True, pg=True) # assign weapons to the player
+                                player.center_print("Weapon Assignment:\n^2LONG-RANGE WEAPONS") # announce their weapon assignment
+                                toggle = 1 # zlr stuff
                 
             
     def housekeeping_tasks(self): # runs when the plugin unloads and when the mode is call-voted off
+        # looks like we have nothing to do...
         return
 
         
@@ -62,8 +68,6 @@ class gamemode_triweapon(minqlx.Plugin):
             self.housekeeping_tasks()
         else:
             return minqlx.RET_USAGE
-
-        return minqlx.RET_STOP_ALL
     
     def handle_vote_called(self, caller, vote, args):
         if not (self.get_cvar("g_allowSpecVote", bool)) and caller.team == "spectator":
