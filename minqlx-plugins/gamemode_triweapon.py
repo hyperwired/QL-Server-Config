@@ -1,4 +1,6 @@
-# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
+# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link or modify to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
+# This plugin is not yet released for other servers at this stage.
+
 # Player selection system for short-mid-long range weapon distribution created by zlr.
 
 GAMEMODE_NAME = "Tri-Weapon CA"
