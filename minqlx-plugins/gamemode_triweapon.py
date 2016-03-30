@@ -22,6 +22,15 @@ class gamemode_triweapon(minqlx.Plugin):
 ######### define your hooks/commands/stuff below
         self.plugin_version = "1.1"
         self.add_hook("round_countdown", self.handle_round_countdown)
+
+        self.CLOSE_RANGE_HEALTH = 200
+        self.CLOSE_RANGE_ARMOUR = 100
+
+        self.MID_RANGE_HEALTH = 150
+        self.MID_RANGE_ARMOUR = 100
+ 
+        self.LONG_RANGE_HEALTH = 100
+        self.LONG_RANGE_ARMOUR = 100
     
     @minqlx.next_frame
     def handle_round_countdown(self, *args, **kwargs): 
@@ -36,15 +45,21 @@ class gamemode_triweapon(minqlx.Plugin):
                     for player in theTeam:
                         if close_range_counter <= 2: # this player will be a close-range weapons-holder
                             player.weapons(reset=True, g=True, rl=True, gl=True, mg=True) # assign weapons to the player
+                            player.health = self.CLOSE_RANGE_HEALTH # set player health
+                            player.armor = self.CLOSE_RANGE_ARMOUR # set player armour
                             player.center_print("Weapon Assignment:\n^1SHORT-RANGE WEAPONS") # announce their weapon assignment
                             close_range_counter += 1 # zlr stuff
                         else:
                             if toggle == 1: # this player will be a mid-range weapons-holder
                                 player.weapons(reset=True, g=True, lg=True, sg=True, hmg=True) # assign weapons to the player
+                                player.health = self.MID_RANGE_HEALTH # set player health
+                                player.armor = self.MID_RANGE_ARMOUR # set player armour
                                 player.center_print("Weapon Assignment:\n^3MID-RANGE WEAPONS") # announce their weapon assignment
                                 toggle = 0 # zlr stuff
                             else: # this player will be a long-range weapons-holder
                                 player.weapons(reset=True, g=True, rg=True, sg=True, pg=True) # assign weapons to the player
+                                player.health = self.LONG_RANGE_HEALTH # set player health
+                                player.armor = self.LONG_RANGE_ARMOUR # set player armour
                                 player.center_print("Weapon Assignment:\n^2LONG-RANGE WEAPONS") # announce their weapon assignment
                                 toggle = 1 # zlr stuff
                 
