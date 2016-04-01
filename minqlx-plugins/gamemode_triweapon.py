@@ -38,31 +38,99 @@ class gamemode_triweapon(minqlx.Plugin):
             for team in self.teams(): # cycle through teams, red, blue, specs, free (free team is the team that players are placed into in team-less gametypes (eg. FFA))
                 if (team != "spectator") and (team != "free"): # don't want to be giving weapons to players in the spectator/free teams, will likely crash server.
                     teams = self.teams() # copy the teams dictionary so we don't try to modify the original
-                    close_range_counter = 1 # zlr stuff
-                    toggle = 1 # zlr stuff
-                    theTeam = teams[team] #<<< have to do some fuckery so random.shuffle below works
-                    random.shuffle(theTeam) # randomly shuffle players to change their weapon assignment every round
+                    teamsize = len(teams['red'])
+                    close_range_counter = 1
+                    mid_range_counter = 1
+                    long_range_counter = 1
+                    if (teamsize == 2):
+                        close_range_cap = 1
+                        mid_range_cap = 1
+                        long_range_cap = 1
+                    elif (teamsize == 3):
+                        close_range_cap = 1
+                        mid_range_cap = 1
+                        long_range_cap = 1
+                    elif (teamsize == 4):
+                        close_range_cap = 2
+                        mid_range_cap = 1
+                        long_range_cap = 1
+                    elif (teamsize == 5):
+                        close_range_cap = 2
+                        mid_range_cap = 2
+                        long_range_cap = 1
+                    elif (teamsize == 6):
+                        close_range_cap = 2
+                        mid_range_cap = 2
+                        long_range_cap = 2
+                    elif (teamsize == 7):
+                        close_range_cap = 3
+                        mid_range_cap = 2
+                        long_range_cap = 2
+                    elif (teamsize == 8):
+                        close_range_cap = 3
+                        mid_range_cap = 3
+                        long_range_cap = 2
+                    theTeam = teams[team]
+                    random.shuffle(theTeam)
                     for player in theTeam:
-                        if close_range_counter <= 2: # this player will be a close-range weapons-holder
-                            player.weapons(reset=True, g=True, rl=True, gl=True, mg=True) # assign weapons to the player
-                            player.health = self.CLOSE_RANGE_HEALTH # set player health
-                            player.armor = self.CLOSE_RANGE_ARMOUR # set player armour
-                            player.center_print("Weapon Assignment:\n^1SHORT-RANGE WEAPONS") # announce their weapon assignment
-                            close_range_counter += 1 # zlr stuff
+                        random_int = random.randint(1,3)
+                        if random_int == 1:
+                            if close_range_counter <= close_range_cap:
+                                player.weapons(reset=True, g=True, rl=True, gl=True, mg=True) 
+                                player.health = self.CLOSE_RANGE_HEALTH 
+                                player.armor = self.CLOSE_RANGE_ARMOUR 
+                                player.center_print("Weapon Assignment:\n^1SHORT-RANGE WEAPONS") 
+                                close_range_counter += 1
+                            elif mid_range_counter <= mid_range_cap:
+                                player.weapons(reset=True, g=True, lg=True, sg=True, hmg=True)
+                                player.health = self.MID_RANGE_HEALTH 
+                                player.armor = self.MID_RANGE_ARMOUR 
+                                player.center_print("Weapon Assignment:\n^3MID-RANGE WEAPONS") 
+                                mid_range_counter += 1
+                            elif long_range_counter <= long_range_cap:
+                                player.weapons(reset=True, g=True, rg=True, sg=True, pg=True) 
+                                player.health = self.LONG_RANGE_HEALTH 
+                                player.armor = self.LONG_RANGE_ARMOUR 
+                                player.center_print("Weapon Assignment:\n^2LONG-RANGE WEAPONS")
+                                long_range_counter += 1
+                        elif random_int == 2:
+                            if mid_range_counter <= mid_range_cap:
+                                player.weapons(reset=True, g=True, lg=True, sg=True, hmg=True)
+                                player.health = self.MID_RANGE_HEALTH 
+                                player.armor = self.MID_RANGE_ARMOUR 
+                                player.center_print("Weapon Assignment:\n^3MID-RANGE WEAPONS")
+                                mid_range_counter += 1
+                            elif long_range_counter <= long_range_cap:
+                                player.weapons(reset=True, g=True, rg=True, sg=True, pg=True) 
+                                player.health = self.LONG_RANGE_HEALTH 
+                                player.armor = self.LONG_RANGE_ARMOUR 
+                                player.center_print("Weapon Assignment:\n^2LONG-RANGE WEAPONS")
+                                long_range_counter += 1
+                            elif close_range_counter <= close_range_cap:
+                                player.weapons(reset=True, g=True, rl=True, gl=True, mg=True) 
+                                player.health = self.CLOSE_RANGE_HEALTH 
+                                player.armor = self.CLOSE_RANGE_ARMOUR 
+                                player.center_print("Weapon Assignment:\n^1SHORT-RANGE WEAPONS") 
+                                close_range_counter += 1
                         else:
-                            if toggle == 1: # this player will be a mid-range weapons-holder
-                                player.weapons(reset=True, g=True, lg=True, sg=True, hmg=True) # assign weapons to the player
-                                player.health = self.MID_RANGE_HEALTH # set player health
-                                player.armor = self.MID_RANGE_ARMOUR # set player armour
-                                player.center_print("Weapon Assignment:\n^3MID-RANGE WEAPONS") # announce their weapon assignment
-                                toggle = 0 # zlr stuff
-                            else: # this player will be a long-range weapons-holder
-                                player.weapons(reset=True, g=True, rg=True, sg=True, pg=True) # assign weapons to the player
-                                player.health = self.LONG_RANGE_HEALTH # set player health
-                                player.armor = self.LONG_RANGE_ARMOUR # set player armour
-                                player.center_print("Weapon Assignment:\n^2LONG-RANGE WEAPONS") # announce their weapon assignment
-                                toggle = 1 # zlr stuff
-                
+                            if long_range_counter <= long_range_cap:
+                                player.weapons(reset=True, g=True, rg=True, sg=True, pg=True) 
+                                player.health = self.LONG_RANGE_HEALTH 
+                                player.armor = self.LONG_RANGE_ARMOUR 
+                                player.center_print("Weapon Assignment:\n^2LONG-RANGE WEAPONS")
+                                long_range_counter += 1
+                            elif mid_range_counter <= mid_range_cap:
+                                player.weapons(reset=True, g=True, lg=True, sg=True, hmg=True)
+                                player.health = self.MID_RANGE_HEALTH 
+                                player.armor = self.MID_RANGE_ARMOUR 
+                                player.center_print("Weapon Assignment:\n^3MID-RANGE WEAPONS") 
+                                mid_range_counter += 1
+                            elif close_range_counter <= close_range_cap:
+                                player.weapons(reset=True, g=True, rl=True, gl=True, mg=True) 
+                                player.health = self.CLOSE_RANGE_HEALTH 
+                                player.armor = self.CLOSE_RANGE_ARMOUR 
+                                player.center_print("Weapon Assignment:\n^1SHORT-RANGE WEAPONS") 
+                                close_range_counter += 1
             
     def housekeeping_tasks(self): # runs when the plugin unloads and when the mode is call-voted off
         # looks like we have nothing to do...
