@@ -180,6 +180,8 @@ class tomtec_logic(minqlx.Plugin):
             if args.lower() in "maido":
                 voteFlags = self.get_cvar("g_voteFlags")
                 self.set_cvar("g_voteFlags", "0")
+
+                if self.game.type_short != "duel": return 
                 
                 @minqlx.next_frame
                 def f(theFlags):
