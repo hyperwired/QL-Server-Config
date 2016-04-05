@@ -2,11 +2,11 @@
 ### Live configuration of the TomTec Solutions servers.
 
 Please read the LICENCE.md file in the root of this repository now, before accessing other files/folders of this repository.
-
 You are most likely looking for this repository: http://github.com/tjone270/Quake-Live
 
 This is the live configuration of TomTec Solutions' servers in Australia.
 
+To donate to The Purgery and it's servers, send Bitcoin to `1PurgerAZWce6NuHjsHL7LmfbtuR3cBUVf` or PayPal funds to `thomas@tomtecsolutions.com`. Thank you!
 
 ##### CVAR Information:
 ```

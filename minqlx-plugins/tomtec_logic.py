@@ -23,6 +23,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("muteall", self.cmd_muteall, 4)
         self.add_command("unmuteall", self.cmd_unmuteall, 4)
         self.add_command(("feedback", "f"), self.cmd_feedback)
+        self.add_command(("donate", "donations", "d"), self.cmd_feedback)
         self.add_command("killall", self.cmd_killall, 4)
         self.add_command("addbot", self.cmd_addbot, 1)
         self.add_command("rembot", self.cmd_rembot, 1)
@@ -166,6 +167,10 @@ class tomtec_logic(minqlx.Plugin):
     def cmd_feedback(self, player, msg, channel):
         channel.reply("To provide feedback on ^4The Purgery^7 servers, please email ^2thomas@tomtecsolutions.com^7.")
 
+    def cmd_donate(self, player, msg, channel):
+        channel.reply("Donations to ^4The Purgery^7 can be made via ^5PayPal^7 or ^3Bitcoin^7, check ^2tomtecsolutions.com.au/quakelive^7 for information.")
+        channel.reply("Thank you!")
+        
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4tomtec_logic.py^7 - version {}, created by Thomas Jones on 01/11/2015.".format(self.plugin_version))
 
