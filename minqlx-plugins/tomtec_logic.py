@@ -23,7 +23,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("muteall", self.cmd_muteall, 4)
         self.add_command("unmuteall", self.cmd_unmuteall, 4)
         self.add_command(("feedback", "f"), self.cmd_feedback)
-        self.add_command(("donate", "donations", "d"), self.cmd_feedback)
+        self.add_command(("donate", "donations", "d", "donating"), self.cmd_donate)
         self.add_command("killall", self.cmd_killall, 4)
         self.add_command("addbot", self.cmd_addbot, 1)
         self.add_command("rembot", self.cmd_rembot, 1)
