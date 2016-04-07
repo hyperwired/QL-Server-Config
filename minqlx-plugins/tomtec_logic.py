@@ -96,7 +96,7 @@ class tomtec_logic(minqlx.Plugin):
         for p in self.players():
             self.slay(p)
 
-    def talk_beep(self, player):
+    def talk_beep(self, player=None):
         if not player:
             self.play_sound("sound/player/talk.ogg")
         else:
@@ -115,12 +115,17 @@ class tomtec_logic(minqlx.Plugin):
         player.tell("Donation messages have been ^4{}^7.".format(word))
         return minqlx.RET_STOP_ALL
     
-    def donation_message(self, message):
+    def donation_message(self, message, player=None):
         if self.get_cvar("qlx_purgeryDonationMessages", bool):
-            for p in self.players():
-                if self.db.get_flag(p, "purgery:donation_messages", default=True):
-                    p.tell(message)
-                    self.talk_beep(p)
+            if not player:
+                for p in self.players():
+                    if self.db.get_flag(p, "purgery:donation_messages", default=True):
+                        p.tell(message)
+                        self.talk_beep(p)
+            else:
+                if self.db.get_flag(player, "purgery:donation_messages", default=True):
+                    player.tell(message)
+                    self.talk_beep(player)
 
 ########################################## END DONATIONS CODE ##########################################
 
@@ -135,7 +140,7 @@ class tomtec_logic(minqlx.Plugin):
 
         @minqlx.delay(5)
         def f():
-            self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.")
+            self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.", player)
         f()
         
     def handle_player_spawn(self, player):
