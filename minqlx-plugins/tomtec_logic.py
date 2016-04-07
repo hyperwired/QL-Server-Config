@@ -133,8 +133,11 @@ class tomtec_logic(minqlx.Plugin):
         if str(player.steam_id) == "76561197960279482": # cryptix is here
             player.name = "^4crypt^7ix"
 
-        self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.")
-
+        @minqlx.delay(5)
+        def f():
+            self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.")
+        f()
+        
     def handle_player_spawn(self, player):
         # Add in ExcessivePlus-like feeling, mimicing the spawn behaviour in EP.
         if self.game.type_short != "duel":
