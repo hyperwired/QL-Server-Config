@@ -18,6 +18,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("vote_ended", self.handle_vote_ended)
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
+        self.add_command(("donation_messages", "donate_messages"), self.cmd_donation_messages)
         self.add_command("giveall", self.cmd_giveall, 5, usage="<powerup [on/off]>, <holdable>")
         self.add_command("map_restart", self.cmd_maprestart, 1)
         self.add_command("muteall", self.cmd_muteall, 4)
@@ -36,10 +37,12 @@ class tomtec_logic(minqlx.Plugin):
         self.disabled_maps = ["proq3dm6", "ra3map1", "ra3map6"]
         
         self.set_cvar_once("qlx_freezePlayersDuringVote", "0")
+        self.set_cvar_once("qlx_purgeryDonationMessages", "1")
+        
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "3.7"
+        self.plugin_version = "3.8"
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         
@@ -93,6 +96,35 @@ class tomtec_logic(minqlx.Plugin):
         for p in self.players():
             self.slay(p)
 
+
+######################################### BEGIN DONATIONS CODE #########################################
+
+    def talk_beep(self, player):
+        if not player:
+            self.play_sound("sound/player/talk.ogg")
+        else:
+            self.play_sound("sound/player/talk.ogg", player)
+
+    def cmd_donation_messages(self, player, msg, channel):
+        flag = self.db.get_flag(player, "purgery:donation_messages", default=True)
+        self.db.set_flag(player, "purgery:donation_messages", not flag)
+        if flag:
+            word = "disabled"
+        else:
+            word = "enabled"
+        player.tell("Donation messages have been ^4{}^7.".format(word))
+        return minqlx.RET_STOP_ALL
+    
+    def donation_message(self, message):
+        if self.get_cvar("qlx_purgeryDonationMessages", bool):
+            for p in self.players():
+                if self.db.get_flag(p, "purgery:donation_messages", default=True):
+                    p.tell(message)
+                    self.talk_beep(p)
+
+########################################## END DONATIONS CODE ##########################################
+
+                    
     @minqlx.next_frame
     def handle_player_loaded(self, player):
         #if player.steam_id == minqlx.owner(): # purger is here, sound effect
@@ -100,6 +132,8 @@ class tomtec_logic(minqlx.Plugin):
             
         if str(player.steam_id) == "76561197960279482": # cryptix is here
             player.name = "^4crypt^7ix"
+
+        donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.")
 
     def handle_player_spawn(self, player):
         # Add in ExcessivePlus-like feeling, mimicing the spawn behaviour in EP.
@@ -132,6 +166,8 @@ class tomtec_logic(minqlx.Plugin):
                 else:
                     p.powerups(battlesuit=10)
 
+        donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.")
+                 
     def game_end(self, data):
         return
 
