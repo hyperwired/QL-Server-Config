@@ -96,14 +96,14 @@ class tomtec_logic(minqlx.Plugin):
         for p in self.players():
             self.slay(p)
 
-
-######################################### BEGIN DONATIONS CODE #########################################
-
     def talk_beep(self, player):
         if not player:
             self.play_sound("sound/player/talk.ogg")
         else:
             self.play_sound("sound/player/talk.ogg", player)
+            
+            
+######################################### BEGIN DONATIONS CODE #########################################
 
     def cmd_donation_messages(self, player, msg, channel):
         flag = self.db.get_flag(player, "purgery:donation_messages", default=True)
@@ -133,7 +133,7 @@ class tomtec_logic(minqlx.Plugin):
         if str(player.steam_id) == "76561197960279482": # cryptix is here
             player.name = "^4crypt^7ix"
 
-        donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.")
+        self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.")
 
     def handle_player_spawn(self, player):
         # Add in ExcessivePlus-like feeling, mimicing the spawn behaviour in EP.
@@ -166,7 +166,7 @@ class tomtec_logic(minqlx.Plugin):
                 else:
                     p.powerups(battlesuit=10)
 
-        donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.")
+        self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.")
                  
     def game_end(self, data):
         return
