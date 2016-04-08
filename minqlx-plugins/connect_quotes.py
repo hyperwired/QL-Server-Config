@@ -24,7 +24,7 @@ class connect_quotes(minqlx.Plugin):
     def handle_player_connect(self, player):
         if player not in self.playerConnectedYetList:
             self.playerConnectedYetList.append(player)
-            randomNumber = randint(0, len(QUOTES))
+            randomNumber = randint(0, (len(QUOTES) - 1))
             randomQuote = QUOTES[randomNumber]
             return randomQuote
 
