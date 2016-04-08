@@ -37,7 +37,7 @@ class tomtec_logic(minqlx.Plugin):
         self.disabled_maps = ["proq3dm6", "ra3map1", "ra3map6"]
         
         self.set_cvar_once("qlx_freezePlayersDuringVote", "0")
-        self.set_cvar_once("qlx_purgeryDonationMessages", "1")
+        self.set_cvar_once("qlx_purgeryDonationMessages", "0")
         
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
