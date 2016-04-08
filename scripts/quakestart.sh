@@ -19,7 +19,7 @@ export qRconPasswordPurgery=$(<~/localConfig-rconPassword-purgery.txt)
 export qPurgeryServerTitle="^4The Purgery^7 - $qServerLocation - ^2#$1^7"
 export qPurgeryStart="$qPathToMinqlxStartScript \
 +set qlx_owner $qPurgeryOwnerSteam64ID \
-+set qlx_plugins DEFAULT, tomtec_logic, tp_fun, fun, balance, commlink, aliases, votestats, custom_votes, votemanager, branding, q3resolver \
++set qlx_plugins DEFAULT, tomtec_logic, tp_fun, fun, balance, commlink, aliases, votestats, custom_votes, votemanager, branding, q3resolver, connect_quotes \
 +set qlx_commlinkIdentity thepurgery \
 +set qlx_commlinkServerName $qCommlinkServerName
 +set qlx_chatlogs 20 \
@@ -28,7 +28,6 @@ export qPurgeryStart="$qPathToMinqlxStartScript \
 +set qlx_serverBrandName $qPurgeryServerTitle \
 +set qlx_serverBrandTopField ^7Sponsored by ^5TomTec Solutions^7. Visit our Wiki at ^2thepurgery.com^7. Change the server configuration here: ^2github.com/TomTec-Solutions/QL-Server-Config^7. \
 +set qlx_serverBrandBottomField ^5www.4seasonsgaming.com^7, home to the Australian and New Zealand Quake community. \
-+set qlx_connectMessage Connected to ^4TomTec Solutions \
 +set qlx_loadedMessage Welcome to ^4The Purgery^7 \
 +set qlx_countdownMessage ^5Good luck, and have fun.^7 \
 +set qlx_endOfGameMessage ^2Good game!^7 \
