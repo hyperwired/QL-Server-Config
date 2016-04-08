@@ -241,6 +241,8 @@ class tomtec_logic(minqlx.Plugin):
                 return minqlx.RET_STOP_ALL
 
             if args.lower() in "rustcampgrounds":
+                minqlx.client_command(caller.id, "callvote map oxodm102_b1")
+                caller.tell("Resolved ^4rustcampgrounds^7 to ^4oxodm102_b1^7.")
                 return minqlx.RET_STOP_ALL
 
         if (vote.lower() == "kick") or (vote.lower() == "clientkick"):
