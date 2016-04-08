@@ -29,7 +29,10 @@ class connect_quotes(minqlx.Plugin):
             return randomQuote
 
     def handle_player_loaded(self, player):
-        self.playerConnectedYetList.remove(player)
+        try:
+            self.playerConnectedYetList.remove(player)
+        except:
+            return
 
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4connect_quotes.py^7 - version {}, created by Thomas Jones on 08/04/2016.".format(self.plugin_version))
