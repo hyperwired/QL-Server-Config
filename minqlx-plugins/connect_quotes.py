@@ -35,7 +35,7 @@ class connect_quotes(minqlx.Plugin):
         self.plugin_version = "1.0"
 
         self.playerConnectedYetList = []
-        self.counter = 0
+        
         
     def handle_player_connect(self, player):
         if player not in self.playerConnectedYetList:
