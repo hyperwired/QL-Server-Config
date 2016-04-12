@@ -1,9 +1,7 @@
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 
-import minqlx
+import minqlx, datetime, time, subprocess
 from random import randint
-import datetime
-import time
 
 class tomtec_logic(minqlx.Plugin):
     def __init__(self):
@@ -33,6 +31,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("facebook", "fb"), self.cmd_facebook)
         self.add_command(("acommands", "acmds"), self.cmd_acommands)
         self.add_command("mapname", self.cmd_mapname)
+        self.add_command("server_reconfigure", self.reconfigure, 5)
     
         self.disabled_maps = ["proq3dm6", "ra3map1", "ra3map6"]
         
@@ -42,7 +41,7 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "3.8"
+        self.plugin_version = "3.9"
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         
@@ -65,6 +64,14 @@ class tomtec_logic(minqlx.Plugin):
         if self.get_cvar("qlx_ratingLimiter", bool):
             minqlx.load_plugin("ratinglimiter")
 
+    @minqlx.thread
+    def reconfigure(self):
+        p = subprocess.Popen("/home/qlserver/initialise.sh --no-restart", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        for line in p.stdout.readlines():
+            channel.reply(line)
+        retval = p.wait()
+        channel.reply("Process Return Code: {}".format(retval))
+        
     def cmd_mapname(self, player, msg, channel):
         channel.reply("The current map's name is ^4{}^7.".format(self.game.map))
         
