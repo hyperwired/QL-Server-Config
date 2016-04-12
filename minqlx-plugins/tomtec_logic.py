@@ -23,7 +23,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("map_restart", self.cmd_maprestart, 1)
         self.add_command("muteall", self.cmd_muteall, 4)
         self.add_command("unmuteall", self.cmd_unmuteall, 4)
-        self.add_command(("feedback", "f"), self.cmd_feedback)
+        self.add_command(("forum", "forums", "f"), self.cmd_forums)
         self.add_command(("donate", "donations", "d", "donating"), self.cmd_donate)
         self.add_command("killall", self.cmd_killall, 4)
         self.add_command("addbot", self.cmd_addbot, 1)
@@ -46,7 +46,7 @@ class tomtec_logic(minqlx.Plugin):
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         
-        self.protectedPlayers = ["76561198213481765", "76561198197573413", "76561197971374552"] # purger, merozollo, barley
+        self.protectedPlayers = ["76561198213481765"]
 
         self.purgersBirthday = False
         
@@ -118,10 +118,10 @@ class tomtec_logic(minqlx.Plugin):
     def donation_message(self, message, player=None):
         if self.get_cvar("qlx_purgeryDonationMessages", bool):
             if not player:
-                for p in self.players():
-                    if self.db.get_flag(p, "purgery:donation_messages", default=True):
-                        p.tell(message)
-                        self.talk_beep(p)
+                for player in self.players():
+                    if self.db.get_flag(player, "purgery:donation_messages", default=True):
+                        player.tell(message)
+                        self.talk_beep(player)
             else:
                 if self.db.get_flag(player, "purgery:donation_messages", default=True):
                     player.tell(message)
@@ -185,6 +185,9 @@ class tomtec_logic(minqlx.Plugin):
             p.noclip = False
         self.set_cvar("g_speed", "320")
 
+    def cmd_clearperms(self, player, msg, channel):
+        return
+        
     def cmd_showrules(self, player, msg, channel):
         # show the rules to the channel from whence the command was issued
         player.tell("^4========================================================================================")
@@ -208,8 +211,8 @@ class tomtec_logic(minqlx.Plugin):
     def cmd_acommands(self, player, msg, channel):
         channel.reply("To see mod/admin commands, check out ^2thepurgery.com^7.")
 
-    def cmd_feedback(self, player, msg, channel):
-        channel.reply("To provide feedback on ^4The Purgery^7 servers, please email ^2thomas@tomtecsolutions.com^7.")
+    def cmd_forums(self, player, msg, channel):
+        channel.reply("Visit ^4The Purgery^7's forum at ^2forum.thepurgery.com^7.")
 
     def cmd_donate(self, player, msg, channel):
         channel.reply("Donations to ^4The Purgery^7 can be made via ^5PayPal^7 or ^3Bitcoin^7, check ^2tomtecsolutions.com.au/quakelive^7 for information.")
