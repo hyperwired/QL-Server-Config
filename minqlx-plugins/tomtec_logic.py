@@ -67,7 +67,7 @@ class tomtec_logic(minqlx.Plugin):
     @minqlx.thread
     def reconfigure(self, player, msg, channel):
         channel.reply("^1Server: ^7Running ^2initialise.sh --no-restart^7.")
-        p = subprocess.Popen("/home/qlserver/initialise.sh --no-restart", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        p = subprocess.Popen("/home/qlserver/initialise.sh --no-restart", shell=True, stdout=subprocess.PIPE)
         for line in p.stdout.readlines():
             time.sleep(0.1)
             channel.reply("^1Process Output: ^7{}".format(line))
