@@ -65,12 +65,14 @@ class tomtec_logic(minqlx.Plugin):
             minqlx.load_plugin("ratinglimiter")
 
     @minqlx.thread
-    def reconfigure(self):
+    def reconfigure(self, player, msg, channel):
+        channel.reply("^1Server: ^7Running ^2initialise.sh --no-restart^7.")
         p = subprocess.Popen("/home/qlserver/initialise.sh --no-restart", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         for line in p.stdout.readlines():
-            channel.reply(line)
+            channel.reply("^1Process Output: ^7{}".format(line))
         retval = p.wait()
-        channel.reply("Process Return Code: {}".format(retval))
+        channel.reply("^1Process Return Code: ^7{}".format(retval))
+        return minqlx.RET_NONE
         
     def cmd_mapname(self, player, msg, channel):
         channel.reply("The current map's name is ^4{}^7.".format(self.game.map))
