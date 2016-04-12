@@ -69,6 +69,7 @@ class tomtec_logic(minqlx.Plugin):
         channel.reply("^1Server: ^7Running ^2initialise.sh --no-restart^7.")
         p = subprocess.Popen("/home/qlserver/initialise.sh --no-restart", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         for line in p.stdout.readlines():
+            time.sleep(0.1)
             channel.reply("^1Process Output: ^7{}".format(line))
         retval = p.wait()
         channel.reply("^1Process Return Code: ^7{}".format(retval))
