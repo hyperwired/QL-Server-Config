@@ -12,6 +12,7 @@ GITURL="https://github.com/TomTec-Solutions/QL-Server-Config.git"
 #  Downloading the GitHub Repository and preparing 'deploy.sh'
 #
 echo "Initialiser has started."
+echo "Specified initialisation flags: $@"
 cd ~
 echo "Changed PWD to ~."
 rm -rf "QL-Server-Config" # removes failed installs
@@ -23,7 +24,6 @@ cd QL-Server-Config
 cp deploy.sh ~/deploy.sh
 chmod +x ~/deploy.sh
 
-echo "Specified initialisation flags: $@"
 
 #
 #  Running 'deploy.sh'
