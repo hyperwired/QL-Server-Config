@@ -11,8 +11,8 @@ dpkg-reconfigure tzdata
 # Install dependencies (during sid-repo activation, may need to install binutils if C compiler can't compile anything)
 apt-get -y install lib32gcc1 curl nano samba build-essential python-dev python-setuptools python3 unzip dos2unix cron mailutils wget lib32z1 lib32stdc++6 libc6 git python-pip
 sudo bash -c "echo \"deb http://ftp.debian.org/debian sid main\" >> /etc/apt/sources.list"; apt-get update; apt-get -y install python3.5 python3.5-dev; sudo sed -i '$ d' /etc/apt/sources.list; apt-get update
-wget https://raw.githubusercontent.com/pypa/get-pip/master/get-pip.py; python3.5 get-pip.py
-easy_install supervisor
+wget https://raw.githubusercontent.com/pypa/get-pip/master/get-pip.py; python3.5 get-pip.py; rm get-pip.py
+easy_install-2.7 supervisor pyzmq # need old 2.7version of pyzmq for quakeupdate rcon.py
 python3.5 -m easy_install pyzmq hiredis
 python3.5 -m pip install redis hiredis requests pyzmq python-valve
 
