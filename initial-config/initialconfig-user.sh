@@ -19,4 +19,5 @@ dos2unix initialise.sh
 chmod +x initialise.sh
 ./initialise.sh
 
-# should be done now
+# should be done now, let's start them going!
+supervisord
