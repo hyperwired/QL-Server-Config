@@ -22,21 +22,25 @@ SERVERS = [
     "43.245.164.133:27966",
     "43.245.164.133:27967",
     "43.245.164.133:27968",
-    "45.114.116.189:27960", # cage sydney
-    "45.114.116.189:27961",
-    "45.114.116.189:27962",
-    "45.114.116.189:27963",
-    "45.114.116.189:27964",
+    "119.252.27.101:27960", # purgery adelaide
+    "119.252.27.101:27961",
+    "119.252.27.101:27962",
+    "119.252.27.101:27963",
+    "119.252.27.101:27964",
+    "119.252.27.101:27965",
+    "119.252.27.101:27966",
+    "119.252.27.101:27967",
+    "119.252.27.101:27968"
 ]
-    
+
 class servers(minqlx.Plugin):
     def __init__(self):
         self.add_command(("servers", "network"), self.cmd_servers)
         self.add_command("tomtec_versions", self.cmd_showversion)
-        
+
         self.plugin_version = "1.0"
 
-        
+
     def cmd_servers(self, player, msg, channel):
         servers = SERVERS
         self.get_servers(servers, player)
@@ -76,4 +80,3 @@ class servers(minqlx.Plugin):
 
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4servers.py^7 - version {}, originally created by ^6kanzo^7, readapted by Thomas Jones on 11/04/2016.".format(self.plugin_version))
-
