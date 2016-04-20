@@ -281,6 +281,14 @@ class tomtec_logic(minqlx.Plugin):
                     caller.tell("{}^7 is in the list of protected players and cannot be kicked.".format(kickee.name))
                     return minqlx.RET_STOP_ALL
 
+        if vote.lower() == "teamsize":
+            if len(args.split()) < 1:
+                return minqlx.RET_STOP
+
+            if str(args) == self.get_cvar("teamsize", str):
+                caller.tell("You sir, need to open your eyes. Only then will you see that the teamsize is already set to {}.".format(self.get_cvar("teamsize")))
+                return minqlx.RET_STOP_ALL
+
     def handle_vote_started(self, caller, vote, args):
         if self.game.state == "warmup":
             if self.get_cvar("qlx_freezePlayersDuringVote", bool):
