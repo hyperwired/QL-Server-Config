@@ -37,6 +37,7 @@ class tomtec_logic(minqlx.Plugin):
         
         self.set_cvar_once("qlx_freezePlayersDuringVote", "0")
         self.set_cvar_once("qlx_purgeryDonationMessages", "0")
+        self.set_cvar_once("qlx_visitForumMessages", "0")
         
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
@@ -48,7 +49,12 @@ class tomtec_logic(minqlx.Plugin):
         self.protectedPlayers = ["76561198213481765"]
 
         self.purgersBirthday = False
-        
+
+        if self.get_cvar("qlx_visitForumMessages", bool):
+            message = "Visit ^2forum.thepurgery.com^7 to vote for/nominate a moderator."
+            self.set_cvar("qlx_connectMessage", message)
+            self.set_cvar("qlx_endOfGameMessage", message)
+            
         if (datetime.datetime.now().month == 3) and (datetime.datetime.now().day == 18):
             # It's Purger's birthday.
             self.purgersBirthday = True
