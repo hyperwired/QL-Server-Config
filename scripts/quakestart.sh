@@ -19,7 +19,7 @@ export qRconPasswordPurgery=$(<~/localConfig-rconPassword-purgery.txt)
 export qPurgeryServerTitle="^4The Purgery^7 - $qServerLocation - ^2#$1^7"
 export qPurgeryStart="$qPathToMinqlxStartScript \
 +set qlx_owner $qPurgeryOwnerSteam64ID \
-+set qlx_plugins DEFAULT, tomtec_logic, tp_fun, fun, balance, commlink, aliases, votestats, custom_votes, votemanager, branding, q3resolver, quotes, servers \
++set qlx_plugins DEFAULT, tomtec_logic, tp_fun, fun, balance, commlink, aliases, votestats, custom_votes, votemanager, branding, q3resolver, servers \
 +set qlx_commlinkIdentity thepurgery \
 +set qlx_commlinkServerName $qCommlinkServerName
 +set qlx_chatlogs 20 \
@@ -31,7 +31,8 @@ export qPurgeryStart="$qPathToMinqlxStartScript \
 +set qlx_loadedMessage Welcome to ^4The Purgery^7 \
 +set qlx_countdownMessage ^5Good luck, and have fun.^7 \
 +set qlx_endOfGameMessage ^2Good game!^7 \
-+set qlx_purgeryDonationMessages 0"
++set qlx_purgeryDonationMessages 0 \
++set qlx_visitForumMessages 1"
 
 sponsortag="$qServerLocation,TomTec Solutions"
 gameport=`expr $1 + 27960`
