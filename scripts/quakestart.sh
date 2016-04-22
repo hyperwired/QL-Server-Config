@@ -69,7 +69,9 @@ exec $qPurgeryStart \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 1 \
     +set qlx_balanceApi elo_b \
-    +set qlx_leaverBan 1
+    +set qlx_leaverBan 1 \
+    +set g_warmupReadyDelay 90 \
+    +set g_warmupReadyDelayAction 2
 elif [ $1 -eq 1 ]; then
 echo "Starting beginner's clan arena server 1..."
 exec $qPurgeryStart \
