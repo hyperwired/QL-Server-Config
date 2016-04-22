@@ -285,7 +285,7 @@ class tomtec_logic(minqlx.Plugin):
             if len(args.split()) < 1:
                 return minqlx.RET_STOP
 
-            if str(args) in self.get_cvar("teamsize", str):
+            if self.get_cvar("teamsize", str) in str(args):
                 caller.tell("You sir, need to open your eyes. Only then will you see that the teamsize is already set to {}.".format(self.get_cvar("teamsize")))
                 return minqlx.RET_STOP_ALL
 
