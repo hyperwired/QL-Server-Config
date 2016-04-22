@@ -4,8 +4,6 @@
 # created by Thomas Jones on 03/10/15.
 # thomas@tomtecsolutions.com
 
-workshopFile="download.list"
-
 echo "========== AutoDownload.sh has started. =========="
 echo "========= $(date) ========="
 
