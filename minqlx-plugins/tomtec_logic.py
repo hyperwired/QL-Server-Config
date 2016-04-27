@@ -42,7 +42,7 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "3.9"
+        self.plugin_version = "4.0"
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         
@@ -148,12 +148,6 @@ class tomtec_logic(minqlx.Plugin):
                     
     @minqlx.next_frame
     def handle_player_loaded(self, player):
-        #if player.steam_id == minqlx.owner(): # purger is here, sound effect
-        #    self.play_sound("q3_audio/sounds/xaero_deathchime.wav")
-            
-        if str(player.steam_id) == "76561197960279482": # cryptix is here
-            player.name = "^4crypt^7ix"
-
         @minqlx.delay(5)
         def f():
             self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.", player)
@@ -274,6 +268,11 @@ class tomtec_logic(minqlx.Plugin):
                         kickee = self.find_player(args.lower())[0]
                     elif vote.lower() == "clientkick":
                         kickee = self.player(int(args))
+                        
+                    if str(kickee.steam_id) == str(minqlx.owner()):
+                        caller.tell("{}^7 is the server owner and cannot be kicked. {}^7 has been notified.".format(kickee.name, kickee.name)
+                        kickee.tell("{}^7 just tried to call a {} vote against you.".format(caller.name, vote.lower())
+                        return minqlx.RET_STOP_ALL
                 except:
                     return minqlx.RET_STOP
                     
