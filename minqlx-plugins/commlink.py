@@ -70,7 +70,7 @@ class commlink(minqlx.Plugin):
         self.logger.info("Connecting to {}...".format(self.server))
         self.msg("Connecting to ^3CommLink^7 server...")
 
-        self.plugin_version = "1.1"
+        self.plugin_version = "1.2"
         
     def game_countdown(self):
         if self.game.type_short == "duel":
@@ -132,13 +132,7 @@ class commlink(minqlx.Plugin):
          
     def handle_raw(self, irc, msg):
         split_msg = msg.split()
-        if len(split_msg) > 2 and split_msg[1] == "NICK":
-            user = re_user.match(split_msg[0][1:])
-            if user and user.groups() in self.authed:
-                # Update nick if an authed user changed it.
-                self.authed.remove(user.groups())
-                self.authed.add((split_msg[2][1:], user.groups()[1], user.groups()[2]))
-        elif len(split_msg) > 1 and split_msg[1] == "433":
+        if len(split_msg) > 1 and split_msg[1] == "433":
             irc.nick(irc.nickname + "_")
 
     @classmethod
