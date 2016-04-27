@@ -270,8 +270,8 @@ class tomtec_logic(minqlx.Plugin):
                         kickee = self.player(int(args))
                         
                     if str(kickee.steam_id) == str(minqlx.owner()):
-                        caller.tell("{}^7 is the server owner and cannot be kicked. {}^7 has been notified.".format(kickee.name, kickee.name)
-                        kickee.tell("{}^7 just tried to call a {} vote against you.".format(caller.name, vote.lower())
+                        caller.tell("{}^7 is the server owner and cannot be kicked. {}^7 has been notified.".format(kickee.name, kickee.name))
+                        kickee.tell("{}^7 just tried to call a {} vote against you.".format(caller.name, vote.lower()))
                         return minqlx.RET_STOP_ALL
                 except:
                     return minqlx.RET_STOP
