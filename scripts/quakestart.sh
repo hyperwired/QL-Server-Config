@@ -361,7 +361,7 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_duel.txt" \
     +set fs_homepath ~/.quakelive/QuakeCon \
     +set sv_location "$qServerLocation" \
-    +set qlx_serverBrandName "QuakeCon 2016 Practice Server" \
+    +set qlx_serverBrandName "^1QCON^7 Practice Server - ^3$qServerLocation^7" \
     +set qlx_serverBrandTopField "Hosted by The Purgery for the Australian/New Zealand representatives of our Quake Community at QuakeCon" \
     +set qlx_serverBrandBottomField "Check out ^54seasonsgaming.com^7 for a great community forum to discuss QuakeCon."
 fi
