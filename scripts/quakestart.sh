@@ -351,7 +351,7 @@ exec $qPathToMinqlxStartScript \
     +set qlx_redisDatabase 5 \
     +set net_port $gameport \
     +set qlx_owner $qPurgeryOwnerSteam64ID \
-    +set qlx_plugins "DEFAULT, custom_votes, branding" \
+    +set qlx_plugins "DEFAULT, custom_votes, branding, votemanager, votestats" \
     +set sv_hostname "QuakeCon 2016 Practice Server - $qServerLocation" \
     +set zmq_rcon_enable 0 \
     +set zmq_stats_enable 1 \
