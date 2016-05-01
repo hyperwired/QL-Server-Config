@@ -1,5 +1,7 @@
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 
+GAME_MODERATORS="merozollo, 0regonn, barley, Biokemical, Quarrel, meganfoxxed, Jubblies, zee."
+
 import minqlx, datetime, time, subprocess
 from random import randint
 
@@ -150,7 +152,12 @@ class tomtec_logic(minqlx.Plugin):
     def handle_player_loaded(self, player):
         @minqlx.delay(5)
         def f():
+            # display donation message if any
             self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.", player)
+
+            # announce game mods
+            self.talk_beep(player)
+            player.tell("Current game moderators: Pur^4g^7er, {}.".format(GAME_MODERATORS))
         f()
         
     def handle_player_spawn(self, player):
@@ -287,6 +294,18 @@ class tomtec_logic(minqlx.Plugin):
             if self.get_cvar("teamsize", str) in str(args):
                 caller.tell("You sir, need to open your eyes. Only then will you see that the teamsize is already set to {}.".format(self.get_cvar("teamsize")))
                 return minqlx.RET_STOP_ALL
+
+        if vote.lower() == "addbot":
+            # enables the '/cv addbot' command
+            self.callvote("qlx !addbot", "add a ^7Pur^4g^7obot^3")
+            self.msg("{}^7 called a vote.".format(caller.name))
+            return minqlx.RET_STOP_ALL
+
+        if vote.lower() == "rembot":
+            # enables the '/cv rembot' command
+            self.callvote("qlx !rembot", "remove all ^7Pur^4g^7obot^3s")
+            self.msg("{}^7 called a vote.".format(caller.name))
+            return minqlx.RET_STOP_ALL
 
     def handle_vote_started(self, caller, vote, args):
         if self.game.state == "warmup":
