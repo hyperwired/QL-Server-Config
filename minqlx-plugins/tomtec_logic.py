@@ -157,7 +157,7 @@ class tomtec_logic(minqlx.Plugin):
 
             # announce game mods
             self.talk_beep(player)
-            player.tell("Current game moderators: Pur^4g^7er, {}.".format(GAME_MODERATORS))
+            player.tell("Current game moderators: Pur^4g^7er (owner), ^4{}^7.".format(GAME_MODERATORS))
         f()
         
     def handle_player_spawn(self, player):
