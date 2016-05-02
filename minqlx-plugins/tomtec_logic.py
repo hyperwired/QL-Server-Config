@@ -28,7 +28,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("killall", self.cmd_killall, 4)
         self.add_command("unban", self.cmd_unban, 2, priority=minqlx.PRI_HIGH)
         self.add_command("addbot", self.cmd_addbot, 1)
-        self.add_command(("respawn", "spawn"), self.cmd_respawnme)
+        self.add_command(("respawn", "spawn"), self.cmd_respawnme, 5)
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command(("wiki", "w"), self.cmd_wiki)
