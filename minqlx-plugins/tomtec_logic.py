@@ -28,6 +28,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("killall", self.cmd_killall, 4)
         self.add_command("unban", self.cmd_unban, 2, priority=minqlx.PRI_HIGH)
         self.add_command("addbot", self.cmd_addbot, 1)
+        self.add_command(("respawn", "spawn"), self.cmd_respawnme)
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command(("wiki", "w"), self.cmd_wiki)
@@ -84,6 +85,16 @@ class tomtec_logic(minqlx.Plugin):
         channel.reply("^1Process Return Code: ^7{}".format(retval))
         return minqlx.RET_NONE
 
+    def cmd_respawnme(self, player, msg, channel):
+        if len(msg) < 2:
+            player.is_alive = True
+        else:
+            try:
+                self.player(int(msg[1])).is_alive = True
+            except:
+                player.tell("Invalid client ID. Please enter a client ID of the player to (re)spawn.")
+            
+        
     def cmd_unban(self, player, msg, channel):
         if msg[1] == "76561198009550342":
             player.tell("Trying to circumvent Shoop's ban = an automatic ban on yourself. Goodbye.")
