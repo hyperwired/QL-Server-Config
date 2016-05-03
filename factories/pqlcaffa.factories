@@ -34,7 +34,8 @@
          "pmove_RampJump":"1",
          "pmove_AirControl":"1",
          "dmflags":"60",
-         "g_startingWeapons":"8447"
+         "g_startingWeapons":"8447",
+         "g_spawnItemWeapons":"0"
       }
    }
 ]
