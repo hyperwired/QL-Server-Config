@@ -12,10 +12,13 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("game_start", self.game_start)
         self.add_hook("game_end", self.game_end)
         self.add_hook("player_loaded", self.handle_player_loaded)
+        self.add_hook("player_connect", self.handle_player_connect, priority=minqlx.PRI_HIGHEST)
         #self.add_hook("player_spawn", self.handle_player_spawn) disable battle-suits
         self.add_hook("vote_called", self.handle_vote_called)
         self.add_hook("vote_started", self.handle_vote_started)
         self.add_hook("vote_ended", self.handle_vote_ended)
+        self.add_hook("userinfo", self.handle_userinfo, priority=minqlx.PRI_HIGHEST)
+        
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
         self.add_command(("donation_messages", "donate_messages"), self.cmd_donation_messages)
@@ -46,7 +49,7 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "4.0"
+        self.plugin_version = "4.1"
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         
@@ -168,7 +171,18 @@ class tomtec_logic(minqlx.Plugin):
 
 ########################################## END DONATIONS CODE ##########################################
 
-                    
+
+    def handle_player_connect(self, player): # prohibit players to have the name 'purgobot'
+        if "purgobot" in self.clean_text(player.name.lower()):
+            if str(player.steam_id)[0] != "9":
+                return "^7Pur^4g^7obot is a restricted name. Please change your Steam name to something else.\n"
+
+    def handle_userinfo(self, player, changed): # kick players who change their in-game name to 'purgobot'
+        if str(player.steam_id)[0] != "9":
+            if "name" in changed:
+                if "purgobot" in self.clean_text(changed["name"].lower()):
+                    player.kick("Changing your name to Purgobot is not permitted on The Purgery.")       
+                
     @minqlx.next_frame
     def handle_player_loaded(self, player):
         @minqlx.delay(5)
