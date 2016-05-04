@@ -1,6 +1,6 @@
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 
-GAME_MODERATORS="merozollo, 0regonn, barley, Biokemical, Quarrel, meganfoxxed, Jubblies, zee."
+GAME_MODERATORS="merozollo, 0regonn, barley, Biokemical, Quarrel, meganfoxxed, Jubblies, zee"
 
 import minqlx, datetime, time, subprocess
 from random import randint
@@ -178,7 +178,7 @@ class tomtec_logic(minqlx.Plugin):
 
             # announce game mods
             self.talk_beep(player)
-            player.tell("Current game moderators: Pur^4g^7er (owner), ^4{}^7.".format(GAME_MODERATORS))
+            player.tell("Current game moderators: Pur^4g^7er (owner), {}.".format(GAME_MODERATORS))
         f()
         
     def handle_player_spawn(self, player):
