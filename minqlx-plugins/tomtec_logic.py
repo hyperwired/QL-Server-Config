@@ -52,6 +52,7 @@ class tomtec_logic(minqlx.Plugin):
         self.plugin_version = "4.1"
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
+        self.serverLocation = self.get_cvar("sv_location")
         
         self.protectedPlayers = ["76561198213481765"]
 
@@ -76,6 +77,16 @@ class tomtec_logic(minqlx.Plugin):
         
         if self.get_cvar("qlx_ratingLimiter", bool):
             minqlx.load_plugin("ratinglimiter")
+
+        if "auckland" in self.serverLocation.lower():
+            @minqlx.delay(20)
+            def f():
+                try:
+                    minqlx.unload_plugin("fun")
+                except:
+                    pass
+            f()
+            
 
     @minqlx.thread
     def reconfigure(self, player, msg, channel):
