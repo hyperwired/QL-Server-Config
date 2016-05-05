@@ -1,4 +1,4 @@
-#! /bin/bash
+                            #! /bin/bash
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 # quakestart.sh - quake live multiple server spawning script.
 # created by Thomas Jones on 09/09/15.
@@ -363,7 +363,7 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_ffa.txt" \
     +set fs_homepath ~/.quakelive/TOEY-SUB613 \
     +set sv_location "$qServerLocation, TOEY" \
-    +set qlx_serverBrandName "TOEY'S FFA" \
+    +set qlx_serverBrandName "TOEY'S FFA"
 else
 echo "This system is not intended to host toey's (sub613) server."
 fi
