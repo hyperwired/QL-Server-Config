@@ -345,6 +345,29 @@ else
 echo "This system is not intended to host ginababy's (sub593) server."
 fi
 elif [ $1 -eq 12 ]; then
+if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]; then
+echo "Starting toey's server (sub613) 1..."
+exec $qPathToMinqlxStartScript \
+    +set net_strict 1 \
+    +set qlx_redisDatabase 6 \
+    +set net_port $gameport \
+    +set qlx_owner $qPurgeryOwnerSteam64ID \
+    +set qlx_plugins "DEFAULT, balance, custom_votes, branding" \
+    +set sv_hostname "TOEY'S FFA" \
+    +set zmq_rcon_enable 0 \
+    +set zmq_stats_enable 1 \
+    +set zmq_stats_password "$(<~/localConfig-rconPassword-toey.txt)" \
+    +set zmq_stats_port $gameport \
+    +set sv_tags "$qServerLocation" \
+    +set g_accessFile "access_toey.txt" \
+    +set sv_mappoolFile "mappool_ffa.txt" \
+    +set fs_homepath ~/.quakelive/TOEY-SUB613 \
+    +set sv_location "$qServerLocation, TOEY" \
+    +set qlx_serverBrandName "TOEY'S FFA" \
+else
+echo "This system is not intended to host toey's (sub613) server."
+fi
+elif [ $1 -eq 13 ]; then
 echo "Starting QuakeCon Server..."
 exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
