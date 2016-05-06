@@ -363,6 +363,7 @@ exec $qPathToMinqlxStartScript \
     +set sv_mappoolFile "mappool_ffa.txt" \
     +set fs_homepath ~/.quakelive/TOEY-SUB613 \
     +set sv_location "$qServerLocation, TOEY" \
+    +set sv_mappoolFile "mappool_toey.txt" \
     +set qlx_serverBrandName "TOEY'S FFA"
 else
 echo "This system is not intended to host toey's (sub613) server."
