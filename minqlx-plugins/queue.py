@@ -17,7 +17,7 @@ class queue(minqlx.Plugin):
         self.add_hook("set_configstring", self.handle_configstring)
         self.add_command(("q", "queue"), self.cmd_lq)
         self.add_command("afk", self.cmd_afk)
-        self.add_command("here", self.cmd_playing)
+        self.add_command(("here", "back"), self.cmd_playing)
         
         self._queue = []
         self._afk   = []
@@ -241,7 +241,7 @@ class queue(minqlx.Plugin):
                     return minqlx.RET_STOP_ALL
         if self.setAFK(player):
             self.setAFKTag(player)
-            player.tell("^7You are marked as ^4AFK^7..")
+            player.tell("^7You are marked as ^4AFK^7.")
         else:
             player.tell("^7Couldn't mark you as ^4AFK^7. Are you already marked as ^4AFK^7?")
 
