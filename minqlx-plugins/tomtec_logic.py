@@ -1,5 +1,7 @@
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 
+OWNER_NAME="^7Pur^4g^7er"
+
 GAME_MODERATORS="merozollo, 0regonn, barley, Biokemical, Quarrel, meganfoxxed, Jubblies, zee"
 ZERO_WIDTH_SPACE=u"\u200B"
 
@@ -210,6 +212,9 @@ class tomtec_logic(minqlx.Plugin):
         name = name.replace(ZERO_WIDTH_SPACE, "")
         if "purgobot" in name:
             return "^7Pur^4g^7obot is a restricted name. Please change your Steam name to something else.\n"
+        if self.clean_text(OWNER_NAME.lower()) in name:
+            if str(player.steam_id) != str(minqlx.owner()): # if the player steam id isn't minqlx.owner id, then it's not me
+                return "{}^7 is the name of the server owner and is reserved for his usage only. Please change your Steam name to something else.\n".format(OWNER_NAME)
 
     def handle_userinfo(self, player, changed): # kick players who change their in-game name to any protected name
         if str(player.steam_id)[0] == "9": return # don't check bots
@@ -217,7 +222,10 @@ class tomtec_logic(minqlx.Plugin):
             name = self.clean_text(changed["name"].lower())
             name = name.replace(ZERO_WIDTH_SPACE, "")
             if "purgobot" in name:
-                player.kick("^7Pur^4g^7obot is a restricted name. Please pick another name and re-connect.")       
+                player.kick("^7Pur^4g^7obot is a restricted name. Please pick another name and re-connect.")
+            if self.clean_text(OWNER_NAME.lower()) in name:
+                if str(player.steam_id) != str(minqlx.owner()): # if the player steam id isn't minqlx.owner id, then it's not me
+                    player.kick("{}^7 is the name of the server owner and is reserved for his usage only. Please change it and re-connect.".format(OWNER_NAME))
                 
     @minqlx.next_frame
     def handle_player_loaded(self, player):
