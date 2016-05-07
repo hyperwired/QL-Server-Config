@@ -1,6 +1,7 @@
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 
 GAME_MODERATORS="merozollo, 0regonn, barley, Biokemical, Quarrel, meganfoxxed, Jubblies, zee"
+ZERO_WIDTH_SPACE=u"\u200B"
 
 import minqlx, datetime, time, subprocess
 from random import randint
@@ -50,7 +51,7 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "4.2"
+        self.plugin_version = "4.3"
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         self.serverLocation = self.get_cvar("sv_location")
@@ -203,16 +204,20 @@ class tomtec_logic(minqlx.Plugin):
 ########################################## END DONATIONS CODE ##########################################
 
 
-    def handle_player_connect(self, player): # prohibit players to have the name 'purgobot'
-        if "purgobot" in self.clean_text(player.name.lower()):
-            if str(player.steam_id)[0] != "9":
-                return "^7Pur^4g^7obot is a restricted name. Please change your Steam name to something else.\n"
+    def handle_player_connect(self, player): # prohibit players to have any protected name in their name
+        if str(player.steam_id)[0] == "9": return # don't check bots
+        name = self.clean_text(player.name.lower())
+        name = name.replace(ZERO_WIDTH_SPACE, "")
+        if "purgobot" in name:
+            return "^7Pur^4g^7obot is a restricted name. Please change your Steam name to something else.\n"
 
-    def handle_userinfo(self, player, changed): # kick players who change their in-game name to 'purgobot'
-        if str(player.steam_id)[0] != "9":
-            if "name" in changed:
-                if "purgobot" in self.clean_text(changed["name"].lower()):
-                    player.kick("Changing your name to Purgobot is not permitted on The Purgery.")       
+    def handle_userinfo(self, player, changed): # kick players who change their in-game name to any protected name
+        if str(player.steam_id)[0] == "9": return # don't check bots
+        if "name" in changed:
+            name = self.clean_text(changed["name"].lower())
+            name = name.replace(ZERO_WIDTH_SPACE, "")
+            if "purgobot" in name:
+                player.kick("^7Pur^4g^7obot is a restricted name. Please pick another name and re-connect.")       
                 
     @minqlx.next_frame
     def handle_player_loaded(self, player):
