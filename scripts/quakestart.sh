@@ -73,11 +73,11 @@ exec $qPurgeryStart \
     +set g_warmupReadyDelay 90 \
     +set g_warmupReadyDelayAction 2
 elif [ $1 -eq 1 ]; then
-echo "Starting beginner's clan arena server 1..."
+echo "Starting vql clan arena server 1..."
 exec $qPurgeryStart \
     +set net_strict 1 \
     +set net_port $gameport \
-    +set sv_hostname "     #$servernum The Purgery $qServerLocation PQL (<1600 Glicko) - Clan Arena" \
+    +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Clan Arena #1 (Unrestricted)" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
@@ -86,23 +86,24 @@ exec $qPurgeryStart \
     +set zmq_stats_port $gameport \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
-    +set g_allowSpecVote 1 \
     +set g_allowVoteMidGame 1 \
-    +set bot_enable 1 \
+    +set bot_enable 0 \
     +set bot_nochat 1 \
-    +set sv_mappoolFile "mappool_pqlca.txt" \
+    +set sv_mappoolFile "mappool_vqlca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
+    +set g_damage_lg 6 \
     +set qlx_rulesetLocked 1 \
-    +set qlx_balanceApi elo_b \
-    +set qlx_leaverBan 1 \
-    +set qlx_ratingLimiter 1
+    +set qlx_disablePlayerRemoval 0 \
+    +set qlx_privatiseVotes 1 \
+    +set qlx_strictVql 1 \
+    +set teamsize 4
 elif [ $1 -eq 2 ]; then
-echo "Starting clan arena server 2..."
+echo "Starting vql clan arena server 2..."
 exec $qPurgeryStart \
     +set net_strict 1 \
     +set net_port $gameport \
-    +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Clan Arena #1 (Max 6v6)" \
+    +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Clan Arena #2 (Max 6v6)" \
     +set zmq_rcon_enable 1 \
     +set zmq_rcon_password "$qRconPasswordPurgery" \
     +set zmq_rcon_port $rconport \
@@ -129,7 +130,7 @@ exec $qPurgeryStart \
   exec $qPurgeryStart \
       +set net_strict 1 \
       +set net_port $gameport \
-      +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Clan Arena #2 (Max 5v5)" \
+      +set sv_hostname "    #$servernum The Purgery $qServerLocation VQL - Clan Arena #3 (Max 5v5)" \
       +set zmq_rcon_enable 1 \
       +set zmq_rcon_password "$qRconPasswordPurgery" \
       +set zmq_rcon_port $rconport \
