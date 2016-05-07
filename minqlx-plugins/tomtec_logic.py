@@ -31,7 +31,8 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("killall", self.cmd_killall, 4)
         self.add_command("unban", self.cmd_unban, 2, priority=minqlx.PRI_HIGH)
         self.add_command("addbot", self.cmd_addbot, 1)
-        self.add_command(("respawn", "spawn"), self.cmd_respawnme, 5)
+        self.add_command(("respawn", "spawn"), self.cmd_respawn, 5)
+        self.add_command(("respawn_aircontrol", "spawn_aircontrol"), self.respawn_aircontrol)
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command(("wiki", "w"), self.cmd_wiki)
@@ -49,7 +50,7 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "4.1"
+        self.plugin_version = "4.2"
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         self.serverLocation = self.get_cvar("sv_location")
@@ -88,6 +89,12 @@ class tomtec_logic(minqlx.Plugin):
             f()
             
 
+    def set_player_configstring(self, player, index, key, value):
+        original_configstring = minqlx.parse_variables(minqlx.get_configstring(index))
+        original_configstring[key] = value
+        modified_configstring = (("\\") + ("\\".join("\\".join((k,str(v))) for k,v in sorted(original_configstring.items()))))
+        minqlx.send_server_command(player.id, "cs {} {}".format(index, modified_configstring))
+        
     @minqlx.thread
     def reconfigure(self, player, msg, channel):
         channel.reply("^1Server: ^7Running ^2initialise.sh --no-restart^7.")
@@ -99,7 +106,7 @@ class tomtec_logic(minqlx.Plugin):
         channel.reply("^1Process Return Code: ^7{}".format(retval))
         return minqlx.RET_NONE
 
-    def cmd_respawnme(self, player, msg, channel):
+    def cmd_respawn(self, player, msg, channel):
         if len(msg) < 2:
             player.is_alive = True
         else:
@@ -108,6 +115,19 @@ class tomtec_logic(minqlx.Plugin):
             except:
                 player.tell("Invalid client ID. Please enter a client ID of the player to (re)spawn.")
             
+    def respawn_aircontrol(self, player, msg, channel):
+        @minqlx.next_frame
+        def spawn():
+            minqlx.player_spawn(player.id)
+        
+        @minqlx.delay(0.2)
+        def reset():
+            self.set_cvar("pmove_aircontrol", "0")
+
+        
+        self.set_cvar("pmove_aircontrol", "1")
+        spawn()
+        reset()
         
     def cmd_unban(self, player, msg, channel):
         if msg[1] == "76561198009550342":
