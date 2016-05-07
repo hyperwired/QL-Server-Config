@@ -112,7 +112,7 @@ exec $qPurgeryStart \
     +set sv_tags "$sponsortag" \
     +set g_voteFlags "9320" \
     +set g_allowVoteMidGame 1 \
-    +set bot_enable 1 \
+    +set bot_enable 0 \
     +set bot_nochat 1 \
     +set sv_mappoolFile "mappool_vqlca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
@@ -139,7 +139,7 @@ exec $qPurgeryStart \
       +set sv_tags "$sponsortag" \
       +set g_voteFlags "9320" \
       +set g_allowVoteMidGame 1 \
-      +set bot_enable 1 \
+      +set bot_enable 0 \
       +set bot_nochat 1 \
       +set sv_mappoolFile "mappool_vqlca.txt" \
       +set fs_homepath ~/.quakelive/$gameport \
