@@ -43,6 +43,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("acommands", "acmds"), self.cmd_acommands)
         self.add_command("mapname", self.cmd_mapname)
         self.add_command("server_reconfigure", self.reconfigure, 5)
+        self.add_command("set_nextmaps", self.set_nextmaps, 5)
     
         self.disabled_maps = ["proq3dm6"]
         
@@ -97,6 +98,20 @@ class tomtec_logic(minqlx.Plugin):
         original_configstring[key] = value
         modified_configstring = (("\\") + ("\\".join("\\".join((k,str(v))) for k,v in sorted(original_configstring.items()))))
         minqlx.send_server_command(player.id, "cs {} {}".format(index, modified_configstring))
+
+    def set_nextmaps(self, player, msg, channel):
+        maps = ("campgrounds", "gridworks", "6plus")
+        maps_titles = ("The Campgrounds", "The Gridworks", "Modified Campgrounds")
+        factories = ("ca", "duel", "ffa")
+        factories_titles = ("VQL Clan Arena", "VQL Duel", "VQL Free For All")
+        
+        nextmaps = "\gt_2\{}\cfg_2\{}\title_2\{}\map_2\{}\gt_1\{}\cfg_1\{}\title_1\{}\map_1\{}\gt_0\{}\cfg_0\{}\title_0\{}\map_0\{}".format(
+                       factories_titles[0], factories[0], maps_titles[0], maps[0],
+                       factories_titles[1], factories[1], maps_titles[1], maps[1],
+                       factories_titles[2], factories[2], maps_titles[2], maps[2])
+
+        self.set_cvar("nextmaps", nextmaps)
+        player.tell(self.get_cvar("nextmaps"))
         
     @minqlx.thread
     def reconfigure(self, player, msg, channel):
