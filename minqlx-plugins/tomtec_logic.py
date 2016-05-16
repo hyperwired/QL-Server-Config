@@ -135,8 +135,14 @@ class tomtec_logic(minqlx.Plugin):
             
     def respawn_aircontrol(self, player, msg, channel):
         @minqlx.next_frame
-        def spawn():
-            minqlx.player_spawn(player.id)
+        def spawn(msg):
+            if len(msg) < 2:
+                minqlx.player_spawn(player.id)
+            else:
+                try:
+                    minqlx.player_spawn(int(msg[1]))
+                except:
+                    player.tell("Invalid client ID. Please enter a client ID of the player to (re)spawn.")
         
         @minqlx.delay(0.2)
         def reset():
@@ -144,7 +150,7 @@ class tomtec_logic(minqlx.Plugin):
 
         
         self.set_cvar("pmove_aircontrol", "1")
-        spawn()
+        spawn(msg)
         reset()
         
     def cmd_unban(self, player, msg, channel):
