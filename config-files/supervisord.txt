@@ -28,5 +28,5 @@ serverurl=unix:///tmp/supervisor.sock ; socket file
 command=/home/qlserver/quakestart.sh %(process_num)s           ; Sent to 'quakestart.sh', from 0 to numprocs, see what happens by looking in 'quakestart.sh'. 
 user=qlserver                                                  ; Default Quake Live server account.
 process_name=qzeroded_%(process_num)s                          ; Name the Quake Live dedicated server process, 'qzeroded_numproc'.
-numprocs=14                                                    ; How many server processes should be spawned.
+numprocs=13                                                    ; How many server processes should be spawned.
 autorestart=true                                               ; If the servers crash, or the process exits, start them up again.
