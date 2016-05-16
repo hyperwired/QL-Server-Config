@@ -2,6 +2,7 @@
 
 # This is an extension plugin for minqlx.
 # Copyright (C) 2016 mattiZed (github) aka mattiZed (ql)
+# Modified by Thomas Jones (tjone270)
 
 import minqlx
 import datetime
@@ -15,6 +16,7 @@ class queue(minqlx.Plugin):
         self.add_hook("player_disconnect", self.handle_player_disconnect)
         self.add_hook("team_switch", self.handle_team_switch)
         self.add_hook("set_configstring", self.handle_configstring)
+        
         self.add_command(("q", "queue"), self.cmd_lq)
         self.add_command("afk", self.cmd_afk)
         self.add_command(("here", "back"), self.cmd_playing)
