@@ -4,6 +4,7 @@ OWNER_NAME="^7Pur^4g^7er"
 
 GAME_MODERATORS="merozollo, 0regonn, barley, Biokemical, Quarrel, meganfoxxed, Jubblies, zee"
 ZERO_WIDTH_SPACE=u"\u200B"
+REG_WIDTH_SPACE=u"\u2002"
 
 import minqlx, datetime, time, subprocess
 from random import randint
@@ -42,8 +43,8 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("facebook", "fb"), self.cmd_facebook)
         self.add_command(("acommands", "acmds"), self.cmd_acommands)
         self.add_command("mapname", self.cmd_mapname)
-        self.add_command("server_reconfigure", self.reconfigure, 5)
-        self.add_command("set_nextmaps", self.set_nextmaps, 5)
+        self.add_command("server_reconfigure", self.cmd_reconfigure, 5)
+        self.add_command("test", self.cmd_test)
     
         self.disabled_maps = ["proq3dm6"]
         
@@ -91,7 +92,16 @@ class tomtec_logic(minqlx.Plugin):
                 except:
                     pass
             f()
+
             
+
+    def cmd_test(self, player, msg, channel): # used for testing stuff
+        @minqlx.thread
+        def f(player, msg, channel):
+            pass
+        f(player, msg, channel)
+        
+
 
     def set_player_configstring(self, player, index, key, value):
         original_configstring = minqlx.parse_variables(minqlx.get_configstring(index))
@@ -99,22 +109,25 @@ class tomtec_logic(minqlx.Plugin):
         modified_configstring = (("\\") + ("\\".join("\\".join((k,str(v))) for k,v in sorted(original_configstring.items()))))
         minqlx.send_server_command(player.id, "cs {} {}".format(index, modified_configstring))
 
-    def set_nextmaps(self, player, msg, channel):
-        maps = ("campgrounds", "gridworks", "6plus")
-        maps_titles = ("The Campgrounds", "The Gridworks", "Modified Campgrounds")
-        factories = ("ca", "duel", "ffa")
-        factories_titles = ("VQL Clan Arena", "VQL Duel", "VQL Free For All")
-        
+    def set_nextmaps(self, maps, maps_titles, factories, factories_titles):
+        """
+            maps = ("campgrounds", "gridworks", "6plus")
+            maps_titles = ("The Campgrounds", "The Gridworks", "Modified Campgrounds")
+            factories = ("ca", "duel", "ffa")
+            factories_titles = ("VQL Clan Arena", "VQL Duel", "VQL Free For All")
+        """
+                       
         nextmaps = "\gt_2\{}\cfg_2\{}\title_2\{}\map_2\{}\gt_1\{}\cfg_1\{}\title_1\{}\map_1\{}\gt_0\{}\cfg_0\{}\title_0\{}\map_0\{}".format(
                        factories_titles[0], factories[0], maps_titles[0], maps[0],
                        factories_titles[1], factories[1], maps_titles[1], maps[1],
                        factories_titles[2], factories[2], maps_titles[2], maps[2])
 
         self.set_cvar("nextmaps", nextmaps)
-        player.tell(self.get_cvar("nextmaps"))
+        #player.tell(self.get_cvar("nextmaps"))
+    
         
     @minqlx.thread
-    def reconfigure(self, player, msg, channel):
+    def cmd_reconfigure(self, player, msg, channel):
         channel.reply("^1Server: ^7Running ^2initialise.sh --no-restart^7.")
         p = subprocess.Popen("/home/qlserver/initialise.sh --no-restart", shell=True, stdout=subprocess.PIPE)
         for line in p.stdout.readlines():
