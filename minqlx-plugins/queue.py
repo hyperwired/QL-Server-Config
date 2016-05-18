@@ -167,7 +167,7 @@ class queue(minqlx.Plugin):
             if not self.inqueue(player):
                 self.add(player)
             else:
-               self.clRemPending(player)
+                self.clRemPending(player)
         elif new_team != "spectator":
             self.setPlaying(player)
             self.clAFKTag(player)
@@ -233,7 +233,12 @@ class queue(minqlx.Plugin):
     def cmd_afk(self, player, msg, channel):
         if len(msg) > 1:
             if self.db.has_permission(player, self.get_cvar("qlx_queueSetAfkPermission", int)):
-                guy = self.find_player(msg[1])[0]
+                try:
+                    guy = self.player(int(msg[1]))
+                except:
+                    player.tell("Invalid client ID.")
+                    return minqlx.RET_STOP_ALL
+
                 if self.setAFK(guy):
                     self.setAFKTag(guy)
                     player.tell("^7You marked {}^7 as ^4AFK^7.".format(guy.name))
