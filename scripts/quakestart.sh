@@ -96,7 +96,7 @@ exec $qPurgeryStart \
     +set qlx_rulesetLocked 1 \
     +set qlx_disablePlayerRemoval 0 \
     +set qlx_privatiseVotes 1 \
-    +set qlx_strictVql 1 \
+    +set qlx_strictVql 0 \
     +set teamsize 4
 elif [ $1 -eq 2 ]; then
 echo "Starting vql clan arena server 2..."
