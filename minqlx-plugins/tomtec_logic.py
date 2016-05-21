@@ -439,8 +439,6 @@ class tomtec_logic(minqlx.Plugin):
             
     def handle_vote_ended(self, votes, vote, args, passed):
         if passed:
-            if vote == "map":
-                self.surprise_infected = False
             minqlx.send_server_command(None, "cp \"^2VOTE PASSED^7\"\n")
         else:
             minqlx.send_server_command(None, "cp \"^1VOTE FAILED^7\"\n")
