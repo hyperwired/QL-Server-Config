@@ -60,7 +60,7 @@ class tomtec_logic(minqlx.Plugin):
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         self.serverLocation = self.get_cvar("sv_location")
         
-        self.protectedPlayers = ["76561198213481765"]
+        self.protectedPlayers = ["76561198213481765", "76561198061594466"]
 
         self.purgersBirthday = False
 
