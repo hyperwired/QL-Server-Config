@@ -410,15 +410,23 @@ class tomtec_logic(minqlx.Plugin):
 
         if vote.lower() == "addbot":
             # enables the '/cv addbot' command
-            self.callvote("qlx !addbot", "add a ^7Pur^4g^7obot^3")
-            self.msg("{}^7 called a vote.".format(caller.name))
-            return minqlx.RET_STOP_ALL
+            if self.get_cvar("bot_enable", bool):
+                self.callvote("qlx !addbot", "add a ^7Pur^4g^7obot^3")
+                self.msg("{}^7 called a vote.".format(caller.name))
+                return minqlx.RET_STOP_ALL
+            else:
+                caller.tell("Bots are not enabled on this server.")
+                return minqlx.RET_STOP_ALL
 
         if vote.lower() == "rembot":
             # enables the '/cv rembot' command
-            self.callvote("qlx !rembot", "remove all ^7Pur^4g^7obot^3s")
-            self.msg("{}^7 called a vote.".format(caller.name))
-            return minqlx.RET_STOP_ALL
+            if self.get_cvar("bot_enable", bool):
+                self.callvote("qlx !rembot", "remove all ^7Pur^4g^7obot^3s")
+                self.msg("{}^7 called a vote.".format(caller.name))
+                return minqlx.RET_STOP_ALL
+            else:
+                caller.tell("Bots are not enabled on this server.")
+                return minqlx.RET_STOP_ALL
 
     def handle_vote_started(self, caller, vote, args):
         if self.game.state == "warmup":
