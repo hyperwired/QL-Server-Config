@@ -248,7 +248,7 @@ class tomtec_logic(minqlx.Plugin):
             return "^7Pur^4g^7obot is a restricted name. Please change your Steam name to something else.\n"
         if self.clean_text(OWNER_NAME.lower()) in name:
             if str(player.steam_id) != str(minqlx.owner()): # if the player steam id isn't minqlx.owner id, then it's not me
-                return "{}^7 is the name of the server owner and is reserved for his usage only. Please change your Steam name to something else.\n".format(OWNER_NAME)
+                return "{}^7 is the name of the server owner and is reserved. Please change your Steam name to something else.\n".format(OWNER_NAME)
 
     def handle_userinfo(self, player, changed): # kick players who change their in-game name to any protected name
         if str(player.steam_id)[0] == "9": return # don't check bots
@@ -259,7 +259,7 @@ class tomtec_logic(minqlx.Plugin):
                 player.kick("^7Pur^4g^7obot is a restricted name. Please pick another name and re-connect.")
             if self.clean_text(OWNER_NAME.lower()) in name:
                 if str(player.steam_id) != str(minqlx.owner()): # if the player steam id isn't minqlx.owner id, then it's not me
-                    player.kick("{}^7 is the name of the server owner and is reserved for his usage only. Please change it and re-connect.".format(OWNER_NAME))
+                    player.kick("{}^7 is the name of the server owner and is reserved. Please change it and re-connect.".format(OWNER_NAME))
                 
     @minqlx.next_frame
     def handle_player_loaded(self, player):
