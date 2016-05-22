@@ -185,11 +185,17 @@ class tomtec_logic(minqlx.Plugin):
         channel.reply("Visit ^2fb.me/thepurgery^7 to see ^4The Purgery^7's Facebook page.")
         
     def cmd_addbot(self, player, msg, channel):
-        minqlx.console_command("addbot anarki 5 any 0 ^7Pur^4g^7obot")
-        player.tell("Remember to ^2!rembot^7 when you're finished with your bot.")
+        if self.get_cvar("bot_enable", bool):
+            minqlx.console_command("addbot anarki 5 any 0 ^7Pur^4g^7obot")
+            player.tell("Remember to ^2!rembot^7 when you're finished with your bot.")
+        else:
+            player.tell("Bots are disabled on this server.")
 
     def cmd_rembot(self, player, msg, channel):
-        minqlx.console_command("kick allbots")
+        if self.get_cvar("bot_enable", bool):
+            minqlx.console_command("kick allbots")
+        else:
+            player.tell("Bots are disabled on this server.")
             
     def cmd_muteall(self, player, msg, channel):
         # mute everybody on the server
