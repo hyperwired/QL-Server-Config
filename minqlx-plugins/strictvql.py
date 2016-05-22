@@ -4,20 +4,16 @@
 # You can modify everything, except for lines 1-4 and the !tomtec_versions code. They're there to indicate I whacked this together originally. Please make it better :D
 
 import minqlx
-import time
 
-ALLREADY_DELAY_SECS = 300 # 5 minutes
 
 class strictvql(minqlx.Plugin):    
     def __init__(self):
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_hook("vote_called", self.handle_vote_called)
         self.add_hook("new_game", self.handle_new_game)
-        self.add_hook("game_end", self.handle_game_end)
         
         self.plugin_version = "1.3"
 
-        self.has_ended = False
 
     def handle_vote_called(self, caller, vote, args):
         if vote.lower() == "teamsize":
@@ -35,19 +31,11 @@ class strictvql(minqlx.Plugin):
                     caller.tell("All votes barring ^2teamsize^7, ^2kick^7 and ^2spec^7 are disabled during the game.")
                     return minqlx.RET_STOP_ALL
 
-    @minqlx.thread        
+    @minqlx.delay(300)       
     def handle_new_game(self):
-        self.has_started = False
-        time.sleep(ALLREADY_DELAY_SECS)
-        if self.has_ended: # game was aborted and we should not auto-start the match.
-            return
         if self.game.state == "warmup":
             self.allready()
-            minutes = (ALLREADY_DELAY_SECS / 60)
-            self.msg("{} minutes have passed, the game is starting now.".format(minutes))
+            self.msg("5 minutes have passed, the game is starting now.")
 
-    def handle_game_end(self, *args, **kwargs):
-        self.has_ended = True
-        
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4strictvql.py^7 - version {}, created by Thomas Jones on 11/02/2016.".format(self.plugin_version))
