@@ -139,10 +139,10 @@ class tomtec_logic(minqlx.Plugin):
 
     def cmd_respawn(self, player, msg, channel):
         if len(msg) < 2:
-            player.is_alive = True
+            minqlx.player_spawn(player.id)
         else:
             try:
-                self.player(int(msg[1])).is_alive = True
+                minqlx.player_spawn(self.player(int(msg[1])).id)
             except:
                 player.tell("Invalid client ID. Please enter a client ID of the player to (re)spawn.")
             
