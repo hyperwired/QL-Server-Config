@@ -21,7 +21,7 @@ class gamemode_triweapon(minqlx.Plugin):
         self.gamemode_active = False
 
 ######### define your hooks/commands/stuff below
-        self.plugin_version = "1.1"
+        self.plugin_version = "1.2"
         self.add_hook("round_countdown", self.handle_round_countdown)
 
         self.CLOSE_RANGE_HEALTH = 200
@@ -80,19 +80,22 @@ class gamemode_triweapon(minqlx.Plugin):
                                 player.weapons(reset=True, g=True, rl=True, gl=True, mg=True) 
                                 player.health = self.CLOSE_RANGE_HEALTH 
                                 player.armor = self.CLOSE_RANGE_ARMOUR 
-                                player.center_print("Weapon Assignment:\n^1SHORT-RANGE WEAPONS") 
+                                player.center_print("Weapon Assignment:\n^1SHORT-RANGE WEAPONS")
+                                player.weapon(5)
                                 close_range_counter += 1
                             elif mid_range_counter <= mid_range_cap:
                                 player.weapons(reset=True, g=True, lg=True, sg=True, hmg=True)
                                 player.health = self.MID_RANGE_HEALTH 
                                 player.armor = self.MID_RANGE_ARMOUR 
-                                player.center_print("Weapon Assignment:\n^3MID-RANGE WEAPONS") 
+                                player.center_print("Weapon Assignment:\n^3MID-RANGE WEAPONS")
+                                player.weapon(2)
                                 mid_range_counter += 1
                             elif long_range_counter <= long_range_cap:
                                 player.weapons(reset=True, g=True, rg=True, sg=True, pg=True) 
                                 player.health = self.LONG_RANGE_HEALTH 
                                 player.armor = self.LONG_RANGE_ARMOUR 
                                 player.center_print("Weapon Assignment:\n^2LONG-RANGE WEAPONS")
+                                player.weapon(7)
                                 long_range_counter += 1
                         elif random_int == 2:
                             if mid_range_counter <= mid_range_cap:
@@ -100,18 +103,21 @@ class gamemode_triweapon(minqlx.Plugin):
                                 player.health = self.MID_RANGE_HEALTH 
                                 player.armor = self.MID_RANGE_ARMOUR 
                                 player.center_print("Weapon Assignment:\n^3MID-RANGE WEAPONS")
+                                player.weapon(2)
                                 mid_range_counter += 1
                             elif long_range_counter <= long_range_cap:
                                 player.weapons(reset=True, g=True, rg=True, sg=True, pg=True) 
                                 player.health = self.LONG_RANGE_HEALTH 
                                 player.armor = self.LONG_RANGE_ARMOUR 
                                 player.center_print("Weapon Assignment:\n^2LONG-RANGE WEAPONS")
+                                player.weapon(7)
                                 long_range_counter += 1
                             elif close_range_counter <= close_range_cap:
                                 player.weapons(reset=True, g=True, rl=True, gl=True, mg=True) 
                                 player.health = self.CLOSE_RANGE_HEALTH 
                                 player.armor = self.CLOSE_RANGE_ARMOUR 
-                                player.center_print("Weapon Assignment:\n^1SHORT-RANGE WEAPONS") 
+                                player.center_print("Weapon Assignment:\n^1SHORT-RANGE WEAPONS")
+                                player.weapon(5)
                                 close_range_counter += 1
                         else:
                             if long_range_counter <= long_range_cap:
@@ -119,18 +125,21 @@ class gamemode_triweapon(minqlx.Plugin):
                                 player.health = self.LONG_RANGE_HEALTH 
                                 player.armor = self.LONG_RANGE_ARMOUR 
                                 player.center_print("Weapon Assignment:\n^2LONG-RANGE WEAPONS")
+                                player.weapon(7)
                                 long_range_counter += 1
                             elif mid_range_counter <= mid_range_cap:
                                 player.weapons(reset=True, g=True, lg=True, sg=True, hmg=True)
                                 player.health = self.MID_RANGE_HEALTH 
                                 player.armor = self.MID_RANGE_ARMOUR 
-                                player.center_print("Weapon Assignment:\n^3MID-RANGE WEAPONS") 
+                                player.center_print("Weapon Assignment:\n^3MID-RANGE WEAPONS")
+                                player.weapon(2)
                                 mid_range_counter += 1
                             elif close_range_counter <= close_range_cap:
                                 player.weapons(reset=True, g=True, rl=True, gl=True, mg=True) 
                                 player.health = self.CLOSE_RANGE_HEALTH 
                                 player.armor = self.CLOSE_RANGE_ARMOUR 
-                                player.center_print("Weapon Assignment:\n^1SHORT-RANGE WEAPONS") 
+                                player.center_print("Weapon Assignment:\n^1SHORT-RANGE WEAPONS")
+                                player.weapon(5)
                                 close_range_counter += 1
             
     def housekeeping_tasks(self): # runs when the plugin unloads and when the mode is call-voted off
