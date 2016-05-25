@@ -34,7 +34,6 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("forum", "forums", "f"), self.cmd_forums)
         self.add_command(("donate", "donations", "d", "donating"), self.cmd_donate)
         self.add_command("killall", self.cmd_killall, 4)
-        self.add_command("unban", self.cmd_unban, 2, priority=minqlx.PRI_HIGH)
         self.add_command("addbot", self.cmd_addbot, 1)
         self.add_command(("respawn", "spawn"), self.cmd_respawn, 5)
         self.add_command(("respawn_aircontrol", "spawn_aircontrol"), self.respawn_aircontrol, 5)
@@ -171,15 +170,6 @@ class tomtec_logic(minqlx.Plugin):
         spawn(msg)
         reset()
         
-    def cmd_unban(self, player, msg, channel):
-        if msg[1] == "76561198009550342":
-            player.tell("Trying to circumvent Shoop's ban = an automatic ban on yourself. Goodbye.")
-            @minqlx.delay(5)
-            def f():
-                minqlx.console_command("qlx !ban {} 1 week attempted to circumvent Shoop's ban. Banned for 1 week.".format(player.steam_id))
-            f()
-            return minqlx.RET_STOP_ALL
-
     def cmd_mapname(self, player, msg, channel):
         channel.reply("The current map's name is ^4{}^7.".format(self.game.map))
         
