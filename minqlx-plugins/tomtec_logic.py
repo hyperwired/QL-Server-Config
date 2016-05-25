@@ -305,7 +305,7 @@ class tomtec_logic(minqlx.Plugin):
             @minqlx.delay(11)
             def f():
                 if self.botError:
-                    self.msg("^1Error:^7 Bots are not supported on this map.")
+                    self.msg("^3Warning:^7 Bots are not supported on this map.")
                     self.talk_beep()
             f()
         
