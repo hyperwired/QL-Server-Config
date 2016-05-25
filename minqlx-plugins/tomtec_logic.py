@@ -22,6 +22,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("vote_started", self.handle_vote_started)
         self.add_hook("vote_ended", self.handle_vote_ended)
         self.add_hook("userinfo", self.handle_userinfo, priority=minqlx.PRI_HIGHEST)
+        self.add_hook("console_print", self.handle_console_print)
         
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
@@ -64,6 +65,8 @@ class tomtec_logic(minqlx.Plugin):
 
         self.purgersBirthday = False
 
+        self.botError = False
+
         if self.get_cvar("qlx_visitForumMessages", bool):
             message = "Visit ^2forum.thepurgery.com^7 to vote for/nominate a moderator."
             self.set_cvar("qlx_connectMessage", message)
@@ -101,7 +104,9 @@ class tomtec_logic(minqlx.Plugin):
             pass
         f(player, msg, channel)
         
-
+    def handle_console_print(self, text):
+        if "botaisetupclient failed" in text.lower():
+            self.botError = True
 
     def set_player_configstring(self, player, index, key, value):
         original_configstring = minqlx.parse_variables(minqlx.get_configstring(index))
@@ -186,7 +191,11 @@ class tomtec_logic(minqlx.Plugin):
         
     def cmd_addbot(self, player, msg, channel):
         if self.get_cvar("bot_enable", bool):
-            minqlx.console_command("addbot anarki 5 any 0 ^7Pur^4g^7obot")
+            if self.botError:
+                channel.reply("^1Error:^7 Bots are not supported on this map.")
+                return minqlx.RET_STOP_ALL
+            
+            minqlx.console_command("addbot Anarki 5 A 0 ^7Pur^4g^7obot")
             player.tell("Remember to ^2!rembot^7 when you're finished with your bot.")
         else:
             channel.reply("Bots are not enabled on this server.")
@@ -298,6 +307,17 @@ class tomtec_logic(minqlx.Plugin):
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
         minqlx.set_cvar("g_infiniteAmmo", "1")
+
+        if self.get_cvar("bot_enable", bool):
+            self.botError = False
+            minqlx.console_command("addbot Anarki 1 A 0 ^1TestingBotSupport^7")
+            minqlx.console_command("kick TestingBotSupport")
+            @minqlx.delay(11)
+            def f():
+                if self.botError:
+                    self.msg("^1Error:^7 Bots are not supported on this map.")
+                    self.talk_beep()
+            f()
         
     def game_countdown(self):
         self.play_sound("sound/items/protect3.ogg")
@@ -417,6 +437,9 @@ class tomtec_logic(minqlx.Plugin):
         if vote.lower() == "addbot":
             # enables the '/cv addbot' command
             if self.get_cvar("bot_enable", bool):
+                if self.botError:
+                    caller.tell("^1Error:^7 Bots are not supported on this map.")
+                    return minqlx.RET_STOP_ALL
                 self.callvote("qlx !addbot", "add a ^7Pur^4g^7obot^3")
                 self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
@@ -427,6 +450,9 @@ class tomtec_logic(minqlx.Plugin):
         if vote.lower() == "rembot":
             # enables the '/cv rembot' command
             if self.get_cvar("bot_enable", bool):
+                if self.botError:
+                    caller.tell("^1Error:^7 Bots are not supported on this map.")
+                    return minqlx.RET_STOP_ALL
                 self.callvote("qlx !rembot", "remove all ^7Pur^4g^7obot^3s")
                 self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
