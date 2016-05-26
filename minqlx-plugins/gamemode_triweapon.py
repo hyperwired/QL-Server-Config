@@ -1,9 +1,12 @@
-# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link or modify to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
-# This plugin is not yet released for other servers at this stage.
+# Created by Thomas Jones on 22/05/2016 - thomas@tomtecsolutions.com
+# aliases.py, a plugin for minqlx to show aliases from the redis database.
+# This plugin is released to everyone, for any purpose. It comes with no warranty, no guarantee it works, it's released AS IS.
+# You can modify everything, except for lines 1-4 and the !tomtec_versions code. They're there to indicate I whacked this together originally. Please make it better :D
 
 # Player selection system for short-mid-long range weapon distribution created by zlr.
 # http://pastebin.com/B8Ruq1YM - PREVIOUS
 # http://pastebin.com/Tse5dkEi - CURRENT
+
 
 GAMEMODE_NAME = "Tri-Weapon CA"
 CALLVOTE_STRING = "triweapon"
@@ -192,7 +195,7 @@ class gamemode_triweapon(minqlx.Plugin):
             player.tell("This server has ^4{}^7 mode enabled. To disable it, use ^2/cv gamemode {} off^7.".format(GAMEMODE_NAME, CALLVOTE_STRING))
 
     def cmd_showversion(self, player, msg, channel):
-        channel.reply("^4{}.py^7 - version {}, created by Thomas Jones on 26/03/2016.".format(self.__class__.__name__, self.plugin_version))
+        channel.reply("^4{}.py^7 - version {}, created by Thomas Jones on 22/05/2016.".format(self.__class__.__name__, self.plugin_version))
 
         
         

@@ -1,5 +1,7 @@
-# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link or modify to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
-# This plugin is not yet released for other servers at this stage.
+# Created by Thomas Jones on 26/03/2016 - thomas@tomtecsolutions.com
+# aliases.py, a plugin for minqlx to show aliases from the redis database.
+# This plugin is released to everyone, for any purpose. It comes with no warranty, no guarantee it works, it's released AS IS.
+# You can modify everything, except for lines 1-4 and the !tomtec_versions code. They're there to indicate I whacked this together originally. Please make it better :D
 
 
 GAMEMODE_NAME = "Second Chance CA"
