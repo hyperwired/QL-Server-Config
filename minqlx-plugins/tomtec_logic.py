@@ -1,9 +1,9 @@
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 
-OWNER_NAME="^7Pur^4g^7er"
+OWNER_NAME="^7Pur^4g^7er" # used to define the owner's name, this name must = the minqlx.owner()'s name.
 
-GAME_MODERATORS="merozollo, 0regonn, barley, Biokemical, Quarrel, meganfoxxed, Jubblies, zee"
-ZERO_WIDTH_SPACE=u"\u200B"
+GAME_MODERATORS="merozollo, 0regonn, barley, Biokemical, Quarrel, meganfoxxed, Jubblies, zee" # string that displays on player load after a delay
+ZERO_WIDTH_SPACE=u"\u200B" # part of the userinfo filtering to prevent illegal names
 REG_WIDTH_SPACE=u"\u2002"
 
 import minqlx, datetime, time, subprocess
@@ -17,17 +17,16 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("game_end", self.game_end)
         self.add_hook("player_loaded", self.handle_player_loaded)
         self.add_hook("player_connect", self.handle_player_connect, priority=minqlx.PRI_HIGHEST)
-        #self.add_hook("player_spawn", self.handle_player_spawn) disable battle-suits
-        self.add_hook("vote_called", self.handle_vote_called)
+        #self.add_hook("player_spawn", self.handle_player_spawn) disable battle-suits per spawn
+        self.add_hook("vote_called", self.handle_vote_called) # to add custom votes
         self.add_hook("vote_started", self.handle_vote_started)
         self.add_hook("vote_ended", self.handle_vote_ended)
-        self.add_hook("userinfo", self.handle_userinfo, priority=minqlx.PRI_HIGHEST)
-        self.add_hook("console_print", self.handle_console_print)
+        self.add_hook("userinfo", self.handle_userinfo, priority=minqlx.PRI_HIGHEST) # to prevent illegal name changes
+        self.add_hook("console_print", self.handle_console_print) # for bot error detection
         
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
         self.add_command(("donation_messages", "donate_messages"), self.cmd_donation_messages)
-        self.add_command("giveall", self.cmd_giveall, 5, usage="<powerup [on/off]>, <holdable>")
         self.add_command("map_restart", self.cmd_maprestart, 1)
         self.add_command("muteall", self.cmd_muteall, 4)
         self.add_command("unmuteall", self.cmd_unmuteall, 4)
@@ -42,25 +41,25 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("wiki", "w"), self.cmd_wiki)
         self.add_command(("facebook", "fb"), self.cmd_facebook)
         self.add_command(("acommands", "acmds"), self.cmd_acommands)
-        self.add_command("mapname", self.cmd_mapname)
+        self.add_command("mapname", self.cmd_mapname) # display current map name
         self.add_command("server_reconfigure", self.cmd_reconfigure, 5)
         self.add_command("test", self.cmd_test)
     
         self.disabled_maps = ["proq3dm6"]
         
-        self.set_cvar_once("qlx_freezePlayersDuringVote", "0")
+        self.set_cvar_once("qlx_freezePlayersDuringVote", "0") 
         self.set_cvar_once("qlx_purgeryDonationMessages", "0")
         self.set_cvar_once("qlx_visitForumMessages", "0")
         
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "4.3"
+        self.plugin_version = "4.4"
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         self.serverLocation = self.get_cvar("sv_location")
         
-        self.protectedPlayers = ["76561198213481765", "76561198061594466"]
+        self.protectedPlayers = ["76561198213481765", "76561198061594466"] # purger, mf falling comets
 
         self.purgersBirthday = False
 
@@ -86,7 +85,7 @@ class tomtec_logic(minqlx.Plugin):
         if self.get_cvar("qlx_ratingLimiter", bool):
             minqlx.load_plugin("ratinglimiter")
 
-        if "auckland" in self.serverLocation.lower():
+        if "auckland" in self.serverLocation.lower(): # was put in to reduce lag and server command traffic in the auckland server.
             @minqlx.delay(20)
             def f():
                 try:
@@ -94,27 +93,27 @@ class tomtec_logic(minqlx.Plugin):
                 except:
                     pass
             f()
-
             
-
+        ##########################################################################################
+        ######################################## END INIT ########################################
+        ##########################################################################################
+   
+        
+    ################################### TESTING STUFF ###################################
     def cmd_test(self, player, msg, channel): # used for testing stuff
         @minqlx.thread
         def f(player, msg, channel):
             pass
         f(player, msg, channel)
         
-    def handle_console_print(self, text):
-        if "botaisetupclient failed" in text.lower():
-            self.botError = True
-
-    def set_player_configstring(self, player, index, key, value):
+    def set_player_configstring(self, player, index, key, value): # will let you set a configstring on a per-player basis.
         original_configstring = minqlx.parse_variables(minqlx.get_configstring(index))
         original_configstring[key] = value
         modified_configstring = (("\\") + ("\\".join("\\".join((k,str(v))) for k,v in sorted(original_configstring.items()))))
         minqlx.send_server_command(player.id, "cs {} {}".format(index, modified_configstring))
 
-    def set_nextmaps(self, maps, maps_titles, factories, factories_titles):
-        """
+    def set_nextmaps(self, maps, maps_titles, factories, factories_titles): # will let you set the end-game-voting maps.
+        """ EXAMPLE VALUES:
             maps = ("campgrounds", "gridworks", "6plus")
             maps_titles = ("The Campgrounds", "The Gridworks", "Modified Campgrounds")
             factories = ("ca", "duel", "ffa")
@@ -128,10 +127,12 @@ class tomtec_logic(minqlx.Plugin):
 
         self.set_cvar("nextmaps", nextmaps)
         #player.tell(self.get_cvar("nextmaps"))
-    
+    ################################### TESTING STUFF ###################################
+
+
         
     @minqlx.thread
-    def cmd_reconfigure(self, player, msg, channel):
+    def cmd_reconfigure(self, player, msg, channel): # clone and redeploy the ql-server-config github repo, downloading new files.
         channel.reply("^1Server: ^7Running ^2initialise.sh --no-restart^7.")
         p = subprocess.Popen("/home/qlserver/initialise.sh --no-restart", shell=True, stdout=subprocess.PIPE)
         for line in p.stdout.readlines():
@@ -141,7 +142,7 @@ class tomtec_logic(minqlx.Plugin):
         channel.reply("^1Process Return Code: ^7{}".format(retval))
         return minqlx.RET_NONE
 
-    def cmd_respawn(self, player, msg, channel):
+    def cmd_respawn(self, player, msg, channel): # respawns the player. Will spawn a player no matter the team (spectators included ;))
         if len(msg) < 2:
             minqlx.player_spawn(player.id)
         else:
@@ -150,7 +151,7 @@ class tomtec_logic(minqlx.Plugin):
             except:
                 player.tell("Invalid client ID. Please enter a client ID of the player to (re)spawn.")
             
-    def respawn_aircontrol(self, player, msg, channel):
+    def respawn_aircontrol(self, player, msg, channel): # uses a quick cvar switch and client respawn to give the player air control.
         @minqlx.next_frame
         def spawn(msg):
             if len(msg) < 2:
@@ -178,24 +179,7 @@ class tomtec_logic(minqlx.Plugin):
 
     def cmd_facebook(self, player, msg, channel):
         channel.reply("Visit ^2fb.me/thepurgery^7 to see ^4The Purgery^7's Facebook page.")
-        
-    def cmd_addbot(self, player, msg, channel):
-        if self.get_cvar("bot_enable", bool):
-            if self.botError:
-                channel.reply("^1Error:^7 Bots are not supported on this map.")
-                return minqlx.RET_STOP_ALL
-            
-            minqlx.console_command("addbot Anarki 5 A 0 ^7Pur^4g^7obot")
-            player.tell("Remember to ^2!rembot^7 when you're finished with your bot.")
-        else:
-            channel.reply("Bots are not enabled on this server.")
 
-    def cmd_rembot(self, player, msg, channel):
-        if self.get_cvar("bot_enable", bool):
-            minqlx.console_command("kick allbots")
-        else:
-            channel.reply("Bots are not enabled on this server.")
-            
     def cmd_muteall(self, player, msg, channel):
         # mute everybody on the server
         for p in self.players():
@@ -207,19 +191,68 @@ class tomtec_logic(minqlx.Plugin):
             p.unmute()
 
     def cmd_killall(self, player, msg, channel):
-        # kill everybody on the server
+        # kill everybody on the server, causes a round draw
         for p in self.players():
-            self.slay(p)
+            p.health = 0
 
     def talk_beep(self, player=None):
         if not player:
             self.play_sound("sound/player/talk.ogg")
         else:
             self.play_sound("sound/player/talk.ogg", player)
-            
-            
-######################################### BEGIN DONATIONS CODE #########################################
 
+    ################################ BOTS ################################
+    def handle_console_print(self, text):
+        if "botaisetupclient failed" in text.lower():
+            self.botError = True
+    
+    def bot_checks(self, flags):
+        if "addbot" in flags.lower():
+            if not self.get_cvar("bot_enable", bool):
+                return (False, "^1Error: Bots are not enabled on this server.")
+            if self.botError:
+                return (False, "^1Error: Bots are not supported on this map.")
+            for p in self.players():
+                if str(p.steam_id)[0] == "9":
+                    return (False, "^1Error: There is already a bot on this server.")
+            return (True, None)
+        elif "rembot" in flags.lower():
+            botPresent = False
+            for p in self.players():
+                if str(p.steam_id)[0] == "9":
+                    botPresent = True
+                    return (True, None)
+            if botPresent == False:
+                return (False, "^1Error: There is no bot currently on this server.")
+        return (False, None)
+
+    def addbot(self):
+        bot_name = "^7Pur^4g^7obot"
+        minqlx.console_command("addbot Trainer 5 A 0 {}".format(bot_name)) # Trainer bot, skill level 5, team any, 0 millisecond join delay, custom name
+
+    def rembot(self):
+        minqlx.console_command("kick allbots") # kicks all bots
+        
+    def cmd_addbot(self, player, msg, channel):
+        checker = bot_checks("addbot") # store the checker array here
+        if checker[0]:       
+            self.addbot()
+            player.tell("Remember to ^2!rembot^7 when you're finished with your bot.")
+        else:
+            channel.reply(checker[1]) # report error to client 
+            return minqlx.RET_STOP_ALL
+
+    def cmd_rembot(self, player, msg, channel):
+        checker = bot_checks("rembot") # store the checker array here
+        if checker[0]:           
+            self.rembot()
+        else:
+            channel.reply(checker[1]) # report error to client 
+            return minqlx.RET_STOP_ALL
+    ################################ BOTS ################################
+        
+            
+    ######################################### DONATIONS CODE #########################################
     def cmd_donation_messages(self, player, msg, channel):
         flag = self.db.get_flag(player, "purgery:donation_messages", default=True)
         self.db.set_flag(player, "purgery:donation_messages", not flag)
@@ -241,10 +274,10 @@ class tomtec_logic(minqlx.Plugin):
                 if self.db.get_flag(player, "purgery:donation_messages", default=True):
                     player.tell(message)
                     self.talk_beep(player)
+    ######################################### DONATIONS CODE #########################################
 
-########################################## END DONATIONS CODE ##########################################
 
-
+    ######################################### ILLEGAL NAME CHECKS #########################################
     def handle_player_connect(self, player): # prohibit players to have any protected name in their name
         if str(player.steam_id)[0] == "9": return # don't check bots
         name = self.clean_text(player.name.lower())
@@ -265,7 +298,8 @@ class tomtec_logic(minqlx.Plugin):
             if self.clean_text(OWNER_NAME.lower()) in name:
                 if str(player.steam_id) != str(minqlx.owner()): # if the player steam id isn't minqlx.owner id, then it's not me
                     player.kick("{}^7 is the name of the server owner and is reserved. Please change it and re-connect.".format(OWNER_NAME))
-                
+    ######################################### ILLEGAL NAME CHECKS #########################################
+                    
     @minqlx.next_frame
     def handle_player_loaded(self, player):
         @minqlx.delay(5)
@@ -469,61 +503,3 @@ class tomtec_logic(minqlx.Plugin):
     def cmd_maprestart(self, player, msg, channel):
         # run a map restart
         minqlx.console_command("map_restart")
-        
-    def cmd_giveall(self, player, msg, channel):
-        # enables the '!giveall' command, to provide all players with items/powerups/others
-        holdTime = self.get_cvar("roundtimelimit", int)
-        if msg[1] == "kamikaze":
-            for p in self.players():
-                p.holdable = "kamikaze"
-        elif msg[1] == "teleporter":
-            for p in self.players():
-                p.holdable = "teleporter"
-        elif msg[1] == "portal":
-            for p in self.players():
-                p.holdable = "portal"
-        elif msg[1] == "flight":
-            for p in self.players():
-                p.holdable = "flight"
-        elif msg[1] == "quaddamage":
-            if msg[2] == "on":
-                for p in self.players():
-                    p.powerups(quad=holdTime)
-            if msg[2] == "off":
-                for p in self.players():
-                    p.powerups(quad=0)
-        elif msg[1] == "regeneration":
-            if msg[2] == "on":
-                for p in self.players():
-                    p.powerups(regeneration=holdTime)
-            if msg[2] == "off":
-                for p in self.players():
-                    p.powerups(regeneration=0)
-        elif msg[1] == "invisibility":
-            if msg[2] == "on":
-                for p in self.players():
-                    p.powerups(invisibility=holdTime)
-            if msg[2] == "off":
-                for p in self.players():
-                    p.powerups(invisibility=0)
-        elif msg[1] == "haste":
-            if msg[2] == "on":
-                for p in self.players():
-                    p.powerups(haste=holdTime)
-            if msg[2] == "off":
-                for p in self.players():
-                    p.powerups(haste=0)
-        elif msg[1] == "battlesuit":
-            if msg[2] == "on":
-                for p in self.players():
-                    p.powerups(battlesuit=holdTime)
-            if msg[2] == "off":
-                for p in self.players():
-                    p.powerups(battlesuit=0)
-        elif msg[1] == "noclip":
-            if msg[2] == "on":
-                for p in self.players():
-                    p.noclip = True
-            if msg[2] == "off":
-                for p in self.players():
-                    p.noclip = False
