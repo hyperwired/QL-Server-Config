@@ -19,7 +19,7 @@ export qRconPasswordPurgery=$(<~/localConfig-rconPassword-purgery.txt)
 export qPurgeryServerTitle="^4The Purgery^7 - $qServerLocation - ^2#$1^7"
 export qPurgeryStart="$qPathToMinqlxStartScript \
 +set qlx_owner $qPurgeryOwnerSteam64ID \
-+set qlx_plugins DEFAULT, tomtec_logic, tp_fun, fun, balance, commlink, aliases, votestats, custom_votes, votemanager, branding, q3resolver, servers, queue \
++set qlx_plugins DEFAULT, tomtec_logic, tp_fun, fun, balance, commlink, aliases, votestats, custom_votes, votemanager, branding, q3resolver, servers, queue, pummel \
 +set qlx_commlinkIdentity thepurgery \
 +set qlx_commlinkServerName $qCommlinkServerName
 +set qlx_chatlogs 20 \
