@@ -209,12 +209,12 @@ class tomtec_logic(minqlx.Plugin):
     def bot_checks(self, flags):
         if "addbot" in flags.lower():
             if not self.get_cvar("bot_enable", bool):
-                return (False, "^1Error: Bots are not enabled on this server.")
+                return (False, "^1Error:^7 Bots are not enabled on this server.")
             if self.botError:
-                return (False, "^1Error: Bots are not supported on this map.")
+                return (False, "^1Error:^7 Bots are not supported on this map.")
             for p in self.players():
                 if str(p.steam_id)[0] == "9":
-                    return (False, "^1Error: There is already a bot on this server.")
+                    return (False, "^1Error:^7 There is already a bot on this server.")
             return (True, None)
         elif "rembot" in flags.lower():
             botPresent = False
@@ -223,7 +223,7 @@ class tomtec_logic(minqlx.Plugin):
                     botPresent = True
                     return (True, None)
             if botPresent == False:
-                return (False, "^1Error: There is no bot currently on this server.")
+                return (False, "^1Error:^7 There is no bot currently on this server.")
         return (False, None)
 
     def addbot(self):
@@ -234,7 +234,7 @@ class tomtec_logic(minqlx.Plugin):
         minqlx.console_command("kick allbots") # kicks all bots
         
     def cmd_addbot(self, player, msg, channel):
-        checker = bot_checks("addbot") # store the checker array here
+        checker = self.bot_checks("addbot") # store the checker array here
         if checker[0]:       
             self.addbot()
             player.tell("Remember to ^2!rembot^7 when you're finished with your bot.")
@@ -243,7 +243,7 @@ class tomtec_logic(minqlx.Plugin):
             return minqlx.RET_STOP_ALL
 
     def cmd_rembot(self, player, msg, channel):
-        checker = bot_checks("rembot") # store the checker array here
+        checker = self.bot_checks("rembot") # store the checker array here
         if checker[0]:           
             self.rembot()
         else:
@@ -460,30 +460,27 @@ class tomtec_logic(minqlx.Plugin):
 
         if vote.lower() == "addbot":
             # enables the '/cv addbot' command
-            if self.get_cvar("bot_enable", bool):
-                if self.botError:
-                    caller.tell("^1Error:^7 Bots are not supported on this map.")
-                    return minqlx.RET_STOP_ALL
-                self.callvote("qlx !addbot", "add a ^7Pur^4g^7obot^3")
+            checker = self.bot_checks("addbot") # store the checker array here
+            if checker[0]:  
+                self.callvote("qlx !addbot", "add ^7Pur^4g^7obot^3")
                 self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             else:
-                caller.tell("Bots are not enabled on this server.")
+                caller.tell(checker[1])
                 return minqlx.RET_STOP_ALL
 
         if vote.lower() == "rembot":
             # enables the '/cv rembot' command
-            if self.get_cvar("bot_enable", bool):
-                if self.botError:
-                    caller.tell("^1Error:^7 Bots are not supported on this map.")
-                    return minqlx.RET_STOP_ALL
-                self.callvote("qlx !rembot", "remove all ^7Pur^4g^7obot^3s")
+            checker = self.bot_checks("rembot") # store the checker array here
+            if checker[0]:  
+                self.callvote("qlx !rembot", "remove ^7Pur^4g^7obot^3")
                 self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             else:
-                caller.tell("Bots are not enabled on this server.")
+                caller.tell(checker[1])
                 return minqlx.RET_STOP_ALL
 
+            
     def handle_vote_started(self, caller, vote, args):
         if self.game.state == "warmup":
             if self.get_cvar("qlx_freezePlayersDuringVote", bool):
