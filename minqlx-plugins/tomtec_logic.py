@@ -64,6 +64,8 @@ class tomtec_logic(minqlx.Plugin):
         self.purgersBirthday = False
 
         self.botError = False
+        self.set_cvar("bot_thinktime", "0")
+        self.set_cvar("bot_challenge", "1")
 
         if self.get_cvar("qlx_visitForumMessages", bool):
             message = "Visit ^2forum.thepurgery.com^7 to vote for/nominate a moderator."
