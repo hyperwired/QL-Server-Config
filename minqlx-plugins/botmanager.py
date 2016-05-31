@@ -3,7 +3,7 @@
 # botmanager.py, a plugin for minqlx to manage bots.
 
 BOT_NAME="^7Pur^4g^7obot" # name of bot in-game
-BOT_TYPE=("Trainer", "5") # bot, skill level
+BOT_TYPE=("Trainer", "4") # bot, skill level
 
 ZERO_WIDTH_SPACE=u"\u200B" # part of the userinfo filtering to prevent illegal names
 
@@ -22,7 +22,7 @@ class botmanager(minqlx.Plugin):
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
 
-        self.plugin_version = "1.0"
+        self.plugin_version = "1.1"
 
         self.botError = False
         
@@ -149,7 +149,7 @@ class botmanager(minqlx.Plugin):
                 caller.tell("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
                 return minqlx.RET_STOP_ALL
             if checker[0]:
-                self.callvote("qlx !addbot", "add ^7Pur^4g^7obot^3")
+                self.callvote("qlx !addbot", "add ^7{}^3".format(BOT_NAME))
                 self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             else:
@@ -163,7 +163,7 @@ class botmanager(minqlx.Plugin):
                 caller.tell("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
                 return minqlx.RET_STOP_ALL
             if checker[0]:
-                self.callvote("qlx !rembot", "remove ^7Pur^4g^7obot^3")
+                self.callvote("qlx !rembot", "remove ^7{}^3".format(BOT_NAME))
                 self.msg("{}^7 called a vote.".format(caller.name))
                 return minqlx.RET_STOP_ALL
             else:
