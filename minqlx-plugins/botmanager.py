@@ -16,6 +16,7 @@ class botmanager(minqlx.Plugin):
         self.add_hook("player_connect", self.handle_player_connect, priority=minqlx.PRI_HIGHEST)
         self.add_hook("player_disconnect", self.handle_player_disconnect)
         self.add_hook("console_print", self.handle_console_print)
+        self.add_hook("game_end", self.handle_game_end)
         self.add_hook("userinfo", self.handle_userinfo, priority=minqlx.PRI_HIGHEST)
 
         self.add_command("addbot", self.cmd_addbot, 1)
@@ -25,6 +26,7 @@ class botmanager(minqlx.Plugin):
         self.plugin_version = "1.1"
 
         self.botError = False
+        self.atGameEnd = False
         
         self.set_cvar("bot_thinktime", "0")
         self.set_cvar("bot_challenge", "1")
@@ -79,13 +81,17 @@ class botmanager(minqlx.Plugin):
             self.botError = False
             self.addbot()
             self.rembot()
+            self.atGameEnd = False
             @minqlx.delay(11)
             def f():
                 if self.botError:
                     self.msg("^3Warning:^7 Bots are not supported on this map.")
                     self.talk_beep()
             f()
-            
+
+    def handle_game_end(self, data):
+        self.atGameEnd = True
+        
     def handle_player_connect(self, player): # prohibit players to have the bot's name in their name/as their name
         if str(player.steam_id)[0] == "9": return # don't check bots
         name = self.clean_text(player.name.lower())
@@ -123,6 +129,7 @@ class botmanager(minqlx.Plugin):
     def handle_team_switch(self, player, old_team, new_team): # automatic bot-management
         if self.get_cvar("bot_autoManage", bool):
             if self.game.type_short == "ffa" or self.game.type_short == "duel" or self.game.type_short == "race": return # exclude non-team gametypes
+            if self.atGameEnd: return # do not swap bots during end-game
             if not self.bots_present():
                 if len(self.teams()['red']) != len(self.teams()['blue']):
                     if len(self.teams()['red']) > len(self.teams()['blue']):
