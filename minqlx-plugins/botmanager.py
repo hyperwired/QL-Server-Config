@@ -23,7 +23,7 @@ class botmanager(minqlx.Plugin):
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
 
-        self.plugin_version = "1.1"
+        self.plugin_version = "1.2"
 
         self.botError = False
         self.atGameEnd = False
@@ -79,8 +79,8 @@ class botmanager(minqlx.Plugin):
     def handle_map(self, mapname, factory):
         if self.get_cvar("bot_enable", bool):
             self.botError = False
-            self.addbot()
-            self.rembot()
+            minqlx.console_command("addbot trainer 5 a 0 TestingBotSupport")
+            minqlx.console_command("kick TestingBotSupport")
             self.atGameEnd = False
             @minqlx.delay(11)
             def f():
