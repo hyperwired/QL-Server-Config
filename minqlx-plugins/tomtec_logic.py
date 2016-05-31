@@ -1,7 +1,6 @@
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 
 OWNER_NAME="^7Pur^4g^7er" # used to define the owner's name, this name must = the minqlx.owner()'s name.
-BOT_NAME="^7Pur^4g^7obot"
 
 GAME_MODERATORS="merozollo, 0regonn, barley, Biokemical, Quarrel, meganfoxxed, Jubblies, zee" # string that displays on player load after a delay
 ZERO_WIDTH_SPACE=u"\u200B" # part of the userinfo filtering to prevent illegal names
@@ -23,9 +22,6 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("vote_started", self.handle_vote_started)
         self.add_hook("vote_ended", self.handle_vote_ended)
         self.add_hook("userinfo", self.handle_userinfo, priority=minqlx.PRI_HIGHEST) # to prevent illegal name changes
-        self.add_hook("console_print", self.handle_console_print) # for bot error detection
-        self.add_hook("team_switch", self.handle_team_switch)
-        self.add_hook("player_disconnect", self.handle_player_disconnect)
         
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
@@ -36,10 +32,9 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("forum", "forums", "f"), self.cmd_forums)
         self.add_command(("donate", "donations", "d", "donating"), self.cmd_donate)
         self.add_command("killall", self.cmd_killall, 4)
-        self.add_command("addbot", self.cmd_addbot, 1)
         self.add_command(("respawn", "spawn"), self.cmd_respawn, 5)
         self.add_command(("respawn_aircontrol", "spawn_aircontrol"), self.respawn_aircontrol, 5)
-        self.add_command("rembot", self.cmd_rembot, 1)
+        
         self.add_command("tomtec_versions", self.cmd_showversion)
         self.add_command(("wiki", "w"), self.cmd_wiki)
         self.add_command(("facebook", "fb"), self.cmd_facebook)
@@ -57,7 +52,7 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "4.5"
+        self.plugin_version = "4.6"
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         self.serverLocation = self.get_cvar("sv_location")
@@ -65,11 +60,6 @@ class tomtec_logic(minqlx.Plugin):
         self.protectedPlayers = ["76561198213481765", "76561198061594466"] # purger, mf falling comets
 
         self.purgersBirthday = False
-
-        self.botError = False
-        self.set_cvar("bot_thinktime", "0")
-        self.set_cvar("bot_challenge", "1")
-        self.set_cvar_once("bot_autoManage", "0")
 
         if self.get_cvar("qlx_visitForumMessages", bool):
             message = "Visit ^2forum.thepurgery.com^7 to vote for/nominate a moderator."
@@ -206,105 +196,6 @@ class tomtec_logic(minqlx.Plugin):
             self.play_sound("sound/player/talk.ogg")
         else:
             self.play_sound("sound/player/talk.ogg", player)
-
-    ################################ BOTS ################################
-    def bots_present(self):
-        for p in self.players():
-            if str(p.clean_name) == str(self.clean_text(BOT_NAME)):
-                return True
-        return False
-
-    def bot_team(self):
-        for p in self.players():
-            if str(p.clean_name) == str(self.clean_text(BOT_NAME)):
-                return str(p.team)
-        return None
-
-    def handle_console_print(self, text):
-        if "botaisetupclient failed" in text.lower():
-            self.botError = True
-
-    @minqlx.next_frame
-    def handle_player_disconnect(self, player, reason): # automatic bot-management
-        if self.get_cvar("bot_autoManage", bool):
-            if self.game.type_short == "ffa" or self.game.type_short == "duel" or self.game.type_short == "race": return
-            if len(self.teams()['red']) != len(self.teams()['blue']):
-                if self.bots_present():
-                    if self.bot_checks("rembot")[0]:
-                        self.msg("^2Bot Manager:^7 Automatically removing {}.".format(BOT_NAME))
-                        self.rembot()
-                else:
-                    if self.bot_checks("addbot")[0]:
-                        self.msg("^2Bot Manager:^7 Automatically adding {}.".format(BOT_NAME))
-                        self.addbot()
-                          
-    @minqlx.next_frame
-    def handle_team_switch(self, player, old_team, new_team): # automatic bot-management
-        if self.get_cvar("bot_autoManage", bool):
-            if self.game.type_short == "ffa" or self.game.type_short == "duel" or self.game.type_short == "race": return
-            if not self.bots_present():
-                if len(self.teams()['red']) != len(self.teams()['blue']):
-                    if len(self.teams()['red']) > len(self.teams()['blue']):
-                        self.set_cvar("teamsize", str(len(self.teams()['red'])))
-                    elif len(self.teams()['blue']) > len(self.teams()['red']):
-                        self.set_cvar("teamsize", str(len(self.teams()['blue'])))
-                    self.set_cvar("teamsize", str(self.get_cvar("teamsize", int) + 1))
-                    if self.bot_checks("addbot")[0]:
-                        self.msg("^2Bot Manager:^7 Automatically adding {}.".format(BOT_NAME))
-                        self.addbot()
-            else:
-                if len(self.teams()['red']) != len(self.teams()['blue']):
-                    if self.bot_checks("rembot")[0]:
-                        self.msg("^2Bot Manager:^7 Automatically removing {}.".format(BOT_NAME))
-                        bot_team = self.bot_team()
-                        self.rembot()
-                        if new_team != "spectator": player.team = bot_team
-                
-    def bot_checks(self, flags):
-        if "addbot" in flags.lower():
-            if not self.get_cvar("bot_enable", bool):
-                return (False, "^1Error:^7 Bots are not enabled on this server.")
-            if self.botError:
-                return (False, "^1Error:^7 Bots are not supported on this map.")
-            if self.bots_present():
-                return (False, "^1Error:^7 There is already a bot on this server.")
-            return (True, None)
-        elif "rembot" in flags.lower():
-            if not self.bots_present():
-                return (False, "^1Error:^7 There is no bot currently on this server.")
-            return (True, None)
-        return (False, None)
-
-    def addbot(self):
-        minqlx.console_command("addbot Trainer 5 A 0 {}".format(BOT_NAME)) # Trainer bot, skill level 5, team any, 0 millisecond join delay, custom name
-
-    def rembot(self):
-        minqlx.console_command("kick {}".format(self.clean_text(BOT_NAME))) # kicks all bots
-        
-    def cmd_addbot(self, player, msg, channel):
-        checker = self.bot_checks("addbot") # store the checker array here
-        if self.get_cvar("bot_autoManage", bool):
-            channel.reply("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
-            return minqlx.RET_STOP_ALL
-        if checker[0]:
-            self.addbot()
-            player.tell("Remember to ^2!rembot^7 when you're finished with your bot.")
-        else:
-            channel.reply(checker[1]) # report error to client 
-            return minqlx.RET_STOP_ALL
-
-    def cmd_rembot(self, player, msg, channel):
-        checker = self.bot_checks("rembot") # store the checker array here
-        if self.get_cvar("bot_autoManage", bool):
-            channel.reply("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
-            return minqlx.RET_STOP_ALL
-        if checker[0]:
-            self.rembot()
-        else:
-            channel.reply(checker[1]) # report error to client 
-            return minqlx.RET_STOP_ALL
-    ################################ BOTS ################################
-        
             
     ######################################### DONATIONS CODE #########################################
     def cmd_donation_messages(self, player, msg, channel):
@@ -336,8 +227,6 @@ class tomtec_logic(minqlx.Plugin):
         if str(player.steam_id)[0] == "9": return # don't check bots
         name = self.clean_text(player.name.lower())
         name = name.replace(ZERO_WIDTH_SPACE, "")
-        if "purgobot" in name:
-            return "^7Pur^4g^7obot is a restricted name. Please change your Steam name to something else.\n"
         if self.clean_text(OWNER_NAME.lower()) in name:
             if str(player.steam_id) != str(minqlx.owner()): # if the player steam id isn't minqlx.owner id, then it's not me
                 return "{}^7 is the name of the server owner and is reserved. Please change your Steam name to something else.\n".format(OWNER_NAME)
@@ -347,8 +236,6 @@ class tomtec_logic(minqlx.Plugin):
         if "name" in changed:
             name = self.clean_text(changed["name"].lower())
             name = name.replace(ZERO_WIDTH_SPACE, "")
-            if "purgobot" in name:
-                player.kick("^7Pur^4g^7obot is a restricted name. Please pick another name and re-connect.")
             if self.clean_text(OWNER_NAME.lower()) in name:
                 if str(player.steam_id) != str(minqlx.owner()): # if the player steam id isn't minqlx.owner id, then it's not me
                     player.kick("{}^7 is the name of the server owner and is reserved. Please change it and re-connect.".format(OWNER_NAME))
@@ -385,17 +272,6 @@ class tomtec_logic(minqlx.Plugin):
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
         minqlx.set_cvar("g_infiniteAmmo", "1")
-
-        if self.get_cvar("bot_enable", bool):
-            self.botError = False
-            minqlx.console_command("addbot Anarki 1 A 0 ^1TestingBotSupport^7")
-            minqlx.console_command("kick TestingBotSupport")
-            @minqlx.delay(11)
-            def f():
-                if self.botError:
-                    self.msg("^3Warning:^7 Bots are not supported on this map.")
-                    self.talk_beep()
-            f()
         
     def game_countdown(self):
         self.play_sound("sound/items/protect3.ogg")
@@ -510,34 +386,6 @@ class tomtec_logic(minqlx.Plugin):
 
             if self.get_cvar("teamsize", str) in str(args):
                 caller.tell("You sir, need to open your eyes. Only then will you see that the teamsize is already set to {}.".format(self.get_cvar("teamsize")))
-                return minqlx.RET_STOP_ALL
-
-        if vote.lower() == "addbot":
-            # enables the '/cv addbot' command
-            checker = self.bot_checks("addbot") # store the checker array here
-            if self.get_cvar("bot_autoManage", bool):
-                caller.tell("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
-                return minqlx.RET_STOP_ALL
-            if checker[0]:
-                self.callvote("qlx !addbot", "add ^7Pur^4g^7obot^3")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            else:
-                caller.tell(checker[1])
-                return minqlx.RET_STOP_ALL
-
-        if vote.lower() == "rembot":
-            # enables the '/cv rembot' command
-            checker = self.bot_checks("rembot") # store the checker array here
-            if self.get_cvar("bot_autoManage", bool):
-                caller.tell("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
-                return minqlx.RET_STOP_ALL
-            if checker[0]:
-                self.callvote("qlx !rembot", "remove ^7Pur^4g^7obot^3")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            else:
-                caller.tell(checker[1])
                 return minqlx.RET_STOP_ALL
 
             
