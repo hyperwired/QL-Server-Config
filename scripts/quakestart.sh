@@ -63,7 +63,7 @@ exec $qPurgeryStart \
     +set g_allowSpecVote 1 \
     +set g_allowVoteMidGame 1 \
     +set bot_enable 1 \
-    +set bot_nochat 1 \
+    +set bot_nochat 0 \
     +set sv_mappoolFile "mappool_pqlca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
