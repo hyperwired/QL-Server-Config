@@ -127,7 +127,8 @@ class botmanager(minqlx.Plugin):
     @minqlx.next_frame
     def handle_team_switch(self, player, old_team, new_team): # automatic bot-management
         if self.get_cvar("bot_autoManage", bool):
-            if self.game.type_short == "ffa" or self.game.type_short == "duel" or self.game.type_short == "race": return # exclude non-team gametypes
+            if self.game.type_short in ("ffa", "duel", "race"): return # exclude non-team gametypes
+            if player == self.bot(): return # do not handle bot switching
             if self.atGameEnd: return # do not swap bots during end-game
             if not self.bots_present():
                 if len(self.teams()['red']) != len(self.teams()['blue']):
@@ -201,7 +202,7 @@ class botmanager(minqlx.Plugin):
         checker = self.bot_checks("addbot") # store the checker array here
         if self.get_cvar("bot_autoManage", bool):
             channel.reply("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
-            return minqlx.RET_STOP_ALL
+            return
         if checker[0]:
             self.addbot()
             player.tell("Remember to ^2!rembot^7 when you're finished with your bot.")
@@ -213,7 +214,7 @@ class botmanager(minqlx.Plugin):
         checker = self.bot_checks("rembot") # store the checker array here
         if self.get_cvar("bot_autoManage", bool):
             channel.reply("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
-            return minqlx.RET_STOP_ALL
+            return
         if checker[0]:
             self.rembot()
         else:
