@@ -3,7 +3,7 @@
 # botmanager.py, a plugin for minqlx to manage bots.
 
 BOT_NAME="^7Pur^4g^7obot" # name of bot in-game
-BOT_TYPE=("Trainer", "4") # bot, skill level
+BOT_TYPE=("Anarki", "5") # bot, skill level
 
 ZERO_WIDTH_SPACE=u"\u200B" # part of the userinfo filtering to prevent illegal names
 
@@ -17,16 +17,19 @@ class botmanager(minqlx.Plugin):
         self.add_hook("player_disconnect", self.handle_player_disconnect)
         self.add_hook("console_print", self.handle_console_print)
         self.add_hook("game_end", self.handle_game_end)
+        self.add_hook("round_start", self.handle_round_start)
+        self.add_hook("round_end", self.handle_round_end)
         self.add_hook("userinfo", self.handle_userinfo, priority=minqlx.PRI_HIGHEST)
 
         self.add_command("addbot", self.cmd_addbot, 1)
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
 
-        self.plugin_version = "1.3"
+        self.plugin_version = "1.4"
 
         self.botError = False
         self.atGameEnd = False
+        self.inRound = False
         
         self.set_cvar("bot_thinktime", "0")
         self.set_cvar("bot_challenge", "1")
@@ -42,15 +45,15 @@ class botmanager(minqlx.Plugin):
             self.play_sound("sound/player/talk.ogg", player)
 
     def bots_present(self):
-        for p in self.players():
-            if str(p.clean_name) == str(self.clean_text(BOT_NAME)):
+        for player in self.players():
+            if str(player.clean_name) == str(self.clean_text(BOT_NAME)):
                 return True
         return False
 
-    def bot_team(self):
-        for p in self.players():
-            if str(p.clean_name) == str(self.clean_text(BOT_NAME)):
-                return str(p.team)
+    def bot(self):
+        for player in self.players():
+            if str(player.clean_name) == str(self.clean_text(BOT_NAME)):
+                return player
         return None
 
     def bot_checks(self, flags):
@@ -91,7 +94,13 @@ class botmanager(minqlx.Plugin):
 
     def handle_game_end(self, data):
         self.atGameEnd = True
-        
+
+    def handle_round_start(self, round_number):
+        self.inRound = True
+
+    def handle_round_end(self, data):
+        self.inRound = False
+                         
     def handle_player_connect(self, player): # prohibit players to have the bot's name in their name/as their name
         if str(player.steam_id)[0] == "9": return # don't check bots
         name = self.clean_text(player.name.lower())
@@ -130,14 +139,33 @@ class botmanager(minqlx.Plugin):
                     if self.bot_checks("addbot")[0]:
                         self.msg("^2Bot Manager:^7 Automatically adding {}.".format(BOT_NAME))
                         self.addbot()
+                        if self.inRound:
+                            @minqlx.delay(2)
+                            def f(player):
+                                self.bot().is_alive = True
+                                self.bot().health = player.health
+                                self.bot().armor = player.armor
+                                #self.bot().ammo = player.ammo
+                            f(player)                                
             else:
                 if len(self.teams()['red']) != len(self.teams()['blue']):
                     if self.bot_checks("rembot")[0]:
                         self.msg("^2Bot Manager:^7 Automatically removing {}.".format(BOT_NAME))
-                        bot_team = self.bot_team()
+                        bot_team = self.bot().team
+                        bot_health = self.bot().health
+                        bot_armor = self.bot().armor
+                        bot_ammo = self.bot().ammo
+                        bot_isalive = self.bot().is_alive
                         self.rembot()
-                        if new_team != "spectator": player.team = bot_team
-
+                        if new_team != "spectator":
+                            player.team = bot_team
+                            if self.inRound:
+                                if bot_isalive:
+                                    player.is_alive = True
+                                    player.health = bot_health
+                                    player.armor = bot_armor
+                                    #player.ammo = bot_ammo
+                            
     def handle_vote_called(self, caller, vote, args):
         if vote.lower() == "addbot":
             # enables the '/cv addbot' command
