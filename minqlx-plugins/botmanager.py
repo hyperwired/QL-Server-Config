@@ -23,7 +23,7 @@ class botmanager(minqlx.Plugin):
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
 
-        self.plugin_version = "1.2"
+        self.plugin_version = "1.3"
 
         self.botError = False
         self.atGameEnd = False
@@ -72,7 +72,7 @@ class botmanager(minqlx.Plugin):
         minqlx.console_command("addbot {} {} A 0 {}".format(BOT_TYPE[0], BOT_TYPE[1], BOT_NAME)) # team any, 0 millisecond join delay
         
     def rembot(self):
-        minqlx.console_command("kick {}".format(self.clean_text(BOT_NAME))) # kicks BOT_NAME
+        minqlx.console_command("clientkick {}".format(self.find_player(BOT_NAME)[0].id)) # kicks BOT_NAME
     ################################ METHODS ################################
 
     ################################ HANDLERS ################################
@@ -113,17 +113,7 @@ class botmanager(minqlx.Plugin):
     
     @minqlx.next_frame
     def handle_player_disconnect(self, player, reason): # automatic bot-management
-        if self.get_cvar("bot_autoManage", bool):
-            if self.game.type_short == "ffa" or self.game.type_short == "duel" or self.game.type_short == "race": return
-            if len(self.teams()['red']) != len(self.teams()['blue']):
-                if self.bots_present():
-                    if self.bot_checks("rembot")[0]:
-                        self.msg("^2Bot Manager:^7 Automatically removing {}.".format(BOT_NAME))
-                        self.rembot()
-                else:
-                    if self.bot_checks("addbot")[0]:
-                        self.msg("^2Bot Manager:^7 Automatically adding {}.".format(BOT_NAME))
-                        self.addbot()
+        self.handle_team_switch(player, player.team, "spectator")
                           
     @minqlx.next_frame
     def handle_team_switch(self, player, old_team, new_team): # automatic bot-management
