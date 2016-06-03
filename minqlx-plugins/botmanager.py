@@ -34,7 +34,7 @@ class botmanager(minqlx.Plugin):
         self.set_cvar("bot_thinktime", "0")
         self.set_cvar("bot_challenge", "1")
         
-        self.set_cvar_once("bot_autoManage", "0", 4) # is a /serverinfo cvar
+        self.set_cvar_once("bot_autoManage", "0", 4) # is a /serverinfo cvar so VSP can query it/stats services get it
 
 
     ################################ METHODS ################################
