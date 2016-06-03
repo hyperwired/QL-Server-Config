@@ -25,7 +25,7 @@ class botmanager(minqlx.Plugin):
         self.add_command("rembot", self.cmd_rembot, 1)
         self.add_command("tomtec_versions", self.cmd_showversion)
 
-        self.plugin_version = "1.4"
+        self.plugin_version = "1.5"
 
         self.botError = False
         self.atGameEnd = False
@@ -128,6 +128,7 @@ class botmanager(minqlx.Plugin):
     def handle_team_switch(self, player, old_team, new_team): # automatic bot-management
         if self.get_cvar("bot_autoManage", bool):
             if self.game.type_short in ("ffa", "duel", "race"): return # exclude non-team gametypes
+            if abs(len(self.teams()['red'])-len(self.teams()['blue'])) >= 2: return # do not affect teams that are out of balance by two or more players.
             if player == self.bot(): return # do not handle bot switching
             if self.atGameEnd: return # do not swap bots during end-game
             if not self.bots_present():
