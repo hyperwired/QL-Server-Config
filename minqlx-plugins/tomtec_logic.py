@@ -52,7 +52,7 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "4.6"
+        self.plugin_version = "4.7"
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         self.serverLocation = self.get_cvar("sv_location")
@@ -387,6 +387,20 @@ class tomtec_logic(minqlx.Plugin):
 
             if self.get_cvar("teamsize", str) in str(args):
                 caller.tell("You sir, need to open your eyes. Only then will you see that the teamsize is already set to {}.".format(self.get_cvar("teamsize")))
+                return minqlx.RET_STOP_ALL
+
+        if vote.lower() == "autobot":
+            # enables the '/cv autobot [on/off]' command
+            if args.lower() == "off":
+                self.callvote("set bot_autoManage 0", "automatic bot management: off")
+                self.msg("{}^7 called a vote.".format(caller.name))
+                return minqlx.RET_STOP_ALL
+            elif args.lower() == "on":
+                self.callvote("set bot_autoManage 1", "automatic bot management: on")
+                self.msg("{}^7 called a vote.".format(caller.name))
+                return minqlx.RET_STOP_ALL
+            else:
+                caller.tell("^2/cv autobot [on/off]^7 is the usage for this callvote command.")
                 return minqlx.RET_STOP_ALL
 
             
