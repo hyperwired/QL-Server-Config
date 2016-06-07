@@ -32,7 +32,8 @@ export qPurgeryStart="$qPathToMinqlxStartScript \
 +set qlx_countdownMessage ^5Good luck, and have fun.^7 \
 +set qlx_endOfGameMessage ^2Good game!^7 \
 +set qlx_purgeryDonationMessages 0 \
-+set qlx_visitForumMessages 0"
++set qlx_visitForumMessages 0 \
++set qlx_workshopReferences 691078677"
 
 sponsortag="$qServerLocation,TomTec Solutions"
 gameport=`expr $1 + 27960`
