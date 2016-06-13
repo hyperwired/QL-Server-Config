@@ -52,7 +52,7 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "4.7"
+        self.plugin_version = "4.8"
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         self.serverLocation = self.get_cvar("sv_location")
@@ -401,6 +401,20 @@ class tomtec_logic(minqlx.Plugin):
                 return minqlx.RET_STOP_ALL
             else:
                 caller.tell("^2/cv autobot [on/off]^7 is the usage for this callvote command.")
+                return minqlx.RET_STOP_ALL
+
+        if vote.lower() == "gibs":
+            # enables the '/cv gibs [on/off]' command
+            if args.lower() == "off":
+                self.callvote("clearcvar qlx_workshopReferences", "^1gibs^3: off")
+                self.msg("{}^7 called a vote.".format(caller.name))
+                return minqlx.RET_STOP_ALL
+            elif args.lower() == "on":
+                self.callvote("set qlx_workshopReferences 691078677", "^1gibs^3: on")
+                self.msg("{}^7 called a vote.".format(caller.name))
+                return minqlx.RET_STOP_ALL
+            else:
+                caller.tell("^2/cv gibs [on/off]^7 is the usage for this callvote command.")
                 return minqlx.RET_STOP_ALL
 
             
