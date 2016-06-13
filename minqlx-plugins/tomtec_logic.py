@@ -21,6 +21,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("vote_called", self.handle_vote_called) # to add custom votes
         self.add_hook("vote_started", self.handle_vote_started)
         self.add_hook("vote_ended", self.handle_vote_ended)
+        self.add_hook("chat", self.handle_chat)
         self.add_hook("userinfo", self.handle_userinfo, priority=minqlx.PRI_HIGHEST) # to prevent illegal name changes
         
         self.add_command(("help", "about", "version"), self.cmd_help)
@@ -52,7 +53,7 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
         
-        self.plugin_version = "4.8"
+        self.plugin_version = "4.9"
 
         self.serverId = int((self.get_cvar("net_port", str))[-1:])
         self.serverLocation = self.get_cvar("sv_location")
@@ -252,6 +253,11 @@ class tomtec_logic(minqlx.Plugin):
             self.talk_beep(player)
             player.tell("Current game moderators: Pur^4g^7er (owner), {}.".format(GAME_MODERATORS))
         f()
+
+    def handle_chat(self, player, msg, channel):
+        # notify users if they say certain things I don't like
+        if "lag" in msg.lower():
+            player.tell("^2Notice: ^7Please don't complain about lag on this server, we're here to play, not to complain and moan.")
         
     def handle_player_spawn(self, player):
         # Add in ExcessivePlus-like feeling, mimicing the spawn behaviour in EP.
