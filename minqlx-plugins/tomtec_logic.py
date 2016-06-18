@@ -256,7 +256,7 @@ class tomtec_logic(minqlx.Plugin):
 
     def handle_chat(self, player, msg, channel):
         # notify users if they say certain things I don't like
-        if "lag" in msg.lower():
+        if " lag " in msg.lower():
             player.tell("^2Notice: ^7Please don't complain about lag on this server, we're here to play, not to complain and moan.")
         
     def handle_player_spawn(self, player):
