@@ -256,8 +256,17 @@ class tomtec_logic(minqlx.Plugin):
 
     def handle_chat(self, player, msg, channel):
         # notify users if they say certain things I don't like
-        if " lag " in msg.lower():
-            player.tell("^2Notice: ^7Please don't complain about lag on this server, we're here to play, not to complain and moan.")
+        msg = msg.lower()
+        words = msg.split()
+        flag = "purgery:badwords:lag"
+
+        for word in words:
+            if word is "lag":
+                if self.db.get_flag(player, flag, default=True):
+                    player.tell("^2Notice: ^7Please don't complain about lag on this server, we're here to play, not to complain and moan.")
+                    player.tell("^2The above message will not appear again.")
+                    self.db.set_flag(player, flag, False)
+                
         
     def handle_player_spawn(self, player):
         # Add in ExcessivePlus-like feeling, mimicing the spawn behaviour in EP.
