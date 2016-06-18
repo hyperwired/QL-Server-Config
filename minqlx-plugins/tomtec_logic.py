@@ -261,7 +261,7 @@ class tomtec_logic(minqlx.Plugin):
         flag = "purgery:badwords:lag"
 
         for word in words:
-            if word is "lag":
+            if word == "lag":
                 if self.db.get_flag(player, flag, default=True):
                     player.tell("^2Notice: ^7Please don't complain about lag on this server, we're here to play, not to complain and moan.")
                     player.tell("^2The above message will not appear again.")
