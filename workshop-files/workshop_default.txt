@@ -1,0 +1,1009 @@
+# This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy, use, redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
+# TomTec Solutions' loaded workshop maps. Please only load maps here, other items will most likely cause issues.
+# Get these numbers from the ?id= ending of the workshop URL.
+
+#
+#    There is a maximum limit on how many workshop items can be loaded at once: 256.
+#    Please keep this list under that amount of items.
+#
+
+
+# Quake Live Extras Pack
+539421606
+
+# Quake Live Holiday Pack
+539421982
+
+# Quake Live Gibs Pack
+691078677
+
+# Soundboard.py Sounds
+645733939
+
+# The Purgery - Sound Pack (by Thomas Jones for testing purposes)
+572495786
+
+# Summer
+622119130
+
+# Quake III Arena/Team Arena VO Integration (testing)
+614429927
+
+# Base One - Zy
+654057011
+
+# Rocket Arena 3 - ra3map18
+550003921
+
+# Map - Rustgrad
+546664071
+
+# OSPCA1 - American Can-CO
+547440173
+
+# Marilyn
+675614269
+
+# Dum
+675597018
+
+# Cubicle - MAP
+608370630
+
+# Threewave q3wpak 0, 1, 2, 3, 4
+546209430
+546895198
+546129401
+545699336
+546960020
+
+# OverkillPP
+605561819
+
+# uberkill
+607068129
+
+# 6+ (Q3: 6++)
+547252823
+
+# Rocket Arena 3 - ra3map13
+550674410
+
+# Rocket Arena 3 - ra3map15
+550575965
+
+# Q1DM6 - The Dark Zone
+545368609
+
+# Beatbox Map (ztn3dm2)
+547937675
+
+# Rocket Arena 3 - ra3map16
+550566693
+
+# Crash Race Course
+548134603
+
+# Hot Crossings
+546510790
+
+# Mario Opposing Castles
+547046433
+
+# Big Campgrounds / Big CTF/CA !
+547481475
+
+# Rocket Arena 3 - ra3map19
+549208258
+
+# Reda
+547535957
+
+# 1337BC
+549763551
+
+# SpaceCtf5
+547915966
+
+# Painless Map
+544872333
+
+# Map - Family Fun Factory
+550747161
+
+# Rocket Arena 3 - ra3map10
+550843679
+
+# The Simpsons Map
+547039436
+
+# MONSOON_CONVERTED
+542684362
+
+# Consequence
+544634523
+
+# Test Big Box
+545598325
+
+# Winter's Edge Original
+540986862
+
+# Menace, CTF map
+539826376
+
+# Arcane Citadel Original
+541499431
+
+# Map - Solitude
+550850908
+
+# SCDM3
+540937824
+
+# Arena trening map
+545137572
+
+# Switch, Duel map
+540068166
+
+# Rocket Arena 3 - ra3map8
+551367534
+
+# Rocket Arena 3 - ra3map20
+551229107
+
+# Fortress
+551212214
+
+# Rocket Arena 3 - ra3map9
+551148976
+
+# Rocket Arena 3 - ra3map21
+551699225
+
+# Sanctorium
+552722973
+
+# Rocket Arena 3 - ra3map22
+553088484
+
+# Rocket Arena 3 - ra3map6
+553095317
+
+# Crypt
+552635969
+
+# Overkill Remix
+549600167
+
+# Central Pwnage Unit (Beta 2)
+553399644
+
+# Push
+553729235
+
+# PondLife
+556966875
+
+# The Simpsons Map v2
+556856618
+
+# Rocket Arena 3 - ra3map1
+557591894
+
+# Batcula
+558018431
+
+# Winter Games
+558036158
+
+# Pad Maps
+557452835
+
+# Rocket Arena 3 - ra3map2
+558200805
+
+# Quatrix
+558643163
+
+# Dangercity
+558783132
+
+# Pacman
+559324052
+
+# Maido: Mid-air like mode & map.
+542770475
+
+# Pill City
+558637317
+
+# q3dm17
+559698707
+
+# DeFRaG map: cSu1_a
+# 560050165 - This item has been removed by the author
+
+# Hockey
+560187778
+
+# Pinball
+560203097
+
+# Playground
+560234205
+
+# Zastavka
+560255387
+
+# School
+560306383
+
+# The Unofficial Edge
+560394920
+
+# Cut em' Hard
+560523904
+
+# The Dark Zone 2020
+560531568
+
+# Sandstorm [Q4]
+560533566
+
+# Q2DM1-ISH: The Edge Remix
+560533896
+
+# The Edge 2004 CPM Remix
+560535691
+
+# 17 Remix
+# 560536524 - This item has been removed by the author
+
+# Club Doom
+560542953
+
+# Campgrounds Redux [Q4DM9]
+560545593
+
+# efq3dm17
+# 560546791 - This item has been removed by the author
+
+# The Sinister Zone (q1dm6)
+560547573
+
+# Aero Run (Second Edition)
+560548198
+
+# The Edge by finko
+560550630
+
+# Rockshellwill
+560588722
+
+# Projectile Vomiting
+560610357
+
+# Z-LANparty
+560617233
+
+# Q3DM6 In a hat
+560647562
+
+# Alliance Race Pack
+560783125
+
+# Tokays Towers
+560972307
+
+# The Chastity Belt Duel (ospdm8)
+# 560989741 - This item has been removed by the author
+
+# The Frag Pipe
+561036971
+
+# Introduction Map (q3dm0)
+561047265
+
+# Rocket Arena 3 - ra3map5
+561459991
+
+# DeFRaG/race map: BardoK-Statik
+# 561610262 - This item has been removed by the author
+
+# Rocket Arena 3 - ra3map3
+561613916
+
+# DeFRaG/race map: Rocket Launcher Training
+# 561646565 - This item has been removed by the author
+
+# Rocket Arena 3 - ra3map14
+561683838
+
+# Rocket Arena 3 - ra3map4
+561815150
+
+# DeFRaG/race map: momentum
+# 561856702 - This item has been removed by the author
+
+# Rocket Arena 3 - ra3map7
+561877295
+
+# Rocket Arena 3 - ra3map17
+562042961
+
+# polo3dm5 - Ufreeze Map
+562087739
+
+# Lanphi 1 (Amphi Rebuild / Bug Fixes)
+562387741
+
+# Lanphi 2 (Amphi No Lava)
+562396716
+
+# Sarge`s War
+562439444
+
+# DeFRaG/race map: df_slopin
+# 562448042 - This item has been removed by the author
+
+# DeFRaG/race map: cos1_beta7b
+# 562448681 - This item has been removed by the author
+
+# Duel map: megadm4-09
+# 562449180 - This item has been removed by the author
+
+# Duel map: rota3tourney1
+# 562449385 - This item has been removed by the author
+
+# DeFRaG/race map: Tr1ckhouse
+# 562451786 - This item has been removed by the author
+
+# Duel map: pukka3tourney5
+# 562530042 - This item has been removed by the author
+
+# Duel/FFA map: rota3dm1
+# 562530320 - This item has been removed by the author
+
+# Duel/FFA map: rota3dm2
+# 562530598 - This item has been removed by the author
+
+# Chronic - Ufreeze Map
+562554624
+
+# Sleep - Ufreeze Map
+562564197
+
+# 69 Pickup - Ufreeze Map
+562569404
+
+# DeFRaG/race: Lick Map Pack
+562739597
+
+# DeFRaG/race map: Freestyle_88
+# 562747010 - This item has been removed by the author
+
+# Rocket Arena 3 - ra3map11
+562987267
+
+# Rocket Arena 3 - ra3map12
+563005769
+
+# fff - Ufreeze Map
+563100435
+
+# Runtfest - Ufreeze Map
+563103303
+
+# Full Moon - Ufreeze Map
+563105825
+
+# DeFRaG/race map: Palmslane
+563284812
+
+# DeFRaG/race map: Coldrun
+# 563333349 - This item has been removed by the author
+
+# DeFRaG/race: Slick Map Pack
+563581691
+
+# The Rage
+563655427
+
+# Storm Maps
+564894881
+
+# Polo Maps
+564946744
+
+# Mars
+565025333
+
+# Dracula
+565025815
+
+# Campgrounds CTF
+565082165
+
+# DeFRaG/race Promode & Vanilla Map Pack
+565175871
+
+# Hogwarts
+565357365
+
+# Casablanca
+565358076
+
+# Bid for Power Maps
+565451557
+
+# bdra3
+565482567
+
+# DeFRaG/race map: PiyoFunJumps
+# 566733850 - This item has been removed by the author
+
+# DeFRaG/race map: Handbreaker4
+567083637
+
+# OSP-CA1 aka American Can-CO
+567136687
+
+# Winter Map Pack
+567348670
+
+# P3NT4-RZ3
+567364365
+
+# CPM maps by Kragle
+568284101
+
+# raztrainql_beta3
+568582691
+
+# pasteyrox
+569117106
+
+# Clan Arena Jof3CA
+569566066
+
+# DeFRag/Race: Run Map Pack #1
+569569643
+
+# DeFRaG/Race: Freestyle Map Pack #1
+569570727
+
+# Aggressor
+569873334
+
+# Nunuk Maps
+569916167
+
+# Xoylent
+# 569917004 - This item has been removed by the author
+
+# koz25
+569922415
+
+# Q1&Q2 Duel Maps
+570397580
+
+# hellsgate original item/weapon locations
+570600222
+
+# Patibuh's Lair
+570842177
+
+# Unbalanced
+570844629
+
+# EA DM Map Pack
+571012719
+
+# Tornado with Quad!
+571832391
+
+# Reloaded by Yogi
+571945871
+
+# CS maps: de_dust & de_dust2
+572015381
+
+# JustOneFix Maps
+573112415
+
+# DeFRaG/Race: CS Map Pack
+573229007
+
+# Reservoir Dog Maps
+573806930
+
+# Q-Fraggel Maps
+573807159
+
+# Iron Yard
+573808557
+
+# jrace2
+579302748
+
+# Canyon Chaos
+579105940
+
+# quake live map - easy shaft trainning
+578431746
+
+# zih_roof - Ufreeze Map
+578409849
+
+# walkathon
+578148544
+
+# mineqraft
+578148104
+
+# Nemesis
+577333309
+
+# pro-q3dm6 original Quake III Arena map
+# 576339240 - This item loads QVM files, and is considered malicious. Please do not re-enable this map.
+
+# Elfinko DM Alpha 1
+575806276
+
+# Fiesling Maps
+575344403
+
+# OSP Maps
+575312620
+
+# decidia
+575088417
+
+# Wakey Maps
+573898676
+
+# Kora
+583405286
+
+# Deck 2k7
+583401688
+
+# PB_run
+583064804
+
+# The Heinous Place
+582961584
+
+# Endurance
+582949583
+
+# The Killing Machine
+# 582941724 - This item has been removed by the author
+
+# hydra b
+# 582933751 - This item has been removed by the author
+
+# Geotechnic *b
+# 582926811 - This item has been removed by the author
+
+# DustBowl
+# 582915859 - This item has been removed by the author
+
+# Hit the Floor
+582908190
+
+# Nazi bunker
+582882064
+
+# DeadStrong
+# 582771824 - This item has been removed by the author
+
+# The Rage Q3
+# 582762928 - This item has been removed by the author
+
+# The Final Hour
+# 582737620 - This item has been removed by the author
+
+# Goldleaf *
+# 582721827 - This item has been removed by the author
+
+# cos1_beta7b
+582665687
+
+# Aero Space
+582657472
+
+# NSW-Race-Pack
+580028420
+
+# Zero Signal (Quake Live Beta)
+579992130
+
+# Quarea 51
+579974872
+
+# Cow's Map
+579950284
+
+# Quake Live Extra Duel Maps
+579717457
+
+# mvdm09 map
+585785742
+
+# tscabdm2 map
+585785188
+
+# cpm8 map
+585784905
+
+# psidm7 map
+585781036
+
+# Lunaran Maps
+585770260
+
+# Vinyl Room
+585734722
+
+# City1
+585734097
+
+# Retribution (duel)
+585268523
+
+# Derwyll's Castle 2
+585120534
+
+# Davinci
+585119731
+
+# phrantic (cpm24)
+585062856
+
+# Aerowalk [Hubster's Remix II] (cpm22)
+585060057
+
+# Guns
+585043904
+
+# r3tina maps
+585008637
+
+# Grindill 2.0
+584984610
+
+# Station 52
+584984132
+
+# WdW Maps
+584964611
+
+# XCM Tricks 2
+584829444
+
+# Strafez
+584819585
+
+# HMF Clan Practice Map
+584815070
+
+# ful-playground-2-1a
+584809801
+
+# Tr1ckhouse
+584485539
+
+# Charon Maps
+584176488
+
+# Evil Lair Maps
+583920201
+
+# Powahaus Redux
+583821497
+
+# The Abandoned Post
+583821136
+
+# Eulogy
+583820600
+
+# Carnage grounds
+583496556
+
+# No One
+# 583488902 - This item has been removed by the author
+
+# q3sg1c
+# 583483661 - This item has been removed by the author
+
+# swift
+624131766
+
+# pillars
+582740326
+
+# Opium
+586817666
+
+# Haunted
+586818000
+
+# Nu Clear Lunch Time
+586859581
+
+# Plus Maps
+587950516
+
+# Hall of Fame - 1.31 eFreeze community
+588212572
+
+# Bal3dm4 - Scrap Metal ][
+588238794
+
+# Uzuldaroum III
+588286307
+
+# Nemesis Online
+588297581
+
+# Feel the Way You Hate
+588430438
+
+# Bal3dm3 - Disinformation
+588859229
+
+# Bal3void2 - Malfunctioning Nano-Constructor
+588911765
+
+# Bal3dm1 - Ash Rain
+588941415
+
+# Bal3dm2 - Golconda
+588956903
+
+# Bal3void1 - Peaceful Holidays in Egypt
+588972906
+
+# Bal3dm5 - Junk Data
+588990000
+
+# Big Box
+589208436
+
+# Facing Worlds (Unreal Tournament CTF map)
+589313020
+
+# Portal Mayhem
+589919154
+
+# Hypersonic Tourney
+597391077
+
+# Cloudwalk
+590113525
+
+# koz24
+591213538
+
+# trippy_run
+592754466
+
+# jLHC
+593100602
+
+# jLHC2
+595181354
+
+# Midair Map Pack
+596113472
+
+# jCommon
+596370556
+
+# mkbase
+596909949
+
+# Iris | rota3ctf1
+596919463
+
+# Capture the Karin | rota3ctf2
+596924297
+
+# Hell Box - Small Duel Map (requires /cv map hellbox hellbox, has it's own built-in factory)
+598441241
+
+# ca_tamb
+597914676
+
+# ts_ca1 - Fly on Rocket
+597920398
+
+# Winter
+599576527
+
+# The Gridworks - Duel Map
+599720061
+
+# cowdm1
+607026809
+
+# Dreamcast Map Pack
+607031259
+
+# hope
+607034812
+
+# imr3dm1
+607037676
+
+# js_tourney1
+607039540
+
+# kineterra1
+607041073
+
+# klhights
+607042346
+
+# lsjg_coop
+607043831
+
+# lun3dm1
+607046379
+
+# lun3dm2
+607048277
+
+# nodm18
+607052130
+
+# pqarena
+607054267
+
+# prodcmap7
+607055481
+
+# q3mexx1
+607057423
+
+# Q3mIKE5
+607060272
+
+# qfraggel2
+607062910
+
+# rdogdm4
+607063967
+
+# thunda3dm2
+607067048
+
+# ShakenNotStirredPP
+607909342
+
+# ctf_faceoff3
+607994732
+
+# j6torments
+609334248
+
+# turnK16
+602200309
+
+# ctf_faceoff2
+602797735
+
+# TG Rest Map
+602865603
+
+# Terror Twilight
+603287286
+
+# Where fears collide
+603289201
+
+# pro_faceoff
+603520158
+
+# The King's Curse (ctf_tkc)
+603533073
+
+# trippy_run2
+603545627
+
+# ctf_voy4
+603681966
+
+# NeoEgypt
+604054934
+
+# JumbyPaddy
+604249474
+
+# jRace3
+604427316
+
+# mega_ramp
+605120401
+
+# Upsilon Complex II (ctf_upsilon2)
+605383478
+
+# plasma_climb
+605613413
+
+# Feel The Base
+605677816
+
+# earth_run_v2
+606150607
+
+# Heroscerated (dm4 & dm9 mix)
+606599547
+
+# tele_world
+606945800
+
+# bah
+607018623
+
+# Mario
+598733591
+
+# Hyperbolic Time Chamber
+598743459
+
+# cpmkitchen - Race map
+598752473
+
+# Gothic Dawn
+598911025
+
+# Dynablast
+598911133
+
+# Arena Gate CTF
+598911298
+
+# QuakeWorld aim map: vrmdmm4 (povdmm4 remake)
+599013329
+
+# Rocket Map Pack
+599095486
+
+# jTheJump
+599477605
+
+# Geit3dm6 - Black Shining Leather
+599947198
+
+# CTFs Compilation
+600046781
+
+# The Lost Village (dust_dm1)
+600287256
+
+# Thril Kill (gd_tourney1a)
+600299201
+
+# lava_hell
+601020709
+
+# jTheRocketJump
+601074113
+
+# Poptart: scavenger hunt map
+601093276
+
+# Frozen Colors
+601222594
+
+# pro_rings
+601701357
+
+# ctf_faceoff2
+602797735

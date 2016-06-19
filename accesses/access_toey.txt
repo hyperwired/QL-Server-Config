@@ -1,8 +1,8 @@
-#! /bin/bash
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
-# Post-run script for 'deploy.sh'
+# Pew Pew no QQ's access control list:
 
-echo "Running 'quakeupdate.sh'..."
-bash ~/quakeupdate.sh
+# staff: tjone270
+76561198213481765|admin
 
-exit 0
+# admin 1, toey
+76561198132598989|admin

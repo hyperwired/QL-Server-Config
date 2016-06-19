@@ -26,10 +26,9 @@ import time
 from minqlx.database import Redis
 
 RATING_KEY = "minqlx:players:{0}:ratings:{1}" # 0 == steam_id, 1 == short gametype.
-API_URL = "http://qlstats.net:8080/elo/{}"
 MAX_ATTEMPTS = 3
 CACHE_EXPIRE = 60*30 # 30 minutes TTL.
-DEFAULT_RATING = 1000
+DEFAULT_RATING = 1200
 SUPPORTED_GAMETYPES = ("ca", "ctf", "dom", "ft", "tdm")
 # Externally supported game types. Used by !getrating for game types the API works with.
 EXT_SUPPORTED_GAMETYPES = ("ca", "ctf", "dom", "ft", "tdm", "duel", "ffa")
@@ -41,14 +40,14 @@ class balance(minqlx.Plugin):
         self.add_hook("round_countdown", self.handle_round_countdown)
         self.add_hook("round_start", self.handle_round_start)
         self.add_hook("vote_ended", self.handle_vote_ended)
-        self.add_command(("setrating", "setelo"), self.cmd_setrating, 3, usage="<id> <rating>")
-        self.add_command(("getrating", "getelo", "elo"), self.cmd_getrating, usage="<id> [gametype]")
-        self.add_command(("remrating", "remelo"), self.cmd_remrating, 3, usage="<id>")
+        self.add_command(("setrating", "setelo", "setglicko"), self.cmd_setrating, 3, usage="<id> <rating>")
+        self.add_command(("getrating", "getelo", "elo", "glicko"), self.cmd_getrating, usage="<id> [gametype]")
+        self.add_command(("remrating", "remelo", "remglicko"), self.cmd_remrating, 3, usage="<id>")
         self.add_command("balance", self.cmd_balance, 1)
         self.add_command(("teams", "teens"), self.cmd_teams)
         self.add_command("do", self.cmd_do, 1)
         self.add_command(("agree", "a"), self.cmd_agree)
-        self.add_command(("ratings", "elos", "selo"), self.cmd_ratings)
+        self.add_command(("ratings", "elos", "selo", "sglickos"), self.cmd_ratings)
 
         self.ratings_lock = threading.RLock()
         # Keys: steam_id - Items: {"ffa": {"elo": 123, "games": 321, "local": False}, ...}
@@ -64,8 +63,10 @@ class balance(minqlx.Plugin):
         self.set_cvar_once("qlx_balanceUrl", "qlstats.net:8080")
         self.set_cvar_once("qlx_balanceAuto", "1")
         self.set_cvar_once("qlx_balanceMinimumSuggestionDiff", "25")
+        self.set_cvar_once("qlx_balanceApi", "elo")
+
         self.use_local = self.get_cvar("qlx_balanceUseLocal", bool)
-        self.api_url = "http://{}/elo/".format(self.get_cvar("qlx_balanceUrl"))
+        self.api_url = "http://{}/{}/".format(self.get_cvar("qlx_balanceUrl"), self.get_cvar("qlx_balanceApi"))
 
     def handle_round_countdown(self, *args, **kwargs):
         if all(self.suggested_agree):
@@ -90,6 +91,10 @@ class balance(minqlx.Plugin):
             @minqlx.delay(3.5)
             def f():
                 players = self.teams()
+                if len(players["red"] + players["blue"]) % 2 != 0:
+                    self.msg("Teams were ^4NOT^7 balanced due to the total number of players being an odd number.")
+                    return
+                
                 players = dict([(p.steam_id, gt) for p in players["red"] + players["blue"]])
                 self.add_request(players, self.callback_balance, minqlx.CHAT_CHANNEL)
             f()
@@ -175,7 +180,7 @@ class balance(minqlx.Plugin):
         del self.requests[request_id]
         if status_code != requests.codes.ok:
             # TODO: Put a couple of known errors here for more detailed feedback.
-            channel.reply("ERROR {}: Failed to fetch ratings.".format(status_code))
+            channel.reply("ERROR {}: Failed to fetch glicko ratings.".format(status_code))
         else:
             callback(players, channel, *args)
 
@@ -212,10 +217,10 @@ class balance(minqlx.Plugin):
                     target_player = self.player(sid)
                     sid = target_player.steam_id
             except ValueError:
-                channel.reply("Invalid ID. Use either a client ID or a SteamID64.")
+                player.tell("Invalid ID. Use either a client ID or a SteamID64.")
                 return minqlx.RET_STOP_ALL
             except minqlx.NonexistentPlayerError:
-                channel.reply("Invalid client ID. Use either a client ID or a SteamID64.")
+                player.tell("Invalid client ID. Use either a client ID or a SteamID64.")
                 return minqlx.RET_STOP_ALL
 
         if len(msg) > 2:
@@ -241,7 +246,7 @@ class balance(minqlx.Plugin):
         else:
             name = sid
         
-        channel.reply("{} has a rating of ^4{}^7 in {}.".format(name, self.ratings[sid][gametype]["elo"], gametype.upper()))
+        channel.reply("{} has a glicko rating of ^4{}^7 in {}.".format(name, self.ratings[sid][gametype]["elo"], gametype.upper()))
 
     def cmd_setrating(self, player, msg, channel):
         if len(msg) < 3:
@@ -254,16 +259,16 @@ class balance(minqlx.Plugin):
                 target_player = self.player(sid)
                 sid = target_player.steam_id
         except ValueError:
-            channel.reply("Invalid ID. Use either a client ID or a SteamID64.")
+            player.tell("Invalid ID. Use either a client ID or a SteamID64.")
             return minqlx.RET_STOP_ALL
         except minqlx.NonexistentPlayerError:
-            channel.reply("Invalid client ID. Use either a client ID or a SteamID64.")
+            player.tell("Invalid client ID. Use either a client ID or a SteamID64.")
             return minqlx.RET_STOP_ALL
         
         try:
             rating = int(msg[2])
         except ValueError:
-            channel.reply("Invalid rating.")
+            player.tell("Invalid rating.")
             return minqlx.RET_STOP_ALL
 
         if target_player:
@@ -281,7 +286,7 @@ class balance(minqlx.Plugin):
                 self.ratings[sid][gt]["local"] = True
                 self.ratings[sid][gt]["time"] = -1
 
-        channel.reply("{}'s {} rating has been set to ^4{}^7.".format(name, gt.upper(), rating))
+        channel.reply("{}'s {} glicko rating has been set to ^4{}^7.".format(name, gt.upper(), rating))
 
     def cmd_remrating(self, player, msg, channel):
         if len(msg) < 2:
@@ -294,10 +299,10 @@ class balance(minqlx.Plugin):
                 target_player = self.player(sid)
                 sid = target_player.steam_id
         except ValueError:
-            channel.reply("Invalid ID. Use either a client ID or a SteamID64.")
+            player.tell("Invalid ID. Use either a client ID or a SteamID64.")
             return minqlx.RET_STOP_ALL
         except minqlx.NonexistentPlayerError:
-            channel.reply("Invalid client ID. Use either a client ID or a SteamID64.")
+            player.tell("Invalid client ID. Use either a client ID or a SteamID64.")
             return minqlx.RET_STOP_ALL
         
         if target_player:
@@ -426,7 +431,7 @@ class balance(minqlx.Plugin):
 
         minimum_suggestion_diff = self.get_cvar("qlx_balanceMinimumSuggestionDiff", int)
         if switch and switch[1] >= minimum_suggestion_diff:
-            channel.reply("SUGGESTION: switch ^4{}^7 with ^4{}^7. Type !a to agree."
+            channel.reply("SUGGESTION: switch ^4{}^7 with ^4{}^7. Mentioned players can type ^4!a^7 to agree."
                 .format(switch[0][0].clean_name, switch[0][1].clean_name))
             if not self.suggested_pair or self.suggested_pair[0] != switch[0][0] or self.suggested_pair[1] != switch[0][1]:
                 self.suggested_pair = (switch[0][0], switch[0][1])

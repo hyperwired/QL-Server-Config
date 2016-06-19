@@ -1,0 +1,26 @@
+[
+  {
+      "author": "4Seasons Gaming",
+      "description": "Team Deathmatch - Classic Mode",
+      "basegt": "tdm",
+      "id": "4sgtdm",
+      "title": "4SG Team Deathmatch",
+      "cvars": {
+        "g_loadout": "0",
+        "g_voteFlags":"0",
+        "g_dropPowerups":"0",
+        "g_dropCmds":"4",
+        "timelimit":"20",
+        "fraglimit":"0",
+        "g_friendlyFire":"1",
+        "g_itemTimers":"0",
+        "g_weaponRespawn":"30",
+        "g_ammoPack":"0",
+        "g_ammoRespawn":"40",
+        "sv_warmupReadyPercentage":"1",
+        "mercylimit":"50",
+        "g_startingWeapons":"3",
+        "dmflags":"0"
+      }
+    }
+]

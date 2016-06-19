@@ -13,10 +13,31 @@ class tp_fun(minqlx.Plugin):
         self.add_command("fuckyou", self.cmd_printfu, 1)
         self.add_command("bury", self.cmd_bury, 3, usage="<id>")
         self.add_command("digup", self.cmd_digup, 3, usage="<id>")
+        self.add_command("smile", self.cmd_elated_emoji) # Purger requested
+        self.add_command("pentagram", self.cmd_pentagram, 1, usage="<id>") # Merozollo requested
         self.add_command("tomtec_versions", self.cmd_showversion)
 
-        self.plugin_version = "1.3"
- 
+        self.plugin_version = "1.4"
+
+    def cmd_elated_emoji(self, player, msg, channel):
+        num1 = randint(0,6)
+        num2 = randint(0,6)
+        minqlx.client_command(player.id, "say ^{}:^{}D".format(num1, num2))
+        return minqlx.RET_STOP_ALL
+        
+    def cmd_pentagram(self, player, msg, channel):
+        if len(msg) < 2:
+            return minqlx.RET_USAGE
+        
+        try:
+            pentagramee = self.player(int(msg[1]))
+        except:
+            player.tell("Invalid ID.")
+            return
+
+        pentagramee.powerups(battlesuit=3)
+        self.msg("{}^7 has got the ^1Pentagram of Protection^7!".format(pentagramee.name))
+        
     def cmd_penlen(self, player, msg, channel):
         playerName = player.clean_name
         randNum = randint(0,11)

@@ -1,7 +1,7 @@
 [
    {
       "author":"TomTec Solutions",
-      "description":"PQL/Turbo ruleset integration to Freeze Tag servers in a Clan Arena style.",
+      "description":"PQL/Turbo ruleset integration to Instagib Freeze Tag servers in a Clan Arena style.",
       "basegt":"ft",
       "id":"pqlcaift",
       "title":"Turbo Insta-FT (CA-style)",
@@ -15,7 +15,7 @@
          "dmflags":"60",
          "g_startingArmor":"200",
          "g_startingHealthBonus":"0",
-         "g_startingWeapons":"81",
+         "g_startingWeapons":"65",
          "weapon_reload_rg":"1200",
          "g_speed":"320",
          "roundlimit":"10",

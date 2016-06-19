@@ -34,14 +34,18 @@ class irc(minqlx.Plugin):
         self.add_hook("unload", self.handle_unload)
         self.add_hook("player_connect", self.handle_player_connect, priority=minqlx.PRI_LOWEST)
         self.add_hook("player_disconnect", self.handle_player_disconnect, priority=minqlx.PRI_LOWEST)
-
+        self.add_hook("game_countdown", self.game_countdown)
+        
         self.add_command(("world", "say_world"), self.send_irc_message, priority=minqlx.PRI_LOWEST)
         self.add_command("tomtec_versions", self.cmd_showversion)
+        self.add_command("commlink", self.cmd_toggle_commlink)
 
-        self.plugin_version = "1.4"
+        self.plugin_version = "2.0"
         
         self.set_cvar_once("qlx_ircServer", "irc.quakenet.org")
-        self.set_cvar_once("qlx_ircRelayChannel", "")
+        
+        self.set_cvar_once("qlx_ircRelayChannel", "#thepurgery")
+            
         self.set_cvar_once("qlx_ircRelayIrcChat", "1")
         self.set_cvar_once("qlx_ircIdleChannels", "")
         self.set_cvar_once("qlx_ircNickname", "minqlx-{}".format(random.randint(1000, 9999)))
@@ -59,7 +63,7 @@ class irc(minqlx.Plugin):
         self.qnet = (self.get_cvar("qlx_ircQuakenetUser"),
             self.get_cvar("qlx_ircQuakenetPass"),
             self.get_cvar("qlx_ircQuakenetHidden", bool))
-        self.is_relaying = self.get_cvar("qlx_ircRelayIrcChat", bool) 
+        self.is_relaying = self.get_cvar("qlx_ircRelayIrcChat", bool)
 
         self.authed = set()
         self.auth_attempts = {}
@@ -72,7 +76,19 @@ class irc(minqlx.Plugin):
             self.irc = SimpleAsyncIrc(self.server, self.nickname, self.handle_msg, self.handle_perform, self.handle_raw)
             self.irc.start()
             self.logger.info("Connecting to {}...".format(self.server))
+            self.msg("Connecting to ^3CommLink^7...")
 
+
+    def cmd_toggle_commlink(self, player, msg, channel):
+        flag = self.db.get_flag(player, "commlink:enabled", default=True)
+        self.db.set_flag(player, "commlink:enabled", not flag)
+        if flag:
+            word = "disabled"
+        else:
+            word = "enabled"
+        player.tell("^3CommLink^7 notices have been ^4{}^7.".format(word))
+        return minqlx.RET_STOP_ALL
+    
     def handle_chat(self, player, msg, channel):
         if self.irc and self.relay and channel == "chat":
             text = "^7<{}> ^2{}".format(player.name, msg)
@@ -85,7 +101,7 @@ class irc(minqlx.Plugin):
 
     def handle_player_connect(self, player):
         if self.irc and self.relay:
-            self.irc.msg(self.relay, self.translate_colors("^3{}^7 connected.".format(player.name)))
+            self.irc.msg(self.relay, self.translate_colors("{} connected.".format(player.name)))
 
     def handle_player_disconnect(self, player, reason):
         if reason and reason[-1] not in ("?", "!", "."):
@@ -94,16 +110,29 @@ class irc(minqlx.Plugin):
         if self.irc and self.relay:
             self.irc.msg(self.relay, self.translate_colors("^3{}^7 {}".format(player.name, reason)))
 
+    def game_countdown(self):
+        if self.game.type_short == "duel":
+            self.msg("^3CommLink^7 message reception has been disabled during your Duel.")
+
     def handle_msg(self, irc, user, channel, msg):
         if not msg:
             return
         
         cmd = msg[0].lower()
-        if channel.lower() == self.relay.lower(): 
+        if channel.lower() == self.relay.lower():
             if cmd in (".players", ".status", ".info", ".map", ".server"):
                 self.server_report(self.relay)
-            elif self.is_relaying: 
-                minqlx.CHAT_CHANNEL.reply("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
+            elif self.is_relaying:
+                if self.game.type_short != "duel":
+                    for p in self.players():
+                        if self.db.get_flag(p, "commlink:enabled", default=True):
+                            p.tell("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
+                else:
+                    if self.game.state == "warmup":
+                        for p in self.players():
+                            if self.db.get_flag(p, "commlink:enabled", default=True):
+                                p.tell("[CommLink] ^4{}^7:^3 {}".format(user[0], " ".join(msg)))
+                        
         elif channel == user[0]: # Is PM?
             if len(msg) > 1 and msg[0].lower() == ".auth" and self.password:
                 if user in self.authed:
@@ -119,15 +148,14 @@ class irc(minqlx.Plugin):
                     if self.auth_attempts[user[2]] > 0:
                         irc.msg(channel, "Wrong password. You have {} attempts left.".format(self.auth_attempts[user[2]]))
             elif len(msg) > 1 and user in self.authed and msg[0].lower() == ".qlx":
-                @minqlx.next_frame  
-                def f():  
-                    try:  
-                        minqlx.COMMANDS.handle_input(IrcDummyPlayer(self.irc, user[0]), " ".join(msg[1:]), IrcChannel(self.irc, user[0]))  
-                    except Exception as e:  
+                @minqlx.next_frame
+                def f():
+                    try:
+                        minqlx.COMMANDS.handle_input(IrcDummyPlayer(self.irc, user[0]), " ".join(msg[1:]), IrcChannel(self.irc, user[0]))
+                    except Exception as e:
                         irc.msg(channel, "{}: {}".format(e.__class__.__name__, e))
-                        minqlx.log_exception()  
-                f()  
-
+                        minqlx.log_exception()
+                f()
 
     def send_irc_message(self, player, msg, channel):
          text = "^7<{}> ^3{} ".format(player.name, " ".join(msg[1:]))
@@ -136,6 +164,7 @@ class irc(minqlx.Plugin):
          
     def handle_perform(self, irc):
         self.logger.info("Connected to IRC!".format(self.server))
+        self.msg("Connected to ^3CommLink^7.")
 
         quser, qpass, qhidden = self.qnet
         if quser and qpass and "NETWORK" in self.irc.server_options and self.irc.server_options["NETWORK"] == "QuakeNet":
@@ -280,6 +309,7 @@ class SimpleAsyncIrc(threading.Thread):
             
             # Disconnected. Try reconnecting in 30 seconds.
             logger.info("Disconnected from IRC. Reconnecting in 30 seconds...")
+            minqlx.CHAT_CHANNEL.reply("Connection attempt to ^3CommLink^7 server failed, retrying in 30 seconds.")
             time.sleep(30)
         loop.close()
 

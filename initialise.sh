@@ -12,11 +12,14 @@ GITURL="https://github.com/TomTec-Solutions/QL-Server-Config.git"
 #  Downloading the GitHub Repository and preparing 'deploy.sh'
 #
 echo "Initialiser has started."
+echo "Specified initialisation flags: $@"
 cd ~
 echo "Changed PWD to ~."
 rm -rf "QL-Server-Config" # removes failed installs
-echo "Downloading the 'QL-Server-Config.git' repository..."
-git clone $GITURL > /dev/null
+until echo "Downloading the 'QL-Server-Config.git' repository..."; git clone $GITURL; do
+  echo "Repository download failed (error $?). Retrying..."
+  sleep 3
+done
 cd QL-Server-Config
 cp deploy.sh ~/deploy.sh
 chmod +x ~/deploy.sh
@@ -26,7 +29,7 @@ chmod +x ~/deploy.sh
 #  Running 'deploy.sh'
 #
 echo "'deploy.sh' has arrived. Executing."
-bash ~/deploy.sh
+bash ~/deploy.sh "$@"
 echo "'deploy.sh' has left. Exiting."
 
 cp -f initialise.sh ~; cd ~; chmod +x ~/initialise.sh; rm -rf ~/QL-Server-Config; exit
