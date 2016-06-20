@@ -283,17 +283,8 @@ class custom_votes(minqlx.Plugin):
 
         if vote.lower() == "excessive":
             # enables the '/cv excessive [on/off]' command
-            if args.lower() == "off":
-                self.callvote("qlx !excessiveweaps off", "excessive weapons: off")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            elif args.lower() == "on":
-                self.callvote("qlx !excessiveweaps on", "excessive weapons: on")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            else:
-                caller.tell("^2/cv excessive [on/off]^7 is the usage for this callvote command.")
-                return minqlx.RET_STOP_ALL
+            caller.tell("^1Excessive weapons have been disabled because players continuously leave it switched on when they leave.")
+            return minqlx.RET_STOP_ALL
 
         if vote.lower() in ("kick", "clientkick"):
             # if player removal cvar is set, do not permit '/cv kick' or '/cv clientkick'
