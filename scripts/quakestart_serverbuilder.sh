@@ -26,6 +26,5 @@ exec $qPathToStartScript \
     +set fs_homepath ~/.quakelive_serverbuilder/$1 \
     +set sv_location "$qServerLocation" \
     +set sv_master 0 \
-    +set sv_serverType 0 \
     +set sv_identifier $1 \
     +set qlx_plugins "serverbuilder_node"
