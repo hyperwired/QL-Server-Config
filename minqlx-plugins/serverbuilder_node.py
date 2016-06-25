@@ -1,6 +1,6 @@
 import minqlx, requests, redis
 
-class serverbuild_node(minqlx.Plugin):
+class serverbuilder_node(minqlx.Plugin):
     def __init__(self):
         server = (self.get_cvar("qlx_redisAddress").split(":"))
         self.database = redis.Redis(host=server[0], port=server[1], db=15, password=self.get_cvar("qlx_redisPassword"))
