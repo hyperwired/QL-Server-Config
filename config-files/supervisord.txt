@@ -34,6 +34,6 @@ autorestart=true                                               ; If the servers 
 [program:quakelive_serverbuilder]
 command=/home/qlserver/quakestart_serverbuilder.sh %(process_num)s
 user=qlserver
-process_name=qzerodedcustom_%(process_num)s
-numprocs=8
+process_name=qzeroded_%(process_num)s
+numprocs=12
 autorestart=true
