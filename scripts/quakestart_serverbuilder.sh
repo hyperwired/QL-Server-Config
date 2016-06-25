@@ -26,4 +26,5 @@ exec $qPathToStartScript \
     +set fs_homepath ~/.quakelive_serverbuilder/$1 \
     +set sv_location "$qServerLocation" \
     +set sv_identifier $1 \
+    +set serverstartup "map campgrounds ffa" \
     +set qlx_plugins "serverbuilder_node"
