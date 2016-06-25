@@ -23,7 +23,7 @@ class custom_votes(minqlx.Plugin):
         self.add_hook("player_loaded", self.player_loaded)
 
         self.add_command("tomtec_versions", self.cmd_showversion)
-        self.add_command("excessiveweaps", self.cmd_excessive_weaps, 5, usage="on/off")
+        self.add_command("excessiveweaps", self.cmd_excessive_weaps, 3, usage="on/off")
         self.add_command("ruleset", self.cmd_ruleset, 5, usage="pql/vql")
 
         self.set_cvar_once("qlx_rulesetLocked", "0")
