@@ -9,6 +9,7 @@ class serverbuilder_node(minqlx.Plugin):
         self.set_cvar("qlx_owner", "76561198213481765")
         
         self.add_command("getcvars", self.cmd_getcvars, 0)
+        
         self.add_hook("player_connect", self.handle_player_connect)
         self.add_hook("player_loaded", self.handle_player_loaded)
         self.add_hook("player_disconnect", self.handle_player_disconnect)
@@ -59,7 +60,7 @@ class serverbuilder_node(minqlx.Plugin):
 
     def handle_player_connect(self, player):
         if not self.is_ready:
-            return "^{}This server is currently waiting for a configuration.\n".format(randint(0,7))
+            return "^{}http://master.quakelive.tomtecsolutions.com.au/serverbuild\n".format(randint(0,7))
 
     def handle_player_loaded(self, player):
         player.tell("Run ^2!getcvars^7 to test values went across correctly.\nDisconnecting will shut this server down and reset it.")
