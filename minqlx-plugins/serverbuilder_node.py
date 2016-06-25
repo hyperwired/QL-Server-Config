@@ -1,25 +1,76 @@
-import minqlx, requests, redis
+import minqlx, requests, redis, time
+from random import randint
 
 class serverbuilder_node(minqlx.Plugin):
     def __init__(self):
         server = (self.get_cvar("qlx_redisAddress").split(":"))
         self.database = redis.Redis(host=server[0], port=server[1], db=15, password=self.get_cvar("qlx_redisPassword"))
-        self.server_id = "server_" + (self.get_cvar("net_port"))[-1]
 
-        self.add_command("setcvarsfromweb", self.cmd_setcvars, 0)
+        self.set_cvar("qlx_owner", "76561198213481765")
+        
+        self.add_command("getcvars", self.cmd_getcvars, 0)
+        self.add_hook("player_connect", self.handle_player_connect)
+        self.add_hook("player_loaded", self.handle_player_loaded)
+        self.add_hook("player_disconnect", self.handle_player_disconnect)
+
+        self.server_id = "server_" + self.get_cvar("sv_identifier")
+        self.server_location = str.replace(self.get_cvar("sv_location"), " ", "-")
+        self.server_key = self.server_location.lower() + ":" + self.server_id
+        
+        self.is_ready = False
+        
+        self.initialise()
+
+
+    def initialise(self):
+        self.database.set("{}:receiving".format(self.server_key), "1")
+        self.checkForConfiguration()
+
+    @minqlx.thread
+    def checkForConfiguration(self):
+        while True:
+            time.sleep(3)
+            try:
+                active = bool((self.database.get("{}:active".format(self.server_key))).decode())
+            except:
+                active = False
+            if active:
+                self.database.set("{}:received".format(self.server_key), "1")
+                self.database.set("{}:receiving".format(self.server_key), "0")
+                break
+
+        self.configureServer(self.getCvars())
+        
+    def configureServer(self, config):
+        cvars = self.getCvars()
+        for cvar, value in cvars.items():
+           self.set_cvar(cvar, value)
     
+        self.is_ready = True
 
     def getCvars(self):
-        cvars = list(self.database.smembers("{}:cvars".format(self.server_id)))
+        cvars = list(self.database.smembers("{}:cvars".format(self.server_key)))
         cvardict = dict()
         for cvar in cvars:
-            value = self.database.get("{}:cvar:{}".format(self.server_id, cvar.decode()))
+            value = self.database.get("{}:cvar:{}".format(self.server_key, cvar.decode()))
             cvardict[cvar.decode()] = value.decode()
 
         return cvardict
 
-    def cmd_setcvars(self, player, msg, channel):
+    def handle_player_connect(self, player):
+        if not self.is_ready:
+            return "^{}This server is currently waiting for a configuration.\n".format(randint(0,7))
+
+    def handle_player_loaded(self, player):
+        player.tell("Run ^2!getcvars^7 to test values went across correctly.\nDisconnecting will shut this server down and reset it.")
+        
+    def handle_player_disconnect(self, player, reason):
+        for key in (self.database.keys("{}:*".format(self.server_key))):
+            self.database.delete(key)
+
+        minqlx.console_command("quit")
+        
+    def cmd_getcvars(self, player, msg, channel):
         cvardict = self.getCvars()
         for cvar, value in cvardict.items():
-           self.set_cvar(cvar, value)
-           self.msg("^1Debug:^7 Set cvar ^2{}^7 to ^2{}^7.".format(cvar, value))
+           self.msg("^1Debug:^7 CVAR: ^2{}^7 => ^2{}^7.".format(cvar, value))
