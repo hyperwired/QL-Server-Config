@@ -69,6 +69,7 @@ class serverbuilder_node(minqlx.Plugin):
         return cvardict
 
     def handle_player_connect(self, player):
+        if str(player.steam_id)[0] == "9": return
         if not self.is_ready:
             return "^{}http://master.quakelive.tomtecsolutions.com.au/serverbuild\n".format(randint(0,7))
         else:
@@ -79,8 +80,8 @@ class serverbuilder_node(minqlx.Plugin):
                 self.mapSet = True
 
     def handle_player_loaded(self, player):
+        if str(player.steam_id)[0] == "9": return
         if self.isFirstPlayer:
-            if str(player.steam_id)[0] == "9": return
             player.tell("^2Info:^7 Welcome to your server.")
             player.tell("^2Info:^7 As soon as there's no more people connected to this server, it'll shut down automatically.")
             player.addmod()
