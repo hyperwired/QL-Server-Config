@@ -89,9 +89,9 @@ class serverbuilder_node(minqlx.Plugin):
             self.isFirstPlayer = False
         
     def handle_player_disconnect(self, player, reason):
+        if reason == "was kicked": return
         if len(self.players()) <= 1:
-            if str(player.steam_id)[0] != "9":
-                self.destroySession()
+            self.destroySession()
 
     def destroySession(self):
         for key in (self.database.keys("{}:*".format(self.server_key))):
