@@ -20,6 +20,7 @@ class serverbuilder_node(minqlx.Plugin):
         
         self.is_ready = False
         self.isFirstPlayer = True
+        self.mapSet = False
 
         for key in (self.database.keys("{}:*".format(self.server_key))):
             self.database.delete(key)
@@ -54,12 +55,8 @@ class serverbuilder_node(minqlx.Plugin):
         for plugin in (self.database.smembers("{}:plugins".format(self.server_key))):
             minqlx.load_plugin(plugin.decode())
 
-        theMap = self.database.get("{}:map".format(self.server_key)).decode()
-        theFactory = self.database.get("{}:factory".format(self.server_key)).decode()
-
         self.is_ready = True
         
-        #minqlx.console_command("map {} {}".format(theMap.decode(), theFactory.decode()))
 
     def getCvars(self):
         cvars = list(self.database.smembers("{}:cvars".format(self.server_key)))
@@ -73,6 +70,12 @@ class serverbuilder_node(minqlx.Plugin):
     def handle_player_connect(self, player):
         if not self.is_ready:
             return "^{}http://master.quakelive.tomtecsolutions.com.au/serverbuild\n".format(randint(0,7))
+        else:
+            if not self.mapSet:
+                theMap = self.database.get("{}:map".format(self.server_key)).decode()
+                theFactory = self.database.get("{}:factory".format(self.server_key)).decode()
+                self.change_map(theMap.decode(), theFactory.decode())
+                self.mapSet = True
 
     def handle_player_loaded(self, player):
         if self.isFirstPlayer:
