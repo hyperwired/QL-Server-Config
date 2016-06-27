@@ -71,7 +71,7 @@ class serverbuilder_node(minqlx.Plugin):
     def handle_player_connect(self, player):
         if str(player.steam_id)[0] == "9": return
         if not self.is_ready:
-            return "^{}http://master.quakelive.tomtecsolutions.com.au/serverbuild\n".format(randint(0,7))
+            return "^{}http://serverbuilder.thepurgery.com\n".format(randint(0,7))
         else:
             if not self.mapSet:
                 theMap = self.database.get("{}:map".format(self.server_key)).decode()
