@@ -80,6 +80,7 @@ class serverbuilder_node(minqlx.Plugin):
 
     def handle_player_loaded(self, player):
         if self.isFirstPlayer:
+            if str(player.steam_id)[0] == "9": return
             player.tell("^2Info:^7 Welcome to your server.")
             player.tell("^2Info:^7 As soon as there's no more people connected to this server, it'll shut down automatically.")
             player.addmod()
