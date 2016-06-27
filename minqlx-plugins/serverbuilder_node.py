@@ -7,6 +7,7 @@ class serverbuilder_node(minqlx.Plugin):
         self.database = redis.Redis(host=server[0], port=server[1], db=15, password=self.get_cvar("qlx_redisPassword"))
 
         self.set_cvar("qlx_owner", "76561198213481765")
+        self.set_cvar("qlx_serverBrandTopField", "Powered by ^4TomTec Solutions^7 Quake Live server hosting and management technologies.")
         
         self.add_command("getinfo", self.cmd_getinfo, 0)
         
