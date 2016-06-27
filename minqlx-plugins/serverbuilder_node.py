@@ -89,7 +89,6 @@ class serverbuilder_node(minqlx.Plugin):
             self.isFirstPlayer = False
         
     def handle_player_disconnect(self, player, reason):
-        if reason == "was kicked": return
         if len(self.players()) <= 1:
             self.destroySession()
 
