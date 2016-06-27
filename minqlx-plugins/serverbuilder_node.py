@@ -90,8 +90,8 @@ class serverbuilder_node(minqlx.Plugin):
         
     def handle_player_disconnect(self, player, reason):
         if len(self.players()) <= 1:
-            if player.name == "TestingBotSupport": return
-            self.destroySession()
+            if str(player.steam_id)[0] != "9":
+                self.destroySession()
 
     def destroySession(self):
         for key in (self.database.keys("{}:*".format(self.server_key))):
