@@ -19,6 +19,7 @@ class serverbuilder_node(minqlx.Plugin):
         self.server_key = self.server_location.lower() + ":" + self.server_id
         
         self.is_ready = False
+        self.isFirstPlayer = True
 
         for key in (self.database.keys("{}:*".format(self.server_key))):
             self.database.delete(key)
@@ -52,8 +53,14 @@ class serverbuilder_node(minqlx.Plugin):
 
         for plugin in (self.database.smembers("{}:plugins".format(self.server_key))):
             minqlx.load_plugin(plugin.decode())
-            
+
+        theMap = self.database.get("{}:map".format(self.server_key)).decode()
+        theFactory = self.database.get("{}:factory".format(self.server_key)).decode()
+
+        minqlx.console_command("map {} {}".format(theMap.decode(), theFactory.decode()))
+
         self.is_ready = True
+        
 
     def getCvars(self):
         cvars = list(self.database.smembers("{}:cvars".format(self.server_key)))
@@ -69,13 +76,17 @@ class serverbuilder_node(minqlx.Plugin):
             return "^{}http://master.quakelive.tomtecsolutions.com.au/serverbuild\n".format(randint(0,7))
 
     def handle_player_loaded(self, player):
-        player.tell("Run ^2!getinfo^7 to test values went across correctly.\nDisconnecting will shut this server down and reset it.")
+        if self.isFirstPlayer:
+            player.tell("^2Info:^7 Welcome to your server.")
+            player.tell("^2Info:^7 As soon as there's no more people connected to this server, it'll shut down automatically.")
+            self.isFirstPlayer = False
         
     def handle_player_disconnect(self, player, reason):
-        for key in (self.database.keys("{}:*".format(self.server_key))):
-            self.database.delete(key)
+        if len(self.players()) <= 1:
+            for key in (self.database.keys("{}:*".format(self.server_key))):
+                self.database.delete(key)
 
-        minqlx.console_command("quit")
+            minqlx.console_command("quit")
         
     def cmd_getinfo(self, player, msg, channel):
         cvardict = self.getCvars()
@@ -84,3 +95,6 @@ class serverbuilder_node(minqlx.Plugin):
 
         for plugin in (self.database.smembers("{}:plugins".format(self.server_key))):
             self.msg("^1Debug:^7 Plugin: ^2{}^7 loaded.".format(plugin.decode()))
+
+        self.msg("^1Debug:^7 Map: ^2{}^7.".format(self.database.get("{}:map".format(self.server_key)).decode()))
+        self.msg("^1Debug:^7 Factory: ^2{}^7.".format(self.database.get("{}:factory".format(self.server_key)).decode()))
