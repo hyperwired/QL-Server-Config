@@ -90,6 +90,7 @@ class serverbuilder_node(minqlx.Plugin):
         
     def handle_player_disconnect(self, player, reason):
         if len(self.players()) <= 1:
+            if player.name == "TestingBotSupport": return
             self.destroySession()
 
     def destroySession(self):
