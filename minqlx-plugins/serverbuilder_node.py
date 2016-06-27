@@ -79,6 +79,7 @@ class serverbuilder_node(minqlx.Plugin):
         if self.isFirstPlayer:
             player.tell("^2Info:^7 Welcome to your server.")
             player.tell("^2Info:^7 As soon as there's no more people connected to this server, it'll shut down automatically.")
+            player.addmod()
             self.isFirstPlayer = False
         
     def handle_player_disconnect(self, player, reason):
