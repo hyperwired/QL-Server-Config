@@ -8,7 +8,7 @@ class serverbuilder_node(minqlx.Plugin):
 
         self.set_cvar("qlx_owner", "76561198213481765")
         
-        self.add_command("getcvars", self.cmd_getcvars, 0)
+        self.add_command("getinfo", self.cmd_getinfo, 0)
         
         self.add_hook("player_connect", self.handle_player_connect)
         self.add_hook("player_loaded", self.handle_player_loaded)
@@ -19,7 +19,10 @@ class serverbuilder_node(minqlx.Plugin):
         self.server_key = self.server_location.lower() + ":" + self.server_id
         
         self.is_ready = False
-        
+
+        for key in (self.database.keys("{}:*".format(self.server_key))):
+            self.database.delete(key)
+    
         self.initialise()
 
 
@@ -45,8 +48,11 @@ class serverbuilder_node(minqlx.Plugin):
     def configureServer(self, config):
         cvars = self.getCvars()
         for cvar, value in cvars.items():
-           self.set_cvar(cvar, value)
-    
+            self.set_cvar(cvar, value)
+
+        for plugin in (self.database.smembers("{}:plugins".format(self.server_key))):
+            minqlx.load_plugin(plugin.decode())
+            
         self.is_ready = True
 
     def getCvars(self):
@@ -63,7 +69,7 @@ class serverbuilder_node(minqlx.Plugin):
             return "^{}http://master.quakelive.tomtecsolutions.com.au/serverbuild\n".format(randint(0,7))
 
     def handle_player_loaded(self, player):
-        player.tell("Run ^2!getcvars^7 to test values went across correctly.\nDisconnecting will shut this server down and reset it.")
+        player.tell("Run ^2!getinfo^7 to test values went across correctly.\nDisconnecting will shut this server down and reset it.")
         
     def handle_player_disconnect(self, player, reason):
         for key in (self.database.keys("{}:*".format(self.server_key))):
@@ -71,7 +77,10 @@ class serverbuilder_node(minqlx.Plugin):
 
         minqlx.console_command("quit")
         
-    def cmd_getcvars(self, player, msg, channel):
+    def cmd_getinfo(self, player, msg, channel):
         cvardict = self.getCvars()
         for cvar, value in cvardict.items():
-           self.msg("^1Debug:^7 CVAR: ^2{}^7 => ^2{}^7.".format(cvar, value))
+            self.msg("^1Debug:^7 CVAR: ^2{}^7 => ^2{}^7.".format(cvar, value))
+
+        for plugin in (self.database.smembers("{}:plugins".format(self.server_key))):
+            self.msg("^1Debug:^7 Plugin: ^2{}^7 loaded.".format(plugin.decode()))
