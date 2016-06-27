@@ -12,9 +12,9 @@ class serverbuilder_node(minqlx.Plugin):
         
         self.add_command("getinfo", self.cmd_getinfo, 0)
         
-        self.add_hook("player_connect", self.handle_player_connect)
-        self.add_hook("player_loaded", self.handle_player_loaded)
-        self.add_hook("player_disconnect", self.handle_player_disconnect)
+        self.add_hook("player_connect", self.handle_player_connect, priority=minqlx.PRI_HIGHEST)
+        self.add_hook("player_loaded", self.handle_player_loaded, priority=minqlx.PRI_HIGHEST)
+        self.add_hook("player_disconnect", self.handle_player_disconnect, priority=minqlx.PRI_HIGHEST)
 
         self.server_id = "server_" + self.get_cvar("sv_identifier")
         self.server_location = str.replace(self.get_cvar("sv_location"), " ", "-")
@@ -58,7 +58,6 @@ class serverbuilder_node(minqlx.Plugin):
             minqlx.load_plugin(plugin.decode())
 
         self.is_ready = True
-        
 
     def getCvars(self):
         cvars = list(self.database.smembers("{}:cvars".format(self.server_key)))
@@ -87,12 +86,11 @@ class serverbuilder_node(minqlx.Plugin):
             player.tell("^2Info:^7 As soon as there's no more people connected to this server, it'll shut down automatically.")
             player.addmod()
             self.isFirstPlayer = False
-        
+
+    @minqlx.next_frame
     def handle_player_disconnect(self, player, reason):
-        if reason == "was kicked": return
+        if (reason == "was kicked") and (str(player.steam_id)[0] == "9"): return # is testingbotsupport bot
         if len(self.players()) <= 1:
-            for p in self.players():
-                if str(p.steam_id)[0] == "9": self.destroySession()
             self.destroySession()
                     
     def destroySession(self):
