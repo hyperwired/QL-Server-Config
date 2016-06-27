@@ -18,6 +18,7 @@ cd ~/steamcmd/steamapps/common/qlds/baseq3
 
 echo "Removing server instance #$1's homepath..."
 rm -rf ~/.quakelive_serverbuilder/$1
+
 echo "Starting server instance #$1..."
 exec $qPathToStartScript \
     +set net_strict 1 \
