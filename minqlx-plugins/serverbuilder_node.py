@@ -90,11 +90,18 @@ class serverbuilder_node(minqlx.Plugin):
         
     def handle_player_disconnect(self, player, reason):
         if len(self.players()) <= 1:
-            for key in (self.database.keys("{}:*".format(self.server_key))):
+            self.destroySession()
+        else:
+            for p in self.players(): # if there's only bots around
+                if str(p.steam_id)[0] == "9":
+                    self.destroySession()
+
+    def destroySession(self):
+        for key in (self.database.keys("{}:*".format(self.server_key))):
                 self.database.delete(key)
 
-            minqlx.console_command("quit")
-        
+        minqlx.console_command("quit")
+
     def cmd_getinfo(self, player, msg, channel):
         cvardict = self.getCvars()
         for cvar, value in cvardict.items():
