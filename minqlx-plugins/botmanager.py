@@ -81,7 +81,7 @@ class botmanager(minqlx.Plugin):
         minqlx.console_command("addbot {} {} A 0 \"{}\"".format(BOT_TYPE[0], BOT_TYPE[1], BOT_NAME)) # team any, 0 millisecond join delay
         
     def rembot(self):
-        minqlx.console_command("clientkick {}".format(self.find_player(BOT_NAME)[0].id)) # kicks BOT_NAME
+        self.bot().kick("was removed")
     ################################ METHODS ################################
 
     ################################ HANDLERS ################################
