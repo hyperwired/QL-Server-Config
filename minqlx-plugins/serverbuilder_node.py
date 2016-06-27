@@ -57,10 +57,9 @@ class serverbuilder_node(minqlx.Plugin):
         theMap = self.database.get("{}:map".format(self.server_key)).decode()
         theFactory = self.database.get("{}:factory".format(self.server_key)).decode()
 
-        minqlx.console_command("map {} {}".format(theMap.decode(), theFactory.decode()))
-
         self.is_ready = True
         
+        #minqlx.console_command("map {} {}".format(theMap.decode(), theFactory.decode()))
 
     def getCvars(self):
         cvars = list(self.database.smembers("{}:cvars".format(self.server_key)))
