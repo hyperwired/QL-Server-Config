@@ -74,7 +74,7 @@ class serverbuilder_node(minqlx.Plugin):
             if not self.mapSet:
                 theMap = self.database.get("{}:map".format(self.server_key)).decode()
                 theFactory = self.database.get("{}:factory".format(self.server_key)).decode()
-                self.change_map(theMap.decode(), theFactory.decode())
+                self.change_map(theMap, theFactory)
                 self.mapSet = True
 
     def handle_player_loaded(self, player):
