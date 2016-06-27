@@ -89,7 +89,6 @@ class serverbuilder_node(minqlx.Plugin):
             self.isFirstPlayer = False
         
     def handle_player_disconnect(self, player, reason):
-        if str(player.steam_id)[0] == "9": return
         if len(self.players()) <= 1:
             for key in (self.database.keys("{}:*".format(self.server_key))):
                 self.database.delete(key)
