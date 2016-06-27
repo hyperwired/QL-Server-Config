@@ -12,9 +12,9 @@ class serverbuilder_node(minqlx.Plugin):
         
         self.add_command("getinfo", self.cmd_getinfo, 0)
         
-        self.add_hook("player_connect", self.handle_player_connect, priority=minqlx.PRI_HIGHEST)
-        self.add_hook("player_loaded", self.handle_player_loaded, priority=minqlx.PRI_HIGHEST)
-        self.add_hook("player_disconnect", self.handle_player_disconnect, priority=minqlx.PRI_HIGHEST)
+        self.add_hook("player_connect", self.handle_player_connect)
+        self.add_hook("player_loaded", self.handle_player_loaded)
+        self.add_hook("player_disconnect", self.handle_player_disconnect)
 
         self.server_id = "server_" + self.get_cvar("sv_identifier")
         self.server_location = str.replace(self.get_cvar("sv_location"), " ", "-")
