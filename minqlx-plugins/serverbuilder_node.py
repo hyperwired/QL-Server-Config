@@ -79,6 +79,9 @@ class serverbuilder_node(minqlx.Plugin):
                 theMap = self.database.get("{}:map".format(self.server_key)).decode()
                 theFactory = self.database.get("{}:factory".format(self.server_key)).decode()
                 self.change_map(theMap, theFactory)
+                cvars = self.getCvars()
+                for cvar, value in cvars.items():
+                    self.set_cvar(cvar, value) # we set them all again incase the factory overrode some cvars
                 self.mapSet = True
 
     def handle_player_loaded(self, player):
