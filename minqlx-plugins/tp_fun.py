@@ -8,7 +8,7 @@ class tp_fun(minqlx.Plugin):
     def __init__(self):
         self.add_command("penislength", self.cmd_penlen) # Junkyard requested
         self.add_command(("vaginadepth", "vaginaldepth", "vaginialdepth"), self.cmd_vagdep) # Junkyard requested
-        self.add_command(("msg", "message"), self.cmd_screenmessage, 1, usage="<text>") # Merozollo requested
+        self.add_command(("msg", "message"), self.cmd_screenmessage, 1, usage="[id] <text>") # Merozollo requested
         self.add_command(("breastsize", "cupsize", "brasize", "boobsize"), self.cmd_boobsize) # 0regonn requested
         self.add_command("fuckyou", self.cmd_printfu, 1)
         self.add_command("bury", self.cmd_bury, 3, usage="<id>")
@@ -75,8 +75,12 @@ class tp_fun(minqlx.Plugin):
     def cmd_screenmessage(self, player, msg, channel):
         if len(msg) < 2:
             return minqlx.RET_USAGE
-        
-        minqlx.console_command("cp ^7{}^7".format(" ".join(msg[1:])))
+
+        if (msg[1].isdigit()):
+            self.player(int(msg[1])).center_print(" ".join(msg[2:]))
+        else:
+            self.center_print(" ".join(msg[1:]))
+
         self.play_sound("sound/world/klaxon2.wav")
 
     def cmd_printfu(self, player, msg, channel):
