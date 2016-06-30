@@ -17,8 +17,26 @@ class tp_fun(minqlx.Plugin):
         self.add_command("pentagram", self.cmd_pentagram, 1, usage="<id>") # Merozollo requested
         self.add_command("tomtec_versions", self.cmd_showversion)
 
-        self.plugin_version = "1.4"
+        self.add_hook("chat", self.handle_chat)
+        
+        self.plugin_version = "1.5"
 
+    def handle_chat(self, player, msg, channel):
+        words = msg
+        
+        if ("When Bio wins, I grins." in words) or ("When Bio dies, I cries." in words): # 0regonn's being gay again
+            @minqlx.delay(1)
+            def f():
+                self.msg("^7Pur^4g^7er: ^2gay") # na na na naa naa, ghost-purgers!
+                self.talk_beep()
+            f()
+
+    def talk_beep(self, player=None):
+        if not player:
+            self.play_sound("sound/player/talk.ogg")
+        else:
+            self.play_sound("sound/player/talk.ogg", player)
+            
     def cmd_elated_emoji(self, player, msg, channel):
         num1 = randint(0,6)
         num2 = randint(0,6)
