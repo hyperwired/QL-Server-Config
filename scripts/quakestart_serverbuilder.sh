@@ -27,6 +27,7 @@ exec $qPathToStartScript \
     +set zmq_stats_enable 1 \
     +set qlx_redisPassword "$qMinqlxRedisPassword" \
     +set fs_homepath ~/.quakelive_serverbuilder/$1 \
+    +set qlx_owner "76561198213481765" \
     +set sv_location "$qServerLocation" \
     +set sv_identifier $1 \
     +set sv_tags "TomTec ServerBuilder,Unconfigured" \
