@@ -6,6 +6,7 @@ class serverbuilder_node(minqlx.Plugin):
         server = (self.get_cvar("qlx_redisAddress").split(":"))
         self.database = redis.Redis(host=server[0], port=server[1], db=15, password=self.get_cvar("qlx_redisPassword"))
 
+        self.set_cvar("sv_master", "0")
         self.set_cvar("qlx_serverBrandTopField", "Powered by ^4TomTec Solutions^7 Quake Live server hosting and management technologies.")
         self.set_cvar("qlx_serverBrandBottomField", "Visit ^2serverbuilder.thepurgery.com^7 to make your own Quake Live server.")
         
@@ -56,6 +57,8 @@ class serverbuilder_node(minqlx.Plugin):
         for plugin in (self.database.smembers("{}:plugins".format(self.server_key))):
             minqlx.load_plugin(plugin.decode())
 
+        self.set_cvar("sv_master", "1")
+        
         self.is_ready = True
 
     def getCvars(self):
