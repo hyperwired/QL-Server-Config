@@ -12,9 +12,12 @@ class serverbuilder_helper(minqlx.Plugin):
     @minqlx.next_frame   
     def handle_map(self, mapname, factory):
         # turn on infinite ammo for warm-up
-        if self.game.state == "in_progress": return
         if self.get_cvar("qlx_infiniteAmmo", int) != 0:
             self.set_cvar("g_infiniteAmmo", "1")
+
+        # correct starting weapons to gaunt+rail if instagib is on
+        if self.get_cvar("g_instaGib", bool):
+            self.set_cvar("g_startingWeapons", "65")
 
     def handle_game_countdown(self):
         self.play_sound("sound/items/protect3.ogg")
