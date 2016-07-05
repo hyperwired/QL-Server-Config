@@ -146,7 +146,7 @@ class custom_votes(minqlx.Plugin):
 
         if vote.lower() == "do":
             # enables the '/cv do' command
-            self.callvote("qlx !do", "do")
+            self.callvote("qlx !do", "force the suggested switch")
             self.msg("{}^7 called a vote.".format(caller.name))
             return minqlx.RET_STOP_ALL
 
