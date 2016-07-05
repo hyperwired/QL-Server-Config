@@ -144,6 +144,12 @@ class custom_votes(minqlx.Plugin):
                 caller.tell("^2/cv freecam [on/off]^7 is the usage for this callvote command.")
                 return minqlx.RET_STOP_ALL
 
+        if vote.lower() == "do":
+            # enables the '/cv do' command
+            self.callvote("qlx !do", "do")
+            self.msg("{}^7 called a vote.".format(caller.name))
+            return minqlx.RET_STOP_ALL
+
         if vote.lower() == "floordamage":
             # enables the '/cv floordamage [on/off]' command
             if args.lower() == "off":
