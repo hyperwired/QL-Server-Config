@@ -25,6 +25,7 @@ class tp_fun(minqlx.Plugin):
         words = msg
         
         if ("When Bio wins, I grins." in words) or ("When Bio dies, I cries." in words): # 0regonn's being gay again
+            if str(player.steam_id) != "76561198150444650": return # don't let other people use this
             @minqlx.delay(1)
             def f():
                 self.msg("^7Pur^4g^7er: ^2gay") # na na na naa naa, ghost-purgers!
