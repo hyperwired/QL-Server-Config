@@ -29,8 +29,14 @@ class serverbuilder_helper(minqlx.Plugin):
             self.set_cvar("g_infiniteAmmo", "0")
 
     def handle_client_command(self, player, command):
-        if command[0].lower() == "addmod":
-            if player is self.Owner:
+        command = command.lower()
+        command = command.split()
+        if command[0] == "stopserver":
+            if player == self.Owner:
+                minqlx.console_command("quit")
+                
+        if command[0] == "addmod":
+            if player == self.Owner:
                 try:
                     target = self.player(int(command[1]))
                 except:
@@ -40,15 +46,15 @@ class serverbuilder_helper(minqlx.Plugin):
                 self.addmod(target)
                 return minqlx.RET_STOP_ALL
 
-        if command[0].lower() == "demote":
-            if player is self.Owner:
+        if command[0] == "demote":
+            if player == self.Owner:
                 try:
                     target = self.player(int(command[1]))
                 except:
                     player.tell("Invalid ID.")
                     return minqlx.RET_STOP_ALL
 
-                if target is self.Owner:
+                if target == self.Owner:
                     player.tell("You cannot demote the server owner.")
                     return minqlx.RET_STOP_ALL
                 
