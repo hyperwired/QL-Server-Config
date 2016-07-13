@@ -29,7 +29,6 @@ class serverbuilder_helper(minqlx.Plugin):
             self.set_cvar("g_infiniteAmmo", "0")
 
     def handle_client_command(self, player, command):
-        command = command.split()
         if command[0].lower() == "addmod":
             if player is self.Owner:
                 try:
