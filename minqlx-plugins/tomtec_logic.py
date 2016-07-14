@@ -43,6 +43,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("mapname", self.cmd_mapname) # display current map name
         self.add_command("server_reconfigure", self.cmd_reconfigure, 5)
         self.add_command("test", self.cmd_test)
+        self.add_command(("listcv", "cvlist", "listcvs"), self.cmd_listcv)
     
         self.disabled_maps = ["proq3dm6"]
         
@@ -167,7 +168,32 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar("pmove_aircontrol", "1")
         spawn(msg)
         reset()
-        
+
+    def cmd_listcv(self, player, msg, channel):
+        player.tell("^3Extra call-vote commands available on this server:^7")
+        player.tell("^5   /cv freecam [on/off]            - Enables free-camming around the arena in a team-based game.")
+        player.tell("^5   /cv infiniteammo [on/off]       - Enables infinite ammo on all weapons.")
+        player.tell("^5   /cv alltalk [on/off]            - Enables voice communication between teams during the game.")
+        player.tell("^5   /cv chatsounds [on/off]         - Enables the chat-activated sounds triggered by words.")
+        player.tell("^5   /cv allready                    - Forces the game to start.")
+        player.tell("^5   /cv abort                       - Abort the current game.")
+        player.tell("^5   /cv silence <id>                - Silences a player for 10 minutes.")
+        player.tell("^5   /cv floordamage [on/off]        - Permits damage to go through floors/walls/surfaces etc.")
+        player.tell("^5   /cv spec <id>                   - Move the player specified to the spectators.")
+        player.tell("^5   /cv tempban <id>                - Ban the specified player until the map changes.")
+        player.tell("^5   /cv lock (team)                 - Lock both or specified team(s).")
+        player.tell("^5   /cv unlock (team)               - Unlock both or specified team(s).")
+        player.tell("^5   /cv roundtimelimit [90/120/180] - Changes the round time limit (specified in seconds).")
+        player.tell("^5   /cv balancing [on/off]          - Enables/disables the elo/glicko team balancing system.")
+        player.tell("^5   /cv lgdamage [6/7]              - Changes Lightning Gun damage/knockback.")
+        player.tell("^5   /cv rgdamage [80/100]           - Changes Railgun damage.")
+        player.tell("^5   /cv runes [on/off]              - Enables/disables runes.")
+        player.tell("^5   /cv lgammo [150/200]            - Change starting lightning gun ammo.")
+        player.tell("^5   /cv gibs [on/off]               - Enable server-forced gibs for all players.")
+        player.tell("^5   /cv autobot [on/off]            - Enable/disable the bot balancing system.")
+        player.tell("^5   /cv do                          - Forces the suggested switch.")
+        return minqlx.RET_STOP_ALL
+
     def cmd_mapname(self, player, msg, channel):
         channel.reply("The current map's name is ^4{}^7.".format(self.game.map))
         
