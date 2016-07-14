@@ -432,6 +432,14 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("^2/cv gibs [on/off]^7 is the usage for this callvote command.")
                 return minqlx.RET_STOP_ALL
 
+        if vote.lower() == "draw":
+            if self.game.state != "in_progress":
+                caller.tell("Voting to draw the round during warm-up isn't possible.")
+                return minqlx.RET_STOP_ALL
+            else:
+                self.callvote("qlx !killall", "round draw")
+                self.msg("{}^7 called a vote.".format(caller.name))
+                return minqlx.RET_STOP_ALL
             
     def handle_vote_started(self, caller, vote, args):
         if self.game.state == "warmup":
