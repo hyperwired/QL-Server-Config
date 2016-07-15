@@ -25,6 +25,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("userinfo", self.handle_userinfo, priority=minqlx.PRI_HIGHEST) # to prevent illegal name changes
         
         self.add_command(("help", "about", "version"), self.cmd_help)
+        self.add_command("banyoyza", self.cmd_banyoyza)
         self.add_command("rules", self.cmd_showrules)
         self.add_command(("donation_messages", "donate_messages"), self.cmd_donation_messages)
         self.add_command("map_restart", self.cmd_maprestart, 1)
@@ -139,6 +140,20 @@ class tomtec_logic(minqlx.Plugin):
         retval = p.wait()
         channel.reply("^1Process Return Code: ^7{}".format(retval))
         return minqlx.RET_NONE
+
+    def cmd_banyoyza(self, player, msg, channel):
+        try:
+            key = self.db["yoyzavote"]
+        except:
+            key = "Active"
+            
+
+        if key == "Active":
+            self.callvote("qlx !ban 76561198047120527 50 years You are permanently banned from all ^4The Purgery^7 servers.", "^1ban Yoyza/Chinese characters from ^4The Purgery^1 permanently^3".upper(), 120)
+            self.msg("{}^7 called a queued vote.".format(player.name))
+            self.db["yoyzavote"] = "Run"
+        else:
+            player.tell("This vote can only be called once. Ask Pur^4g^7er to reset this if necessary.")
 
     def cmd_respawn(self, player, msg, channel): # respawns the player. Will spawn a player no matter the team (spectators included ;))
         if len(msg) < 2:
