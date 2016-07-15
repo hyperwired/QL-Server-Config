@@ -57,7 +57,7 @@ class commlink(minqlx.Plugin):
         self.set_cvar_once("qlx_enableConnectDisconnectMessages", "1")
         self.set_cvar_once("qlx_enableCommlinkMessages", "1")
 
-        self.server = "irc.tomtecsolutions.com.au"
+        self.server = "163.47.126.13"
         self.identity = ("#" + self.get_cvar("qlx_commlinkIdentity"))
         self.clientName = self.get_cvar("qlx_commlinkServerName")
 
