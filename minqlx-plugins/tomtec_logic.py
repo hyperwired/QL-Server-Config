@@ -153,7 +153,7 @@ class tomtec_logic(minqlx.Plugin):
             self.msg("{}^7 called a queued vote.".format(player.name))
             self.db["yoyzavote"] = "Run"
         else:
-            player.tell("This vote can only be called once. Ask Pur^4g^7er to reset this if necessary.")
+            channel.reply("This vote can only be called once. Ask Pur^4g^7er to reset this if necessary.")
 
     def cmd_respawn(self, player, msg, channel): # respawns the player. Will spawn a player no matter the team (spectators included ;))
         if len(msg) < 2:
