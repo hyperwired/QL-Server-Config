@@ -25,7 +25,7 @@ class cleverbot(minqlx.Plugin):
         self.set_cvar("qlx_cleverbotNick", "^7Pur^4g^7obot")
 
         # Percentage chance to respond to chat, float between 0 and 1.
-        self.set_cvar_limit_once("qlx_cleverbotChance", "0.2", "0", "1")
+        self.set_cvar_limit_once("qlx_cleverbotChance", "0.1", "0", "1")
 
         self.created = False
         self.create()
