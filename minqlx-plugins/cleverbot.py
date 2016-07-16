@@ -18,9 +18,6 @@ class cleverbot(minqlx.Plugin):
     def __init__(self):
         super().__init__()
         self.add_hook("chat", self.handle_chat)
-        self.add_command("create", self.cmd_create, 5, usage="<nick>")
-        self.add_command("chat", self.cmd_chat, usage="<some text>")
-        self.add_command("chance", self.cmd_chance, 5, usage="<chance (0-1)>")
 
         # Get an API key at cleverbot.io
         self.set_cvar("qlx_cleverbotUser", "04twdDLhNypTzdET")
@@ -28,7 +25,7 @@ class cleverbot(minqlx.Plugin):
         self.set_cvar("qlx_cleverbotNick", "^7Pur^4g^7obot")
 
         # Percentage chance to respond to chat, float between 0 and 1.
-        self.set_cvar_limit_once("qlx_cleverbotChance", "0", "0", "1")
+        self.set_cvar_limit_once("qlx_cleverbotChance", "0.2", "0", "1")
 
         self.created = False
         self.create()
@@ -44,51 +41,11 @@ class cleverbot(minqlx.Plugin):
             self.logger.info("cleverbot: qlx_cleverbotChance is not a valid float.")
             return
 
-        if random.random() < chance:
-            msg = self.clean_text(msg)
-            self.ask(msg, channel)
-
-    def cmd_create(self, player, msg, channel):
-        """Creates the bot with the nick given."""
-        if len(msg) != 2:
-            return minqlx.RET_USAGE
-
-        self.set_cvar("qlx_cleverbotNick", msg[1])
-        self.create()
-
-    def cmd_chat(self, player, msg, channel):
-        """Responds to !chat some text
-        Example: !chat Just a small town girl
-        cleverbot: Livin' in a lonely world"""
-        if len(msg) == 1:
-            return minqlx.RET_USAGE
-        else:
-            text = ' '.join(msg[1:])
-
-        if self.created:
-            self.ask(text, channel)
-        else:
-            channel.reply("^3You need to create the bot or set API key first.")
-
-    def cmd_chance(self, player, msg, channel):
-        """Sets the chance that the bot responds to chat."""
-        if len(msg) == 1:
-            chance = self.get_cvar("qlx_cleverbotChance")
-            channel.reply("Chance is currently {}".format(chance))
-        if len(msg) > 2:
-            return minqlx.RET_USAGE
-
-        chance = 0
-        try:
-            chance = float(msg[1])
-        except ValueError:
-            channel.reply("{} is not a valid float.".format(msg[1]))
-
-        if 0 <= chance <= 1:
-            self.set_cvar("qlx_cleverbotChance", str(chance))
-            channel.reply("Chance was set to {}".format(chance))
-        else:
-            channel.reply("Chance must be between 0 and 1.")
+        msg = msg.lower()
+        if (random.random() < chance) or (self.clean_text(self.get_cvar("qlx_cleverbotNick")).lower() in msg) or ("bot" in msg):
+            if self.bot_present():
+                msg = self.clean_text(msg)
+                self.ask(msg, channel)
 
     @minqlx.thread
     def create(self):
@@ -110,6 +67,7 @@ class cleverbot(minqlx.Plugin):
         if response:
             nick = self.get_cvar("qlx_cleverbotNick")
             channel.reply("{}^7:^2 {}".format(nick, response["response"]))
+            self.talk_beep()
 
     def post_data(self, url, text=''):
         """POSTS data to cleverbot.io
@@ -135,3 +93,15 @@ class cleverbot(minqlx.Plugin):
         else:
             self.msg("^3You need to set qlx_cleverbotUser and qlx_cleverbotKey")
 
+    def talk_beep(self, player=None):
+        if not player:
+            self.play_sound("sound/player/talk.ogg")
+        else:
+            self.play_sound("sound/player/talk.ogg", player)
+
+
+    def bot_present(self):
+        for player in self.players():
+            if str(player.steam_id)[0] == "9":
+                return True
+        return False
