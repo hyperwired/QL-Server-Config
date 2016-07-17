@@ -209,7 +209,7 @@ class botmanager(minqlx.Plugin):
     def cmd_addbot(self, player, msg, channel):
         checker = self.bot_checks("addbot") # store the checker array here
         if self.get_cvar("bot_autoManage", bool):
-            player.tell("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
+            channel.reply("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
             return
         if checker[0]:
             self.addbot()
@@ -221,7 +221,7 @@ class botmanager(minqlx.Plugin):
     def cmd_rembot(self, player, msg, channel):
         checker = self.bot_checks("rembot") # store the checker array here
         if self.get_cvar("bot_autoManage", bool):
-            player.tell("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
+            channel.reply("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
             return
         if checker[0]:
             self.rembot()
