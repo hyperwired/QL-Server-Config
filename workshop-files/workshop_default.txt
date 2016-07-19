@@ -35,6 +35,9 @@
 # Rocket Arena 3 - ra3map18
 550003921
 
+# Ancient Archipelago
+726137411
+
 # Map - Rustgrad
 546664071
 
