@@ -2,7 +2,6 @@
 
 OWNER_NAME="^7Pur^4g^7er" # used to define the owner's name, this name must = the minqlx.owner()'s name.
 
-GAME_MODERATORS="merozollo, 0regonn, barley, Biokemical, Quarrel, meganfoxxed, Jubblies, zee" # string that displays on player load after a delay
 ZERO_WIDTH_SPACE=u"\u200B" # part of the userinfo filtering to prevent illegal names
 REG_WIDTH_SPACE=u"\u2002"
 
@@ -274,10 +273,6 @@ class tomtec_logic(minqlx.Plugin):
         def f():
             # display donation message if any
             self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot.", player)
-
-            # announce game mods
-            self.talk_beep(player)
-            player.tell("Current game moderators: Pur^4g^7er (owner), {}.".format(GAME_MODERATORS))
         f()
 
     def handle_chat(self, player, msg, channel):
