@@ -367,7 +367,7 @@ class tomtec_logic(minqlx.Plugin):
         channel.reply("Visit ^4The Purgery^7's forum at ^2forum.thepurgery.com^7.")
 
     def cmd_donate(self, player, msg, channel):
-        channel.reply("Donations to ^4The Purgery^7 can be made via ^5PayPal^7 or ^3Bitcoin^7, check ^2tomtecsolutions.com.au/quakelive^7 for information.")
+        channel.reply("Donations to ^4The Purgery^7 can be made via ^5PayPal^7 or ^3Bitcoin^7, check ^2tomtecsolutions.com.au/donate^7 for information.")
         channel.reply("Thank you!")
         
     def cmd_showversion(self, player, msg, channel):
