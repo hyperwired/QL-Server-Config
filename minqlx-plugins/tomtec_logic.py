@@ -273,7 +273,7 @@ class tomtec_logic(minqlx.Plugin):
         @minqlx.delay(5)
         def f():
             # display donation message if any
-            self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.", player)
+            self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot.", player)
 
             # announce game mods
             self.talk_beep(player)
@@ -325,7 +325,7 @@ class tomtec_logic(minqlx.Plugin):
                 else:
                     p.powerups(battlesuit=10)
 
-        self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.")
+        self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot.")
                  
     def game_end(self, data):
         return
@@ -468,20 +468,13 @@ class tomtec_logic(minqlx.Plugin):
                 return minqlx.RET_STOP_ALL
             
     def handle_vote_started(self, caller, vote, args):
-        if self.game.state == "warmup":
-            if self.get_cvar("qlx_freezePlayersDuringVote", bool):
-                self.set_cvar("g_speed", "0")
-                self.play_sound("sound/world/klaxon1.wav")
-                minqlx.send_server_command(None, "cp \"^7PLEASE VOTE NOW\nPLAYER MOVEMENT IS DISABLED\nUNTIL THE VOTE ENDS\"\n")
-        else:
-            minqlx.send_server_command(None, "cp \"^7PLEASE VOTE NOW\"\n")
+        self.center_print("PLEASE VOTE NOW")
             
     def handle_vote_ended(self, votes, vote, args, passed):
         if passed:
-            minqlx.send_server_command(None, "cp \"^2VOTE PASSED^7\"\n")
+            self.center_print("^2VOTE PASSED^7")
         else:
-            minqlx.send_server_command(None, "cp \"^1VOTE FAILED^7\"\n")
-        self.set_cvar("g_speed", "320")
+            self.center_print("^1VOTE FAILED^7")
         
     def cmd_maprestart(self, player, msg, channel):
         # run a map restart
