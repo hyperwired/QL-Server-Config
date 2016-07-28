@@ -150,7 +150,7 @@ class tomtec_logic(minqlx.Plugin):
             elif len(msg) > 2:
                 if msg[3].lower() != "here": return
                 try:
-                    position = self.player(int(msg[1])).position
+                    position = self.player(int(msg[1])).position()
                     minqlx.player_spawn(self.player(int(msg[1])).id)
                     @minqlx.next_frame
                     def f(position):
