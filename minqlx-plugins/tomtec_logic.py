@@ -32,7 +32,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("forum", "forums", "f"), self.cmd_forums)
         self.add_command(("donate", "donations", "d", "donating"), self.cmd_donate)
         self.add_command("killall", self.cmd_killall, 4)
-        self.add_command(("respawn", "spawn"), self.cmd_respawn, 5, usage="[id] [here]")
+        self.add_command(("respawn", "spawn"), self.cmd_respawn, 5, usage="[id]")
         self.add_command(("respawn_aircontrol", "spawn_aircontrol"), self.respawn_aircontrol, 5)
         
         self.add_command("tomtec_versions", self.cmd_showversion)
@@ -142,22 +142,11 @@ class tomtec_logic(minqlx.Plugin):
         if len(msg) < 2:
             minqlx.player_spawn(player.id)
         else:
-            if len(msg) == 2:
-                try:
-                    minqlx.player_spawn(self.player(int(msg[1])).id)
-                except:
-                    player.tell("Invalid client ID. Please enter a client ID of the player to (re)spawn.")
-            elif len(msg) > 2:
-                if msg[3].lower() != "here": return
-                try:
-                    position = self.player(int(msg[1])).position()
-                    minqlx.player_spawn(self.player(int(msg[1])).id)
-                    @minqlx.next_frame
-                    def f(position):
-                        self.player(int(msg[1])).position = position
-                    f(position)
-                except:
-                    player.tell("Invalid client ID. Please enter a client ID of the player to (re)spawn.")
+            try:
+                minqlx.player_spawn(self.player(int(msg[1])).id)
+            except:
+                player.tell("Invalid client ID. Please enter a client ID of the player to (re)spawn.")
+            
             
     def respawn_aircontrol(self, player, msg, channel): # uses a quick cvar switch and client respawn to give the player air control.
         @minqlx.next_frame
