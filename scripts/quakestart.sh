@@ -269,12 +269,8 @@ exec $qPathToVanillaStartScript \
     +set net_strict 1 \
     +set net_port $gameport \
     +set sv_hostname "Reythe's Duel House" \
-    +set zmq_rcon_enable 1 \
-    +set zmq_rcon_password "$(<~/localConfig-rconPassword-reythe.txt)" \
-    +set zmq_rcon_port $rconport \
+    +set zmq_rcon_enable 0 \
     +set zmq_stats_enable 1 \
-    +set zmq_stats_password "$(<~/localConfig-rconPassword-reythe.txt)" \
-    +set zmq_stats_port $gameport \
     +set sv_tags "$qServerLocation" \
     +set bot_enable 0 \
     +set g_accessFile "access_reythe.txt" \
@@ -299,12 +295,7 @@ exec $qPathToMinqlxStartScript \
     +set qlx_serverBrandTopField "Check out our forums at ^2http://intothepit.org^7." \
     +set qlx_serverBrandBottomField "" \
     +set sv_hostname "=PiT= Clan Server" \
-    +set zmq_rcon_enable 1 \
-    +set zmq_rcon_password "$(<~/localConfig-rconPassword-pit.txt)" \
-    +set zmq_rcon_port $rconport \
     +set zmq_stats_enable 1 \
-    +set zmq_stats_password "$(<~/localConfig-rconPassword-pit.txt)" \
-    +set zmq_stats_port $gameport \
     +set sv_tags "$qServerLocation" \
     +set g_accessFile "access_pit.txt" \
     +set sv_mappoolFile "mappool_pit.txt" \
@@ -330,8 +321,6 @@ exec $qPathToMinqlxStartScript \
     +set sv_hostname "TOEY'S FFA" \
     +set zmq_rcon_enable 0 \
     +set zmq_stats_enable 1 \
-    +set zmq_stats_password "$(<~/localConfig-rconPassword-toey.txt)" \
-    +set zmq_stats_port $gameport \
     +set sv_tags "$qServerLocation" \
     +set g_accessFile "access_toey.txt" \
     +set sv_mappoolFile "mappool_ffa.txt" \
