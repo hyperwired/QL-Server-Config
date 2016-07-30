@@ -3,7 +3,7 @@ import minqlx
 class cheats(minqlx.Plugin):
     def __init__(self):
         self.add_hook("client_command", self.handle_client_command)
-        self.add_command("add50", self.cmd_add50, 1)
+        self.add_command("add50", self.cmd_add50)
         
         self.specialCommands = ["noclip"]
         
