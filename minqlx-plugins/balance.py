@@ -22,6 +22,8 @@ import itertools
 import threading
 import random
 import time
+import unstak
+import collections
 
 from minqlx.database import Redis
 
@@ -44,6 +46,7 @@ class balance(minqlx.Plugin):
         self.add_command(("getrating", "getelo", "elo", "glicko"), self.cmd_getrating, usage="<id> [gametype]")
         self.add_command(("remrating", "remelo", "remglicko"), self.cmd_remrating, 3, usage="<id>")
         self.add_command("balance", self.cmd_balance, 1)
+        self.add_command("unstak", self.cmd_unstak, 1)
         self.add_command(("teams", "teens"), self.cmd_teams)
         self.add_command("do", self.cmd_do, 1)
         self.add_command(("agree", "a"), self.cmd_agree)
@@ -388,6 +391,125 @@ class balance(minqlx.Plugin):
         else:
             channel.reply("Teams are good! Nothing to balance.")
         return True
+
+    def cmd_unstak(self, player, msg, channel):
+        gt = self.game.type_short
+        if gt not in SUPPORTED_GAMETYPES:
+            player.tell("This game mode is not supported by the balance plugin.")
+            return minqlx.RET_STOP_ALL
+
+        teams = self.teams()
+        if len(teams["red"] + teams["blue"]) <= 2:
+            player.tell("Nothing to balance.")
+            return minqlx.RET_STOP_ALL
+
+        players = dict([(p.steam_id, gt) for p in teams["red"] + teams["blue"]])
+        self.add_request(players, self.callback_unstak, minqlx.CHAT_CHANNEL)
+
+    def callback_unstak(self, players, channel):
+        # We check if people joined while we were requesting ratings and get them if someone did.
+        teams = self.teams()
+        current = teams["red"] + teams["blue"]
+        gt = self.game.type_short
+
+        for p in current:
+            if p.steam_id not in players:
+                d = dict([(p.steam_id, gt) for p in current])
+                self.add_request(d, self.callback_unstak, channel)
+                return
+
+        # Generate an unstak PlayerInfo list
+        players_dict = {}
+        for p in current:
+            player_steam_id = p.steam_id
+            player_name = p.clean_name
+            player_elo = self.ratings[p.steam_id][gt]["elo"]
+            players_dict[p.steam_id] = (player_name, player_elo, p)
+        players_info = unstak.player_info_list_from_steam_id_name_ext_obj_elo_dict(players_dict)
+
+        # do unstak balancing on player data (doesnt actually do any balancing operations)
+        new_blue_team, new_red_team = unstak.balance_players_by_skill_band(players_info)
+
+        def move_players_to_new_team(team, team_index):
+            """
+            Move the given players to this team.
+            :param team: PlayerInfo list for one of the teams
+            :param team_index: The corresponding index of team. 0 = blue, 1 = red
+            :return: True if any players were moved
+            """
+            team_names = ["blue", "red"]
+            players_moved = False
+            this_team_name = team_names[team_index]
+            other_team_name = team_names[1 - team_index]
+            for player_info in team:
+                assert isinstance(player_info, unstak.PlayerInfo)
+                p = player_info.ext_obj
+                assert p
+                if p in teams[other_team_name]:
+                    teams[other_team_name].remove(p)
+                    players_moved = True
+                if p not in teams[this_team_name]:
+                    teams[this_team_name].append(p)
+                    players_moved = True
+            return players_moved
+
+        moved_players = False
+        moved_players = move_players_to_new_team(new_blue_team, 0) or moved_players
+        moved_players = move_players_to_new_team(new_red_team, 1) or moved_players
+
+        if not moved_players:
+            channel.reply("No one was moved.")
+            return True
+
+        self.report_team_stats(teams, gt, new_blue_team, new_red_team)
+        return True
+
+    # TODO: other reporting sites (e.g. balance/teams command) could be updated to use this (needs to use PlayerInfo)
+    def report_team_stats(self, teams, gt, new_blue_team, new_red_team):
+        # print some stats
+        avg_red = self.team_average(teams["red"], gt)
+        avg_blue = self.team_average(teams["blue"], gt)
+        diff_rounded = abs(round(avg_red) - round(avg_blue))  # Round individual averages.
+
+        def team_color(team_index):
+            if team_index == 0:
+                # red
+                return "^1"
+            elif team_index == 1:
+                # blue
+                return "^4"
+            return ""
+
+        def stronger_team_index(red_amount, blue_amount):
+            if red_amount > blue_amount:
+                return 0
+            if red_amount < blue_amount:
+                return 1
+            return None
+
+        round_avg_red = round(avg_red)
+        round_avg_blue = round(avg_blue)
+        favoured_team_colour_prefix = team_color(stronger_team_index(round_avg_red, round_avg_blue))
+        avg_msg = "^1{} ^7vs ^4{}^7 - DIFFERENCE: ^{}{}".format(round_avg_red,
+                                                                round_avg_blue,
+                                                                favoured_team_colour_prefix,
+                                                                diff_rounded)
+        self.msg(avg_msg)
+        # print some skill band stats
+        bands_msg = []
+        blue_bands = unstak.split_players_by_skill_band(new_blue_team)
+        red_bands = unstak.split_players_by_skill_band(new_red_team)
+        for category_name in blue_bands.keys():
+            blue_players = blue_bands[category_name]
+            red_players = red_bands[category_name]
+            difference = abs(len(blue_players) - len(red_players))
+            if difference:
+                adv_team_idx = stronger_team_index(len(red_players), len(blue_players))
+                bands_msg.append("^7{}:{}+{}".format(category_name,
+                                                     team_color(adv_team_idx),
+                                                     difference))
+        bands_msg = "net skill band diff: " + ", ".join(bands_msg)
+        self.msg(bands_msg)
 
     def cmd_teams(self, player, msg, channel):
         gt = self.game.type_short
