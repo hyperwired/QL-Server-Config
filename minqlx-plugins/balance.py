@@ -22,6 +22,8 @@ import itertools
 import threading
 import random
 import time
+import collections
+import hashlib
 
 from minqlx.database import Redis
 
@@ -32,6 +34,329 @@ DEFAULT_RATING = 1200
 SUPPORTED_GAMETYPES = ("ca", "ctf", "dom", "ft", "tdm")
 # Externally supported game types. Used by !getrating for game types the API works with.
 EXT_SUPPORTED_GAMETYPES = ("ca", "ctf", "dom", "ft", "tdm", "duel", "ffa")
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------
+# unstak, an alternative balancing method for minqlx created by github/hyperwired aka "stakz", 2016-07-31
+# This plugin is released to everyone, for any purpose. It comes with no warranty, no guarantee it works, it's released AS IS.
+# You can modify everything, except for lines 1-4. They're there to indicate I whacked this together originally. Please make it better :D
+
+def format_obj_desc_str(obj):
+    oclass = obj.__class__
+    a = str(obj.__module__)
+    b = str(obj.__class__.__name__)
+    return "%s.%s %s" % (a, b, obj.desc())
+
+
+def format_obj_desc_repr(obj):
+    return "<%s object @ 0x%x>" % (format_obj_desc_str(obj), id(obj))
+
+
+class PerformanceSnapshot(object):
+    def __init__(self, elo, elo_variance):
+        self._elo = elo
+        self._elo_variance = elo_variance
+
+    @property
+    def elo(self):
+        return self._elo
+
+    @property
+    def elo_variance(self):
+        return self._elo_variance
+
+    def desc(self):
+        return "elo=%s (~%s)" % (self._elo, self._elo_variance)
+
+    def __str__(self):
+        return format_obj_desc_str(self)
+
+    def __repr__(self):
+        return format_obj_desc_repr(self)
+
+
+class PerformanceHistory(object):
+    def __init__(self):
+        self._snapshots = []
+
+    def has_data(self):
+        return len(self._snapshots)
+
+    def latest_snapshot(self):
+        if self.has_data():
+            return self._snapshots[-1]
+        return None
+
+    def desc(self):
+        latest = self.latest_snapshot()
+        if latest:
+            return "%s, history=%s" % (latest.desc(), len(self._snapshots))
+        return "<empty>"
+
+    def __str__(self):
+        return format_obj_desc_str(self)
+
+    def __repr__(self):
+        return format_obj_desc_repr(self)
+
+
+class PlayerInfo(object):
+    def __init__(self, name=None, perf_history=None, steam_id=None, ext_obj=None):
+        self._name = name
+        self._perf_history = perf_history
+        self._steam_id = steam_id
+        self._ext_obj = ext_obj
+
+    @property
+    def steam_id(self):
+        return self._steam_id
+
+    @property
+    def ext_obj(self):
+        return self._ext_obj
+
+    @property
+    def perf_history(self):
+        return self._perf_history
+
+    @property
+    def latest_perf(self):
+        return self._perf_history.latest_snapshot()
+
+    @property
+    def elo(self):
+        return self.latest_perf.elo
+
+    @property
+    def elo_variance(self):
+        return self.latest_perf.elo_variance
+
+    @property
+    def name(self):
+        return self._name
+
+    def desc(self):
+        return "'%s': %s" % (self._name, self._perf_history.desc())
+
+    def __str__(self):
+        return format_obj_desc_str(self)
+
+    def __repr__(self):
+        return format_obj_desc_repr(self)
+
+
+def player_info_list_from_steam_id_name_ext_obj_elo_dict(d):
+    out = []
+    for steam_id, (name, elo, ext_obj) in d.items():
+        perf_snap = PerformanceSnapshot(elo, 0)
+        perf_history = PerformanceHistory()
+        perf_history._snapshots.append(perf_snap)
+        player_info = PlayerInfo(name, perf_history, steam_id=steam_id, ext_obj=ext_obj)
+        out.append(player_info)
+    return out
+
+
+def sort_by_elo_descending(players):
+    return sorted(players, key=lambda p: (p.elo, p.name), reverse=True)
+
+
+def balance_players_random(players):
+    """
+    Shuffle teams completely randomly.
+    Non deterministic (random)
+
+    :param players: a list of all the players that are to be balanced
+    :return: (team_a, team_b) 2-tuple of lists of players
+    """
+    out = list(players)
+    random.shuffle(out)
+    total = len(out)
+    return out[:total/2], out[total/2:]
+
+
+def balance_players_ranked_odd_even(players):
+    """
+    Balance teams by first sorting players by skill and then picking players alternating to teams.
+    Deterministic (Stable) for a given input.
+
+    :param players: a list of all the players that are to be balanced
+    :return: (team_a, team_b) 2-tuple of lists of players
+    """
+    presorted = sort_by_elo_descending(players)
+    teams = ([], [])
+    for i, player in enumerate(presorted):
+        teams[i % 2].append(player)
+    return teams
+
+
+def accumulate_teams(team, players):
+    """
+    Accumulate input players placement into a target teams collection, returning the input deficit.
+    :param team: A 2-tuple of lists ([], []) representing the team we are adding players to
+    :param players: A 2-tuple of lists ([], []) representing the players we are adding to the target team
+    :return: an int describing the balance of the added players (before they are added to the team)
+        1  : The right team got an extra player
+        0  : The players added were counted even.
+        -1 : The left team got an extra player
+    """
+    left_count, right_count = len(players[0]), len(players[1])
+    team[0].extend(players[0])
+    team[1].extend(players[1])
+    return right_count - left_count
+
+
+def distribute_skill_band(players_class, bias_left=True):
+    """
+    Split a list into two lists by halving. If there is an odd number of elements, the 0th item will go to the
+    list determined by bias_left parameter
+
+    :param players_class: a list of PlayerInfo objects
+    :param bias_left: True if the left team should get the extra player if there is one. Otherwise right team.
+    :return: a 2-tuple of lists ([], []) filled with the placed players.
+    """
+    sorted_players = sort_by_elo_descending(players_class)
+    teams_category = ([], [])
+
+    # Deal with odd case. The bias side has a deficit, so they deserve the top player of this class
+    even_start_idx = 0
+    bias = 0
+    if len(sorted_players) % 2 != 0:
+        bias = -1 if bias_left else 1
+        idx = 0 if bias_left else 1
+        teams_category[idx].append(sorted_players[0])
+        even_start_idx = 1
+
+    # Place the remaining players
+    bias += accumulate_teams(teams_category, balance_players_ranked_odd_even(sorted_players[even_start_idx:]))
+    return teams_category
+
+
+class SkillBands(object):
+    """
+    There are 5 broad skill bands:
+    - "rookie": Generally are a liability to the team. New or under-performing players starting their skill journey.
+    - "standard": An OK player. It is a wide category because typically they are inconsistent.
+    - "decent": A mostly reliable/decent player that is often in the top half of the score board in a public match
+    - "carry": A consistently top or near-top scoring player. Typically 98th percentile upwards.
+    - "pro": Outlier-level excellent player capable of professional solo play. one of the top few in their region.
+
+    Precedence of balancing is [rookie, pro, carries, decent, standard]
+    The reasoning is that this is the order in which they usually impact the match outcome
+    """
+    ROOKIE_CATEGORY_NAME = "rookie"
+    STANDARD_CATEGORY_NAME = "standard"
+    DECENT_CATEGORY_NAME = "decent"
+    CARRY_CATEGORY_NAME = "carry"
+    PRO_CATEGORY_NAME = "pro"
+
+    def __init__(self):
+        self.ROOKIE_START_ELO = 0
+        self.STANDARD_START_ELO = 1250
+        self.DECENT_START_ELO = 1720
+        self.CARRY_START_ELO = 1950
+        self.PRO_START_ELO = 2220
+        self.MAX_ELO = 999999
+
+    def get_skill_ordering(self):
+        return [self.ROOKIE_CATEGORY_NAME,
+                self.STANDARD_CATEGORY_NAME,
+                self.DECENT_CATEGORY_NAME,
+                self.CARRY_CATEGORY_NAME,
+                self.PRO_CATEGORY_NAME]
+
+    def get_balance_ordering(self):
+        return [self.ROOKIE_CATEGORY_NAME,
+                self.PRO_CATEGORY_NAME,
+                self.CARRY_CATEGORY_NAME,
+                self.DECENT_CATEGORY_NAME,
+                self.STANDARD_CATEGORY_NAME]
+
+    def get_ordering(self, balance_ordering=True):
+        if balance_ordering:
+            return self.get_balance_ordering()
+        else:
+            return self.get_skill_ordering()
+
+    def get_category_intervals(self, balance_ordering=True):
+        d = {
+            self.ROOKIE_CATEGORY_NAME: (self.ROOKIE_START_ELO, self.STANDARD_START_ELO),
+            self.STANDARD_CATEGORY_NAME: (self.STANDARD_START_ELO, self.DECENT_START_ELO),
+            self.DECENT_CATEGORY_NAME: (self.DECENT_START_ELO, self.CARRY_START_ELO),
+            self.CARRY_CATEGORY_NAME: (self.CARRY_START_ELO, self.PRO_START_ELO),
+            self.PRO_CATEGORY_NAME: (self.PRO_START_ELO, self.MAX_ELO),
+        }
+        out = collections.OrderedDict()
+        ordering = self.get_ordering(balance_ordering=balance_ordering)
+        for band_name in ordering:
+            out[band_name] = d[band_name]
+        return out
+
+
+def split_players_by_skill_band(players, balance_ordering=True):
+    """
+    :param players: a list of all the players (PlayerInfo) that need to be balanced
+    :return: players split by skill band [(category name: PlayerInfo), ...]
+    """
+    default_skill_bands = SkillBands()
+    skill_intervals = default_skill_bands.get_category_intervals(balance_ordering=balance_ordering)
+
+    d = collections.OrderedDict()
+    for category_name, (interval_start, interval_end) in skill_intervals.items():
+        d[category_name] = [p for p in players if (p.elo >= interval_start and p.elo < interval_end)]
+    return d
+
+
+def balance_players_by_skill_band(players):
+    """
+    Balance teams by classifying players into skill bands, and then try to match band distribution between both
+    teams. In scenarios where there are odd players per skill band, we track the deficit and make up for it in
+    the next bands.
+    Deterministic (Stable) for a given input.
+
+    See SkillBands for a definition of skill bands
+
+    :param players: a list of all the players that are to be balanced
+    :return: (team_a, team_b) 2-tuple of lists of players
+    """
+    bands = split_players_by_skill_band(players, balance_ordering=True)
+    categories = list(bands.values())
+
+    # Generate a value based on player elos to pick which side gets tiebreaker bias for first category
+    # We do it this way so e.g. left team is not always favoured, but keeping it deterministic so that the
+    # same elo profiles input will generate the same matchmaking without introducing RNG randomness (for testability).
+    hasher = hashlib.md5()
+    sorted_players = sort_by_elo_descending(players)
+    for player in sorted_players:
+        assert isinstance(player, PlayerInfo)
+        hasher.update(("%d-%d" % (player.elo, player.elo_variance)).encode("utf-8"))
+    fallback_bias = bytearray(hasher.digest())[0] & 0x1
+
+    team_a = []
+    team_b = []
+
+    teams = (team_a, team_b)
+
+    bias_levels = [0]*len(categories)
+    last_bias_category = None
+    for i, category in enumerate(categories):
+        # each category gets alternating default bias
+        bias_left = ((fallback_bias + i) % 2) == 0
+        if last_bias_category is not None and bias_levels[last_bias_category] != 0:
+            bias_left = True if bias_levels[last_bias_category] == 1 else False
+        resolved_band = distribute_skill_band(category, bias_left=bias_left)
+        category_bias = accumulate_teams(teams, resolved_band)
+        bias_levels[i] = category_bias
+        if category_bias != 0:
+            last_bias_category = i
+
+    #TODO: Are we done? Rebalance between players at same skillrating level per category?
+    # i.e. is it possible to match accumulated ELOs closer than they currently are without changing category composition?
+    return teams
+
+# end unstak
+#----------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 class balance(minqlx.Plugin):
     database = Redis
@@ -44,6 +369,7 @@ class balance(minqlx.Plugin):
         self.add_command(("getrating", "getelo", "elo", "glicko"), self.cmd_getrating, usage="<id> [gametype]")
         self.add_command(("remrating", "remelo", "remglicko"), self.cmd_remrating, 3, usage="<id>")
         self.add_command("balance", self.cmd_balance, 1)
+        self.add_command("unstak", self.cmd_unstak, 1)
         self.add_command(("teams", "teens"), self.cmd_teams)
         self.add_command("do", self.cmd_do, 1)
         self.add_command(("agree", "a"), self.cmd_agree)
@@ -388,6 +714,125 @@ class balance(minqlx.Plugin):
         else:
             channel.reply("Teams are good! Nothing to balance.")
         return True
+
+    def cmd_unstak(self, player, msg, channel):
+        gt = self.game.type_short
+        if gt not in SUPPORTED_GAMETYPES:
+            player.tell("This game mode is not supported by the balance plugin.")
+            return minqlx.RET_STOP_ALL
+
+        teams = self.teams()
+        if len(teams["red"] + teams["blue"]) <= 2:
+            player.tell("Nothing to balance.")
+            return minqlx.RET_STOP_ALL
+
+        players = dict([(p.steam_id, gt) for p in teams["red"] + teams["blue"]])
+        self.add_request(players, self.callback_unstak, minqlx.CHAT_CHANNEL)
+
+    def callback_unstak(self, players, channel):
+        # We check if people joined while we were requesting ratings and get them if someone did.
+        teams = self.teams()
+        current = teams["red"] + teams["blue"]
+        gt = self.game.type_short
+
+        for p in current:
+            if p.steam_id not in players:
+                d = dict([(p.steam_id, gt) for p in current])
+                self.add_request(d, self.callback_unstak, channel)
+                return
+
+        # Generate an unstak PlayerInfo list
+        players_dict = {}
+        for p in current:
+            player_steam_id = p.steam_id
+            player_name = p.clean_name
+            player_elo = self.ratings[p.steam_id][gt]["elo"]
+            players_dict[p.steam_id] = (player_name, player_elo, p)
+        players_info = unstak.player_info_list_from_steam_id_name_ext_obj_elo_dict(players_dict)
+
+        # do unstak balancing on player data (doesnt actually do any balancing operations)
+        new_blue_team, new_red_team = unstak.balance_players_by_skill_band(players_info)
+
+        def move_players_to_new_team(team, team_index):
+            """
+            Move the given players to this team.
+            :param team: PlayerInfo list for one of the teams
+            :param team_index: The corresponding index of team. 0 = blue, 1 = red
+            :return: True if any players were moved
+            """
+            team_names = ["blue", "red"]
+            players_moved = False
+            this_team_name = team_names[team_index]
+            other_team_name = team_names[1 - team_index]
+            for player_info in team:
+                assert isinstance(player_info, unstak.PlayerInfo)
+                p = player_info.ext_obj
+                assert p
+                if p in teams[other_team_name]:
+                    teams[other_team_name].remove(p)
+                    players_moved = True
+                if p not in teams[this_team_name]:
+                    teams[this_team_name].append(p)
+                    players_moved = True
+            return players_moved
+
+        moved_players = False
+        moved_players = move_players_to_new_team(new_blue_team, 0) or moved_players
+        moved_players = move_players_to_new_team(new_red_team, 1) or moved_players
+
+        if not moved_players:
+            channel.reply("No one was moved.")
+            return True
+
+        self.report_team_stats(teams, gt, new_blue_team, new_red_team)
+        return True
+
+    # TODO: other reporting sites (e.g. balance/teams command) could be updated to use this (needs to use PlayerInfo)
+    def report_team_stats(self, teams, gt, new_blue_team, new_red_team):
+        # print some stats
+        avg_red = self.team_average(teams["red"], gt)
+        avg_blue = self.team_average(teams["blue"], gt)
+        diff_rounded = abs(round(avg_red) - round(avg_blue))  # Round individual averages.
+
+        def team_color(team_index):
+            if team_index == 0:
+                # red
+                return "^1"
+            elif team_index == 1:
+                # blue
+                return "^4"
+            return ""
+
+        def stronger_team_index(red_amount, blue_amount):
+            if red_amount > blue_amount:
+                return 0
+            if red_amount < blue_amount:
+                return 1
+            return None
+
+        round_avg_red = round(avg_red)
+        round_avg_blue = round(avg_blue)
+        favoured_team_colour_prefix = team_color(stronger_team_index(round_avg_red, round_avg_blue))
+        avg_msg = "^1{} ^7vs ^4{}^7 - DIFFERENCE: ^{}{}".format(round_avg_red,
+                                                                round_avg_blue,
+                                                                favoured_team_colour_prefix,
+                                                                diff_rounded)
+        self.msg(avg_msg)
+        # print some skill band stats
+        bands_msg = []
+        blue_bands = unstak.split_players_by_skill_band(new_blue_team)
+        red_bands = unstak.split_players_by_skill_band(new_red_team)
+        for category_name in blue_bands.keys():
+            blue_players = blue_bands[category_name]
+            red_players = red_bands[category_name]
+            difference = abs(len(blue_players) - len(red_players))
+            if difference:
+                adv_team_idx = stronger_team_index(len(red_players), len(blue_players))
+                bands_msg.append("^7{}:{}+{}".format(category_name,
+                                                     team_color(adv_team_idx),
+                                                     difference))
+        bands_msg = "net skill band diff: " + ", ".join(bands_msg)
+        self.msg(bands_msg)
 
     def cmd_teams(self, player, msg, channel):
         gt = self.game.type_short
