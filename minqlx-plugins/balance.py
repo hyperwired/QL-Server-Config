@@ -768,8 +768,8 @@ class balance(minqlx.Plugin):
                 assert isinstance(player_info, PlayerInfo)
                 p = player_info.ext_obj
                 assert p
+                players_moved = (p.team != this_team_name) 
                 p.team = this_team_name
-                players_moved = True
                     
             return players_moved
 
