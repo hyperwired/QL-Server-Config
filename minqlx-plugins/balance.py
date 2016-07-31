@@ -828,10 +828,14 @@ class balance(minqlx.Plugin):
             difference = abs(len(blue_players) - len(red_players))
             if difference:
                 adv_team_idx = stronger_team_index(len(red_players), len(blue_players))
-                bands_msg.append("^7{}:{}+{}".format(category_name,
-                                                     team_color(adv_team_idx),
-                                                     difference))
-        bands_msg = "net skill band diff: " + ", ".join(bands_msg)
+                bands_msg.append("{}:{}+{}".format(category_name,
+                                                   team_color(adv_team_idx),
+                                                   difference))
+        bands_diff_content = "Balanced"
+        if bands_msg:
+            bands_diff_content = "^7, ".join(bands_msg)
+
+        bands_msg = "Net skill band diff: " + bands_diff_content
         self.msg(bands_msg)
 
     def cmd_teams(self, player, msg, channel):
