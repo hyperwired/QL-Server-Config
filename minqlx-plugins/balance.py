@@ -748,10 +748,10 @@ class balance(minqlx.Plugin):
             player_name = p.clean_name
             player_elo = self.ratings[p.steam_id][gt]["elo"]
             players_dict[p.steam_id] = (player_name, player_elo, p)
-        players_info = unstak.player_info_list_from_steam_id_name_ext_obj_elo_dict(players_dict)
+        players_info = player_info_list_from_steam_id_name_ext_obj_elo_dict(players_dict)
 
         # do unstak balancing on player data (doesnt actually do any balancing operations)
-        new_blue_team, new_red_team = unstak.balance_players_by_skill_band(players_info)
+        new_blue_team, new_red_team = balance_players_by_skill_band(players_info)
 
         def move_players_to_new_team(team, team_index):
             """
@@ -765,7 +765,7 @@ class balance(minqlx.Plugin):
             this_team_name = team_names[team_index]
             other_team_name = team_names[1 - team_index]
             for player_info in team:
-                assert isinstance(player_info, unstak.PlayerInfo)
+                assert isinstance(player_info, PlayerInfo)
                 p = player_info.ext_obj
                 assert p
                 if p in teams[other_team_name]:
@@ -820,8 +820,8 @@ class balance(minqlx.Plugin):
         self.msg(avg_msg)
         # print some skill band stats
         bands_msg = []
-        blue_bands = unstak.split_players_by_skill_band(new_blue_team)
-        red_bands = unstak.split_players_by_skill_band(new_red_team)
+        blue_bands = split_players_by_skill_band(new_blue_team)
+        red_bands = split_players_by_skill_band(new_red_team)
         for category_name in blue_bands.keys():
             blue_players = blue_bands[category_name]
             red_players = red_bands[category_name]
