@@ -331,26 +331,6 @@ exec $qPathToMinqlxStartScript \
 else
 echo "This system is not intended to host toey's (sub613) server."
 fi
-elif [ $1 -eq 12 ]; then
-echo "Starting QuakeCon Server..."
-exec $qPathToMinqlxStartScript \
-    +set net_strict 1 \
-    +set qlx_redisDatabase 5 \
-    +set net_port $gameport \
-    +set qlx_owner $qPurgeryOwnerSteam64ID \
-    +set qlx_plugins "DEFAULT, custom_votes, branding, votemanager, votestats" \
-    +set sv_hostname "QuakeCon 2016 Practice Server - $qServerLocation" \
-    +set zmq_rcon_enable 0 \
-    +set zmq_stats_enable 1 \
-    +set zmq_stats_password "eggplant" \
-    +set zmq_stats_port $gameport \
-    +set sv_tags "$qServerLocation, QuakeCon 2016" \
-    +set sv_mappoolFile "mappool_qcon.txt" \
-    +set fs_homepath ~/.quakelive/QuakeCon \
-    +set sv_location "$qServerLocation" \
-    +set qlx_serverBrandName "^1QCON^7 Practice Server - ^3$qServerLocation^7" \
-    +set qlx_serverBrandTopField "Hosted by ^4The Purgery^7 for the Australian/New Zealand representatives of our Quake Community at QuakeCon" \
-    +set qlx_serverBrandBottomField "Check out ^54seasonsgaming.com^7 for a great community forum to discuss QuakeCon."
 fi
 
 #elif [ $1 -ge 12 ] && [ $1 -le 16 ]; then
