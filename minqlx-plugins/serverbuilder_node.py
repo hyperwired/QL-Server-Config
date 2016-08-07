@@ -18,7 +18,7 @@ class serverbuilder_node(minqlx.Plugin):
 
         self.server_id = "server_" + self.get_cvar("sv_identifier")
         self.server_location = str.replace(self.get_cvar("sv_location"), " ", "-")
-        self.server_key = self.server_location.lower() + ":" + self.server_id
+        self.server_key = "serverbuilder:" + self.server_location.lower() + ":" + self.server_id
         
         self.is_ready = False
         self.isFirstPlayer = True
