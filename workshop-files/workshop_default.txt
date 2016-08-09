@@ -69,8 +69,8 @@
 # uberkill
 607068129
 
-# 6+ (Q3: 6++)
-547252823
+# 6Plus - Bot Support
+740535931
 
 # Rocket Arena 3 - ra3map13
 550674410
@@ -180,8 +180,8 @@
 # Crypt
 552635969
 
-# Overkill Remix
-549600167
+# OkRemix - Bot Support
+740534444
 
 # Central Pwnage Unit (Beta 2)
 553399644
