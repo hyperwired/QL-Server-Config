@@ -97,7 +97,7 @@ exec $qPurgeryStart \
     +set qlx_disablePlayerRemoval 0 \
     +set qlx_privatiseVotes 1 \
     +set qlx_strictVql 0 \
-    +set teamsize 4
+    +set teamsize 5
 elif [ $1 -eq 2 ]; then
 echo "Starting vql clan arena server 2..."
 exec $qPurgeryStart \
@@ -124,7 +124,7 @@ exec $qPurgeryStart \
     +set qlx_teamsizeMaximum 6 \
     +set qlx_privatiseVotes 1 \
     +set qlx_strictVql 1 \
-    +set teamsize 4
+    +set teamsize 5
   elif [ $1 -eq 3 ]; then
   echo "Starting clan arena server 3..."
   exec $qPurgeryStart \
@@ -151,7 +151,7 @@ exec $qPurgeryStart \
       +set qlx_teamsizeMaximum 5 \
       +set qlx_privatiseVotes 1 \
       +set qlx_strictVql 1 \
-      +set teamsize 4
+      +set teamsize 5
 elif [ $1 -eq 4 ]; then
 echo "Starting race server 1..."
 exec $qPurgeryStart \
