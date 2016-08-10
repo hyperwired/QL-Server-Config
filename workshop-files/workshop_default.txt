@@ -189,9 +189,6 @@
 # Push
 553729235
 
-# PondLife
-556966875
-
 # The Simpsons Map v2
 556856618
 
@@ -228,9 +225,6 @@
 # q3dm17
 559698707
 
-# DeFRaG map: cSu1_a
-# 560050165 - This item has been removed by the author
-
 # Hockey
 560187778
 
@@ -264,17 +258,11 @@
 # The Edge 2004 CPM Remix
 560535691
 
-# 17 Remix
-# 560536524 - This item has been removed by the author
-
 # Club Doom
 560542953
 
 # Campgrounds Redux [Q4DM9]
 560545593
-
-# efq3dm17
-# 560546791 - This item has been removed by the author
 
 # The Sinister Zone (q1dm6)
 560547573
@@ -303,9 +291,6 @@
 # Tokays Towers
 560972307
 
-# The Chastity Belt Duel (ospdm8)
-# 560989741 - This item has been removed by the author
-
 # The Frag Pipe
 561036971
 
@@ -315,23 +300,14 @@
 # Rocket Arena 3 - ra3map5
 561459991
 
-# DeFRaG/race map: BardoK-Statik
-# 561610262 - This item has been removed by the author
-
 # Rocket Arena 3 - ra3map3
 561613916
-
-# DeFRaG/race map: Rocket Launcher Training
-# 561646565 - This item has been removed by the author
 
 # Rocket Arena 3 - ra3map14
 561683838
 
 # Rocket Arena 3 - ra3map4
 561815150
-
-# DeFRaG/race map: momentum
-# 561856702 - This item has been removed by the author
 
 # Rocket Arena 3 - ra3map7
 561877295
@@ -351,30 +327,6 @@
 # Sarge`s War
 562439444
 
-# DeFRaG/race map: df_slopin
-# 562448042 - This item has been removed by the author
-
-# DeFRaG/race map: cos1_beta7b
-# 562448681 - This item has been removed by the author
-
-# Duel map: megadm4-09
-# 562449180 - This item has been removed by the author
-
-# Duel map: rota3tourney1
-# 562449385 - This item has been removed by the author
-
-# DeFRaG/race map: Tr1ckhouse
-# 562451786 - This item has been removed by the author
-
-# Duel map: pukka3tourney5
-# 562530042 - This item has been removed by the author
-
-# Duel/FFA map: rota3dm1
-# 562530320 - This item has been removed by the author
-
-# Duel/FFA map: rota3dm2
-# 562530598 - This item has been removed by the author
-
 # Chronic - Ufreeze Map
 562554624
 
@@ -386,9 +338,6 @@
 
 # DeFRaG/race: Lick Map Pack
 562739597
-
-# DeFRaG/race map: Freestyle_88
-# 562747010 - This item has been removed by the author
 
 # Rocket Arena 3 - ra3map11
 562987267
@@ -408,9 +357,6 @@
 # DeFRaG/race map: Palmslane
 563284812
 
-# DeFRaG/race map: Coldrun
-# 563333349 - This item has been removed by the author
-
 # DeFRaG/race: Slick Map Pack
 563581691
 
@@ -429,9 +375,6 @@
 # Dracula
 565025815
 
-# Campgrounds CTF
-565082165
-
 # DeFRaG/race Promode & Vanilla Map Pack
 565175871
 
@@ -446,9 +389,6 @@
 
 # bdra3
 565482567
-
-# DeFRaG/race map: PiyoFunJumps
-# 566733850 - This item has been removed by the author
 
 # DeFRaG/race map: Handbreaker4
 567083637
@@ -485,9 +425,6 @@
 
 # Nunuk Maps
 569916167
-
-# Xoylent
-# 569917004 - This item has been removed by the author
 
 # koz25
 569922415
@@ -582,38 +519,11 @@
 # The Heinous Place
 582961584
 
-# Endurance
-582949583
-
-# The Killing Machine
-# 582941724 - This item has been removed by the author
-
-# hydra b
-# 582933751 - This item has been removed by the author
-
-# Geotechnic *b
-# 582926811 - This item has been removed by the author
-
-# DustBowl
-# 582915859 - This item has been removed by the author
-
 # Hit the Floor
 582908190
 
 # Nazi bunker
 582882064
-
-# DeadStrong
-# 582771824 - This item has been removed by the author
-
-# The Rage Q3
-# 582762928 - This item has been removed by the author
-
-# The Final Hour
-# 582737620 - This item has been removed by the author
-
-# Goldleaf *
-# 582721827 - This item has been removed by the author
 
 # cos1_beta7b
 582665687
@@ -719,18 +629,6 @@
 
 # Carnage grounds
 583496556
-
-# No One
-# 583488902 - This item has been removed by the author
-
-# q3sg1c
-# 583483661 - This item has been removed by the author
-
-# swift
-624131766
-
-# pillars
-582740326
 
 # Opium
 586817666
@@ -942,9 +840,6 @@
 # plasma_climb
 605613413
 
-# Feel The Base
-605677816
-
 # earth_run_v2
 606150607
 
@@ -965,15 +860,6 @@
 
 # cpmkitchen - Race map
 598752473
-
-# Gothic Dawn
-598911025
-
-# Dynablast
-598911133
-
-# Arena Gate CTF
-598911298
 
 # QuakeWorld aim map: vrmdmm4 (povdmm4 remake)
 599013329
@@ -1001,12 +887,6 @@
 
 # jTheRocketJump
 601074113
-
-# Poptart: scavenger hunt map
-601093276
-
-# Frozen Colors
-601222594
 
 # pro_rings
 601701357
