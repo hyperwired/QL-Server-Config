@@ -81,6 +81,10 @@ class tomtec_logic(minqlx.Plugin):
         if self.get_cvar("qlx_ratingLimiter", bool):
             minqlx.load_plugin("ratinglimiter")
 
+        minqlx.load_plugin("gamemode_secondchance")
+        minqlx.load_plugin("gamemode_singleweapon")
+        minqlx.load_plugin("gamemode_triweapon")
+
         if "auckland" in self.serverLocation.lower(): # was put in to reduce lag and server command traffic in the auckland server.
             @minqlx.delay(20)
             def f():
