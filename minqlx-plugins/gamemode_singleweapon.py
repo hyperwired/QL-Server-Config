@@ -28,7 +28,7 @@ class gamemode_singleweapon(minqlx.Plugin):
     def incrementWeapons(self):
         if self.gamemode_active:
             current_weapons = self.get_cvar("g_startingWeapons", int)
-            if (current_weapons == 8192) or (current_weapons == 0):
+            if (current_weapons >= 8192) or (current_weapons == 0):
                 self.set_cvar("g_startingWeapons", str(1))
             else:
                 current_weapons += current_weapons
