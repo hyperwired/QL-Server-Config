@@ -22,6 +22,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("vote_ended", self.handle_vote_ended)
         self.add_hook("chat", self.handle_chat)
         self.add_hook("userinfo", self.handle_userinfo, priority=minqlx.PRI_HIGHEST) # to prevent illegal name changes
+        self.add_hook("client_command", self.handle_client_command)
         
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
@@ -45,6 +46,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("listcv", "cvlist", "listcvs"), self.cmd_listcv)
     
         self.disabled_maps = ["proq3dm6"]
+        self.readyPlayers = []
         
         self.set_cvar_once("qlx_purgeryDonationMessages", "1")
         self.set_cvar_once("qlx_visitForumMessages", "0")
@@ -291,8 +293,18 @@ class tomtec_logic(minqlx.Plugin):
                     player.tell("^2Notice: ^7Please don't complain about lag on this server, we're here to play, not to complain and moan.")
                     player.tell("^2The above message will not appear again.")
                     self.db.set_flag(player, flag, False)
+
+    @minqlx.next_frame    
+    def handle_client_command(self, player, command):
+        if self.game.state == "warmup":
+            if command == "readyup":
+                if player not in self.readyPlayers:
+                    self.center_print("{}^7 is ^2READY!".format(player))
+                    self.readyPlayers.append(player)
+                else:
+                    self.center_print("{}^7 is ^1NOT READY!".format(player))
+                    self.readyPlayers.remove(player)
                 
-        
     def handle_player_spawn(self, player):
         # Add in ExcessivePlus-like feeling, mimicing the spawn behaviour in EP.
         if self.game.type_short != "duel":
