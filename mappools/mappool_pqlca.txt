@@ -55,10 +55,6 @@ ra3map4c|pqlca
 ra3map5a|pqlca
 ra3map5b|pqlca
 ra3map5c|pqlca
-ra3map6|pqlca
-ra3map6a|pqlca
-ra3map6b|pqlca
-ra3map6c|pqlca
 ra3map7|pqlca
 ra3map7a|pqlca
 ra3map7b|pqlca
@@ -113,3 +109,4 @@ ra3map22|pqlca
 ra3map22a|pqlca
 ra3map22c|pqlca
 ra3map22d|pqlca
+gridworks|pqlca
