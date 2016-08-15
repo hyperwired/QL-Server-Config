@@ -3,11 +3,11 @@
 
 set sv_mapPoolFile "mappool.txt"           // Map pool that the server will use. See default mapcycle.txt for format.
 set g_accessFile "access.txt"              // Used to determine which 64-bit Steam IDs have admin access, or are banned.
-set sv_maxClients "18"                     // How many players can connect at once.
+set sv_maxClients "24"                     // How many players can connect at once.
 set g_password ""                          // Set a server-wide password, and stop all users from connecting without it.
 set sv_privateClients "1"                  // Reserve clients that can be used with sv_privatePassword.
 set sv_privatePassword "givemeaspot"       // Keyword to use in conjunction with sv_privateClients.
-set com_hunkMegs 60                        // Amount of memory allocated to the hunk (in MB)
+set com_hunkMegs 70                        // Amount of memory allocated to the hunk (in MB)
 set com_zoneMegs 10                        // Amount of memory allocated to the main zone (in MB)
 set sv_master 1                            // Put the server on the Steam server master list.
 set sv_serverType 2                        // Indicate that the server is a full internet Quake Live server.
