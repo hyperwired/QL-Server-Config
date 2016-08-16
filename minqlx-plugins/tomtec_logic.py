@@ -324,6 +324,7 @@ class tomtec_logic(minqlx.Plugin):
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
         minqlx.set_cvar("g_infiniteAmmo", "1")
+        self.readyPlayers = []
         
     def game_countdown(self):
         self.play_sound("sound/items/protect3.ogg")
