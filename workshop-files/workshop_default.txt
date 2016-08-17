@@ -129,9 +129,6 @@
 # Consequence
 544634523
 
-# Test Big Box
-545598325
-
 # Winter's Edge Original
 540986862
 
@@ -675,9 +672,6 @@
 # Bal3dm5 - Junk Data
 588990000
 
-# Big Box
-589208436
-
 # Facing Worlds (Unreal Tournament CTF map)
 589313020
 
@@ -717,8 +711,8 @@
 # Capture the Karin | rota3ctf2
 596924297
 
-# Hell Box - Small Duel Map (requires /cv map hellbox hellbox, has it's own built-in factory)
-598441241
+# Big Box
+746056756
 
 # ca_tamb
 597914676
