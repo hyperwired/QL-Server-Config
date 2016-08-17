@@ -23,6 +23,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("chat", self.handle_chat)
         self.add_hook("userinfo", self.handle_userinfo, priority=minqlx.PRI_HIGHEST) # to prevent illegal name changes
         self.add_hook("client_command", self.handle_client_command)
+        self.add_hook("team_switch", self.handle_team_switch)
         
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
@@ -298,12 +299,18 @@ class tomtec_logic(minqlx.Plugin):
     def handle_client_command(self, player, command):
         if self.game.state == "warmup":
             if command == "readyup":
-                if player not in self.readyPlayers:
-                    self.center_print("{}^7 is ^2READY!".format(player))
-                    self.readyPlayers.append(player)
-                else:
-                    self.center_print("{}^7 is ^1NOT READY!".format(player))
-                    self.readyPlayers.remove(player)
+                if player.team != "spectator":
+                    if player not in self.readyPlayers:
+                        self.center_print("{}^7 is ^2READY!".format(player))
+                        self.readyPlayers.append(player)
+                    else:
+                        self.center_print("{}^7 is ^1NOT READY!".format(player))
+                        self.readyPlayers.remove(player)
+
+    def handle_team_switch(self, player, old_team, new_team):
+        if new_team == "spectator":
+            if player in self.readyPlayers:
+                self.readyPlayers.remove(player)
                 
     def handle_player_spawn(self, player):
         # Add in ExcessivePlus-like feeling, mimicing the spawn behaviour in EP.
