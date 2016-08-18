@@ -263,7 +263,7 @@ exec $qPurgeryStart \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 0
 elif [ $1 -eq 9 ]; then
-if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]; then
+if [ $(hostname) == "sydney.thepurgery.com" ]; then
 echo "Starting reythe's duel house (sub580) 1..."
 exec $qPathToVanillaStartScript \
     +set net_strict 1 \
@@ -283,7 +283,7 @@ else
 echo "This system is not intended to host reythe (sub580) server."
 fi
 elif [ $1 -eq 10 ]; then
-if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]; then
+if [ $(hostname) == "sydney.thepurgery.com" ]; then
 echo "Starting pit clan server (sub586) 1..."
 exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
@@ -310,7 +310,7 @@ else
 echo "This system is not intended to host pit clan (sub586) server."
 fi
 elif [ $1 -eq 11 ]; then
-if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]; then
+if [ $(hostname) == "sydney.thepurgery.com" ]; then
 echo "Starting toey's server (sub613) 1..."
 exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
@@ -334,7 +334,7 @@ fi
 fi
 
 #elif [ $1 -ge 12 ] && [ $1 -le 16 ]; then
-#if [ $(hostname) == "sydney.quakelive.tomtecsolutions.com.au" ]; then
+#if [ $(hostname) == "sydney.thepurgery.com" ]; then
 #servernum=`expr $1 - 11`
 #echo "Starting starting 4sg tournament server $servernum..."
 #exec $qPathToMinqlxStartScript \
