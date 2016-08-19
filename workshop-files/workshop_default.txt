@@ -20,6 +20,9 @@
 # Soundboard.py Sounds
 645733939
 
+# Lan Info Map
+747283601
+
 # The Purgery - Sound Pack (by Thomas Jones for testing purposes)
 572495786
 
