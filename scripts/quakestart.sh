@@ -262,14 +262,17 @@ exec $qPurgeryStart \
 elif [ $1 -eq 9 ]; then
 if [ $(hostname) == "adelaide.thepurgery.com" ]; then
 echo "Starting reythe's duel house (sub580) 1..."
-exec $qPathToVanillaStartScript \
+exec $qPathToMinqlxStartScript \
     +set net_strict 1 \
+    +set qlx_redisDatabase 3 \
     +set net_port $gameport \
+    +set qlx_owner $qPurgeryOwnerSteam64ID \
+    +set qlx_plugins "DEFAULT, branding, balance, votestats" \
+    +set qlx_serverBrandName "Reythe's Duel House" \
     +set sv_hostname "Reythe's Duel House" \
     +set zmq_rcon_enable 0 \
     +set zmq_stats_enable 1 \
     +set sv_tags "$qServerLocation" \
-    +set bot_enable 0 \
     +set g_accessFile "access_reythe.txt" \
     +set sv_mappoolFile "mappool_reythe.txt" \
     +set fs_homepath ~/.quakelive/REYTHE-SUB580 \
@@ -290,7 +293,6 @@ exec $qPathToMinqlxStartScript \
     +set qlx_plugins "DEFAULT, branding, fun, balance, votestats" \
     +set qlx_serverBrandName "^1=^4P^1i^4T^1=^7 Clan Server" \
     +set qlx_serverBrandTopField "Check out our forums at ^2http://intothepit.org^7." \
-    +set qlx_serverBrandBottomField "" \
     +set sv_hostname "=PiT= Clan Server" \
     +set zmq_stats_enable 1 \
     +set sv_tags "$qServerLocation" \
@@ -301,8 +303,7 @@ exec $qPathToMinqlxStartScript \
     +set sv_location "$qServerLocation" \
     +set qlx_connectMessage Connected to the ^1=^4P^1i^4T^1=^7 Clan Server \
     +set qlx_loadedMessage Welcome to ^4The ^1=^4P^1i^4T^1=^7 Clan Server^7 \
-    +set qlx_countdownMessage ^1Good luck, and have fun!^7 \
-    +set qlx_balanceUrl stats.quakelive.tomtecsolutions.com.au:8080
+    +set qlx_countdownMessage ^1Good luck, and have fun!^7
 else
 echo "This system is not intended to host pit clan (sub586) server."
 fi
