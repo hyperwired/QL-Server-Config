@@ -264,7 +264,7 @@ exec $qPurgeryStart \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 0
 elif [ $1 -eq 9 ]; then
-if [ $(hostname) == "sydney.thepurgery.com" ]; then
+if [ $(hostname) == "adelaide.thepurgery.com" ]; then
 echo "Starting reythe's duel house (sub580) 1..."
 exec $qPathToVanillaStartScript \
     +set net_strict 1 \
