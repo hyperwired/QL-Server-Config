@@ -62,16 +62,12 @@ exec $qPurgeryStart \
     +set g_voteFlags "9320" \
     +set g_allowSpecVote 1 \
     +set g_allowVoteMidGame 1 \
-    +set bot_enable 1 \
-    +set bot_nochat 0 \
     +set sv_mappoolFile "mappool_pqlca.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
     +set qlx_rulesetLocked 1 \
     +set qlx_balanceApi elo_b \
     +set qlx_leaverBan 1 \
-    +set g_warmupReadyDelay 90 \
-    +set g_warmupReadyDelayAction 2 \
     +set qlx_loadQueue 1
 elif [ $1 -eq 1 ]; then
 echo "Starting vql clan arena server 1..."
