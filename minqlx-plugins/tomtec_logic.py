@@ -54,6 +54,7 @@ class tomtec_logic(minqlx.Plugin):
         
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
+        self.set_cvar_once("qlx_loadQueue", "0")
         
         self.plugin_version = "4.9"
 
@@ -83,6 +84,9 @@ class tomtec_logic(minqlx.Plugin):
         
         if self.get_cvar("qlx_ratingLimiter", bool):
             minqlx.load_plugin("ratinglimiter")
+
+        if self.get_cvar("qlx_loadQueue", bool):
+            minqlx.load_plugin("queue")
 
         minqlx.load_plugin("gamemode_secondchance")
         minqlx.load_plugin("gamemode_singleweapon")

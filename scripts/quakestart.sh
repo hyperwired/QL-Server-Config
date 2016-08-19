@@ -19,7 +19,7 @@ export qRconPasswordPurgery=$(<~/localConfig-rconPassword-purgery.txt)
 export qPurgeryServerTitle="^4The Purgery^7 - $qServerLocation - ^2#$1^7"
 export qPurgeryStart="$qPathToMinqlxStartScript \
 +set qlx_owner $qPurgeryOwnerSteam64ID \
-+set qlx_plugins DEFAULT, tomtec_logic, botmanager, cleverbot, tp_fun, fun, balance, commlink, aliases, votestats, custom_votes, votemanager, branding, q3resolver, queue, pummel \
++set qlx_plugins DEFAULT, tomtec_logic, botmanager, cleverbot, tp_fun, fun, balance, commlink, aliases, votestats, custom_votes, votemanager, branding, q3resolver, pummel \
 +set qlx_commlinkIdentity thepurgery \
 +set qlx_commlinkServerName $qCommlinkServerName
 +set qlx_chatlogs 20 \
@@ -71,7 +71,8 @@ exec $qPurgeryStart \
     +set qlx_balanceApi elo_b \
     +set qlx_leaverBan 1 \
     +set g_warmupReadyDelay 90 \
-    +set g_warmupReadyDelayAction 2
+    +set g_warmupReadyDelayAction 2 \
+    +set qlx_loadQueue 1
 elif [ $1 -eq 1 ]; then
 echo "Starting vql clan arena server 1..."
 exec $qPurgeryStart \
