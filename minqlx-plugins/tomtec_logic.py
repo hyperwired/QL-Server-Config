@@ -358,7 +358,6 @@ class tomtec_logic(minqlx.Plugin):
         for p in self.players():
             p.noclip = False
         self.set_cvar("g_speed", "320")
-        self.play_sound("sound/vo_evil/welcome")
 
     def cmd_clearperms(self, player, msg, channel):
         return
