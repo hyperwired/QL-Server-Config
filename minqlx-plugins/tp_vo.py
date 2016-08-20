@@ -22,7 +22,7 @@ class tp_vo(minqlx.Plugin):
     def handle_game_countdown(self, *args, **kwargs):
         @minqlx.thread
         def announceGametype():
-            time.sleep(1.2)
+            time.sleep(1.6)
             done = False
             for mod in GAMEMODS:
                 if mod.lower() in self.game.factory.lower() and not done:
