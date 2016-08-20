@@ -4,6 +4,7 @@ GAMEMODS = ["infected", "quadhog"]
 
 import minqlx
 from random import randint
+from time import sleep
 class tp_vo(minqlx.Plugin):
     def __init__(self):
         self.add_hook("map", self.map_load)
@@ -21,21 +22,22 @@ class tp_vo(minqlx.Plugin):
     @minqlx.delay(2)
     def handle_game_countdown(self, *args, **kwargs):
         done = False
-        for mod in GAMEMODS:
-            if mod.lower() in self.game.factory.lower() and not done:
-                self.play_sound("tp_vo/gametypes/mods/{}.ogg".format(mod.lower()))
-                done = True
-
-        if not done:
-            self.play_sound("tp_vo/gametypes/{}.ogg".format(self.game.type_short))
-
+        @minqlx.thread
+        def announceGametype():
+            sleep(1.2)
+            for mod in GAMEMODS:
+                if mod.lower() in self.game.factory.lower() and not done:
+                    self.play_sound("tp_vo/gametypes/mods/{}.ogg".format(mod.lower()))
+                    done = True
+            if not done:
+                self.play_sound("tp_vo/gametypes/{}.ogg".format(self.game.type_short))
+        self.play_sound("tp_vo/rulesets/pql.ogg") if self.get_cvar("pmove_aircontrol", bool) else self.play_sound("tp_vo/rulesets/vql.ogg")
+        announceGametype()
+        
     @minqlx.delay(2)
     def handle_game_end(self, *args, **kwargs):
         rand = randint(0, 9)
-        if not rand:
-            self.play_sound("tp_vo/general/great_game.ogg")
-        else:
-            self.play_sound("tp_vo/general/good_game.ogg")
+        self.play_sound("tp_vo/general/good_game.ogg") if rand else self.play_sound("tp_vo/general/great_game.ogg")
         
     @minqlx.delay(3)
     def handle_player_loaded(self, player):
