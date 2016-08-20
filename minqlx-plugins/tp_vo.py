@@ -39,6 +39,8 @@ class tp_vo(minqlx.Plugin):
         
     @minqlx.delay(3)
     def handle_player_loaded(self, player):
+        if str(player.steam_id) == str(minqlx.owner()):
+            self.play_sound("tp_vo/purgery/purger.ogg")
         self.play_sound("tp_vo/purgery/welcome_to_the_purgery.ogg", player)
 
         
