@@ -10,6 +10,7 @@ class tp_vo(minqlx.Plugin):
         self.add_hook("game_countdown", self.handle_game_countdown)
         self.add_hook("game_end", self.handle_game_end)
         self.add_hook("player_loaded", self.handle_player_loaded)
+        self.add_hook("player_connect", self.handle_player_connect)
         self.add_command("tomtec_versions", self.cmd_showversion)
 
         self.plugin_version = "1.1"
@@ -40,10 +41,12 @@ class tp_vo(minqlx.Plugin):
         
     @minqlx.delay(3)
     def handle_player_loaded(self, player):
-        if str(player.steam_id) == str(minqlx.owner()):
-            self.play_sound("tp_vo/purgery/purger.ogg")
         self.play_sound("tp_vo/purgery/welcome_to_the_purgery.ogg", player)
 
+    def handle_player_connect(self, player):
+        if str(player.steam_id) == str(minqlx.owner()):
+            self.play_sound("tp_vo/purgery/purger.ogg")
+            
         
     def cmd_showversion(self, player, msg, channel):
         channel.reply("^4tp_vo.py^7 - version {}, created by Thomas Jones on 11/12/2015.".format(self.plugin_version))
