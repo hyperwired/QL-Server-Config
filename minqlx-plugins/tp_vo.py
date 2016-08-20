@@ -18,7 +18,7 @@ class tp_vo(minqlx.Plugin):
     def map_load(self, *args, **kwargs):
         self.game.workshop_items += [572495786]
 
-    @minqlx.delay(3)
+    @minqlx.delay(2)
     def handle_game_countdown(self, *args, **kwargs):
         done = False
         for mod in GAMEMODS:
@@ -27,7 +27,7 @@ class tp_vo(minqlx.Plugin):
                 done = True
 
         if not done:
-            self.play_sound("tp_vo/gametypes/{}.ogg".format(self.game.type))
+            self.play_sound("tp_vo/gametypes/{}.ogg".format(self.game.type_short))
 
     @minqlx.delay(2)
     def handle_game_end(self, *args, **kwargs):
