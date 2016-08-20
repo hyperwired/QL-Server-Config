@@ -2,9 +2,8 @@
 
 GAMEMODS = ["infected", "quadhog"]
 
-import minqlx
+import minqlx, time
 from random import randint
-from time import sleep
 class tp_vo(minqlx.Plugin):
     def __init__(self):
         self.add_hook("map", self.map_load)
@@ -21,10 +20,10 @@ class tp_vo(minqlx.Plugin):
 
     @minqlx.delay(2)
     def handle_game_countdown(self, *args, **kwargs):
-        done = False
         @minqlx.thread
         def announceGametype():
-            sleep(1.2)
+            time.sleep(1.2)
+            done = False
             for mod in GAMEMODS:
                 if mod.lower() in self.game.factory.lower() and not done:
                     self.play_sound("tp_vo/gametypes/mods/{}.ogg".format(mod.lower()))
