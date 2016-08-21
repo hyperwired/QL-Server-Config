@@ -22,7 +22,8 @@ class tp_fun(minqlx.Plugin):
 
         self.add_hook("chat", self.handle_chat)
         
-        self.plugin_version = "1.5"
+        self.plugin_version = "1.6"
+        self.last_sound = None
 
     def handle_chat(self, player, msg, channel):
         words = msg
