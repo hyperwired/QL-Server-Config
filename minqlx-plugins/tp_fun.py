@@ -35,13 +35,23 @@ class tp_fun(minqlx.Plugin):
                 self.talk_beep()
             f()
 
+        def play_sound(self, path):
+            if not self.last_sound:
+                pass
+            elif time.time() - self.last_sound < self.get_cvar("qlx_funSoundDelay", int):
+                return
+            self.last_sound = time.time()
+            for p in self.players():
+                if self.db.get_flag(p, "essentials:sounds_enabled", default=True):
+                    super().play_sound(path, p)
+                    
         if "tp_vo" in minqlx.Plugin._loaded_plugins:
             if channel != "chat": return
             msg = self.clean_text(msg)
             if _re_purger.match(msg):
-                self.play_sound("tp_vo/purgery/purger.ogg")
+                play_sound("tp_vo/purgery/purger.ogg")
             elif _re_tomtec_solutions.match(msg):
-                self.play_sound("tp_vo/purgery/tomtec_solutions.ogg")
+                play_sound("tp_vo/purgery/tomtec_solutions.ogg")
 
     def talk_beep(self, player=None):
         if not player:
