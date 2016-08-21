@@ -44,7 +44,7 @@ class tp_fun(minqlx.Plugin):
             self.last_sound = time.time()
             for p in self.players():
                 if self.db.get_flag(p, "essentials:sounds_enabled", default=True):
-                    super().play_sound(path, p)
+                    self.play_sound(path, p)
                     
         if "tp_vo" in minqlx.Plugin._loaded_plugins:
             if channel != "chat": return
