@@ -41,7 +41,7 @@ class tp_fun(minqlx.Plugin):
             if _re_purger.match(msg):
                 self.play_sound("tp_vo/purgery/purger.ogg")
             elif _re_tomtec_solutions.match(msg):
-                self.play_sound("tp_vo/thepurgery/tomtec_solutions.ogg")
+                self.play_sound("tp_vo/purgery/tomtec_solutions.ogg")
 
     def talk_beep(self, player=None):
         if not player:
