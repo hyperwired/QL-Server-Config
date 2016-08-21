@@ -35,7 +35,7 @@ class tp_fun(minqlx.Plugin):
                 self.talk_beep()
             f()
 
-        def play_sound(self, path):
+        def play_sound(path):
             if not self.last_sound:
                 pass
             elif time.time() - self.last_sound < self.get_cvar("qlx_funSoundDelay", int):
