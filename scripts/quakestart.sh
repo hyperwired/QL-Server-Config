@@ -239,7 +239,7 @@ exec $qPurgeryStart \
     +set qlx_ircNickname "$qIrcNickname" \
     +set g_damage_lg 6 \
     +set g_voteFlags 0 \
-    +set qlx_rulesetLocked 0
+    +set qlx_rulesetLocked 1
 elif [ $1 -eq 8 ]; then
 echo "Starting multi game type VQL server 1..."
 exec $qPurgeryStart \
@@ -258,7 +258,13 @@ exec $qPurgeryStart \
     +set sv_mappoolFile "mappool_default.txt" \
     +set fs_homepath ~/.quakelive/$gameport \
     +set qlx_ircNickname "$qIrcNickname" \
-    +set qlx_rulesetLocked 0
+    +set qlx_rulesetLocked 1 \
+    +set pmove_airControl 1 \
+    +set pmove_rampJump 1 \
+    +set weapon_reload_rg 1200 \
+    +set pmove_weaponRaiseTime 10 \
+    +set pmove_weaponDropTime 10 \
+    +set g_damage_lg 7
 elif [ $1 -eq 9 ]; then
 if [ $(hostname) == "adelaide.thepurgery.com" ]; then
 echo "Starting reythe's duel house (sub580) 1..."
