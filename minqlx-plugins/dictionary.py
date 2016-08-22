@@ -6,8 +6,10 @@ import minqlx, requests, json
 class dictionary(minqlx.Plugin):
     def __init__(self):
         self.add_command("define", self.define_term, usage="<term>")
+        self.add_command("tomtec_versions", self.cmd_showversion)
 
-
+        self.plugin_version = "1.1"
+        
     
     def define_term(self, player, msg, channel):
         @minqlx.thread
@@ -23,8 +25,9 @@ class dictionary(minqlx.Plugin):
             return minqlx.RET_USAGE
         else:
             run(player, msg, channel)
-            
-    
 
-        
+
+    def cmd_showversion(self, player, msg, channel):
+        channel.reply("^4dictionary.py^7 - version {}, created by Thomas Jones on 22/08/16.".format(self.plugin_version))
+
         
