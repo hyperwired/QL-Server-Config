@@ -2,7 +2,6 @@
 
 OWNER_NAME="^7Pur^4g^7er" # used to define the owner's name, this name must = the minqlx.owner()'s name.
 
-GAME_MODERATORS="merozollo, 0regonn, barley, Biokemical, Quarrel, meganfoxxed, Jubblies, zee" # string that displays on player load after a delay
 ZERO_WIDTH_SPACE=u"\u200B" # part of the userinfo filtering to prevent illegal names
 REG_WIDTH_SPACE=u"\u2002"
 
@@ -23,6 +22,8 @@ class tomtec_logic(minqlx.Plugin):
         self.add_hook("vote_ended", self.handle_vote_ended)
         self.add_hook("chat", self.handle_chat)
         self.add_hook("userinfo", self.handle_userinfo, priority=minqlx.PRI_HIGHEST) # to prevent illegal name changes
+        self.add_hook("client_command", self.handle_client_command)
+        self.add_hook("team_switch", self.handle_team_switch)
         
         self.add_command(("help", "about", "version"), self.cmd_help)
         self.add_command("rules", self.cmd_showrules)
@@ -33,7 +34,7 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command(("forum", "forums", "f"), self.cmd_forums)
         self.add_command(("donate", "donations", "d", "donating"), self.cmd_donate)
         self.add_command("killall", self.cmd_killall, 4)
-        self.add_command(("respawn", "spawn"), self.cmd_respawn, 5)
+        self.add_command(("respawn", "spawn"), self.cmd_respawn, 5, usage="[id]")
         self.add_command(("respawn_aircontrol", "spawn_aircontrol"), self.respawn_aircontrol, 5)
         
         self.add_command("tomtec_versions", self.cmd_showversion)
@@ -43,15 +44,17 @@ class tomtec_logic(minqlx.Plugin):
         self.add_command("mapname", self.cmd_mapname) # display current map name
         self.add_command("server_reconfigure", self.cmd_reconfigure, 5)
         self.add_command("test", self.cmd_test)
+        self.add_command(("listcv", "cvlist", "listcvs"), self.cmd_listcv)
     
         self.disabled_maps = ["proq3dm6"]
+        self.readyPlayers = []
         
-        self.set_cvar_once("qlx_freezePlayersDuringVote", "0") 
-        self.set_cvar_once("qlx_purgeryDonationMessages", "0")
+        self.set_cvar_once("qlx_purgeryDonationMessages", "1")
         self.set_cvar_once("qlx_visitForumMessages", "0")
         
         self.set_cvar_once("qlx_strictVql", "0")
         self.set_cvar_once("qlx_ratingLimiter", "0")
+        self.set_cvar_once("qlx_loadQueue", "0")
         
         self.plugin_version = "4.9"
 
@@ -81,6 +84,13 @@ class tomtec_logic(minqlx.Plugin):
         
         if self.get_cvar("qlx_ratingLimiter", bool):
             minqlx.load_plugin("ratinglimiter")
+
+        if self.get_cvar("qlx_loadQueue", bool):
+            minqlx.load_plugin("queue")
+
+        minqlx.load_plugin("gamemode_secondchance")
+        minqlx.load_plugin("gamemode_singleweapon")
+        minqlx.load_plugin("gamemode_triweapon")
 
         if "auckland" in self.serverLocation.lower(): # was put in to reduce lag and server command traffic in the auckland server.
             @minqlx.delay(20)
@@ -148,6 +158,7 @@ class tomtec_logic(minqlx.Plugin):
             except:
                 player.tell("Invalid client ID. Please enter a client ID of the player to (re)spawn.")
             
+            
     def respawn_aircontrol(self, player, msg, channel): # uses a quick cvar switch and client respawn to give the player air control.
         @minqlx.next_frame
         def spawn(msg):
@@ -167,7 +178,32 @@ class tomtec_logic(minqlx.Plugin):
         self.set_cvar("pmove_aircontrol", "1")
         spawn(msg)
         reset()
-        
+
+    def cmd_listcv(self, player, msg, channel):
+        player.tell("^3Extra call-vote commands available on this server:^7")
+        player.tell("^5   /cv freecam [on/off]            - Enables free-camming around the arena in a team-based game.")
+        player.tell("^5   /cv infiniteammo [on/off]       - Enables infinite ammo on all weapons.")
+        player.tell("^5   /cv alltalk [on/off]            - Enables voice communication between teams during the game.")
+        player.tell("^5   /cv chatsounds [on/off]         - Enables the chat-activated sounds triggered by words.")
+        player.tell("^5   /cv allready                    - Forces the game to start.")
+        player.tell("^5   /cv abort                       - Abort the current game.")
+        player.tell("^5   /cv silence <id>                - Silences a player for 10 minutes.")
+        player.tell("^5   /cv floordamage [on/off]        - Permits damage to go through floors/walls/surfaces etc.")
+        player.tell("^5   /cv spec <id>                   - Move the player specified to the spectators.")
+        player.tell("^5   /cv tempban <id>                - Ban the specified player until the map changes.")
+        player.tell("^5   /cv lock (team)                 - Lock both or specified team(s).")
+        player.tell("^5   /cv unlock (team)               - Unlock both or specified team(s).")
+        player.tell("^5   /cv roundtimelimit [90/120/180] - Changes the round time limit (specified in seconds).")
+        player.tell("^5   /cv balancing [on/off]          - Enables/disables the elo/glicko team balancing system.")
+        player.tell("^5   /cv lgdamage [6/7]              - Changes Lightning Gun damage/knockback.")
+        player.tell("^5   /cv rgdamage [80/100]           - Changes Railgun damage.")
+        player.tell("^5   /cv runes [on/off]              - Enables/disables runes.")
+        player.tell("^5   /cv lgammo [150/200]            - Change starting lightning gun ammo.")
+        player.tell("^5   /cv gibs [on/off]               - Enable server-forced gibs for all players.")
+        player.tell("^5   /cv autobot [on/off]            - Enable/disable the bot balancing system.")
+        player.tell("^5   /cv do                          - Forces the suggested switch.")
+        return minqlx.RET_STOP_ALL
+
     def cmd_mapname(self, player, msg, channel):
         channel.reply("The current map's name is ^4{}^7.".format(self.game.map))
         
@@ -247,11 +283,7 @@ class tomtec_logic(minqlx.Plugin):
         @minqlx.delay(5)
         def f():
             # display donation message if any
-            self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.", player)
-
-            # announce game mods
-            self.talk_beep(player)
-            player.tell("Current game moderators: Pur^4g^7er (owner), {}.".format(GAME_MODERATORS))
+            self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot.", player)
         f()
 
     def handle_chat(self, player, msg, channel):
@@ -266,8 +298,24 @@ class tomtec_logic(minqlx.Plugin):
                     player.tell("^2Notice: ^7Please don't complain about lag on this server, we're here to play, not to complain and moan.")
                     player.tell("^2The above message will not appear again.")
                     self.db.set_flag(player, flag, False)
+
+    @minqlx.next_frame    
+    def handle_client_command(self, player, command):
+        if self.game.state == "warmup":
+            if command == "readyup":
+                if player.team != "spectator":
+                    if player not in self.readyPlayers:
+                        self.center_print("{}^7 is ^2READY!".format(player))
+                        self.readyPlayers.append(player)
+                    else:
+                        self.center_print("{}^7 is ^1NOT READY!".format(player))
+                        self.readyPlayers.remove(player)
+
+    def handle_team_switch(self, player, old_team, new_team):
+        if new_team == "spectator":
+            if player in self.readyPlayers:
+                self.readyPlayers.remove(player)
                 
-        
     def handle_player_spawn(self, player):
         # Add in ExcessivePlus-like feeling, mimicing the spawn behaviour in EP.
         if self.game.type_short != "duel":
@@ -287,6 +335,7 @@ class tomtec_logic(minqlx.Plugin):
     def map_load(self, mapname, factory):
         # turn on infinite ammo for warm-up
         minqlx.set_cvar("g_infiniteAmmo", "1")
+        self.readyPlayers = []
         
     def game_countdown(self):
         self.play_sound("sound/items/protect3.ogg")
@@ -299,7 +348,7 @@ class tomtec_logic(minqlx.Plugin):
                 else:
                     p.powerups(battlesuit=10)
 
-        self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot with the running costs.")
+        self.donation_message("Consider ^2!donating^7 to ^4The Purgery^7, it would really help a lot.")
                  
     def game_end(self, data):
         return
@@ -309,7 +358,6 @@ class tomtec_logic(minqlx.Plugin):
         for p in self.players():
             p.noclip = False
         self.set_cvar("g_speed", "320")
-        self.play_sound("sound/vo_evil/welcome")
 
     def cmd_clearperms(self, player, msg, channel):
         return
@@ -341,7 +389,7 @@ class tomtec_logic(minqlx.Plugin):
         channel.reply("Visit ^4The Purgery^7's forum at ^2forum.thepurgery.com^7.")
 
     def cmd_donate(self, player, msg, channel):
-        channel.reply("Donations to ^4The Purgery^7 can be made via ^5PayPal^7 or ^3Bitcoin^7, check ^2tomtecsolutions.com.au/quakelive^7 for information.")
+        channel.reply("Donations to ^4The Purgery^7 can be made via ^5PayPal^7 or ^3Bitcoin^7, check ^2tomtecsolutions.com.au/donate^7 for information.")
         channel.reply("Thank you!")
         
     def cmd_showversion(self, player, msg, channel):
@@ -432,22 +480,23 @@ class tomtec_logic(minqlx.Plugin):
                 caller.tell("^2/cv gibs [on/off]^7 is the usage for this callvote command.")
                 return minqlx.RET_STOP_ALL
 
+        if vote.lower() == "draw":
+            if self.game.state != "in_progress":
+                caller.tell("Voting to draw the round during warm-up isn't possible.")
+                return minqlx.RET_STOP_ALL
+            else:
+                self.callvote("qlx !killall", "round draw")
+                self.msg("{}^7 called a vote.".format(caller.name))
+                return minqlx.RET_STOP_ALL
             
     def handle_vote_started(self, caller, vote, args):
-        if self.game.state == "warmup":
-            if self.get_cvar("qlx_freezePlayersDuringVote", bool):
-                self.set_cvar("g_speed", "0")
-                self.play_sound("sound/world/klaxon1.wav")
-                minqlx.send_server_command(None, "cp \"^7PLEASE VOTE NOW\nPLAYER MOVEMENT IS DISABLED\nUNTIL THE VOTE ENDS\"\n")
-        else:
-            minqlx.send_server_command(None, "cp \"^7PLEASE VOTE NOW\"\n")
+        self.center_print("PLEASE VOTE NOW")
             
     def handle_vote_ended(self, votes, vote, args, passed):
         if passed:
-            minqlx.send_server_command(None, "cp \"^2VOTE PASSED^7\"\n")
+            self.center_print("^2VOTE PASSED^7")
         else:
-            minqlx.send_server_command(None, "cp \"^1VOTE FAILED^7\"\n")
-        self.set_cvar("g_speed", "320")
+            self.center_print("^1VOTE FAILED^7")
         
     def cmd_maprestart(self, player, msg, channel):
         # run a map restart

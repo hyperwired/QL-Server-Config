@@ -768,12 +768,9 @@ class balance(minqlx.Plugin):
                 assert isinstance(player_info, PlayerInfo)
                 p = player_info.ext_obj
                 assert p
-                if p in teams[other_team_name]:
-                    teams[other_team_name].remove(p)
-                    players_moved = True
-                if p not in teams[this_team_name]:
-                    teams[this_team_name].append(p)
-                    players_moved = True
+                players_moved = (p.team != this_team_name) 
+                p.team = this_team_name
+                    
             return players_moved
 
         moved_players = False

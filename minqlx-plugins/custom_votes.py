@@ -23,7 +23,7 @@ class custom_votes(minqlx.Plugin):
         self.add_hook("player_loaded", self.player_loaded)
 
         self.add_command("tomtec_versions", self.cmd_showversion)
-        self.add_command("excessiveweaps", self.cmd_excessive_weaps, 5, usage="on/off")
+        self.add_command("excessiveweaps", self.cmd_excessive_weaps, 3, usage="on/off")
         self.add_command("ruleset", self.cmd_ruleset, 5, usage="pql/vql")
 
         self.set_cvar_once("qlx_rulesetLocked", "0")
@@ -143,6 +143,12 @@ class custom_votes(minqlx.Plugin):
             else:
                 caller.tell("^2/cv freecam [on/off]^7 is the usage for this callvote command.")
                 return minqlx.RET_STOP_ALL
+
+        if vote.lower() == "do":
+            # enables the '/cv do' command
+            self.callvote("qlx !do", "force the suggested switch")
+            self.msg("{}^7 called a vote.".format(caller.name))
+            return minqlx.RET_STOP_ALL
 
         if vote.lower() == "floordamage":
             # enables the '/cv floordamage [on/off]' command
@@ -283,17 +289,8 @@ class custom_votes(minqlx.Plugin):
 
         if vote.lower() == "excessive":
             # enables the '/cv excessive [on/off]' command
-            if args.lower() == "off":
-                self.callvote("qlx !excessiveweaps off", "excessive weapons: off")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            elif args.lower() == "on":
-                self.callvote("qlx !excessiveweaps on", "excessive weapons: on")
-                self.msg("{}^7 called a vote.".format(caller.name))
-                return minqlx.RET_STOP_ALL
-            else:
-                caller.tell("^2/cv excessive [on/off]^7 is the usage for this callvote command.")
-                return minqlx.RET_STOP_ALL
+            caller.tell("^1Excessive weapons have been disabled because players continuously leave it switched on when they leave.")
+            return minqlx.RET_STOP_ALL
 
         if vote.lower() in ("kick", "clientkick"):
             # if player removal cvar is set, do not permit '/cv kick' or '/cv clientkick'

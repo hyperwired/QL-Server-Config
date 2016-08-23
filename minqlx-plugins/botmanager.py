@@ -39,6 +39,7 @@ class botmanager(minqlx.Plugin):
         
         self.set_cvar("bot_thinktime", "0")
         self.set_cvar("bot_challenge", "1")
+        self.set_cvar("bot_enable", "1")
         
         self.set_cvar_once("bot_autoManage", "0", 4) # is a /serverinfo cvar so VSP can query it/stats services get it
 
@@ -81,7 +82,7 @@ class botmanager(minqlx.Plugin):
         minqlx.console_command("addbot {} {} A 0 \"{}\"".format(BOT_TYPE[0], BOT_TYPE[1], BOT_NAME)) # team any, 0 millisecond join delay
         
     def rembot(self):
-        minqlx.console_command("clientkick {}".format(self.find_player(BOT_NAME)[0].id)) # kicks BOT_NAME
+        self.bot().kick("was removed")
     ################################ METHODS ################################
 
     ################################ HANDLERS ################################
@@ -208,7 +209,7 @@ class botmanager(minqlx.Plugin):
     def cmd_addbot(self, player, msg, channel):
         checker = self.bot_checks("addbot") # store the checker array here
         if self.get_cvar("bot_autoManage", bool):
-            player.tell("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
+            channel.reply("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
             return
         if checker[0]:
             self.addbot()
@@ -220,7 +221,7 @@ class botmanager(minqlx.Plugin):
     def cmd_rembot(self, player, msg, channel):
         checker = self.bot_checks("rembot") # store the checker array here
         if self.get_cvar("bot_autoManage", bool):
-            player.tell("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
+            channel.reply("^1Error: ^7Automatic bot management is enabled. Manual bot commands are therefore disabled.")
             return
         if checker[0]:
             self.rembot()

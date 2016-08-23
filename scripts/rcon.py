@@ -274,7 +274,7 @@ if ( __name__ == '__main__' ):
         monitor = socket.get_monitor_socket( zmq.EVENT_ALL )
         if ( args.password is not None ):
             logging.info( 'setting password for access' )
-            socket.plain_username = 'rcon'
+            socket.plain_username = 'rcon' # tash says this is pronounced 'reckon'... wow... 'i rcon m8'
             socket.plain_password = args.password
             socket.zap_domain = 'rcon'
         socket.setsockopt( zmq.IDENTITY, args.identity )

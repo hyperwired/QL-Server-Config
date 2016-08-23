@@ -1,14 +1,17 @@
 # This file is part of the Quake Live server implementation by TomTec Solutions. Do not copy or redistribute or link to this file without the emailed consent of Thomas Jones (thomas@tomtecsolutions.com).
 # This file contains community ideas that may be found to be in bad taste. These views do not represent the views of TomTec Solutions
 
-import minqlx
+import minqlx, re, time
 from random import randint
+
+_re_purger = re.compile(r"^purger\W?$", flags=re.IGNORECASE)
+_re_tomtec_solutions = re.compile(r"^tomtec solutions\W?$", flags=re.IGNORECASE)
 
 class tp_fun(minqlx.Plugin):
     def __init__(self):
         self.add_command("penislength", self.cmd_penlen) # Junkyard requested
         self.add_command(("vaginadepth", "vaginaldepth", "vaginialdepth"), self.cmd_vagdep) # Junkyard requested
-        self.add_command(("msg", "message"), self.cmd_screenmessage, 1, usage="<text>") # Merozollo requested
+        self.add_command(("msg", "message"), self.cmd_screenmessage, 1, usage="[id] <text>") # Merozollo requested
         self.add_command(("breastsize", "cupsize", "brasize", "boobsize"), self.cmd_boobsize) # 0regonn requested
         self.add_command("fuckyou", self.cmd_printfu, 1)
         self.add_command("bury", self.cmd_bury, 3, usage="<id>")
@@ -17,8 +20,46 @@ class tp_fun(minqlx.Plugin):
         self.add_command("pentagram", self.cmd_pentagram, 1, usage="<id>") # Merozollo requested
         self.add_command("tomtec_versions", self.cmd_showversion)
 
-        self.plugin_version = "1.4"
+        self.add_hook("chat", self.handle_chat)
+        
+        self.plugin_version = "1.6"
+        self.last_sound = None
 
+    def handle_chat(self, player, msg, channel):
+        words = msg
+        
+        if ("When Bio wins, I grins." in words) or ("When Bio dies, I cries." in words): # 0regonn's being gay again
+            if str(player.steam_id) != "76561198150444650": return # don't let other people use this
+            @minqlx.delay(1)
+            def f():
+                self.msg("^7Pur^4g^7er: ^2gay") # na na na naa naa, ghost-purgers!
+                self.talk_beep()
+            f()
+
+        def play_sound(path):
+            if not self.last_sound:
+                pass
+            elif time.time() - self.last_sound < self.get_cvar("qlx_funSoundDelay", int):
+                return
+            self.last_sound = time.time()
+            for p in self.players():
+                if self.db.get_flag(p, "essentials:sounds_enabled", default=True):
+                    self.play_sound(path, p)
+                    
+        if "tp_vo" in minqlx.Plugin._loaded_plugins:
+            if channel != "chat": return
+            msg = self.clean_text(msg)
+            if _re_purger.match(msg):
+                play_sound("tp_vo/purgery/purger.ogg")
+            elif _re_tomtec_solutions.match(msg):
+                play_sound("tp_vo/purgery/tomtec_solutions.ogg")
+
+    def talk_beep(self, player=None):
+        if not player:
+            self.play_sound("sound/player/talk.ogg")
+        else:
+            self.play_sound("sound/player/talk.ogg", player)
+            
     def cmd_elated_emoji(self, player, msg, channel):
         num1 = randint(0,6)
         num2 = randint(0,6)
@@ -75,8 +116,12 @@ class tp_fun(minqlx.Plugin):
     def cmd_screenmessage(self, player, msg, channel):
         if len(msg) < 2:
             return minqlx.RET_USAGE
-        
-        minqlx.console_command("cp ^7{}^7".format(" ".join(msg[1:])))
+
+        if (msg[1].isdigit()):
+            self.player(int(msg[1])).center_print(" ".join(msg[2:]))
+        else:
+            self.center_print(" ".join(msg[1:]))
+
         self.play_sound("sound/world/klaxon2.wav")
 
     def cmd_printfu(self, player, msg, channel):

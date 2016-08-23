@@ -3,12 +3,14 @@
 # ex: aerowalk|ffa
 # see factories.txt for valid factory id values
 campgrounds|ffa
-cobaltstation|ffa
-asylum|ffa
-almostlost|ffa
+demonkeep|ffa
+fatalinstinct|ffa
+spacectf|ffa
+hellsgateredux|ffa
+powerstation|ffa
+forgotton|ffa
+retribution|ffa
+dredwerkz|ffa
+terminalheights|ffa
 longestyard|ffa
 hellsgate|ffa
-heroskeep|ffa
-spacechamber|ffa
-provinggrounds|ffa
-beyondreality|ffa

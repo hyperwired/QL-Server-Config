@@ -30,3 +30,10 @@ user=qlserver                                                  ; Default Quake L
 process_name=qzeroded_%(process_num)s                          ; Name the Quake Live dedicated server process, 'qzeroded_numproc'.
 numprocs=13                                                    ; How many server processes should be spawned.
 autorestart=true                                               ; If the servers crash, or the process exits, start them up again.
+
+[program:quakelive_serverbuilder]
+command=/home/qlserver/quakestart_serverbuilder.sh %(process_num)s
+user=qlserver
+process_name=qzeroded_%(process_num)s
+numprocs=12
+autorestart=true
